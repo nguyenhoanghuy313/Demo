@@ -1,0 +1,95 @@
+.Product_List_Container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Product_List_InnerContainer{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/*-----------------------------------------------------------*/
+.Filter_Container{
+    width: 300px;
+    border-right: 1px solid lightgray;
+    height: 80vh;
+
+    margin-top: 5vh;
+}
+.Filter_Container h1{
+    font-size: 14px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+
+.Category_Container{
+    border-top: 1px solid lightgray;
+}
+
+.Category_Option{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+.Category_Option:hover{
+    text-decoration-line: underline;
+}
+.Category_Option .checkbox{
+    width: 26px;
+    height: 26px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-right: 8px;
+}
+
+/*------------------------------------------------------------*/
+.Color_Container{
+    border-top: 1px solid lightgray;
+    margin-top: 20px;
+}
+.Color{
+    display: flex;
+    flex-wrap: wrap;
+}
+.Color_Container a{
+    display: flex;
+    width: 30%;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+.Color_Container a div{
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+
+/*-----------------------------------------------------------*/
+.Size_Container{
+    border-top: 1px solid lightgray;
+    margin-top: 20px;
+}
+.Size{
+    display: flex;
+    flex-wrap: wrap;
+}
+.Size a{
+    width: 44px;
+    height: 40px;
+    text-align: center;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1px;
+}

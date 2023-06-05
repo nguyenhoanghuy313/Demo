@@ -1,0 +1,66 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inconsolata', monospace;
+    text-decoration: none;
+    list-style: none;
+}
+
+/*Season_Collection_Banner*/
+.Season_Collection_Banner{
+    position: relative;
+    width: 100%;
+}
+.Season_Collection_Banner img{
+    width: 100%;
+}
+
+.Season_Collection_Banner_text{
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    color: white;
+}
+
+.Season_Collection_Banner_text h1{
+    font-size: 3rem;
+    text-align: center;
+    padding: 0px 0px 14px;
+}
+.Season_Collection_Banner_text p{
+    font-size: 1.7rem;
+    text-align: center;
+    padding: 0px 0px 14px;
+}
+
+.Season_Collection_Banner_text button{
+    width: 100%;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    transition: all .50s ease;
+
+}
+.Season_Collection_Banner_text button:hover{
+    background-color: black;
+    color: white;
+}
+
+@media (max-width: 1090px){
+    .Season_Collection_Banner_text{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        flex-direction: column;
+        right: 0;
+        top: 10%;
+    }
+    .Season_Collection_Banner_text button {
+        width: 50%;
+    }
+}
+
