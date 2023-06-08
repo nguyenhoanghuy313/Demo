@@ -1,0 +1,25 @@
+.Story_List{
+    width: 100%;
+    margin: 100px auto 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Story{
+    width: 30%;
+    margin-bottom: 10vh;
+}
+
+.Story img{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.Story p{
+    margin-top: 10px;
+    font-size: 32px;
+}

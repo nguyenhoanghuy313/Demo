@@ -112,4 +112,7 @@ GO
 
 ALTER DATABASE [SWP_Project] SET  READ_WRITE 
 GO
+UPDATE Category
+
+
 

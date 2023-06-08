@@ -30,7 +30,7 @@
         <ul class="navbar">
             <li><a href="#">Women</a></li>
             <li><a href="#">About</a></li>
-            <li><a href="#">Stories</a></li>
+            <li><a href="storyList.jsp">Stories</a></li>
         </ul>
         <a href="${pageContext.request.contextPath}/category-servlet" class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Everlane_logo.png"></a>
 
