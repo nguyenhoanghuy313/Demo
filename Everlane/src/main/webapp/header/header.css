@@ -2,7 +2,6 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Inconsolata', monospace;
     text-decoration: none;
     list-style: none;
 }
@@ -23,9 +22,9 @@ header{
     z-index: 10000;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     /*background: transparent;*/
-    padding: 0px 10%;
+    padding: 0px 68px;
     transition: all .50s ease;
     border-bottom: 1px solid lightgray;
 }
@@ -46,11 +45,13 @@ header{
 }
 .navbar a{
     color: black;
-    font-size: 1rem;
+    font-size: 12px;
     padding: 12px;
     margin: 8px 2px;
     transition: all .50s ease;
     border-radius: 5px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bold;
 }
 
 .navbar a:hover{
@@ -70,6 +71,7 @@ header{
     padding: 12px;
     transition: all .50s ease;
     border-radius: 5px;
+    font-family: 'Nunito Sans', sans-serif;
 }
 .main a:hover{
     background-color: lightgray;
@@ -100,6 +102,8 @@ header{
     padding: 8px 20px;
     color: black;
     font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 16px;
 }
 
 
@@ -114,7 +118,8 @@ header{
     padding-top: 8px;
     padding-left: 20px;
     color: black;
-    font-size: 1.5rem;
+    font-size: 20px;
+    font-family: 'Nunito Sans', sans-serif;
 }
 
 .menu_container3{
@@ -128,7 +133,8 @@ header{
     padding-top: 8px;
     padding-left: 20px;
     color: black;
-    font-size: 1.5rem;
+    font-size: 20px;
+    font-family: 'Nunito Sans', sans-serif;
 }
 
 .navbar2_container{
@@ -147,11 +153,15 @@ header{
     align-items: center;
     justify-content: center;
     transition: all .50s ;
-
+    font-family: 'Nunito Sans', sans-serif;
 }
 .navbar2 a{
     padding: 20px 16px;
     border-radius: 5px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    color: black;
 }
 .navbar2 a:hover{
     font-weight: bold;

@@ -18,8 +18,13 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
+<%--    fonts--%>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap" rel="stylesheet">
 
 
+<%--    css--%>
     <link rel="stylesheet" href="header/header.css">
     <link rel="stylesheet" href="homepage/season-collection.css">
     <link rel="stylesheet" href="homepage/category.css">

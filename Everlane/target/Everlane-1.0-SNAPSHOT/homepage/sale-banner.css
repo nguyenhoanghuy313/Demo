@@ -1,11 +1,3 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Inconsolata', monospace;
-    text-decoration: none;
-    list-style: none;
-}
 .Sales_Banner{
     position: relative;
     width: 100%;
@@ -20,9 +12,10 @@
 }
 
 .Sales_Banner h1{
-    font-size: 2.5rem;
+    font-size: 46px;
     margin-top: 3vh;
     margin-bottom: 2vh;
+    font-family: 'Nunito Sans', sans-serif;
 }
 
 .Sales_Banner button{
@@ -47,5 +40,8 @@
     .Sales_Banner button{
         width: 40%;
 
+    }
+    .Sales_Banner h1{
+        font-size: 4.888vw;
     }
 }

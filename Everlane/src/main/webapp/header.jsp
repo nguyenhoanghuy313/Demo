@@ -9,15 +9,16 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="icon" type="image/x-icon" href="https://asset.brandfetch.io/idg0XRU3ny/iduCRhJlyM.jpeg?updated=1667682228156">
 
-<%--    icon--%>
+    <%--    icon--%>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
     <%--    font--%>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap" rel="stylesheet">
 
     <%--    css--%>
     <link rel="stylesheet" href="header/header.css"/>
@@ -25,7 +26,7 @@
 </head>
 <body>
     <header>
-        <%--        web--%>
+        <%-- web--%>
         <a class="bx bx-menu" id="menu-icon"></a>
         <ul class="navbar">
             <li><a href="#">Women</a></li>
@@ -60,6 +61,7 @@
             </div>
         </div>
     </header>
+
     <div class="navbar2_container">
         <ul class="navbar2">
             <li><a href="">What's New</a></li>
@@ -70,6 +72,7 @@
             <li><a href="" style="color: red">Sale</a></li>
         </ul>
     </div>
+
     <script>
         x = document.querySelector("#menu-icon");
         y = document.querySelector(".menu_container");

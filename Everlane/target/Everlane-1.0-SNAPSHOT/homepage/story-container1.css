@@ -1,12 +1,3 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Inconsolata', monospace;
-    text-decoration: none;
-    list-style: none;
-}
-
 .Stories_Container{
     position: relative;
     width: 100%;
@@ -26,12 +17,15 @@
 }
 
 .Story h1{
-    font-size: 3rem;
+    font-size: 46px;
     margin-bottom: 3vh;
+    font-family: 'Nunito Sans', sans-serif;
 }
 .Story p{
     width: 90%;
+    font-size: 28px;
     margin-bottom: 3vh;
+    font-family: 'Nunito Sans', sans-serif;
 }
 
 .Story button{
@@ -60,5 +54,12 @@
     }
     .Story button{
         width: 40%;
+    }
+
+    .Story h1{
+        font-size: 4.888vw;
+    }
+    .Story p{
+        ffont-size: 2.444vw;
     }
 }
