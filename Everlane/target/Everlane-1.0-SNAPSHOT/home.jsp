@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="homepage/category.css">
     <link rel="stylesheet" href="homepage/best-seller-slider.css">
     <link rel="stylesheet" href="homepage/sale-banner.css">
-    <link rel="stylesheet" href="homepage/story-container1.css">
+    <link rel="stylesheet" href="homepage/story-container.css">
     <link rel="stylesheet" href="footer/footer.css">
 </head>
 <body>
