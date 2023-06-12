@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Register</title>
-    <link rel="stylesheet" href="header/header.css">
+    <link rel="stylesheet" href="header/header1.css">
     <link rel="stylesheet" href="account/authentication/authentication.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">

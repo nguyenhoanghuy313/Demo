@@ -17,7 +17,7 @@
     <%--    icon--%>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-    <link rel="stylesheet" href="header/header.css">
+    <link rel="stylesheet" href="header/header1.css">
     <link rel="stylesheet" href="footer/footer.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="productpage/productlist/filter-container.css">
