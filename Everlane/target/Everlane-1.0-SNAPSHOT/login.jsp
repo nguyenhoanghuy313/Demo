@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="header/header1.css">
+    <link rel="stylesheet" href="header/header.css">
     <link rel="stylesheet" href="account/authentication/authentication.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
@@ -27,7 +27,7 @@
                 <input type="submit" value="Login">
             </form>
             <a href="register.jsp">Don’t have an account? Sign up</a>
-            <a>Reset password</a>
+            <a href="admin/productListManager.jsp">Reset password</a>
 
         </div>
     </div>

@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap" rel="stylesheet">
 
     <%--    css--%>
-    <link rel="stylesheet" href="header/header1.css"/>
+    <link rel="stylesheet" href="header/header.css"/>
     <link rel="stylesheet" href="header/cart/cart.css">
 
 </head>

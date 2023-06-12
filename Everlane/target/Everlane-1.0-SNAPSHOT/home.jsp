@@ -25,7 +25,7 @@
 
 
 <%--    css--%>
-    <link rel="stylesheet" href="header/header1.css">
+    <link rel="stylesheet" href="header/header.css">
     <link rel="stylesheet" href="homepage/season-collection.css">
     <link rel="stylesheet" href="homepage/category.css">
     <link rel="stylesheet" href="homepage/best-seller-slider.css">
