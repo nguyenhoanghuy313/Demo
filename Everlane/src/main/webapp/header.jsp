@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="header/header.css"/>
     <link rel="stylesheet" href="header/cart/cart.css">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png" />
+
 </head>
 <body>
     <header>

@@ -2680,7 +2680,6 @@ textarea.form-control-lg {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  width: 100%;
 }
 .input-group > .form-control,
 .input-group > .form-select {
@@ -7680,7 +7679,7 @@ button:focus {
 }
 
 .input-group:focus-within {
-  box-shadow: 0 0 0.25rem 0.05rem rgba(105, 108, 255, 0.1);
+  box-shadow: none;
 }
 .input-group:focus-within .form-control,
 .input-group:focus-within .input-group-text {

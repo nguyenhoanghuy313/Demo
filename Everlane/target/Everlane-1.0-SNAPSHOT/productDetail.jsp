@@ -22,7 +22,9 @@
     <link rel="stylesheet" href="homepage/best-seller-slider.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
-    <title>Title</title>
+    <title>Product Detail</title>
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png" />
 </head>
 <body>
 <jsp:include page="header.jsp"/>
@@ -32,9 +34,9 @@
     Product pi = (Product) request.getAttribute("pi");
 %>
 <section class="Product_Detail_Container">
-    <div class="Product_Image_Container">
-        <img src=${pi.getProductImg()}>
-    </div>
+        <div class="Product_Image_Container">
+            <img src=${pi.getProductImg()}>
+        </div>
     <div class="Product_Detail">
         <div class="Product_Name">
             <p class="Category_Tag">Dresses</p>
@@ -76,27 +78,68 @@
     </div>
 
 
+
 </section>
 <section class="Best_Seller_Slider">
     <div class="wrapper">
         <i id="left" class='bx bx-chevron-left'></i>
         <div class="carousel">
-
-                <c:forEach var="p" items="${data}">
-                    <div class="Product">
-                        <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=${p.getProductID()}">
-                        <img src=${p.getProductImg()}>
-                        <div class="Product_Name">
-                            <div class="Best_Seller_Text">
-                                <h1>${p.getProductName()}</h1>
-                                <h1>${p.getPrice()}</h1>
-                                    <%--                            </div>--%>
-                                    <%--                            <p>${p.getColor()}</p>--%>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
-                </c:forEach>
+            <a href="#">
+                <img src="https://media.everlane.com/image/upload/c_fill,w_1080,ar_5:7,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/5d211d85_8862">
+                <div class="Best_Seller_Text">
+                    <h1>The Linen Workewear Dress</h1>
+                    <h1>₫3387200</h1>
+                </div>
+            </a>
+            <a href="#">
+                <img src="https://media.everlane.com/image/upload/c_fill,w_1080,ar_5:7,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/5d211d85_8862">
+                <div class="Best_Seller_Text">
+                    <h1>The Linen Workewear Dress</h1>
+                    <h1>₫3387200</h1>
+                </div>
+            </a>
+            <a href="#">
+                <img src="https://media.everlane.com/image/upload/c_fill,w_1080,ar_5:7,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/5d211d85_8862">
+                <div class="Best_Seller_Text">
+                    <h1>The Linen Workewear Dress</h1>
+                    <h1>₫3387200</h1>
+                </div>
+            </a>
+            <a href="#">
+                <img src="https://media.everlane.com/image/upload/c_fill,w_1080,ar_5:7,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/5d211d85_8862">
+                <div class="Best_Seller_Text">
+                    <h1>The Linen Workewear Dress</h1>
+                    <h1>₫3387200</h1>
+                </div>
+            </a>
+            <a href="#">
+                <img src="https://media.everlane.com/image/upload/c_fill,w_1080,ar_5:7,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/5d211d85_8862">
+                <div class="Best_Seller_Text">
+                    <h1>The Linen Workewear Dress</h1>
+                    <h1>₫3387200</h1>
+                </div>
+            </a>
+            <a href="#">
+                <img src="https://media.everlane.com/image/upload/c_fill,w_1080,ar_5:7,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/5d211d85_8862">
+                <div class="Best_Seller_Text">
+                    <h1>The Linen Workewear Dress</h1>
+                    <h1>₫3387200</h1>
+                </div>
+            </a>
+            <a href="#">
+                <img src="https://media.everlane.com/image/upload/c_fill,w_1080,ar_5:7,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/5d211d85_8862">
+                <div class="Best_Seller_Text">
+                    <h1>The Linen Workewear Dress</h1>
+                    <h1>₫3387200</h1>
+                </div>
+            </a>
+            <a href="#">
+                <img src="https://media.everlane.com/image/upload/c_fill,w_1080,ar_5:7,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/5d211d85_8862">
+                <div class="Best_Seller_Text">
+                    <h1>The Linen Workewear Dress</h1>
+                    <h1>₫3387200</h1>
+                </div>
+            </a>
         </div>
         <i id="right" class='bx bx-chevron-right'></i>
 
