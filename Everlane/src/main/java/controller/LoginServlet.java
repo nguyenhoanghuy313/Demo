@@ -45,16 +45,19 @@ public class LoginServlet extends HttpServlet {
                 }
             }
             if (ok) {
-                if (checkUser) {
-                    if(Role.getRole().equals("Customer")) {
-                        req.setAttribute("productListOnClick", productListOnClick);
-                        req.setAttribute("data", data);
-                        req.setAttribute("cateList", cateList);
-                        req.getRequestDispatcher("home.jsp").forward(req, resp);
-                    }
-                    if(Role.getRole().equals("Admin")) {
-                        req.getRequestDispatcher("admin.jsp").forward(req, resp);
-                    }
+                if (checkUser && Role.getRole().equals("Customer")) {
+                    req.setAttribute("productListOnClick", productListOnClick);
+                    req.setAttribute("data", data);
+                    req.setAttribute("cateList", cateList);
+                    req.getRequestDispatcher("home.jsp").forward(req, resp);
+                } else if (checkUser && Role.getRole().equals("Admin")) {
+                    req.setAttribute("productListOnClick", productListOnClick);
+                    req.setAttribute("data", data);
+                    req.setAttribute("cateList", cateList);
+                    req.getRequestDispatcher("home.jsp").forward(req, resp);
+                } else {
+                    req.setAttribute("Message", "Email or Password is incorrect");
+                    req.getRequestDispatcher("login.jsp").forward(req, resp);
                 }
             } else {
                 req.getRequestDispatcher("login.jsp").forward(req, resp);
