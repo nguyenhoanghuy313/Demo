@@ -14,8 +14,10 @@ public class HomeServlet extends HttpServlet{
         CategoryDAO c = new CategoryDAO();
         String cateID = request.getParameter("categoryID");
         List<Product> productListOnClick = p.getProductsByCateID(cateID);
-        request.setAttribute("productListOnClick", productListOnClick);
+        List<Product> data = p.getAllProducts();
         List<Category> cateList = c.getCategory();
+        request.setAttribute("productListOnClick", productListOnClick);
+        request.setAttribute("data", data);
         request.setAttribute("cateList", cateList);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
