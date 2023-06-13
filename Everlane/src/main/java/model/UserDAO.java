@@ -43,17 +43,17 @@ public class UserDAO extends myDAO {
         return u;
     }
 
-    public static void main(String[] args) {
-        UserDAO test = new UserDAO();
-        String xemail = "hoangdatsup2003@gmail.com";
-//        String xpassword = "duc123";
-        User check = test.getRoleByEmail(xemail);
-        System.out.printf(String.valueOf(check.getRole()));
+//    public static void main(String[] args) {
+//        UserDAO test = new UserDAO();
+//        String xemail = "hoangdatsup2003@gmail.com";
+////        String xpassword = "duc123";
+//        User check = test.getRoleByEmail(xemail);
+//        System.out.printf(String.valueOf(check.getRole()));
 //        if (check.equals("Customer")) {
 //            System.out.printf("đúng vl");
 //        } else {
 //            System.out.printf("Sai vl");
 //        }
     }
-}
+
 //
