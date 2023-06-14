@@ -32,6 +32,9 @@
     <link rel="stylesheet" href="homepage/sale-banner.css">
     <link rel="stylesheet" href="homepage/story-container.css">
     <link rel="stylesheet" href="footer/footer.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png" />
 </head>
 <body>
   <jsp:include page="header.jsp" />
