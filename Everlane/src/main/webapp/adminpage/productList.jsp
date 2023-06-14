@@ -71,7 +71,7 @@
               </span>
                 </a>
 
-                <a href="dashboard.jsp;" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                     <i class="bx bx-chevron-left bx-sm align-middle"></i>
                 </a>
             </div>
@@ -99,7 +99,7 @@
                 </li>
                 <!-- User List -->
                 <li class="menu-item">
-                    <a href="userList.jsp" class="menu-link">
+                    <a href="tables-basic.html" class="menu-link">
                         <i class='menu-icon tf-icons bx bx-user'></i>
                         <div data-i18n="User List">User List</div>
                     </a>

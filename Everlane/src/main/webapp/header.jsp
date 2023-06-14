@@ -23,7 +23,6 @@
     <%--    css--%>
     <link rel="stylesheet" href="header/header.css"/>
     <link rel="stylesheet" href="header/cart/cart.css">
-    <link rel="stylesheet" href="header/search/search.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png" />
@@ -41,7 +40,7 @@
         <a href="${pageContext.request.contextPath}/category-servlet" class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Everlane_logo.png"></a>
 
         <div class="main">
-            <a href="#" class="search" id="search-icon"><i class="ri-search-line"></i></a>
+            <a href="#" class="search"><i class="ri-search-line"></i></a>
             <a href="login.jsp" class="user"><i class="ri-user-3-line"></i></a>
             <a class="cart" id="cart-icon"><i class="ri-shopping-cart-2-line"></i></a>
         </div>
@@ -161,6 +160,8 @@
         </div>
     </header>
 
+
+
     <div class="navbar2_container">
         <ul class="navbar2">
             <li><a href="">What's New</a></li>
@@ -172,14 +173,7 @@
         </ul>
     </div>
 
-    <div class="search_container">
-        <div class="search_inner">
-            <input type="search" id="site-search" name="q" placeholder="Search...">
-            <button class='bx bx-search-alt'></button>
-        </div>
-    </div>
     <script>
-        //menu
         x = document.querySelector("#menu-icon");
         y = document.querySelector(".menu_container");
         x.onclick = function (){
@@ -187,7 +181,6 @@
             y.classList.toggle("open");
         }
 
-        //cart
         x1 = document.querySelector("#cart-icon");
         x2 = document.querySelector("#x-icon")
         y1 = document.querySelector(".cart_container");
@@ -196,13 +189,6 @@
         }
         x2.onclick = function (){
             y1.classList.toggle("openCart");
-        }
-
-        //search
-        xSearch = document.querySelector("#search-icon");
-        ySearch = document.querySelector(".search_container");
-        xSearch.onclick = function (){
-            ySearch.classList.toggle("openSearch");
         }
     </script>
 
