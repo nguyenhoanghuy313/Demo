@@ -89,71 +89,30 @@
         <h1>Best-Sellers: Wear Now, Love Forever</h1>
     </section>
 
-    <section class="Best_Seller_Slider">
-        <div class="wrapper">
-            <i id="left" class='bx bx-chevron-left'></i>
-            <div class="carousel">
-                <a href="#">
-                    <img src="https://media.everlane.com/image/upload/c_fill,w_1080,ar_5:7,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/5d211d85_8862">
-                    <div class="Best_Seller_Text">
-                        <h1>The Linen Workewear Dress</h1>
-                        <h1>₫3387200</h1>
-                    </div>
-                </a>
-                <a href="#">
-                    <img src="https://media.everlane.com/image/upload/c_fill,w_1080,ar_5:7,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/5d211d85_8862">
-                    <div class="Best_Seller_Text">
-                        <h1>The Linen Workewear Dress</h1>
-                        <h1>₫3387200</h1>
-                    </div>
-                </a>
-                <a href="#">
-                    <img src="https://media.everlane.com/image/upload/c_fill,w_1080,ar_5:7,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/5d211d85_8862">
-                    <div class="Best_Seller_Text">
-                        <h1>The Linen Workewear Dress</h1>
-                        <h1>₫3387200</h1>
-                    </div>
-                </a>
-                <a href="#">
-                    <img src="https://media.everlane.com/image/upload/c_fill,w_1080,ar_5:7,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/5d211d85_8862">
-                    <div class="Best_Seller_Text">
-                        <h1>The Linen Workewear Dress</h1>
-                        <h1>₫3387200</h1>
-                    </div>
-                </a>
-                <a href="#">
-                    <img src="https://media.everlane.com/image/upload/c_fill,w_1080,ar_5:7,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/5d211d85_8862">
-                    <div class="Best_Seller_Text">
-                        <h1>The Linen Workewear Dress</h1>
-                        <h1>₫3387200</h1>
-                    </div>
-                </a>
-                <a href="#">
-                    <img src="https://media.everlane.com/image/upload/c_fill,w_1080,ar_5:7,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/5d211d85_8862">
-                    <div class="Best_Seller_Text">
-                        <h1>The Linen Workewear Dress</h1>
-                        <h1>₫3387200</h1>
-                    </div>
-                </a>
-                <a href="#">
-                    <img src="https://media.everlane.com/image/upload/c_fill,w_1080,ar_5:7,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/5d211d85_8862">
-                    <div class="Best_Seller_Text">
-                        <h1>The Linen Workewear Dress</h1>
-                        <h1>₫3387200</h1>
-                    </div>
-                </a>
-                <a href="#">
-                    <img src="https://media.everlane.com/image/upload/c_fill,w_1080,ar_5:7,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/5d211d85_8862">
-                    <div class="Best_Seller_Text">
-                        <h1>The Linen Workewear Dress</h1>
-                        <h1>₫3387200</h1>
-                    </div>
-                </a>
-            </div>
-            <i id="right" class='bx bx-chevron-right' ></i>
+  <section class="Best_Seller_Slider">
+      <div class="wrapper">
+          <i id="left" class='bx bx-chevron-left'></i>
+          <div class="carousel">
 
-        </div>
-    </section>
+              <c:forEach var="p" items="${data}">
+                  <div class="Product">
+                      <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=${p.getProductID()}">
+                          <img src=${p.getProductImg()}>
+                          <div class="Product_Name">
+                              <div class="Best_Seller_Text">
+                                  <h1>${p.getProductName()}</h1>
+                                  <h1>${p.getPrice()}</h1>
+                                      <%--                            </div>--%>
+                                      <%--                            <p>${p.getColor()}</p>--%>
+                              </div>
+                          </div>
+                      </a>
+                  </div>
+              </c:forEach>
+          </div>
+          <i id="right" class='bx bx-chevron-right'></i>
+      </div>
+  </section>
 
     <section class="Sales_Banner">
         <h1>
