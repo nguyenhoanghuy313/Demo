@@ -29,7 +29,6 @@
 <jsp:include page="header.jsp"/>
 <%
     List<Product> productList = (List<Product>) request.getAttribute("productList");
-    List<Product> productListOnClick = (List<Product>) request.getAttribute("productListOnClick");
 %>
 <section class="Product_List_Container">
     <div class="Product_List_InnerContainer">
@@ -101,7 +100,10 @@
                 <h1>Women's Dresses & Jumpsuits</h1>
             </div>
             <div class="Product_List">
-                <c:forEach var="p" items="${productListOnClick}">
+                <%
+                    if(!productList.isEmpty()){
+                %>
+                <c:forEach var="p" items="${productList}">
                     <div class="Product">
                         <img src=${p.getProductImg()}>
                         <div class="Product_Text">
@@ -113,6 +115,9 @@
                         </div>
                     </div>
                 </c:forEach>
+                <% } else {%>
+                <h2>No products found</h2>
+                <% } %>
             </div>
 
         </div>

@@ -173,10 +173,10 @@
     </div>
 
     <div class="search_container">
-        <div class="search_inner">
-            <input type="search" id="site-search" name="q" placeholder="Search...">
+        <form action="${pageContext.request.contextPath}/SearchServlet" method="post" class="search_inner">
+            <input type="text" id="site-search" name="productName" placeholder="Search...">
             <button class='bx bx-search-alt'></button>
-        </div>
+        </form>
     </div>
     <script>
         //menu

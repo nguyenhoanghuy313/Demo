@@ -89,7 +89,7 @@ public class ProductsDAO extends myDAO {
     }
 
     public List<Product> searchByName(String sName) {
-        xSql = "select * from Product where ProductName like '%" + sName + "'";
+        xSql = "select * from Product where ProductName like '%" + sName + "%'";
         List<Product> productList = new ArrayList<>();
         try {
             int xProductID;

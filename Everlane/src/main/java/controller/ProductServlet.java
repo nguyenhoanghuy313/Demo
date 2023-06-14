@@ -15,8 +15,8 @@ public class ProductServlet extends HttpServlet{
         String cateID = request.getParameter("categoryID");
         List<Category> cateList = cd.getCategory();
         request.setAttribute("cateList", cateList);
-        List<Product> productListOnClick = pd.getProductsByCateID(cateID);
-        request.setAttribute("productListOnClick", productListOnClick);
+        List<Product> productList = pd.getProductsByCateID(cateID);
+        request.setAttribute("productList", productList);
         request.getRequestDispatcher("productList.jsp").forward(request, response);
 
     }
