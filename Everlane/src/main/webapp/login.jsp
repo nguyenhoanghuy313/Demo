@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="account/authentication/authentication.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png" />
 </head>
 <body>
 <jsp:include page="header.jsp"/>
@@ -27,7 +30,7 @@
                 <input type="submit" value="Login">
             </form>
             <a href="register.jsp">Don’t have an account? Sign up</a>
-            <a href="admin/productListManager.jsp">Reset password</a>
+            <a href="adminpage/dashboard.jsp">Reset password</a>
 
         </div>
     </div>
