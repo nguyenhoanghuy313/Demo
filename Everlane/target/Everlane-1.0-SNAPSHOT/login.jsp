@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="account/authentication/authentication.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png" />
 </head>
 <body>
 <jsp:include page="header.jsp"/>
@@ -21,13 +24,15 @@
         <div class="Login_Container">
             <h1>Good to see you</h1>
             <h2>Please log in to your account</h2>
-            <form action="#">
-                <input type="email" id="email" name="email" value="" placeholder="Email Address"><br>
-                <input type="password" id="password" name="password" value="" placeholder="Password"><br><br>
+            <form action="login-servlet" method="post">
+                <input type="email" id="email" name="email" value="" placeholder="Email Address"><br>${EmailErr}<br>
+                <input type="password" id="password" name="password" value="" placeholder="Password"><br>${PassErr}<br>
                 <input type="submit" value="Login">
+                <br>
+                ${Message}
             </form>
             <a href="register.jsp">Don’t have an account? Sign up</a>
-            <a href="admin/productListManager.jsp">Reset password</a>
+            <a href="adminpage/dashboard.jsp">Reset password</a>
 
         </div>
     </div>

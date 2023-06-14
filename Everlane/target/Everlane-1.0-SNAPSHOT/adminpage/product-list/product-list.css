@@ -1,0 +1,21 @@
+.list_option_container{
+    display: flex;
+    justify-content: space-between;
+    height: 20px;
+    padding: 24px;
+    margin-bottom: 50px;
+}
+
+.list_option_container2{
+    display: flex;
+}
+
+.item img{
+    width: 72px;
+    height: 96px;
+}
+
+.listtable{
+    height: 50vh;
+    overflow: scroll;
+}

@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="storyList/scrolling-text-container.css">
     <link rel="stylesheet" href="footer/footer.css">
     <link rel="stylesheet" href="footer/ad-container.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png" />
 </head>
 <body>
     <jsp:include page="header.jsp"/>
