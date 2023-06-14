@@ -75,7 +75,7 @@
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
-                <a href="adminpage/dashboard.jsp" class="app-brand-link">
+                <a href="dashboard.jsp" class="app-brand-link">
               <span class="app-brand-logo demo">
                     <svg width="128" height="14px" class="styles_everlane-logo__4o010" viewBox="0 0 128 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M116.776 0V14H127.933V11.2198H119.6V8.38015H127.032V5.61985H119.6V2.78015H127.933V0H116.776ZM108.221 0V9.45982L101.311 0H98.5062V14H101.311V4.54018L108.222 14H111.066V0H108.222H108.221ZM86.0055 0L80.3766 14H83.3211L84.4828 11.1397H90.2922L91.4341 14H94.4191L88.7902 0H86.0055ZM87.3875 3.7201L89.2307 8.48018H85.5046L87.3875 3.7201ZM67.1754 0V14H77.3717V11.2198H69.9998V0H67.1754ZM52.4714 2.71982V5.70003H57.6201C58.4017 5.70003 59.0625 5.09986 59.0625 4.22024C59.0625 3.34063 58.4216 2.71982 57.6201 2.71982H52.4714ZM58.7619 14L55.396 8.38015H52.4714V14H49.647V0H57.6201C60.0238 0 61.867 1.74018 61.867 4.17976C61.867 6.35974 60.4651 7.9197 58.5019 8.28012L61.9672 14H58.7619ZM32.9201 0V14H44.0785V11.2198H35.7453V8.38015H43.1776V5.61985H35.7453V2.78015H44.0785V0H32.9201ZM26.1494 0L22.1227 10.1997L18.0753 0H15.0307L20.6596 14H23.484L29.1336 0H26.1486H26.1494ZM0.0865293 0L0.0666504 14H11.245V11.2198H2.91092V8.38015H10.3432V5.61985H2.91092V2.78015H11.2442V0H0.0865293Z" fill="black"></path></svg>
               </span>
@@ -91,7 +91,7 @@
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
                 <li class="menu-item">
-                    <a href="adminpage/dashboard.jsp" class="menu-link">
+                    <a href="dashboard.jsp" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
                     </a>
@@ -102,7 +102,7 @@
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
                 <!-- Product List -->
                 <li class="menu-item active">
-                    <a href="productList.jsp" class="menu-link">
+                    <a href="${pageContext.request.contextPath}/ProductListManagerServlet" class="menu-link">
                         <i class='menu-icon tf-icons bx bxs-package'></i>
                         <div data-i18n="Product List">Product List</div>
                     </a>
@@ -139,6 +139,89 @@
 
         <!-- Layout container -->
         <div class="layout-page">
+            <!-- Navbar -->
+
+            <nav
+                    class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                    id="layout-navbar"
+            >
+                <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                        <i class="bx bx-menu bx-sm"></i>
+                    </a>
+                </div>
+
+                <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                    <!-- Search -->
+                    <div class="navbar-nav align-items-center">
+                        <div class="nav-item d-flex align-items-center">
+                            <i class="bx bx-search fs-4 lh-0"></i>
+                            <input
+                                    type="text"
+                                    class="form-control border-0 shadow-none"
+                                    placeholder="Search..."
+                                    aria-label="Search..."
+                            />
+                        </div>
+                    </div>
+                    <!-- /Search -->
+
+                    <ul class="navbar-nav flex-row align-items-center ms-auto">
+                        <!-- User -->
+                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                <div class="avatar avatar-online">
+                                    <img src="../../a.template/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="avatar avatar-online">
+                                                    <img src="../../a.template/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <span class="fw-semibold d-block">John Doe</span>
+                                                <small class="text-muted">Admin</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="bx bx-user me-2"></i>
+                                        <span class="align-middle">My Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="bx bx-cog me-2"></i>
+                                        <span class="align-middle">Settings</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="auth-login-basic.html">
+                                        <i class="bx bx-power-off me-2"></i>
+                                        <span class="align-middle">Log Out</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--/ User -->
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- / Navbar -->
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <!-- Content -->
@@ -234,7 +317,7 @@
                                             <%
                                                 if(cateList.get(i).getCategoryID() == x.getCategoryID()){
                                             %>
-                                        <td><%= cateList.get(i).getCategoryName()%>;</td>
+                                        <td><%= cateList.get(i).getCategoryName()%></td>
                                             <% break; } %>
                                         <% } %>
                                     <td><%= x.getColor() %></td>

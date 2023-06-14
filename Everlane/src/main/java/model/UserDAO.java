@@ -1,10 +1,43 @@
 package model;
 
-import javax.management.relation.Role;
-import java.io.PrintStream;
-import java.text.SimpleDateFormat;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.*;
 
 public class UserDAO extends myDAO {
+
+    public List<User> getAllUser(){
+        List<User> t = new ArrayList<>();
+        xSql = "select * from user";
+        try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            int xUserID, xSex, xPhone;
+            String xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xRole;
+            User x;
+            while(rs.next()){
+                xUserID = rs.getInt("UserID");
+                xUserName = rs.getString("UserName");
+                xPassword = rs.getString("Password");
+                xEmail = rs.getString("Email");
+                xFirstName = rs.getString("FirstName");
+                xLastName = rs.getString("LastName");
+                xDob = rs.getString("Dob");
+                xSex = rs.getInt("Sex");
+                xPhone = rs.getInt("Phone");
+                xRole = rs.getString("Role");
+                x = new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xPhone, xRole);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return t;
+    }
 
     public boolean checkUser(String xemail, String xpassword) {
         try {

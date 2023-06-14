@@ -32,7 +32,7 @@
                 ${Message}
             </form>
             <a href="register.jsp">Don’t have an account? Sign up</a>
-            <a href="adminpage/dashboard.jsp">Reset password</a>
+            <a href="dashboardManager.jsp">Reset password</a>
 
         </div>
     </div>
