@@ -32,7 +32,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../a.template/assets/img/favicon/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="../../a.template/assets/img/favicon/favicon.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,25 +43,25 @@
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="../a.template/assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="../../a.template/assets/vendor/fonts/boxicons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../a.template/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../a.template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../a.template/assets/css/demo.css" />
+    <link rel="stylesheet" href="../../a.template/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../a.template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../a.template/assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
     <!-- Page CSS -->
-    <link rel="stylesheet" href="product-list/product-list.css">
+    <link rel="stylesheet" href="../product-list/product-list.css">
 
     <!-- Helpers -->
-    <script src="../a.template/assets/vendor/js/helpers.js"></script>
+    <script src="../../a.template/assets/vendor/js/helpers.js"></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../a.template/assets/js/config.js"></script>
+    <script src="../../a.template/assets/js/config.js"></script>
   </head>
 
   <body>
@@ -97,15 +97,15 @@
             <!-- Pages -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
             <!-- Product List -->
-            <li class="menu-item active">
-              <a href="tables-basic.html" class="menu-link">
+            <li class="menu-item">
+              <a href="productList.html" class="menu-link">
                 <i class='menu-icon tf-icons bx bxs-package'></i>
                 <div data-i18n="Product List">Product List</div>
               </a>
             </li>
             <!-- User List -->
-            <li class="menu-item">
-              <a href="tables-basic.html" class="menu-link">
+            <li class="menu-item  active">
+              <a href="userList.html" class="menu-link">
                 <i class='menu-icon tf-icons bx bx-user'></i>
                 <div data-i18n="User List">User List</div>
               </a>
@@ -141,7 +141,7 @@
             <div class="list_option_container">
               <div class="list_option_container1">
                 <div class="input-group ">
-                  <button class="btn btn-outline-dark" type="button">New Product</button>
+                  <button class="btn btn-outline-dark" type="button">New User</button>
                 </div>
               </div>
               <div class="list_option_container2">
@@ -167,10 +167,8 @@
                     Sort by
                   </button>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="javascript:void(0);">Sort by Latest</a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0);">Sort by Newest</a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0);">Sort by Price: Up</a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0);">Sort by Price: Down</a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0);">Sort by LatestUser</a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0);">Sort by NewestUser</a></li>
                   </ul>
                 </div>
                 <div class="input-group">
@@ -183,10 +181,10 @@
                     Category
                   </button>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="javascript:void(0);">Sort by Latest</a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0);">Sort by Newest</a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0);">Sort by Price: Up</a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0);">Sort by Price: Down</a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0);">Admin</a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0);">Customer</a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0);">Sale</a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0);">Marketing</a></li>
                   </ul>
                 </div>
               </div>
@@ -201,27 +199,28 @@
                 <table class="table">
                   <thead>
                   <tr>
-                    <th>PRODUCT ID</th>
-                    <th>PRODUCT IMAGE</th>
-                    <th>PRODUCT NAME</th>
-                    <th>CATEGORY</th>
-                    <th>COLOR</th>
-                    <th>PRICE</th>
-                    <th>AMOUNT</th>
-                    <th>RATE</th>
-                    <th>ACTION</th>
+                    <th>USER ID</th>
+                    <th>USER NAME</th>
+                    <th>EMAIL</th>
+                    <th>FIRST NAME</th>
+                    <th>LAST NAME</th>
+                    <th>DATE OF BIRTH</th>
+                    <th>GENDER</th>
+                    <th>PHONE NUMBER</th>
+                    <th>ROLE</th>
                   </tr>
                   </thead>
                   <tbody class="table-border-bottom-0">
                   <tr class="item">
                     <td>1</td>
-                    <td><img src="https://media.everlane.com/image/upload/c_fill,w_640,ar_4:5,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/aabd7304_283f"></td>
-                    <td>The Poplin Tiered Dress</td>
-                    <td>Dresses</td>
-                    <td>Brown</td>
-                    <td>₫4369000</td>
-                    <td>60</td>
-                    <td>sao sao sao</td>
+                    <td>Lê Minh Đức</td>
+                    <td>leminhductod@gmail.com</td>
+                    <td>Duc</td>
+                    <td>Le</td>
+                    <td>04/12/2003</td>
+                    <td>Male</td>
+                    <td>0123456789</td>
+                    <td>Admin</td>
                     <td>
                       <div class="dropdown">
                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -240,13 +239,14 @@
                   </tr>
                   <tr class="item">
                     <td>1</td>
-                    <td><img src="https://media.everlane.com/image/upload/c_fill,w_640,ar_4:5,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/aabd7304_283f"></td>
-                    <td>The Poplin Tiered Dress</td>
-                    <td>Dresses</td>
-                    <td>Brown</td>
-                    <td>₫4369000</td>
-                    <td>60</td>
-                    <td>sao sao sao</td>
+                    <td>Lê Minh Đức</td>
+                    <td>leminhductod@gmail.com</td>
+                    <td>Duc</td>
+                    <td>Le</td>
+                    <td>04/12/2003</td>
+                    <td>Male</td>
+                    <td>0123456789</td>
+                    <td>Admin</td>
                     <td>
                       <div class="dropdown">
                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -265,13 +265,14 @@
                   </tr>
                   <tr class="item">
                     <td>1</td>
-                    <td><img src="https://media.everlane.com/image/upload/c_fill,w_640,ar_4:5,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/aabd7304_283f"></td>
-                    <td>The Poplin Tiered Dress</td>
-                    <td>Dresses</td>
-                    <td>Brown</td>
-                    <td>₫4369000</td>
-                    <td>60</td>
-                    <td>sao sao sao</td>
+                    <td>Lê Minh Đức</td>
+                    <td>leminhductod@gmail.com</td>
+                    <td>Duc</td>
+                    <td>Le</td>
+                    <td>04/12/2003</td>
+                    <td>Male</td>
+                    <td>0123456789</td>
+                    <td>Admin</td>
                     <td>
                       <div class="dropdown">
                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -290,13 +291,14 @@
                   </tr>
                   <tr class="item">
                     <td>1</td>
-                    <td><img src="https://media.everlane.com/image/upload/c_fill,w_640,ar_4:5,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/aabd7304_283f"></td>
-                    <td>The Poplin Tiered Dress</td>
-                    <td>Dresses</td>
-                    <td>Brown</td>
-                    <td>₫4369000</td>
-                    <td>60</td>
-                    <td>sao sao sao</td>
+                    <td>Lê Minh Đức</td>
+                    <td>leminhductod@gmail.com</td>
+                    <td>Duc</td>
+                    <td>Le</td>
+                    <td>04/12/2003</td>
+                    <td>Male</td>
+                    <td>0123456789</td>
+                    <td>Admin</td>
                     <td>
                       <div class="dropdown">
                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -315,13 +317,14 @@
                   </tr>
                   <tr class="item">
                     <td>1</td>
-                    <td><img src="https://media.everlane.com/image/upload/c_fill,w_640,ar_4:5,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/aabd7304_283f"></td>
-                    <td>The Poplin Tiered Dress</td>
-                    <td>Dresses</td>
-                    <td>Brown</td>
-                    <td>₫4369000</td>
-                    <td>60</td>
-                    <td>sao sao sao</td>
+                    <td>Lê Minh Đức</td>
+                    <td>leminhductod@gmail.com</td>
+                    <td>Duc</td>
+                    <td>Le</td>
+                    <td>04/12/2003</td>
+                    <td>Male</td>
+                    <td>0123456789</td>
+                    <td>Admin</td>
                     <td>
                       <div class="dropdown">
                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -340,13 +343,14 @@
                   </tr>
                   <tr class="item">
                     <td>1</td>
-                    <td><img src="https://media.everlane.com/image/upload/c_fill,w_640,ar_4:5,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/aabd7304_283f"></td>
-                    <td>The Poplin Tiered Dress</td>
-                    <td>Dresses</td>
-                    <td>Brown</td>
-                    <td>₫4369000</td>
-                    <td>60</td>
-                    <td>sao sao sao</td>
+                    <td>Lê Minh Đức</td>
+                    <td>leminhductod@gmail.com</td>
+                    <td>Duc</td>
+                    <td>Le</td>
+                    <td>04/12/2003</td>
+                    <td>Male</td>
+                    <td>0123456789</td>
+                    <td>Admin</td>
                     <td>
                       <div class="dropdown">
                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -363,31 +367,7 @@
                       </div>
                     </td>
                   </tr>
-                  <tr class="item">
-                    <td>1</td>
-                    <td><img src="https://media.everlane.com/image/upload/c_fill,w_640,ar_4:5,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/aabd7304_283f"></td>
-                    <td>The Poplin Tiered Dress</td>
-                    <td>Dresses</td>
-                    <td>Brown</td>
-                    <td>₫4369000</td>
-                    <td>60</td>
-                    <td>sao sao sao</td>
-                    <td>
-                      <div class="dropdown">
-                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                          <i class="bx bx-dots-vertical-rounded"></i>
-                        </button>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item" href="javascript:void(0);"
-                          ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                          >
-                          <a class="dropdown-item" href="javascript:void(0);"
-                          ><i class="bx bx-trash me-1"></i> Delete</a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+
                   </tbody>
                 </table>
               </div>
@@ -411,18 +391,18 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-    <script src="../a.template/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../a.template/assets/vendor/libs/popper/popper.js"></script>
-    <script src="../a.template/assets/vendor/js/bootstrap.js"></script>
-    <script src="../a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../a.template/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../a.template/assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../a.template/assets/vendor/js/bootstrap.js"></script>
+    <script src="../../a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <script src="../a.template/assets/vendor/js/menu.js"></script>
+    <script src="../../a.template/assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
 
     <!-- Main JS -->
-    <script src="../a.template/assets/js/main.js"></script>
+    <script src="../../a.template/assets/js/main.js"></script>
 
     <!-- Page JS -->
 
