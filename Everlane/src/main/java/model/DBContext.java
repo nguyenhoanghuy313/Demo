@@ -9,11 +9,10 @@ import java.util.logging.Logger;
 public class DBContext {
     protected Connection connection;
 
-    //dat lai pass va user cho dung
     public DBContext() {
         try {
             String user = "root";
-            String pass = "123456";
+            String pass = "1234";
             String url = "jdbc:mysql://localhost:3306/swp_project?allowPublicKeyRetrieval=true&useSSL=false";
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, pass);
