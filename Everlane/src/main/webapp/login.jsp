@@ -25,11 +25,11 @@
             <h1>Good to see you</h1>
             <h2>Please log in to your account</h2>
             <form action="login-servlet" method="post">
-                <input type="email" id="email" name="email" value="" placeholder="Email Address"><br>${EmailErr}<br>
+                <input type="email" id="email" name="email" value="${newemail}" placeholder="Email Address"><br>${EmailErr}<br>
                 <input type="password" id="password" name="password" value="" placeholder="Password"><br>${PassErr}<br>
                 <input type="submit" value="Login">
                 <br>
-                ${Message}
+                ${Message} ${success}
             </form>
             <a href="register.jsp">Don’t have an account? Sign up</a>
             <a href="dashboardManager.jsp">Reset password</a>

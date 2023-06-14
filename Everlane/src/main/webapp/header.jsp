@@ -5,6 +5,7 @@
   Time: 3:18 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -42,7 +43,13 @@
 
         <div class="main">
             <a href="#" class="search" id="search-icon"><i class="ri-search-line"></i></a>
-            <a href="login.jsp" class="user"><i class="ri-user-3-line"></i></a>
+            <c:if test="${sessionScope.acc != null}">
+                <a href="${pageContext.request.contextPath}/logout-servlet" class="user"><i class="ri-user-3-line"></i></a>
+            </c:if>
+            <c:if test="${sessionScope.acc == null}">
+                <a href="${pageContext.request.contextPath}/login.jsp" class="user"><i class="ri-user-3-line"></i></a>
+            </c:if>
+<%--            <a href="login.jsp" class="user"><i class="ri-user-3-line"></i></a>--%>
             <a class="cart" id="cart-icon"><i class="ri-shopping-cart-2-line"></i></a>
         </div>
 

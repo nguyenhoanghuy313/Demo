@@ -28,9 +28,11 @@
             <h1>Create a password</h1>
             <h2>Complete your sign up to
                 receive your discount.*</h2>
-            <form action="#">
+            <form action="register-servlet" method="post">
+                <input type="text" id="email" name="username" value="" placeholder="User Name"><br>
                 <input type="email" id="email" name="email" value="" placeholder="Email Address"><br>
                 <input type="password" id="password" name="password" value="" placeholder="Password"><br><br>
+                <input type="password" id="repass" name="repass" value="" placeholder="Repeat Password"><br>${error}<br>
                 <input type="submit" value="Unlock Your Discount">
             </form>
             <a href="login.jsp">Already have an account? Sign in</a>
