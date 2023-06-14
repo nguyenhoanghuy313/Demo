@@ -107,7 +107,7 @@
         </li>
         <!-- User List -->
         <li class="menu-item  active">
-          <a href="userList.jsp" class="menu-link">
+          <a href="${pageContext.request.contextPath}/UserListManagerServlet" class="menu-link">
             <i class='menu-icon tf-icons bx bx-user'></i>
             <div data-i18n="User List">User List</div>
           </a>
