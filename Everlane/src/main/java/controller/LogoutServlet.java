@@ -1,5 +1,5 @@
+//Nguyễn Đắc Hoàng Đạt - HE170720
 package controller;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,3 +21,4 @@ public class LogoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     }
 }
+//Nguyễn Đắc Hoàng Đạt - HE170720

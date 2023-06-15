@@ -1,3 +1,4 @@
+//Nguyễn Đắc Hoàng Đạt - HE170720
 package model;
 
 import java.sql.Connection;
@@ -120,3 +121,4 @@ public class User {
         this.role = role;
     }
 }
+//Nguyễn Đắc Hoàng Đạt - HE170720

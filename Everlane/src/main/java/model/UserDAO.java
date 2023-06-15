@@ -36,7 +36,7 @@ public class UserDAO extends myDAO {
         }
         return t;
     }
-
+//Nguyễn Đắc Hoàng Đạt - HE70720
     public User checkUser(String xemail, String xpassword) {
         try {
             xSql = "select *\n" +
@@ -119,6 +119,8 @@ public class UserDAO extends myDAO {
             System.out.println("addUser: " + e.getMessage());
         }
     }
+
+    //Nguyễn Đắc Hoàng Đạt - HE70720
 
 //    public static void main(String[] args) {
 //        UserDAO test = new UserDAO();
