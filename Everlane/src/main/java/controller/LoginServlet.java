@@ -56,10 +56,7 @@ public class LoginServlet extends HttpServlet {
                 } else if (Role.getRole().equals("Admin")) {
                     HttpSession session = req.getSession();
                     session.setAttribute("acc", checkUser);
-                    UserDAO ud = new UserDAO();
-                    List<User> userList = ud.getAllUser();
-                    req.setAttribute("userList", userList);
-                    req.getRequestDispatcher("userListManager.jsp").forward(req, resp);
+                    req.getRequestDispatcher("dashboardManager.jsp").forward(req, resp);
                 } else {
                     req.setAttribute("Message", "Email or Password is incorrect or not exist!!!");
                     req.getRequestDispatcher("login.jsp").forward(req, resp);
