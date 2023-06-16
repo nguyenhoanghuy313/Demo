@@ -24,7 +24,7 @@ public class Product {
         this.productName = productName;
         this.price = price;
     }
-//local
+//local change product
     public Product(int cateID, String productID, String productName, String[] productImg, double price) {
         this.cateID = cateID;
         this.productID = productID;
