@@ -31,6 +31,8 @@
                 <br>
                 ${Message} ${success}
             </form>
+            <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/LoginGoogle/LoginGoogleHandler&response_type=code
+		   &client_id=377412618992-d6fdoanaf6nm1ivg4atd28c4aqffvnqo.apps.googleusercontent.com&approval_prompt=force">Login With Google</a>
             <a href="register.jsp">Don’t have an account? Sign up</a>
             <a href="dashboardManager.jsp">Reset password</a>
 
