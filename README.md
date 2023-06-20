@@ -20,4 +20,5 @@ How folder work:
   - "Everlane" contains the main code
 
 Code Structure
-  - 
+  - Code structure follows the MVC process
+    
