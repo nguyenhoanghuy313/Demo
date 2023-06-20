@@ -22,4 +22,18 @@ public class ProductListManagerServlet extends HttpServlet {
         request.getRequestDispatcher("productListManager.jsp").forward(request, response);
 
     }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        String xName = request.getParameter("productName").trim();
+        ProductsDAO pd = new ProductsDAO();
+        CategoryDAO cd = new CategoryDAO();
+        String cateID = request.getParameter("categoryID");
+        List<Category> cateList = cd.getCategory();
+        request.setAttribute("cateList", cateList);
+        List<Product> productList = pd.searchByName(xName);
+        request.setAttribute("productList", productList);
+        request.getRequestDispatcher("productListManager.jsp").forward(request, response);
+    }
 }

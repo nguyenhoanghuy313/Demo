@@ -232,14 +232,17 @@
           <div class="list_option_container2">
 
             <div class="input-group input-group-merge">
-              <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
-              <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Search..."
-                      aria-label="Search..."
-                      aria-describedby="basic-addon-search31"
-              />
+              <form action="${pageContext.request.contextPath}/UserListManagerServlet" method="post">
+                <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
+                <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Search..."
+                        aria-label="Search..."
+                        aria-describedby="basic-addon-search31"
+                        name="userName"
+                />
+              </form>
             </div>
 
             <div class="input-group">

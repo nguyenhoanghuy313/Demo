@@ -120,16 +120,46 @@ public class UserDAO extends myDAO {
         }
     }
 
-    //Nguyễn Đắc Hoàng Đạt - HE70720
+    public List<User> searchByName(String sName) {
+        xSql = "select * from User where UserName like '%" + sName + "%'";
+        List<User> userList = new ArrayList<>();
+        try {
+            int xUserID;
+            String xUserName;
+            String xPassword;
+            String xEmail;
+            String xFirstName;
+            String xLastName;
+            String xDob;
+            int xGender;
+            int xPhone;
+            String xRole;
 
-//    public static void main(String[] args) {
-//        UserDAO test = new UserDAO();
-//        String xemail = "hoangdatsup2003@gmail.com";
-//        String xusername = "Ducdz";
-////        String xpassword = "duc123";
-//        boolean check = test.checkAccountExist(xusername, xemail);
-//        System.out.printf(check + "");
-//        }
+            User u;
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                xUserID = rs.getInt("UserID");
+                xUserName = rs.getString("UserName");
+                xPassword = rs.getString("Password");
+                xEmail = rs.getString("Email");
+                xFirstName = rs.getString("FirstName");
+                xLastName = rs.getString("LastName");
+                xDob = rs.getString("Dob");
+                xGender = rs.getInt("Sex");
+                xPhone = rs.getInt("Phone");
+                xRole = rs.getString("Role");
+                u = new User(xUserID,xUserName,xPassword,xEmail,xFirstName,xLastName,xDob,xGender,xPhone,xRole);
+                userList.add(u);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
+
 }
 
 //
