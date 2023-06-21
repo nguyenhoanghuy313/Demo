@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
             List<Product> data = p.getAllProducts();
             List<Category> cateList = c.getCategory();
             User checkUser = u.checkUser(email, password);
-            User GoogleUser = u.getRoleByEmail(ugd.getEmail());
+//            User GoogleUser = u.getRoleByEmail(ugd.getEmail());
             User Role = u.getRoleByEmail(email);
 //            boolean ok = true;
 
@@ -51,19 +51,20 @@ public class LoginServlet extends HttpServlet {
                 if(!email.isEmpty() && !password.isEmpty()){
                     req.setAttribute("Message", "Email or Password is incorrect or not exist!!!");
                 }
-                if(ugd.getEmail().isEmpty()) {
-                    req.setAttribute("Message", "Gmail is incorrect or not exist!!!");
-                    req.getRequestDispatcher("login.jsp").forward(req, resp);
-                }
+                req.getRequestDispatcher("login.jsp").forward(req, resp);
+//                if(ugd.getEmail().isEmpty()) {
+//                    req.setAttribute("Message", "Gmail is incorrect or not exist!!!");
+//                    req.getRequestDispatcher("login.jsp").forward(req, resp);
+//                }
             } else {
-                if (Role.getRole().equals("Customer") || GoogleUser.equals("Customer") ) {
+                if (Role.getRole().equals("Customer")) {
                     HttpSession session = req.getSession();
                     session.setAttribute("acc", checkUser);
                     req.setAttribute("productListOnClick", productListOnClick);
                     req.setAttribute("data", data);
                     req.setAttribute("cateList", cateList);
                     req.getRequestDispatcher("home.jsp").forward(req, resp);
-                } else if (Role.getRole().equals("Admin") || GoogleUser.equals("Admin") ) {
+                } else if (Role.getRole().equals("Admin")) {
                     HttpSession session = req.getSession();
                     session.setAttribute("acc", checkUser);
                     req.getRequestDispatcher("dashboardManager.jsp").forward(req, resp);

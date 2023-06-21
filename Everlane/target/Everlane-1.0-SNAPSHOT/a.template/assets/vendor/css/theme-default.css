@@ -296,6 +296,7 @@ button.list-group-item-primary.active {
 }
 
 .nav .nav-link:hover, .nav .nav-link:focus {
+<<<<<<< Updated upstream
   color: #5f61e6;
 }
 
@@ -303,6 +304,14 @@ button.list-group-item-primary.active {
   background-color: #696cff;
   color: #fff;
   box-shadow: 0 2px 4px 0 rgba(105, 108, 255, 0.4);
+=======
+  color: black;
+}
+
+.nav-pills .nav-link.active, .nav-pills .nav-link.active:hover, .nav-pills .nav-link.active:focus {
+  background-color: black;
+  color: #fff;
+>>>>>>> Stashed changes
 }
 
 .form-control:focus,
@@ -387,7 +396,11 @@ button.list-group-item-primary.active {
 .navbar.bg-primary .navbar-nav > .nav-link.disabled,
 .navbar.bg-primary .navbar-nav > .nav-item > .nav-link.disabled,
 .navbar.bg-primary .navbar-nav > .nav > .nav-item > .nav-link.disabled {
+<<<<<<< Updated upstream
   color: #b0b2ff !important;
+=======
+  color: #fff !important;
+>>>>>>> Stashed changes
 }
 .navbar.bg-primary .navbar-nav .show > .nav-link,
 .navbar.bg-primary .navbar-nav .active > .nav-link,
@@ -592,19 +605,31 @@ a:hover {
 .bg-navbar-theme .navbar-nav > .nav-link,
 .bg-navbar-theme .navbar-nav > .nav-item > .nav-link,
 .bg-navbar-theme .navbar-nav > .nav > .nav-item > .nav-link {
+<<<<<<< Updated upstream
   color: #697a8d;
+=======
+  color: #fff;
+>>>>>>> Stashed changes
 }
 .bg-navbar-theme .navbar-nav > .nav-link:hover, .bg-navbar-theme .navbar-nav > .nav-link:focus,
 .bg-navbar-theme .navbar-nav > .nav-item > .nav-link:hover,
 .bg-navbar-theme .navbar-nav > .nav-item > .nav-link:focus,
 .bg-navbar-theme .navbar-nav > .nav > .nav-item > .nav-link:hover,
 .bg-navbar-theme .navbar-nav > .nav > .nav-item > .nav-link:focus {
+<<<<<<< Updated upstream
   color: #566a7f;
+=======
+  color: #fff;
+>>>>>>> Stashed changes
 }
 .bg-navbar-theme .navbar-nav > .nav-link.disabled,
 .bg-navbar-theme .navbar-nav > .nav-item > .nav-link.disabled,
 .bg-navbar-theme .navbar-nav > .nav > .nav-item > .nav-link.disabled {
+<<<<<<< Updated upstream
   color: #a5afbb !important;
+=======
+  color: #fff !important;
+>>>>>>> Stashed changes
 }
 .bg-navbar-theme .navbar-nav .show > .nav-link,
 .bg-navbar-theme .navbar-nav .active > .nav-link,
