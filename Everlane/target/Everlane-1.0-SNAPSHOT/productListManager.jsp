@@ -50,7 +50,7 @@
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="a.template/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="a.template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="a.template/assets/vendor/css/theme-default1.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="a.template/assets/css/demo.css" />
 
     <!-- Vendors CSS -->
@@ -194,7 +194,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="highUserAccount.jsp">
                                         <i class="bx bx-user me-2"></i>
                                         <span class="align-middle">My Profile</span>
                                     </a>
