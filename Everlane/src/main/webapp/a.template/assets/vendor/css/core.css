@@ -224,15 +224,15 @@ sup {
 }
 
 a {
-  color: #696cff;
+  color: white;
   text-decoration: none;
 }
 a:hover {
-  color: #5f61e6;
+  color: white;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
-  color: inherit;
+  color: white;
   text-decoration: none;
 }
 
@@ -3268,7 +3268,7 @@ textarea.form-control-lg {
 .nav-link {
   display: block;
   padding: 0.5rem 1.25rem;
-  color: #8e9baa;
+  color: white;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3290,7 +3290,6 @@ textarea.form-control-lg {
 }
 .nav-tabs .nav-link {
   margin-bottom: -1px;
-  background: none;
   border: 1px solid transparent;
   border-top-left-radius: 0.375rem;
   border-top-right-radius: 0.375rem;
@@ -3306,9 +3305,9 @@ textarea.form-control-lg {
 }
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  color: #697a8d;
-  background-color: #fff;
-  border-color: #fff;
+  color: white;
+  background-color: black;
+  border-color: black;
 }
 .nav-tabs .dropdown-menu {
   margin-top: -1px;
@@ -3317,14 +3316,14 @@ textarea.form-control-lg {
 }
 
 .nav-pills .nav-link {
-  background: none;
+  color: white;
   border: 0;
   border-radius: 0.375rem;
 }
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: transparent;
+  background-color: black; !important;
 }
 
 .nav-fill > .nav-link,
@@ -3768,7 +3767,7 @@ textarea.form-control-lg {
   color: #697a8d;
 }
 .navbar-light .navbar-nav .nav-link {
-  color: rgba(67, 89, 113, 0.5);
+  color: black;
 }
 .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
   color: #697a8d;
@@ -7111,15 +7110,15 @@ button:focus {
 }
 
 .nav-tabs .nav-item .nav-link {
-  color: #566a7f;
+  color: black;
   border: 0;
   border-radius: 0;
 }
-.nav-tabs .nav-item .nav-link:hover, .nav-tabs .nav-item .nav-link:focus {
-  color: #566a7f;
+.nav-tabs .nav-item .nav-link:hover{
+  color: white;
 }
 .nav-tabs .nav-item .nav-link:not(.active) {
-  background-color: #eceef1;
+  background-color: black;
 }
 .nav-tabs .nav-item .nav-link.disabled {
   color: #c7cdd4;
@@ -16157,7 +16156,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
 .navbar.bg-info .navbar-nav > .nav-link,
 .navbar.bg-info .navbar-nav > .nav-item > .nav-link,
 .navbar.bg-info .navbar-nav > .nav > .nav-item > .nav-link {
-  color: #d2f4fc;
+  color: white;
 }
 .navbar.bg-info .navbar-nav > .nav-link:hover, .navbar.bg-info .navbar-nav > .nav-link:focus,
 .navbar.bg-info .navbar-nav > .nav-item > .nav-link:hover,

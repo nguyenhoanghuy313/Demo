@@ -31,6 +31,11 @@
             <form action="#">
                 <input type="email" id="email" name="email" value="" placeholder="Email Address"><br>
                 <input type="password" id="password" name="password" value="" placeholder="Password"><br><br>
+<<<<<<< Updated upstream
+=======
+                <input type="password" id="repass" name="repass" value="" placeholder="Repeat Password"><br>${error}<br>
+                <input type="hidden" id="roll" name="roll" value="Customer">
+>>>>>>> Stashed changes
                 <input type="submit" value="Unlock Your Discount">
             </form>
             <a href="login.jsp">Already have an account? Sign in</a>
