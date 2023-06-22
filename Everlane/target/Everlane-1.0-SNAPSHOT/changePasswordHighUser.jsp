@@ -51,7 +51,7 @@ changePasswordHighUser
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="a.template/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="a.template/assets/vendor/css/theme-default1.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="a.template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="a.template/assets/css/demo.css" />
 
     <!-- Vendors CSS -->

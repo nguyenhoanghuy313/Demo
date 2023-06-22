@@ -228,7 +228,7 @@
                 <div class="list_option_container">
                     <div class="list_option_container1">
                         <div class="input-group ">
-                            <button class="btn btn-outline-dark" type="button">New Product</button>
+                            <a href="addNewProduct.jsp" class="btn btn-outline-dark" type="button">New Product</a>
                         </div>
                     </div>
                     <div class="list_option_container2">
@@ -281,7 +281,10 @@
                                 <thead>
                                 <tr>
                                     <th>PRODUCT ID</th>
-                                    <th>PRODUCT IMAGE</th>
+                                    <th>THUMBNAIL</th>
+                                    <th>PRODUCT IMAGE 1</th>
+                                    <th>PRODUCT IMAGE 2</th>
+                                    <th>PRODUCT IMAGE 3</th>
                                     <th>PRODUCT NAME</th>
                                     <th>CATEGORY</th>
                                     <th>COLOR</th>
@@ -301,6 +304,9 @@
                                     <tr class="item">
                                     <td><%= x.getProductID() %></td>
                                     <td><img src=<%= x.getProductImg() %>></td>
+                                        <td><img src=<%= x.getProductImg() %>></td>
+                                        <td><img src=<%= x.getProductImg() %>></td>
+                                        <td><img src=<%= x.getProductImg() %>></td>
                                     <td><%= x.getProductName() %></td>
                                         <%
                                             for(int i = 0; i <= cateList.size(); i++ ){
