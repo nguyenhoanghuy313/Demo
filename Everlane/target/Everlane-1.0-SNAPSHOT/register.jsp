@@ -29,6 +29,15 @@
             <h2>Complete your sign up to
                 receive your discount.*</h2>
             <form action="register-servlet" method="post">
+                <input type="text" id="email" name="firstname" value="" placeholder="First Name"><br>
+                <input type="text" id="email" name="lastname" value="" placeholder="Last Name"><br>
+                <input type="number" id="email" name="phone" value="" placeholder="Phone Number"><br>
+                <input type="date" id="email" name="dob" value="" placeholder="Date Of Birth"><br>
+                <select name="gender">
+                    <option value="0">Choose Your Gender</option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                </select><br>
                 <input type="text" id="email" name="username" value="" placeholder="User Name"><br>
                 <input type="text" id="email" name="firstname" value="" placeholder="First Name"><br>
                 <input type="text" id="email" name="lastname" value="" placeholder="Last Name"><br>

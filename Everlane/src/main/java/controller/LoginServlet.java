@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
             UserDAO u = new UserDAO();
             ProductsDAO p = new ProductsDAO();
             CategoryDAO c = new CategoryDAO();
-            UserGoogleDto ugd = new UserGoogleDto();
+//            UserGoogleDto ugd = new UserGoogleDto();
             String cateID = req.getParameter("categoryID");
             List<Product> productListOnClick = p.getProductsByCateID(cateID);
             List<Product> data = p.getAllProducts();
@@ -52,10 +52,13 @@ public class LoginServlet extends HttpServlet {
                     req.setAttribute("Message", "Email or Password is incorrect or not exist!!!");
                 }
                 req.getRequestDispatcher("login.jsp").forward(req, resp);
+<<<<<<< Updated upstream
 //                if(ugd.getEmail().isEmpty()) {
 //                    req.setAttribute("Message", "Gmail is incorrect or not exist!!!");
 //                    req.getRequestDispatcher("login.jsp").forward(req, resp);
 //                }
+=======
+>>>>>>> Stashed changes
             } else {
                 if (Role.getRole().equals("Customer")) {
                     HttpSession session = req.getSession();

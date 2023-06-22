@@ -297,6 +297,7 @@ button.list-group-item-primary.active {
 
 .nav .nav-link:hover, .nav .nav-link:focus {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   color: #5f61e6;
 }
 
@@ -305,12 +306,17 @@ button.list-group-item-primary.active {
   color: #fff;
   box-shadow: 0 2px 4px 0 rgba(105, 108, 255, 0.4);
 =======
+=======
+>>>>>>> Stashed changes
   color: black;
 }
 
 .nav-pills .nav-link.active, .nav-pills .nav-link.active:hover, .nav-pills .nav-link.active:focus {
   background-color: black;
   color: #fff;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }
 
@@ -397,7 +403,11 @@ button.list-group-item-primary.active {
 .navbar.bg-primary .navbar-nav > .nav-item > .nav-link.disabled,
 .navbar.bg-primary .navbar-nav > .nav > .nav-item > .nav-link.disabled {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   color: #b0b2ff !important;
+=======
+  color: #fff !important;
+>>>>>>> Stashed changes
 =======
   color: #fff !important;
 >>>>>>> Stashed changes
@@ -606,7 +616,11 @@ a:hover {
 .bg-navbar-theme .navbar-nav > .nav-item > .nav-link,
 .bg-navbar-theme .navbar-nav > .nav > .nav-item > .nav-link {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   color: #697a8d;
+=======
+  color: #fff;
+>>>>>>> Stashed changes
 =======
   color: #fff;
 >>>>>>> Stashed changes
@@ -617,7 +631,11 @@ a:hover {
 .bg-navbar-theme .navbar-nav > .nav > .nav-item > .nav-link:hover,
 .bg-navbar-theme .navbar-nav > .nav > .nav-item > .nav-link:focus {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   color: #566a7f;
+=======
+  color: #fff;
+>>>>>>> Stashed changes
 =======
   color: #fff;
 >>>>>>> Stashed changes
@@ -626,7 +644,11 @@ a:hover {
 .bg-navbar-theme .navbar-nav > .nav-item > .nav-link.disabled,
 .bg-navbar-theme .navbar-nav > .nav > .nav-item > .nav-link.disabled {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   color: #a5afbb !important;
+=======
+  color: #fff !important;
+>>>>>>> Stashed changes
 =======
   color: #fff !important;
 >>>>>>> Stashed changes

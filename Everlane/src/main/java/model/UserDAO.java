@@ -1,7 +1,8 @@
 package model;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class UserDAO extends myDAO {
@@ -103,17 +104,22 @@ public class UserDAO extends myDAO {
         return false;
     }
 
-    public void addUser(String xusername,String xpassword, String xemail) {
+    public void addUser(String xusername,String xpassword, String xemail, String xfirstname, String xlastname, String xdob, int xsex, int xphone) {
         String xRole = "Customer";
         try {
             xSql = "INSERT INTO user (UserID,UserName,Password,Email,FirstName,LastName,Dob,Sex,Phone,Role)\n" +
-                    "SELECT IFNULL(MAX(UserID), 0) + 1, ?,?,?,null,null,null,null,null,?\n" +
+                    "SELECT IFNULL(MAX(UserID), 0) + 1, ?,?,?,?,?,?,?,?,?\n" +
                     "FROM user";
             ps = con.prepareStatement(xSql);
             ps.setString(1, xusername);
             ps.setString(2, xpassword);
             ps.setString(3, xemail);
-            ps.setString(4, xRole);
+            ps.setString(4, xfirstname);
+            ps.setString(5, xlastname);
+            ps.setDate(6, Date.valueOf(xdob));
+            ps.setInt(7, xsex);
+            ps.setInt(8, xphone);
+            ps.setString(9, xRole);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("addUser: " + e.getMessage());
@@ -159,7 +165,19 @@ public class UserDAO extends myDAO {
         }
         return userList;
     }
-
+    public static boolean isValidDate(String date) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date currentDate = new java.util.Date();
+            java.util.Date inputDate = dateFormat.parse(date);
+            if (inputDate.after(currentDate) || inputDate.equals(currentDate)) {
+                return false; // Ngày sinh không hợp lệ
+            }
+            return true; // Ngày sinh hợp lệ
+        } catch (Exception e) {
+            return false; // Lỗi xảy ra khi chuyển đổi ngày
+        }
+    }
 }
 
 //
