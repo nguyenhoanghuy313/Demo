@@ -52,13 +52,13 @@ public class LoginServlet extends HttpServlet {
                     req.setAttribute("Message", "Email or Password is incorrect or not exist!!!");
                 }
                 req.getRequestDispatcher("login.jsp").forward(req, resp);
-<<<<<<< Updated upstream
-//                if(ugd.getEmail().isEmpty()) {
-//                    req.setAttribute("Message", "Gmail is incorrect or not exist!!!");
-//                    req.getRequestDispatcher("login.jsp").forward(req, resp);
-//                }
-=======
->>>>>>> Stashed changes
+//<<<<<<< Updated upstream
+////                if(ugd.getEmail().isEmpty()) {
+////                    req.setAttribute("Message", "Gmail is incorrect or not exist!!!");
+////                    req.getRequestDispatcher("login.jsp").forward(req, resp);
+////                }
+//=======
+//>>>>>>> Stashed changes
             } else {
                 if (Role.getRole().equals("Customer")) {
                     HttpSession session = req.getSession();
