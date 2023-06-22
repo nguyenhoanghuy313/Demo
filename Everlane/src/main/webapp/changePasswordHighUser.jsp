@@ -1,20 +1,21 @@
 <%--
   Created by IntelliJ IDEA.
   User: minileisduk
-  Date: 6/13/2023
-  Time: 11:41 PM
+  Date: 21/06/2023
+  Time: 11:51 SA
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="java.util.*" %>
-<%@page import="model.*" %>
-<%@page import="controller.*" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%
-    List<Product> productList = (List<Product>) request.getAttribute("productList");
-    List<Category> cateList = (List<Category>) request.getAttribute("cateList");
-%>
+changePasswordHighUser
+<%--
+  Created by IntelliJ IDEA.
+  User: minileisduk
+  Date: 21/06/2023
+  Time: 11:12 SA
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -30,7 +31,7 @@
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Product List</title>
+    <title>Dashboard</title>
 
     <meta name="description" content="" />
 
@@ -56,8 +57,9 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
+    <link rel="stylesheet" href="a.template/assets/vendor/libs/apex-charts/apex-charts.css" />
+
     <!-- Page CSS -->
-    <link rel="stylesheet" href="adminpage/product-list/product-list.css">
 
     <!-- Helpers -->
     <script src="a.template/assets/vendor/js/helpers.js"></script>
@@ -68,7 +70,6 @@
 </head>
 
 <body>
-
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -77,11 +78,15 @@
             <div class="app-brand demo">
                 <a href="dashboardManager.jsp" class="app-brand-link">
               <span class="app-brand-logo demo">
-                    <svg width="128" height="14px" class="styles_everlane-logo__4o010" viewBox="0 0 128 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M116.776 0V14H127.933V11.2198H119.6V8.38015H127.032V5.61985H119.6V2.78015H127.933V0H116.776ZM108.221 0V9.45982L101.311 0H98.5062V14H101.311V4.54018L108.222 14H111.066V0H108.222H108.221ZM86.0055 0L80.3766 14H83.3211L84.4828 11.1397H90.2922L91.4341 14H94.4191L88.7902 0H86.0055ZM87.3875 3.7201L89.2307 8.48018H85.5046L87.3875 3.7201ZM67.1754 0V14H77.3717V11.2198H69.9998V0H67.1754ZM52.4714 2.71982V5.70003H57.6201C58.4017 5.70003 59.0625 5.09986 59.0625 4.22024C59.0625 3.34063 58.4216 2.71982 57.6201 2.71982H52.4714ZM58.7619 14L55.396 8.38015H52.4714V14H49.647V0H57.6201C60.0238 0 61.867 1.74018 61.867 4.17976C61.867 6.35974 60.4651 7.9197 58.5019 8.28012L61.9672 14H58.7619ZM32.9201 0V14H44.0785V11.2198H35.7453V8.38015H43.1776V5.61985H35.7453V2.78015H44.0785V0H32.9201ZM26.1494 0L22.1227 10.1997L18.0753 0H15.0307L20.6596 14H23.484L29.1336 0H26.1486H26.1494ZM0.0865293 0L0.0666504 14H11.245V11.2198H2.91092V8.38015H10.3432V5.61985H2.91092V2.78015H11.2442V0H0.0865293Z" fill="black"></path></svg>
+                    <svg width="128" height="14px" class="styles_everlane-logo__4o010" viewBox="0 0 128 14" fill="none"
+                         xmlns="http://www.w3.org/2000/svg"><path
+                            d="M116.776 0V14H127.933V11.2198H119.6V8.38015H127.032V5.61985H119.6V2.78015H127.933V0H116.776ZM108.221 0V9.45982L101.311 0H98.5062V14H101.311V4.54018L108.222 14H111.066V0H108.222H108.221ZM86.0055 0L80.3766 14H83.3211L84.4828 11.1397H90.2922L91.4341 14H94.4191L88.7902 0H86.0055ZM87.3875 3.7201L89.2307 8.48018H85.5046L87.3875 3.7201ZM67.1754 0V14H77.3717V11.2198H69.9998V0H67.1754ZM52.4714 2.71982V5.70003H57.6201C58.4017 5.70003 59.0625 5.09986 59.0625 4.22024C59.0625 3.34063 58.4216 2.71982 57.6201 2.71982H52.4714ZM58.7619 14L55.396 8.38015H52.4714V14H49.647V0H57.6201C60.0238 0 61.867 1.74018 61.867 4.17976C61.867 6.35974 60.4651 7.9197 58.5019 8.28012L61.9672 14H58.7619ZM32.9201 0V14H44.0785V11.2198H35.7453V8.38015H43.1776V5.61985H35.7453V2.78015H44.0785V0H32.9201ZM26.1494 0L22.1227 10.1997L18.0753 0H15.0307L20.6596 14H23.484L29.1336 0H26.1486H26.1494ZM0.0865293 0L0.0666504 14H11.245V11.2198H2.91092V8.38015H10.3432V5.61985H2.91092V2.78015H11.2442V0H0.0865293Z"
+                            fill="black"></path></svg>
               </span>
                 </a>
 
-                <a href="dashboardManager.jsp;" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                <a href="dashboardManager.jsp"
+                   class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                     <i class="bx bx-chevron-left bx-sm align-middle"></i>
                 </a>
             </div>
@@ -90,7 +95,7 @@
 
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
-                <li class="menu-item">
+                <li class="menu-item active">
                     <a href="dashboardManager.jsp" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
@@ -101,7 +106,7 @@
                 <!-- Pages -->
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
                 <!-- Product List -->
-                <li class="menu-item active">
+                <li class="menu-item">
                     <a href="${pageContext.request.contextPath}/ProductListManagerServlet" class="menu-link">
                         <i class='menu-icon tf-icons bx bxs-package'></i>
                         <div data-i18n="Product List">Product List</div>
@@ -171,7 +176,7 @@
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
-                                    <img src="../../a.template/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                    <img src="a.template/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -180,7 +185,7 @@
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="../../a.template/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                                    <img src="a.template/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
@@ -194,7 +199,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="highUserAccount.jsp">
+                                    <a class="dropdown-item" href="#">
                                         <i class="bx bx-user me-2"></i>
                                         <span class="align-middle">My Profile</span>
                                     </a>
@@ -222,149 +227,66 @@
             </nav>
 
             <!-- / Navbar -->
+
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <!-- Content -->
-                <div class="list_option_container">
-                    <div class="list_option_container1">
-                        <div class="input-group ">
-                            <a href="addNewProduct.jsp" class="btn btn-outline-dark" type="button">New Product</a>
-                        </div>
-                    </div>
-                    <div class="list_option_container2">
 
-                        <div class="input-group input-group-merge">
-                            <form action="${pageContext.request.contextPath}/ProductListManagerServlet" method="post">
-                                <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
-                                <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Search..."
-                                        aria-label="Search..."
-                                        aria-describedby="basic-addon-search31"
-                                        name="productName"
-                                />
-                            </form>
-                        </div>
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account Settings / Account /</span> Change Password</h4>
 
-
-                        <div class="input-group">
-                            <button
-                                    class="btn btn-outline-dark dropdown-toggle"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                            >
-                                Sort by
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:void(0);">Sort by Latest</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Sort by Newest</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Sort by Price: Up</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Sort by Price: Down</a></li>
-                            </ul>
-                        </div>
-                        <div class="input-group">
-                            <button
-                                    class="btn btn-outline-dark dropdown-toggle"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                            >
-                                Category
-                            </button>
-                            <ul class="dropdown-menu">
-                                <c:forEach var="cate" items="${cateList}" varStatus="status">
-                                    <c:if test="${status.index < 8}">
-                                        <li><a class="dropdown-item" href="javascript:void(0);">${cate.getCategoryName()}</a></li>
-                                    </c:if>
-                                </c:forEach>
-                            </ul>
-                        </div>
-                    </div>
-
-
-                </div>
-
-                <div class="container-xxl flex-grow-1 container-p-y ">
-                    <div class="card">
-                        <h5 class="card-header">Products</h5>
-                        <div class="table-responsive text-nowrap listtable">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>PRODUCT ID</th>
-                                    <th>THUMBNAIL</th>
-                                    <th>PRODUCT IMAGE 1</th>
-                                    <th>PRODUCT IMAGE 2</th>
-                                    <th>PRODUCT IMAGE 3</th>
-                                    <th>PRODUCT NAME</th>
-                                    <th>CATEGORY</th>
-                                    <th>COLOR</th>
-                                    <th>PRICE</th>
-                                    <th>AMOUNT</th>
-                                    <th>RATE</th>
-                                    <th>ACTION</th>
-                                </tr>
-                                </thead>
-                                <tbody class="table-border-bottom-0">
-                                <%
-                                    if(!productList.isEmpty()){
-                                %>
-                                <%
-                                    for(Product x: productList) {
-                                %>
-                                    <tr class="item">
-                                    <td><%= x.getProductID() %></td>
-                                    <td><img src=<%= x.getProductImg() %>></td>
-                                        <td><img src=<%= x.getProductImg() %>></td>
-                                        <td><img src=<%= x.getProductImg() %>></td>
-                                        <td><img src=<%= x.getProductImg() %>></td>
-                                    <td><%= x.getProductName() %></td>
-                                        <%
-                                            for(int i = 0; i <= cateList.size(); i++ ){
-                                        %>
-                                            <%
-                                                if(cateList.get(i).getCategoryID() == x.getCategoryID()){
-                                            %>
-                                        <td><%= cateList.get(i).getCategoryName()%></td>
-                                            <% break; } %>
-                                        <% } %>
-                                    <td><%= x.getColor() %></td>
-                                    <td><%= x.getPrice() %></td>
-                                    <td>null</td>
-                                    <td>null</td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                                                >
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-trash me-1"></i> Delete</a
-                                                >
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card mb-4">
+                                <!-- Account -->
+                                <hr class="my-0" />
+                                <div class="card-body">
+                                    <form id="changePasswordHighUser" method="POST" onsubmit="return false">
+                                        <div class="row">
+                                            <div class="mb-3 col-md-12">
+                                                <label for="oldPassword" class="form-label">Old Password</label>
+                                                <input
+                                                        class="form-control"
+                                                        type="text"
+                                                        id="oldPassword"
+                                                        name="oldPassword"
+                                                        placeholder="Please enter your old password"
+                                                        autofocus
+                                                />
                                             </div>
+                                            <div class="mb-3 col-md-12">
+                                                <label for="newPassword" class="form-label">New Password</label>
+                                                <input class="form-control" type="text" name="newPassword" id="newPassword" placeholder="Please enter your new password" />
+                                            </div>
+                                            <div class="mb-3 col-md-12">
+                                                <label for="reEnterNewPassword" class="form-label">Confirm Your New Password</label>
+                                                <input
+                                                        class="form-control"
+                                                        type="text"
+                                                        id="reEnterNewPassword"
+                                                        name="reEnterNewPassword"
+                                                        placeholder="Please reenter your new password"
+                                                />
+                                            </div>
+
+
                                         </div>
-                                    </td>
-                                </tr>
-                                <% } %>
-                                <% } else {%>
-                                <h2>No products found</h2>
-                                <% } %>
-                                </tbody>
-                            </table>
+                                        <div class="mt-2">
+                                            <button type="submit" class="btn btn-dark me-2">Save changes</button>
+                                            <a href="highUserAccount.jsp" class="btn btn-outline-secondary">Cancel</a>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /Account -->
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- / Content -->
 
-
-
                 <div class="content-backdrop fade"></div>
             </div>
+            <!-- Content wrapper -->
             <!-- Content wrapper -->
         </div>
         <!-- / Layout page -->
@@ -374,6 +296,7 @@
     <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
+
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
@@ -386,11 +309,13 @@
 <!-- endbuild -->
 
 <!-- Vendors JS -->
+<script src="a.template/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 <!-- Main JS -->
 <script src="a.template/assets/js/main.js"></script>
 
 <!-- Page JS -->
+<script src="a.template/assets/js/dashboards-analytics.js"></script>
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>

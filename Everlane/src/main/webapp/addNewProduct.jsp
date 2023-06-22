@@ -1,19 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
   User: minileisduk
-  Date: 6/14/2023
-  Time: 10:06 AM
+  Date: 22/06/2023
+  Time: 10:14 CH
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="java.util.*" %>
-<%@page import="model.*" %>
-<%@page import="controller.*" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%
-  List<User> userList = (List<User>) request.getAttribute("userList");
-%>
+<!DOCTYPE html>
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -29,7 +22,7 @@
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
   />
 
-  <title>Product List</title>
+  <title>Create New Product</title>
 
   <meta name="description" content="" />
 
@@ -55,8 +48,9 @@
   <!-- Vendors CSS -->
   <link rel="stylesheet" href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
+  <link rel="stylesheet" href="a.template/assets/vendor/libs/apex-charts/apex-charts.css" />
+
   <!-- Page CSS -->
-  <link rel="stylesheet" href="adminpage/product-list/product-list.css">
 
   <!-- Helpers -->
   <script src="a.template/assets/vendor/js/helpers.js"></script>
@@ -79,7 +73,7 @@
               </span>
         </a>
 
-        <a href="dashboardManager.jsp" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+        <a href="dashboardManager.jsp;" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
           <i class="bx bx-chevron-left bx-sm align-middle"></i>
         </a>
       </div>
@@ -99,14 +93,14 @@
         <!-- Pages -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
         <!-- Product List -->
-        <li class="menu-item">
+        <li class="menu-item active">
           <a href="${pageContext.request.contextPath}/ProductListManagerServlet" class="menu-link">
             <i class='menu-icon tf-icons bx bxs-package'></i>
             <div data-i18n="Product List">Product List</div>
           </a>
         </li>
         <!-- User List -->
-        <li class="menu-item  active">
+        <li class="menu-item">
           <a href="${pageContext.request.contextPath}/UserListManagerServlet" class="menu-link">
             <i class='menu-icon tf-icons bx bx-user'></i>
             <div data-i18n="User List">User List</div>
@@ -167,9 +161,11 @@
           <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
-              <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+              <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                 data-bs-toggle="dropdown">
                 <div class="avatar avatar-online">
-                  <img src="../../a.template/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                  <img src="a.template/assets/img/avatars/1.png" alt
+                       class="w-px-40 h-auto rounded-circle"/>
                 </div>
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
@@ -178,11 +174,14 @@
                     <div class="d-flex">
                       <div class="flex-shrink-0 me-3">
                         <div class="avatar avatar-online">
-                          <img src="../../a.template/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                          <img src="a.template/assets/img/avatars/1.png" alt
+                               class="w-px-40 h-auto rounded-circle"/>
                         </div>
                       </div>
                       <div class="flex-grow-1">
-                        <span class="fw-semibold d-block">John Doe</span>
+                        <c:if test=" ${sessionScope.acc!= null}">
+                          <span class="fw-semibold d-block">${sessionScope.acc.userName}</span>
+                        </c:if>
                         <small class="text-muted">Admin</small>
                       </div>
                     </div>
@@ -219,125 +218,118 @@
         </div>
       </nav>
 
+
       <!-- / Navbar -->
+
       <!-- Content wrapper -->
       <div class="content-wrapper">
         <!-- Content -->
-        <div class="list_option_container">
-          <div class="list_option_container1">
-            <div class="input-group ">
-              <a href="addNewUser.jsp" class="btn btn-outline-dark" type="button">New User</a>
-            </div>
-          </div>
-          <div class="list_option_container2">
 
-            <div class="input-group input-group-merge">
-              <form action="${pageContext.request.contextPath}/UserListManagerServlet" method="post">
-                <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
-                <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Search..."
-                        aria-label="Search..."
-                        aria-describedby="basic-addon-search31"
-                        name="userName"
-                />
-              </form>
-            </div>
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Product List / </span> New Product</h4>
 
-            <div class="input-group">
-              <button
-                      class="btn btn-outline-dark dropdown-toggle"
-                      type="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-              >
-                Sort by
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="javascript:void(0);">Sort by LatestUser</a></li>
-                <li><a class="dropdown-item" href="javascript:void(0);">Sort by NewestUser</a></li>
-              </ul>
-            </div>
-            <div class="input-group">
-              <button
-                      class="btn btn-outline-dark dropdown-toggle"
-                      type="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-              >
-                Category
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="javascript:void(0);">Admin</a></li>
-                <li><a class="dropdown-item" href="javascript:void(0);">Customer</a></li>
-                <li><a class="dropdown-item" href="javascript:void(0);">Sale</a></li>
-                <li><a class="dropdown-item" href="javascript:void(0);">Marketing</a></li>
-              </ul>
-            </div>
-          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card mb-4">
+                <h5 class="card-header">Create New Product</h5>
+                <!-- Account -->
 
-
-        </div>
-
-        <div class="container-xxl flex-grow-1 container-p-y ">
-          <div class="card">
-            <h5 class="card-header">Products</h5>
-            <div class="table-responsive text-nowrap listtable">
-              <table class="table">
-                <thead>
-                <tr>
-                  <th>USER ID</th>
-                  <th>USER NAME</th>
-                  <th>EMAIL</th>
-                  <th>FIRST NAME</th>
-                  <th>LAST NAME</th>
-                  <th>DATE OF BIRTH</th>
-                  <th>GENDER</th>
-                  <th>PHONE NUMBER</th>
-                  <th>ROLE</th>
-                </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                <c:forEach var="u" items="${userList}" varStatus="status">
-                  <tr class="item">
-                  <td>${u.getUserID()}</td>
-                  <td>${u.getUserName()}</td>
-                  <td>${u.getEmail()}</td>
-                  <td>${u.getFirstName()}</td>
-                  <td>${u.getLastName()}</td>
-                  <td>${u.getDob()}</td>
-                  <td>${u.getSex()}</td>
-                  <td>${u.getPhone()}</td>
-                  <td>${u.getRole()}</td>
-                  <td>
-                    <div class="dropdown">
-                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                      </button>
-                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="javascript:void(0);"
-                        ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                        >
-                        <a class="dropdown-item" href="javascript:void(0);"
-                        ><i class="bx bx-trash me-1"></i> Delete</a
-                        >
+                <hr class="my-0" />
+                <div class="card-body">
+                  <form id="formAccountSettings" method="POST" onsubmit="return false">
+                    <div class="row">
+                      <div class="mb-3 col-md-6">
+                        <label for="productID" class="form-label">Product ID</label>
+                        <input
+                                class="form-control"
+                                type="text"
+                                id="productID"
+                                name="productID"
+                                placeholder="Please enter Product ID"
+                                autofocus
+                        />
                       </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="productName" class="form-label">Product Name</label>
+                        <input class="form-control" type="text" name="productName" id="productName" placeholder="Please enter Product Name" />
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="thumbnail" class="form-label">Select thumbnail image</label>
+                        <input class="form-control" type="file" id="thumbnail" />
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="productImg1" class="form-label">Select product Image</label>
+                        <input class="form-control" type="file" id="productImg1" />
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="productImg2" class="form-label">Select product Image</label>
+                        <input class="form-control" type="file" id="productImg2" />
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="productImg3" class="form-label">Select product Image</label>
+                        <input class="form-control" type="file" id="productImg3" />
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="categoryID" class="form-label">Category</label>
+                        <select id="categoryID" class="select2 form-select" >
+                          <option value="">Please chose Category</option>
+                          <!--                          in ra list các category bằng loop -->
+                          <option value="Truyền value cua category">Tên category</option>
+                          <option value="Truyền value cua category">Tên category</option>
+                          <option value="Truyền value cua category">Tên category</option>
+                          <option value="Truyền value cua category">Tên category</option>
+                        </select>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="collectionID" class="form-label">Collection</label>
+                        <select id="collectionID" class="select2 form-select" >
+                          <option value="">Please chose Collection</option>
+                          <!--                          in ra list các collection bằng loop -->
+                          <option value="Truyền value cua collection">Tên collection</option>
+                          <option value="Truyền value cua collection">Tên collection</option>
+                          <option value="Truyền value cua collection">Tên collection</option>
+                          <option value="Truyền value cua collection">Tên collection</option>
+                        </select>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="colourID" class="form-label">Colour</label>
+                        <select id="colourID" class="select2 form-select" >
+                          <option value="">Please chose Colour</option>
+                          <!--                          in ra list các colour trong bẳng colour bằng loop -->
+                          <option value="Truyền value cua colour">Tên colour</option>
+                          <option value="Truyền value cua colour">Tên colour</option>
+                          <option value="Truyền value cua colour">Tên colour</option>
+                          <option value="Truyền value cua colour">Tên colour</option>
+                        </select>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="price" class="form-label">Price</label>
+                        <input
+                                class="form-control"
+                                type="number"
+                                id="price"
+                                name="price"
+                                placeholder="Please enter Product Price"
+                        />
+                      </div>
+
+
                     </div>
-                  </td>
-                </tr>
-                </c:forEach>
-                </tbody>
-              </table>
+                    <div class="mt-2">
+                      <button type="submit" class="btn btn-dark me-2">Create new Product</button>
+                      <a href="${pageContext.request.contextPath}/ProductListManagerServlet" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <!-- / Content -->
 
-
-
         <div class="content-backdrop fade"></div>
       </div>
+      <!-- Content wrapper -->
       <!-- Content wrapper -->
     </div>
     <!-- / Layout page -->
@@ -347,6 +339,7 @@
   <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
+
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
@@ -359,14 +352,17 @@
 <!-- endbuild -->
 
 <!-- Vendors JS -->
+<script src="a.template/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 <!-- Main JS -->
 <script src="a.template/assets/js/main.js"></script>
 
 <!-- Page JS -->
+<script src="a.template/assets/js/dashboards-analytics.js"></script>
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>
+
 
