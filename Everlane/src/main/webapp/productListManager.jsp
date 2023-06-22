@@ -233,6 +233,19 @@
                     </div>
                     <div class="list_option_container2">
 
+                        <div class="input-group input-group-merge">
+                            <form action="${pageContext.request.contextPath}/ProductListManagerServlet" method="post">
+                                <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Search..."
+                                        aria-label="Search..."
+                                        aria-describedby="basic-addon-search31"
+                                        name="productName"
+                                />
+                            </form>
+                        </div>
 
 
                         <div class="input-group">
