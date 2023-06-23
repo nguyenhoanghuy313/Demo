@@ -25,7 +25,7 @@ changePasswordHighUser
         data-template="vertical-menu-template-free"
 >
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
@@ -33,31 +33,31 @@ changePasswordHighUser
 
     <title>Dashboard</title>
 
-    <meta name="description" content="" />
+    <meta name="description" content=""/>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet"
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="a.template/assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="a.template/assets/vendor/fonts/boxicons.css"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="a.template/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="a.template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="a.template/assets/css/demo.css" />
+    <link rel="stylesheet" href="a.template/assets/vendor/css/core.css" class="template-customizer-core-css"/>
+    <link rel="stylesheet" href="a.template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css"/>
+    <link rel="stylesheet" href="a.template/assets/css/demo.css"/>
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
-    <link rel="stylesheet" href="a.template/assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" href="a.template/assets/vendor/libs/apex-charts/apex-charts.css"/>
 
     <!-- Page CSS -->
 
@@ -107,14 +107,15 @@ changePasswordHighUser
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
                 <!-- Product List -->
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/ProductListManagerServlet" class="menu-link">
+                    <a href="${pageContext.request.contextPath}/ProductListManagerServlet?categoryID=all"
+                       class="menu-link">
                         <i class='menu-icon tf-icons bx bxs-package'></i>
                         <div data-i18n="Product List">Product List</div>
                     </a>
                 </li>
                 <!-- User List -->
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/UserListManagerServlet" class="menu-link">
+                    <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=all" class="menu-link">
                         <i class='menu-icon tf-icons bx bx-user'></i>
                         <div data-i18n="User List">User List</div>
                     </a>
@@ -174,9 +175,11 @@ changePasswordHighUser
                     <ul class="navbar-nav flex-row align-items-center ms-auto">
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                               data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
-                                    <img src="a.template/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                    <img src="a.template/assets/img/avatars/1.png" alt
+                                         class="w-px-40 h-auto rounded-circle"/>
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -185,7 +188,8 @@ changePasswordHighUser
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="a.template/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                                    <img src="a.template/assets/img/avatars/1.png" alt
+                                                         class="w-px-40 h-auto rounded-circle"/>
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
@@ -233,13 +237,14 @@ changePasswordHighUser
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account Settings / Account /</span> Change Password</h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account Settings / Account /</span>
+                        Change Password</h4>
 
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card mb-4">
                                 <!-- Account -->
-                                <hr class="my-0" />
+                                <hr class="my-0"/>
                                 <div class="card-body">
                                     <form id="changePasswordHighUser" method="POST" onsubmit="return false">
                                         <div class="row">
@@ -256,10 +261,12 @@ changePasswordHighUser
                                             </div>
                                             <div class="mb-3 col-md-12">
                                                 <label for="newPassword" class="form-label">New Password</label>
-                                                <input class="form-control" type="text" name="newPassword" id="newPassword" placeholder="Please enter your new password" />
+                                                <input class="form-control" type="text" name="newPassword"
+                                                       id="newPassword" placeholder="Please enter your new password"/>
                                             </div>
                                             <div class="mb-3 col-md-12">
-                                                <label for="reEnterNewPassword" class="form-label">Confirm Your New Password</label>
+                                                <label for="reEnterNewPassword" class="form-label">Confirm Your New
+                                                    Password</label>
                                                 <input
                                                         class="form-control"
                                                         type="text"

@@ -107,7 +107,7 @@
                 <!-- Pages -->
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
                 <!-- Product List -->
-                <li class="menu-item active">l
+                <li class="menu-item active">
                     <a href="${pageContext.request.contextPath}/ProductListManagerServlet?categoryID=all"
                        class="menu-link">
                         <i class='menu-icon tf-icons bx bxs-package'></i>
@@ -238,7 +238,7 @@
                 <div class="list_option_container">
                     <div class="list_option_container1">
                         <div class="input-group ">
-                            <button class="btn btn-outline-dark" type="button">New Product</button>
+                            <a href="addNewProduct.jsp" class="btn btn-outline-dark" type="button">New Product</a>
                         </div>
                     </div>
                     <div class="list_option_container2">

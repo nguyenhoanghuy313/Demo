@@ -65,7 +65,6 @@
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
     <!-- Menu -->
-
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
       <div class="app-brand demo">
         <a href="dashboardManager.jsp" class="app-brand-link">
@@ -77,7 +76,7 @@
               </span>
         </a>
 
-        <a href="dashboardManager.jsp"
+        <a href="dashboardManager.jsp;"
            class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
           <i class="bx bx-chevron-left bx-sm align-middle"></i>
         </a>
@@ -99,14 +98,15 @@
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
         <!-- Product List -->
         <li class="menu-item">
-          <a href="${pageContext.request.contextPath}/ProductListManagerServlet" class="menu-link">
+          <a href="${pageContext.request.contextPath}/ProductListManagerServlet?categoryID=all"
+             class="menu-link">
             <i class='menu-icon tf-icons bx bxs-package'></i>
             <div data-i18n="Product List">Product List</div>
           </a>
         </li>
         <!-- User List -->
         <li class="menu-item active">
-          <a href="${pageContext.request.contextPath}/UserListManagerServlet" class="menu-link">
+          <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=all" class="menu-link">
             <i class='menu-icon tf-icons bx bx-user'></i>
             <div data-i18n="User List">User List</div>
           </a>
@@ -132,7 +132,6 @@
         </li>
       </ul>
     </aside>
-
     <!-- / Menu -->
 
     <!-- Layout container -->
@@ -322,7 +321,7 @@
                     </div>
                     <div class="mt-2">
                       <button type="submit" class="btn btn-dark me-2">Create new User</button>
-                      <a href="${pageContext.request.contextPath}/UserListManagerServlet" class="btn btn-outline-secondary">Cancel</a>
+                      <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=all" class="btn btn-outline-secondary">Cancel</a>
                     </div>
                   </form>
                 </div>

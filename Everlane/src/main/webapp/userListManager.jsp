@@ -226,7 +226,7 @@
         <div class="list_option_container">
           <div class="list_option_container1">
             <div class="input-group ">
-              <button class="btn btn-outline-dark" type="button">New User</button>
+              <a href="addNewUser.jsp" class="btn btn-outline-dark" type="button">New User</a>
             </div>
           </div>
           <div class="list_option_container2">
