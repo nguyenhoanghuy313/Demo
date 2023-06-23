@@ -1,0 +1,114 @@
+.Product_Detail_Container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 32px 80px 128px;
+}
+
+/*----------------------------------------------------------------------------*/
+.Product_Image_Container{
+    width: 960px;
+    height: 960px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.Product_Image_Container img{
+    width: 476px;
+    height: 476px;
+    margin: 1px;
+}
+
+/*--------------------------------------------------------------------------------*/
+.Product_Detail{
+    width: 396px;
+    padding: 10px;
+}
+.Product_Name{
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+}
+
+.Category_Tag{
+    font-size: 12px;
+}
+.Name_And_Price{
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    padding-bottom: 5vh ;
+}
+.Price{
+    display: flex;
+    flex-direction: row;
+}
+.Price p:first-child{
+    text-decoration: line-through;
+    margin-right: 5px;
+}
+.Price p:last-child{
+    font-weight: bold;
+}
+
+
+/*--------------------------------------------------------------------------------*/
+.Product_Color{
+    width: 100%;
+    margin-top: 5vh;
+    font-size: 14px;
+}
+.Color{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+.Product_Color a{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+.Product_Color a div{
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+
+/*-------------------------------------------------*/
+.Product_Size{
+    margin-top: 20px;
+    font-size: 14px;
+}
+.Size{
+    display: flex;
+    flex-wrap: wrap;
+}
+.Size a{
+    width: 44px;
+    height: 40px;
+    text-align: center;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1px;
+}
+
+/*---------------------------------------------------------*/
+.Product_Detail button{
+    width: 100%;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 16px 0px;
+    margin-top: 5vh;
+}
+
+/*-------------------------------------------------------------*/
+.Product_Description{
+    width: 100%;
+    border-top: 1px solid lightgray;
+    margin-top: 5vh;
+}

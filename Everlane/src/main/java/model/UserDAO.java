@@ -1,9 +1,12 @@
 package model;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class UserDAO extends myDAO {
 
@@ -14,7 +17,8 @@ public class UserDAO extends myDAO {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
             int xUserID, xSex, xPhone;
-            String xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xRole;
+            String xUserName, xPassword, xEmail, xFirstName, xLastName, xRole;
+            Date xDob;
             User x;
             while (rs.next()) {
                 xUserID = rs.getInt("UserID");
@@ -23,7 +27,7 @@ public class UserDAO extends myDAO {
                 xEmail = rs.getString("Email");
                 xFirstName = rs.getString("FirstName");
                 xLastName = rs.getString("LastName");
-                xDob = rs.getString("Dob");
+                xDob = rs.getDate("Dob");
                 xSex = rs.getInt("Sex");
                 xPhone = rs.getInt("Phone");
                 xRole = rs.getString("Role");
@@ -37,7 +41,8 @@ public class UserDAO extends myDAO {
         }
         return t;
     }
-//Nguyễn Đắc Hoàng Đạt - HE70720
+
+    //Nguyễn Đắc Hoàng Đạt - HE70720
     public User checkUser(String xemail, String xpassword) {
         try {
             xSql = "select *\n" +
@@ -54,7 +59,7 @@ public class UserDAO extends myDAO {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
-                        rs.getString(7),
+                        rs.getDate(7),
                         rs.getInt(8),
                         rs.getInt(9),
                         rs.getString(10));
@@ -85,8 +90,7 @@ public class UserDAO extends myDAO {
     }
 
 
-
-    public boolean checkAccountExist(String xusername,String xemail) {
+    public boolean checkAccountExist(String xusername, String xemail) {
         try {
             xSql = "select *\n" +
                     "from user\n" +
@@ -104,28 +108,24 @@ public class UserDAO extends myDAO {
         return false;
     }
 
-    public void addUser(String xusername,String xpassword, String xemail, String xfirstname, String xlastname, String xdob, int xsex, int xphone) {
+    public void addUser(String xusername, String xpassword, String xemail) {
         String xRole = "Customer";
         try {
             xSql = "INSERT INTO user (UserID,UserName,Password,Email,FirstName,LastName,Dob,Sex,Phone,Role)\n" +
-                    "SELECT IFNULL(MAX(UserID), 0) + 1, ?,?,?,?,?,?,?,?,?\n" +
+                    "SELECT IFNULL(MAX(UserID), 0) + 1, ?,?,?,null,null,null,null,null,?\n" +
                     "FROM user";
             ps = con.prepareStatement(xSql);
             ps.setString(1, xusername);
             ps.setString(2, xpassword);
             ps.setString(3, xemail);
-            ps.setString(4, xfirstname);
-            ps.setString(5, xlastname);
-            ps.setDate(6, Date.valueOf(xdob));
-            ps.setInt(7, xsex);
-            ps.setInt(8, xphone);
-            ps.setString(9, xRole);
+            ps.setString(4, xRole);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("addUser: " + e.getMessage());
         }
     }
-
+    //Nguyễn Đắc Hoàng Đạt - HE70720
+//Đoàn Phan Hưng - HE170721
     public List<User> searchByName(String sName) {
         xSql = "select * from User where UserName like '%" + sName + "%'";
         List<User> userList = new ArrayList<>();
@@ -136,7 +136,7 @@ public class UserDAO extends myDAO {
             String xEmail;
             String xFirstName;
             String xLastName;
-            String xDob;
+            Date xDob;
             int xGender;
             int xPhone;
             String xRole;
@@ -151,11 +151,11 @@ public class UserDAO extends myDAO {
                 xEmail = rs.getString("Email");
                 xFirstName = rs.getString("FirstName");
                 xLastName = rs.getString("LastName");
-                xDob = rs.getString("Dob");
+                xDob = rs.getDate("Dob");
                 xGender = rs.getInt("Sex");
                 xPhone = rs.getInt("Phone");
                 xRole = rs.getString("Role");
-                u = new User(xUserID,xUserName,xPassword,xEmail,xFirstName,xLastName,xDob,xGender,xPhone,xRole);
+                u = new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xGender, xPhone, xRole);
                 userList.add(u);
             }
             rs.close();
@@ -165,19 +165,156 @@ public class UserDAO extends myDAO {
         }
         return userList;
     }
-    public static boolean isValidDate(String date) {
+
+
+    //Đoàn Phan Hưng - HE170721
+    public void setUserID(User u) {
+        xSql = "INSERT INTO user (UserID, UserName, Password, Email, FirstName, LastName, Dob, Sex, Phone, Role) " +
+                "                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date currentDate = new java.util.Date();
-            java.util.Date inputDate = dateFormat.parse(date);
-            if (inputDate.after(currentDate) || inputDate.equals(currentDate)) {
-                return false; // Ngày sinh không hợp lệ
+            ps = con.prepareStatement(xSql, Statement.RETURN_GENERATED_KEYS);
+            Random rand = new Random();
+            int userID = rand.nextInt(900) + 100;
+            ps.setInt(1, userID);
+            ps.setString(2, u.getUserName());
+            ps.setString(3, u.getPassword());
+            ps.setString(4, u.getEmail());
+            ps.setString(5, u.getFirstName());
+            ps.setString(6, u.getLastName());
+            ps.setDate(7, (java.sql.Date) u.getDob());
+            ps.setInt(8, u.getSex());
+            ps.setInt(9, u.getPhone());
+            ps.setString(10, u.getRole());
+            ps.executeUpdate();
+            // Lấy giá trị UserID được tự động tạo
+            ResultSet generatedKeys = ps.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int generatedUserID = generatedKeys.getInt(1);
+                u.setUserID(generatedUserID);
             }
-            return true; // Ngày sinh hợp lệ
-        } catch (Exception e) {
-            return false; // Lỗi xảy ra khi chuyển đổi ngày
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
+
+    public List<User> getUsersByRoleAndSort(String role) {
+        List<User> sortedUserList = new ArrayList<>();
+        if(role.equalsIgnoreCase("all")){
+            xSql = "select * from user";
+        }else {
+            xSql = "select * from user where Role = ?";
+        }
+        try {
+            ps = con.prepareStatement(xSql);
+            if(!role.equalsIgnoreCase("all")){
+                ps.setString(1, role);
+            }
+            rs = ps.executeQuery();
+            int xUserID;
+            String xUserName;
+            String xPassword;
+            String xEmail;
+            String xFirstName;
+            String xLastName;
+            Date xDob;
+            int xGender;
+            int xPhone;
+            String xRole;
+            User u;
+            while ((rs.next())){
+                xUserID = rs.getInt("UserID");
+                xUserName = rs.getString("UserName");
+                xPassword = rs.getString("Password");
+                xEmail = rs.getString("Email");
+                xFirstName = rs.getString("FirstName");
+                xLastName = rs.getString("LastName");
+                xDob = rs.getDate("Dob");
+                xGender = rs.getInt("Sex");
+                xPhone = rs.getInt("Phone");
+                xRole = rs.getString("Role");
+                u = new User(xUserID, xUserName, xPassword, xEmail,
+                        xFirstName, xLastName, xDob, xGender, xPhone, xRole);
+                sortedUserList.add(u);
+            }
+            rs.close();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return sortedUserList;
+    }
+
+    public User getUserById(String xID){
+        User u = null;
+        int uID = Integer.parseInt(xID);
+        xSql = "";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, uID);
+            rs = ps.executeQuery();
+            String xUserName;
+            String xPassword;
+            String xEmail;
+            String xFirstName;
+            String xLastName;
+            Date xDob;
+            int xGender;
+            int xPhone;
+            String xRole;
+            while (rs.next()){
+                uID = rs.getInt("UserID");
+                xUserName = rs.getString("UserName");
+                xPassword = rs.getString("Password");
+                xEmail = rs.getString("Email");
+                xFirstName = rs.getString("FirstName");
+                xLastName = rs.getString("LastName");
+                xDob = rs.getDate("Dob");
+                xGender = rs.getInt("Sex");
+                xPhone = rs.getInt("Phone");
+                xRole = rs.getString("Role");
+                u = new User(uID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xGender, xPhone, xRole);
+            }
+            rs.close();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return u;
+    }
+
+    public void deleteUser(String userID){
+        int uID = Integer.parseInt(userID);
+        xSql = "Delete from user where UserID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, uID);
+            ps.executeUpdate();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+//    public static void main(String[] args) {
+//        UserDAO test = new UserDAO();
+//        List<User> userList = test.getUsersByRoleAndSort("Customer");
+//        for (User user:
+//             userList ) {
+//            System.out.println(user.toString());
+//        }
+//    }
 }
 
-//
+
+
+

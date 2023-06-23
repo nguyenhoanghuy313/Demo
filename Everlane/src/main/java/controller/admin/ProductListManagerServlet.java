@@ -19,6 +19,8 @@ public class ProductListManagerServlet extends HttpServlet {
         request.setAttribute("cateList", cateList);
         List<Product> productList = pd.getAllProducts();
         request.setAttribute("productList", productList);
+        List<Product> productListSorted = pd.getProductsByCateID(cateID);
+        request.setAttribute("productListSorted", productListSorted);
         request.getRequestDispatcher("productListManager.jsp").forward(request, response);
 
     }

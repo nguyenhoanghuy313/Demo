@@ -12,11 +12,11 @@ public class HomeServlet extends HttpServlet{
         response.setContentType("text/html;charset=UTF-8");
         ProductsDAO p = new ProductsDAO();
         CategoryDAO c = new CategoryDAO();
-        String cateID = request.getParameter("categoryID");
-        List<Product> productListOnClick = p.getProductsByCateID(cateID);
+//        String cateID = request.getParameter("categoryID");
+//        List<Product> productListOnClick = p.getProductsByCateID(cateID);
         List<Product> data = p.getAllProducts();
         List<Category> cateList = c.getCategory();
-        request.setAttribute("productListOnClick", productListOnClick);
+//        request.setAttribute("productListOnClick", productListOnClick);
         request.setAttribute("data", data);
         request.setAttribute("cateList", cateList);
         request.getRequestDispatcher("home.jsp").forward(request, response);

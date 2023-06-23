@@ -123,10 +123,20 @@ public class ProductsDAO extends myDAO {
 
     public List<Product> getProductsByCateID(String cateID) {
         List<Product> productList = new ArrayList<>();
-        xSql = "Select * from Product where CategoryID = ?";
+        if(cateID.equalsIgnoreCase("all")){
+            xSql = "Select * from product";
+        } else if (cateID.equalsIgnoreCase("up")) {
+            xSql = "Select * from product order by Price desc ";
+        } else if (cateID.equalsIgnoreCase("down")) {
+            xSql = "Select * from product order by Price asc ";
+        } else {
+            xSql = "Select * from Product where CategoryID = ?";
+        }
         try {
             ps = con.prepareStatement(xSql);
-            ps.setString(1, cateID);
+            if(xSql == "Select * from Product where CategoryID = ?"){
+                ps.setString(1, cateID);
+            }
             rs = ps.executeQuery();
             int xProductID;
             int xCategoryID;
@@ -151,6 +161,22 @@ public class ProductsDAO extends myDAO {
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            // Close the resources (ResultSet, PreparedStatement) in the finally block
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return productList;
     }
@@ -185,6 +211,19 @@ public class ProductsDAO extends myDAO {
             e.printStackTrace();
         }
         return x;
+    }
+
+    public void delete(String productID){
+        int pID = Integer.parseInt(productID);
+        xSql = "delete  from product where ProductID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, pID);
+            ps.executeUpdate();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 //    public List<Product> sortProductsByPrice(List<Product> products) {

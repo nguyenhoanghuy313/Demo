@@ -100,14 +100,14 @@
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
         <!-- Product List -->
         <li class="menu-item">
-          <a href="${pageContext.request.contextPath}/ProductListManagerServlet" class="menu-link">
+          <a href="${pageContext.request.contextPath}/ProductListManagerServlet?categoryID=all" class="menu-link">
             <i class='menu-icon tf-icons bx bxs-package'></i>
             <div data-i18n="Product List">Product List</div>
           </a>
         </li>
         <!-- User List -->
         <li class="menu-item  active">
-          <a href="${pageContext.request.contextPath}/UserListManagerServlet" class="menu-link">
+          <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=all" class="menu-link">
             <i class='menu-icon tf-icons bx bx-user'></i>
             <div data-i18n="User List">User List</div>
           </a>
@@ -226,13 +226,13 @@
         <div class="list_option_container">
           <div class="list_option_container1">
             <div class="input-group ">
-              <a href="addNewUser.jsp" class="btn btn-outline-dark" type="button">New User</a>
+              <button class="btn btn-outline-dark" type="button">New User</button>
             </div>
           </div>
           <div class="list_option_container2">
 
             <div class="input-group input-group-merge">
-              <form action="${pageContext.request.contextPath}/UserListManagerServlet" method="post">
+              <form action="${pageContext.request.contextPath}/UserListManagerServlet?role=all" method="post">
                 <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
                 <input
                         type="text"
@@ -269,10 +269,11 @@
                 Category
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="javascript:void(0);">Admin</a></li>
-                <li><a class="dropdown-item" href="javascript:void(0);">Customer</a></li>
-                <li><a class="dropdown-item" href="javascript:void(0);">Sale</a></li>
-                <li><a class="dropdown-item" href="javascript:void(0);">Marketing</a></li>
+                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UserListManagerServlet?role=all">All</a></li>
+                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UserListManagerServlet?role=Admin">Admin</a></li>
+                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UserListManagerServlet?role=Customer">Customer</a></li>
+                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UserListManagerServlet?role=Sale">Sale</a></li>
+                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UserListManagerServlet?role=Marketing">Marketing</a></li>
               </ul>
             </div>
           </div>
@@ -283,7 +284,7 @@
         <div class="container-xxl flex-grow-1 container-p-y ">
           <div class="card">
             <h5 class="card-header">Products</h5>
-            <div class="table-responsive text-nowrap listtable">
+            <div class="table-responsive text-nowrap listtable ">
               <table class="table">
                 <thead>
                 <tr>
@@ -301,31 +302,31 @@
                 <tbody class="table-border-bottom-0">
                 <c:forEach var="u" items="${userList}" varStatus="status">
                   <tr class="item">
-                  <td>${u.getUserID()}</td>
-                  <td>${u.getUserName()}</td>
-                  <td>${u.getEmail()}</td>
-                  <td>${u.getFirstName()}</td>
-                  <td>${u.getLastName()}</td>
-                  <td>${u.getDob()}</td>
-                  <td>${u.getSex()}</td>
-                  <td>${u.getPhone()}</td>
-                  <td>${u.getRole()}</td>
-                  <td>
-                    <div class="dropdown">
-                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                      </button>
-                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="javascript:void(0);"
-                        ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                        >
-                        <a class="dropdown-item" href="javascript:void(0);"
-                        ><i class="bx bx-trash me-1"></i> Delete</a
-                        >
+                    <td>${u.getUserID()}</td>
+                    <td>${u.getUserName()}</td>
+                    <td>${u.getEmail()}</td>
+                    <td>${u.getFirstName()}</td>
+                    <td>${u.getLastName()}</td>
+                    <td>${u.getDob()}</td>
+                    <td>${u.getSex()}</td>
+                    <td>${u.getPhone()}</td>
+                    <td>${u.getRole()}</td>
+                    <td>
+                      <div class="dropdown">
+                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                          <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" href="javascript:void(0);"
+                          ><i class="bx bx-edit-alt me-1"></i> Edit</a
+                          >
+                          <a class="dropdown-item" href="DeleteUser?UserID=${u.getUserID()}" onclick="return confirm('Are you sure want to delete this ticket?')"
+                          ><i class="bx bx-trash me-1"></i> Delete</a
+                          >
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                </tr>
+                    </td>
+                  </tr>
                 </c:forEach>
                 </tbody>
               </table>

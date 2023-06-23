@@ -1,0 +1,43 @@
+.List_Container{
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    margin-top: 5vh;
+    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+.Product_List_Headline{
+    width: 100%
+}
+.Product_List_Headline h1{
+    font-size: 2rem;
+    padding: 20px;
+}
+
+.Product_List{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 8px;
+}
+
+.Product{
+    width: 30%;
+    margin: 30px 8px;
+}
+.Product img{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.Product_Text{
+    width: 100%;
+}
+.Product_Name{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}

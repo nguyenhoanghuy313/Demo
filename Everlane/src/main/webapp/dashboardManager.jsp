@@ -99,14 +99,14 @@
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
                 <!-- Product List -->
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/ProductListManagerServlet" class="menu-link">
+                    <a href="${pageContext.request.contextPath}/ProductListManagerServlet?categoryID=all" class="menu-link">
                         <i class='menu-icon tf-icons bx bxs-package'></i>
                         <div data-i18n="Product List">Product List</div>
                     </a>
                 </li>
                 <!-- User List -->
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/UserListManagerServlet" class="menu-link">
+                    <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=all" class="menu-link">
                         <i class='menu-icon tf-icons bx bx-user'></i>
                         <div data-i18n="User List">User List</div>
                     </a>

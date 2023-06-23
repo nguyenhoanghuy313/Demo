@@ -14,7 +14,9 @@ public class UserListManagerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         UserDAO ud = new UserDAO();
-        List<User> userList = ud.getAllUser();
+        String role = request.getParameter("role");
+        System.out.println(role);
+        List<User> userList = ud.getUsersByRoleAndSort(role);
         request.setAttribute("userList", userList);
         request.getRequestDispatcher("userListManager.jsp").forward(request, response);
     }
@@ -25,7 +27,7 @@ public class UserListManagerServlet extends HttpServlet {
         String xName = request.getParameter("userName").trim();
         UserDAO ud = new UserDAO();
         CategoryDAO cd = new CategoryDAO();
-        String cateID = request.getParameter("categoryID");
+//        String cateID = request.getParameter("categoryID");
         List<Category> cateList = cd.getCategory();
         request.setAttribute("cateList", cateList);
         List<User> userList = ud.searchByName(xName);

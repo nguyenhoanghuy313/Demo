@@ -6,7 +6,8 @@ import java.util.Date;
 
 public class User {
     int userID;
-    String userName, password, email, firstName, lastName,dob;
+    String userName, password, email, firstName, lastName;
+    Date dob;
     int sex, phone;
     String role;
 
@@ -28,7 +29,7 @@ public class User {
         this.role = role;
     }
 
-    public User(int userID, String userName, String password, String email, String firstName, String lastName, String dob, int sex, int phone, String role) {
+    public User(int userID, String userName, String password, String email, String firstName, String lastName, Date dob, int sex, int phone, String role) {
         this.userID = userID;
         this.userName = userName;
         this.password = password;
@@ -89,11 +90,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getDob() {
+    public Date getDob() {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(Date dob) {
         this.dob = dob;
     }
 
