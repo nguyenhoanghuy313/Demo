@@ -33,6 +33,7 @@
 <section class="Product_List_Container">
     <div class="Product_List_InnerContainer">
         <div class="Filter_Container">
+            <a class='bx bx-x' id="x_filter-icon"></a>
             <div class="Category_Container">
                 <h1>Category</h1>
                 <c:forEach var="cate" items="${cateList}" varStatus="status">
@@ -99,6 +100,7 @@
             <div class="Product_List_Headline">
                 <h1>Women's Dresses & Jumpsuits</h1>
             </div>
+            <a class="bx bx-menu" id="menu_Filter-icon">Filter</a>
             <div class="Product_List">
                 <%
                     if(!productList.isEmpty()){
@@ -124,5 +126,18 @@
     </div>
 </section>
 <jsp:include page="footer.jsp"/>
+<script>
+    //cart
+    z1 = document.querySelector("#menu_Filter-icon");
+    z2 = document.querySelector("#x_filter-icon")
+    z3 = document.querySelector(".Filter_Container");
+    z1.onclick = function (){
+        z3.classList.toggle("openFilter");
+    }
+    z2.onclick = function (){
+        z3.classList.toggle("openFilter");
+    }
+
+</script>
 </body>
 </html>
