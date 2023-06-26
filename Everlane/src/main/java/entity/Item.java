@@ -23,6 +23,7 @@ public class Item {
         this.size = size;
     }
 //khong tot cho cart
+    // nsat
     public Product getProduct() {
         return product;
     }

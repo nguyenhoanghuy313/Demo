@@ -9,8 +9,5 @@
         <module name="Everlane" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Everlane" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
