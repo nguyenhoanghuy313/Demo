@@ -39,13 +39,6 @@
                     <option value="2">Female</option>
                 </select><br>
                 <input type="text" id="email" name="username" value="" placeholder="User Name"><br>
-                <input type="text" id="email" name="firstname" value="" placeholder="First Name"><br>
-                <input type="text" id="email" name="lastname" value="" placeholder="Last Name"><br>
-                <input type="date" id="email" name="dob" value="" placeholder="Date of birth"><br>
-                <select name="gender">
-                    <option value="" selected>Chose your gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
                 </select><br>
                 <input type="email" id="email" name="email" value="" placeholder="Email Address"><br>
                 <input type="password" id="password" name="password" value="" placeholder="Password"><br><br>

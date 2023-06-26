@@ -1,10 +1,11 @@
 package model;
-
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
+//import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -108,17 +109,22 @@ public class UserDAO extends myDAO {
         return false;
     }
 
-    public void addUser(String xusername, String xpassword, String xemail) {
+    public void addUser(String xusername,String xpassword, String xemail, String xfirstname, String xlastname, String xdob, int xsex, int xphone) {
         String xRole = "Customer";
         try {
             xSql = "INSERT INTO user (UserID,UserName,Password,Email,FirstName,LastName,Dob,Sex,Phone,Role)\n" +
-                    "SELECT IFNULL(MAX(UserID), 0) + 1, ?,?,?,null,null,null,null,null,?\n" +
+                    "SELECT IFNULL(MAX(UserID), 0) + 1, ?,?,?,?,?,?,?,LPAD(?, 10, '0'),?\n" +
                     "FROM user";
             ps = con.prepareStatement(xSql);
             ps.setString(1, xusername);
             ps.setString(2, xpassword);
             ps.setString(3, xemail);
-            ps.setString(4, xRole);
+            ps.setString(4, xfirstname);
+            ps.setString(5, xlastname);
+            ps.setDate(6, Date.valueOf(xdob));
+            ps.setInt(7, xsex);
+            ps.setInt(8, xphone);
+            ps.setString(9, xRole);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("addUser: " + e.getMessage());
@@ -305,12 +311,48 @@ public class UserDAO extends myDAO {
             e.printStackTrace();
         }
     }
+//Nguyễn Đắc Hoàng Đạt - HE170720
+    public static boolean isValidDate(String date) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date currentDate = new java.util.Date();
+            java.util.Date inputDate = dateFormat.parse(date);
+            if (inputDate.after(currentDate) || inputDate.equals(currentDate)) {
+                return false; // Ngày sinh không hợp lệ
+            }
+            return true; // Ngày sinh hợp lệ
+        } catch (Exception e) {
+            return false; // Lỗi xảy ra khi chuyển đổi ngày
+        }
+    }
+
+//    public void updateUser() {
+//        try {
+//            String strUpdate="update Schedule set SubjectCode=?,TeacherID=?,ClassID=?, Slot=?,Date=?, Status=? where ID=?";
+////            pstm=cnn.prepareStatement(strUpdate);
+//            pstm.setString(1, subject);
+//            pstm.setString(2, id);
+//            pstm.setString(3, classid);
+//            pstm.setString(4, slot);
+//            pstm.setDate(5, java.sql.Date.valueOf(date));
+//            pstm.setString(6, status);
+//            pstm.setInt(7, Integer.parseInt(stt));
+//            pstm.execute();
+//        } catch (Exception e) {
+//            System.out.println("updateSchedule:" + e.getMessage());
+//        }
+//    }
+
+//Nguyễn Đắc Hoàng Đạt - HE170720
+
 //    public static void main(String[] args) {
 //        UserDAO test = new UserDAO();
-//        List<User> userList = test.getUsersByRoleAndSort("Customer");
-//        for (User user:
-//             userList ) {
-//            System.out.println(user.toString());
+//        String date = "2024-12-12";
+////        String date = "12-12-2020";
+//        if (isValidDate(date)) {
+//            System.out.println("Ngày sinh hợp lệ");
+//        } else {
+//            System.out.println("Ngày sinh không hợp lệ");
 //        }
 //    }
 }

@@ -44,7 +44,7 @@
         <div class="main">
             <a href="#" class="search" id="search-icon"><i class="ri-search-line"></i></a>
             <c:if test="${sessionScope.acc != null}">
-                <a href="${pageContext.request.contextPath}/logout-servlet" class="user"><i class="ri-user-3-line"></i></a>
+                <a href="${pageContext.request.contextPath}/user-account-detail-servlet" class="user"><i class="ri-user-3-line"></i></a>
             </c:if>
             <c:if test="${sessionScope.acc == null}">
                 <a href="${pageContext.request.contextPath}/login.jsp" class="user"><i class="ri-user-3-line"></i></a>
