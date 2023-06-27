@@ -95,19 +95,15 @@
           <div class="carousel">
 
               <c:forEach var="p" items="${data}">
-                  <div class="Product">
-                      <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=${p.getProductID()}">
-                          <img src=${p.getProductImg()}>
-                          <div class="Product_Name">
-                              <div class="Best_Seller_Text">
-                                  <h1>${p.getProductName()}</h1>
-                                  <h1>${p.getPrice()}</h1>
-                                      <%--                            </div>--%>
-                                      <%--                            <p>${p.getColor()}</p>--%>
-                              </div>
+                  <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=${p.getProductID()}">
+                      <img src=${p.getProductImg()}>
+                      <div class="Product_Name">
+                          <div class="Best_Seller_Text">
+                              <h1>${p.getProductName()}</h1>
+                              <h1>${p.getPrice()}</h1>
                           </div>
-                      </a>
-                  </div>
+                      </div>
+                  </a>
               </c:forEach>
           </div>
           <i id="right" class='bx bx-chevron-right'></i>

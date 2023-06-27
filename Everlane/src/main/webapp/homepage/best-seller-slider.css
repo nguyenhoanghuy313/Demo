@@ -62,6 +62,8 @@
 
 .Best_Seller_Text h1{
     font-family: 'Nunito Sans', sans-serif;
+    font-size: 16px;
+    text-decoration: none;
 }
 
 .carousel img:first-child{
