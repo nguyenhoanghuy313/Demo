@@ -22,8 +22,8 @@
     <link rel="stylesheet" href="header/header.css">
     <link rel="stylesheet" href="footer/footer.css">
     <link rel="stylesheet" href="footer/ad-container.css">
-    <link rel="stylesheet" href="productpage/productlist/filter-container.css">
-    <link rel="stylesheet" href="productpage/productlist/product-list-container.css">
+    <link rel="stylesheet" href="productpage/productlist/filter-container1.css">
+    <link rel="stylesheet" href="productpage/productlist/product-list-container1.css">
 </head>
 <body>
 <jsp:include page="header.jsp"/>

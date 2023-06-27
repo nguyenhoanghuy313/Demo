@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
     <link rel="stylesheet" href="header/header.css">
-    <link rel="stylesheet" href="productpage/productdetail/product-detail.css">
-    <link rel="stylesheet" href="homepage/best-seller-slider.css">
+    <link rel="stylesheet" href="productpage/productdetail/product-detail1.css">
+    <link rel="stylesheet" href="homepage/best-seller-slider1.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
     <title>Product Detail</title>
