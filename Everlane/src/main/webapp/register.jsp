@@ -65,8 +65,10 @@
                 <input type="password" id="repass" name="repass" value="" placeholder="Repeat Password"><br>${error}<br>
                 <input type="submit" value="Unlock Your Discount">
             </form>
-            <h2 style="text-align: center; cursor: pointer" class="open_policy">By providing your email address, you agree to our <br>
-                <span style="text-decoration: underline">Privacy Policy</span> and <span style="text-decoration: underline">Terms of Service</span>.</h2>
+            <h2 style="text-align: center; cursor: pointer" class="open_policy">By providing your email address, you
+                agree to our <br>
+                <span style="text-decoration: underline">Privacy Policy</span> and <span
+                        style="text-decoration: underline">Terms of Service</span>.</h2>
             <a href="login.jsp">Already have an account? Sign in</a>
         </div>
     </div>

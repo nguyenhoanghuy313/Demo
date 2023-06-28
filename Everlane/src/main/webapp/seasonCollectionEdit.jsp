@@ -1,63 +1,53 @@
 <%--
   Created by IntelliJ IDEA.
   User: minileisduk
-  Date: 21/06/2023
-  Time: 11:51 SA
+  Date: 29/06/2023
+  Time: 12:02 SA
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-changePasswordHighUser
-<%--
-  Created by IntelliJ IDEA.
-  User: minileisduk
-  Date: 21/06/2023
-  Time: 11:12 SA
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html
-        lang="en"
         class="light-style layout-menu-fixed"
-        dir="ltr"
-        data-theme="theme-default"
         data-assets-path="../a.template/assets/"
         data-template="vertical-menu-template-free"
+        data-theme="theme-default"
+        dir="ltr"
+        lang="en"
 >
 <head>
     <meta charset="utf-8"/>
     <meta
-            name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+            name="viewport"
     />
 
-    <title>Dashboard</title>
+    <title>Season Collection Edit</title>
 
-    <meta name="description" content=""/>
+    <meta content="" name="description"/>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
+    <link href="a.template/assets/img/favicon/favicon.png" rel="icon" type="image/x-icon"/>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
     <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet"
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="a.template/assets/vendor/fonts/boxicons.css"/>
+    <link href="a.template/assets/vendor/fonts/boxicons.css" rel="stylesheet"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="a.template/assets/vendor/css/core.css" class="template-customizer-core-css"/>
-    <link rel="stylesheet" href="a.template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css"/>
-    <link rel="stylesheet" href="a.template/assets/css/demo.css"/>
+    <link class="template-customizer-core-css" href="a.template/assets/vendor/css/core.css" rel="stylesheet"/>
+    <link class="template-customizer-theme-css" href="a.template/assets/vendor/css/theme-default.css" rel="stylesheet"/>
+    <link href="a.template/assets/css/demo.css" rel="stylesheet"/>
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+    <link href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet"/>
 
-    <link rel="stylesheet" href="a.template/assets/vendor/libs/apex-charts/apex-charts.css"/>
+    <link href="a.template/assets/vendor/libs/apex-charts/apex-charts.css" rel="stylesheet"/>
 
     <!-- Page CSS -->
 
@@ -74,6 +64,7 @@ changePasswordHighUser
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
         <!-- Menu -->
+
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
                 <a href="dashboardManager.jsp" class="app-brand-link">
@@ -165,10 +156,10 @@ changePasswordHighUser
                         <div class="nav-item d-flex align-items-center">
                             <i class="bx bx-search fs-4 lh-0"></i>
                             <input
-                                    type="text"
+                                    aria-label="Search..."
                                     class="form-control border-0 shadow-none"
                                     placeholder="Search..."
-                                    aria-label="Search..."
+                                    type="text"
                             />
                         </div>
                     </div>
@@ -177,11 +168,11 @@ changePasswordHighUser
                     <ul class="navbar-nav flex-row align-items-center ms-auto">
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                               data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle hide-arrow" data-bs-toggle="dropdown"
+                               href="javascript:void(0);">
                                 <div class="avatar avatar-online">
-                                    <img src="a.template/assets/img/avatars/1.png" alt
-                                         class="w-px-40 h-auto rounded-circle"/>
+                                    <img alt class="w-px-40 h-auto rounded-circle"
+                                         src="a.template/assets/img/avatars/1.png"/>
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -190,12 +181,14 @@ changePasswordHighUser
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="a.template/assets/img/avatars/1.png" alt
-                                                         class="w-px-40 h-auto rounded-circle"/>
+                                                    <img alt class="w-px-40 h-auto rounded-circle"
+                                                         src="a.template/assets/img/avatars/1.png"/>
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <span class="fw-semibold d-block">John Doe</span>
+                                                <c:if test=" ${sessionScope.acc!= null}">
+                                                    <span class="fw-semibold d-block">${sessionScope.acc.userName}</span>
+                                                </c:if>
                                                 <small class="text-muted">Admin</small>
                                             </div>
                                         </div>
@@ -205,7 +198,7 @@ changePasswordHighUser
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="highUserAccount.jsp">
                                         <i class="bx bx-user me-2"></i>
                                         <span class="align-middle">My Profile</span>
                                     </a>
@@ -237,65 +230,77 @@ changePasswordHighUser
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <!-- Content -->
-
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account Settings / Account /</span>
-                        Change Password</h4>
-
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Marketing / </span> Season
+                        Collection
+                    </h4>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-xxl">
                             <div class="card mb-4">
-                                <!-- Account -->
-                                <hr class="my-0"/>
+                                <div class="card-header d-flex align-items-center justify-content-between">
+                                    <h5 class="mb-0">Edit Season Collection</h5>
+                                </div>
                                 <div class="card-body">
-                                    <form id="changePasswordHighUser" method="POST" onsubmit="return false">
-                                        <div class="row">
-                                            <div class="mb-3 col-md-12">
-                                                <label for="oldPassword" class="form-label">Old Password</label>
+                                    <form>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-2 col-form-label"
+                                                   for="basic-default-image">Image</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" id="basic-default-image"
+                                                       value="Lấy giá trị ảnh hiện tại"
+                                                       type="text"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-2 col-form-label"
+                                                   for="basic-default-h1">Title h1</label>
+                                            <div class="col-sm-10">
                                                 <input
                                                         class="form-control"
+                                                        id="basic-default-h1"
+                                                        value="Lấy title h1 hiện tại"
                                                         type="text"
-                                                        id="oldPassword"
-                                                        name="oldPassword"
-                                                        placeholder="Please enter your old password"
-                                                        autofocus
                                                 />
                                             </div>
-                                            <div class="mb-3 col-md-12">
-                                                <label for="newPassword" class="form-label">New Password</label>
-                                                <input class="form-control" type="text" name="newPassword"
-                                                       id="newPassword" placeholder="Please enter your new password"/>
-                                            </div>
-                                            <div class="mb-3 col-md-12">
-                                                <label for="reEnterNewPassword" class="form-label">Confirm Your New
-                                                    Password</label>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-2 col-form-label"
+                                                   for="basic-default-p">Content p</label>
+                                            <div class="col-sm-10">
                                                 <input
                                                         class="form-control"
+                                                        id="basic-default-p"
+                                                        value="Lấy content p hiện tại"
                                                         type="text"
-                                                        id="reEnterNewPassword"
-                                                        name="reEnterNewPassword"
-                                                        placeholder="Please reenter your new password"
                                                 />
                                             </div>
-
-
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Select
+                                                Collection</label>
+                                            <select class=" form-select col-sm-10" id="exampleFormControlSelect1"
+                                                    aria-label="Default select example">
+                                                <option selected>Select</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
                                         </div>
                                         <div class="mt-2">
                                             <button type="submit" class="btn btn-dark me-2">Save changes</button>
-                                            <a href="highUserAccount.jsp" class="btn btn-outline-secondary">Cancel</a>
+                                            <a href="" type="reset" class="btn btn-outline-secondary">Cancel</a>
                                         </div>
                                     </form>
                                 </div>
-                                <!-- /Account -->
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- / Content -->
 
+
                 <div class="content-backdrop fade"></div>
             </div>
-            <!-- Content wrapper -->
             <!-- Content wrapper -->
         </div>
         <!-- / Layout page -->
@@ -330,4 +335,3 @@ changePasswordHighUser
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>
-

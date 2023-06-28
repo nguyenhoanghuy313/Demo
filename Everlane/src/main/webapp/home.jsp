@@ -86,14 +86,14 @@
         <div class="Category2">
             <img src="https://media.everlane.com/image/upload/c_scale,dpr_1.0,f_auto,q_auto,w_auto/c_limit,w_900/v1/i/73436bb3_0cdc.png">
             <div class="Category_text">
-                <h2>Best-Sellers</h2>
+                <h2>New Arrivals</h2>
                 <button>Buy</button>
             </div>
         </div>
         <div class="Category2">
             <img src="https://media.everlane.com/image/upload/c_scale,dpr_1.0,f_auto,q_auto,w_auto/c_limit,w_900/v1/i/73436bb3_0cdc.png">
             <div class="Category_text">
-                <h2>Best-Sellers</h2>
+                <h2>Best Sellers</h2>
                 <button>Buy</button>
             </div>
         </div>

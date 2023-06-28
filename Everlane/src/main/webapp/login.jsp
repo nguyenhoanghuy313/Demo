@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="footer/footer.css">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
@@ -30,10 +30,11 @@
                 <input type="password" id="password" name="password" value="" placeholder="Password">
                 <p>${PassErr}</p>
                 <input type="submit" value="Login">
-                <p>${Message}  ${success}</p>
+                <p>${Message} ${success}</p>
             </form>
             <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/LoginGoogle/LoginGoogleHandler&response_type=code
-		   &client_id=377412618992-d6fdoanaf6nm1ivg4atd28c4aqffvnqo.apps.googleusercontent.com&approval_prompt=force">Login With Google</a>
+		   &client_id=377412618992-d6fdoanaf6nm1ivg4atd28c4aqffvnqo.apps.googleusercontent.com&approval_prompt=force">Login
+                With Google</a>
             <a href="register.jsp">Don’t have an account? Sign up</a>
             <a href="dashboardManager.jsp">Forgot your password</a>
             <a href="userAccount.jsp">user account</a>
