@@ -47,7 +47,7 @@
                 <a href="${pageContext.request.contextPath}/user-account-detail-servlet" class="user"><i class="ri-user-3-line"></i></a>
             </c:if>
             <c:if test="${sessionScope.acc == null}">
-                <a href="${pageContext.request.contextPath}/login.jsp" class="user"><i class="ri-user-3-line"></i></a>
+                <a href="${pageContext.request.contextPath}/login-servlet" class="user"><i class="ri-user-3-line"></i></a>
             </c:if>
 <%--            <a href="login.jsp" class="user"><i class="ri-user-3-line"></i></a>--%>
             <a class="cart" id="cart-icon"><i class="ri-shopping-cart-2-line"></i></a>

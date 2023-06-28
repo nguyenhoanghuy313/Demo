@@ -31,7 +31,9 @@
                 <br>${PassErr}<br>
                 <input type="submit" value="Login">
                 <br>
-                ${Message} ${success}
+                <div style="color: red">
+                    ${Message} ${success}
+                </div>
             </form>
             <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/LoginGoogle/LoginGoogleHandler&response_type=code
 		   &client_id=377412618992-d6fdoanaf6nm1ivg4atd28c4aqffvnqo.apps.googleusercontent.com&approval_prompt=force">Login With Google</a>

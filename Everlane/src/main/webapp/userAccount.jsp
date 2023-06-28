@@ -196,7 +196,7 @@
                                 </div>
                                 <hr class="my-0" />
                                 <div class="card-body">
-                                    <form id="formAccountSettings" method="POST" onsubmit="return false">
+                                    <form action="user-account-detail-servlet" method="POST">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">First Name</label>
@@ -205,13 +205,14 @@
                                                         type="text"
                                                         id="firstName"
                                                         name="firstName"
-                                                        value="Lấy sẵn first name người dùng vào đây"
+                                                        value="${u.getFirstName()}"
+                                                        placeholder="Enter your first name"
                                                         autofocus
                                                 />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Last Name</label>
-                                                <input class="form-control" type="text" name="lastName" id="lastName" value="Lấy sẵn last name người dùng vào đây" />
+                                                <input class="form-control" type="text" name="lastName" id="lastName" value="${u.getLastName()}" placeholder="Enter your last name" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="email" class="form-label">E-mail</label>
@@ -220,7 +221,7 @@
                                                         type="email"
                                                         id="email"
                                                         name="email"
-                                                        value="Lấy sẵn email người dùng vào đây"
+                                                        value="${u.getEmail()}"
                                                 />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -230,7 +231,7 @@
                                                         class="form-control"
                                                         id="username"
                                                         name="username"
-                                                        value="Lấy sẵn username vào đây"
+                                                        value="${u.getUserName()}"
                                                 />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -241,37 +242,45 @@
                                                             id="phoneNumber"
                                                             name="phoneNumber"
                                                             class="form-control"
-                                                            value="Lấy sẵn phone number vào đây"
+                                                            placeholder="Enter your phone number"
+                                                            value="${u.getPhone()}"
                                                     />
                                                 </div>
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="dob" class="form-label">Date Of Birth</label>
-                                                <input type="date" class="form-control" id="dob" name="dob" placeholder="Tự độgn lấy ngày tháng năm sinh người đùng" />
+                                                <input type="date" class="form-control" id="dob" name="dob" value="${u.getDob()}" placeholder="" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="gender" class="form-label">Gender</label>
-                                                <select id="gender" class="select2 form-select">
-                                                    <option value="Lấy gender hiện tại của người dùng">Lấy gender hiện tại của người dùng</option>
-                                                    <option value="1">Male</option>
-                                                    <option value="2">Female</option>
-                                                    <option value="3">Other</option>
+                                                <select id="gender" name = "gender" class="select2 form-select">
+                                                    <c:if test="${u.getSex() == null}">
+                                                        <option value="0" >Choose Your Gender</option>
+                                                    </c:if>
+                                                    <c:if test="${u.getSex() != null}">
+                                                        <option value="1" ${u.getSex() != "1" ? "" : "selected"}>Male</option>
+                                                        <option value="2" ${u.getSex() != "2" ? "" : "selected"}>Female</option>
+                                                    </c:if>
+
                                                 </select>
                                             </div>
                                             <!--                      cái này để hidden-->
                                             <div class="mb-3 col-md-6">
-                                                <input type="hidden" class="form-control" id="password" name="password" valuer="Lấy password hiện tại của người dùng" />
+                                                <input type="hidden" class="form-control" id="password" name="password" valuer="${u.getPassword()}" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <input type="hidden" class="form-control" id="role" name="role" value="Lấy role hiện tại của người dùng " />
+                                                <input type="hidden" class="form-control" id="role" name="role" value="${u.getRole()}" />
                                             </div>
-
-                                            <a class="text-primary " href="changePassword.jsp">Change password</a>
-
+                                            <div style="color: red">
+                                                ${error} ${success}
+                                            </div>
+                                            <div class="mt-2">
+                                                <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/changePassword">Change password</a>
+                                            </div>
                                         </div>
                                         <div class="mt-2">
-                                            <button type="submit" class="btn btn-dark me-2">Save changes</button>
-                                            <a href="dashboardManager.jsp" type="reset" class="btn btn-outline-secondary">Cancel</a>
+                                            <button type="submit" class="btn btn-dark me-2" value="Update" name ="Update">Save changes</button>
+                                            <a href="user-account-detail-servlet?mod=1" type="reset" class="btn btn-outline-secondary">Cancel</a>
                                         </div>
                                     </form>
                                 </div>
@@ -286,7 +295,7 @@
                                             <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
                                         </div>
                                     </div>
-                                    <form id="formAccountDeactivation" onsubmit="return false">
+                                    <form action="deleteAccountSevlet" id="formAccountDeactivation" method="post">
                                         <div class="form-check mb-3">
                                             <input
                                                     class="form-check-input"
@@ -298,7 +307,11 @@
                                             >I confirm my account deactivation</label
                                             >
                                         </div>
+                                    <div style="color: red">
+                                        ${errorDelete}
+                                    </div>
                                         <button type="submit" class="btn btn-danger deactivate-account">Deactivate Account</button>
+<%--                                        <a href="user-account-detail-servlet?mod=2" class="btn btn-danger deactivate-account" id="deleteAccount">Deactivate Account</a>--%>
                                     </form>
                                 </div>
                             </div>
@@ -323,6 +336,14 @@
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
+<%--<script>--%>
+<%--    document.getElementById("deleteAccount").addEventListener("click", function(event) {--%>
+<%--        if (document.getElementById("accountActivation").checked) {--%>
+<%--            event.preventDefault(); // Ngăn chặn hành động mặc định của liên kết--%>
+<%--            window.location.href = "user-account-detail-servlet?mod=2"; // Chuyển hướng đến servlet--%>
+<%--        }--%>
+<%--    });--%>
+<%--</script>--%>
 <script src="a.template/assets/vendor/libs/jquery/jquery.js"></script>
 <script src="a.template/assets/vendor/libs/popper/popper.js"></script>
 <script src="a.template/assets/vendor/js/bootstrap.js"></script>
