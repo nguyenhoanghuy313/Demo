@@ -109,27 +109,44 @@ public class UserDAO extends myDAO {
         return false;
     }
 
-    public void addUser(String xusername,String xpassword, String xemail, String xfirstname, String xlastname, String xdob, int xsex, int xphone) {
+    public void addUser(String xusername,String xpassword, String xemail) {
         String xRole = "Customer";
         try {
             xSql = "INSERT INTO user (UserID,UserName,Password,Email,FirstName,LastName,Dob,Sex,Phone,Role)\n" +
-                    "SELECT IFNULL(MAX(UserID), 0) + 1, ?,?,?,?,?,?,?,LPAD(?, 10, '0'),?\n" +
+                    "SELECT IFNULL(MAX(UserID), 0) + 1, ?,?,?,null,null,null,null,null,?\n" +
                     "FROM user";
             ps = con.prepareStatement(xSql);
             ps.setString(1, xusername);
             ps.setString(2, xpassword);
             ps.setString(3, xemail);
-            ps.setString(4, xfirstname);
-            ps.setString(5, xlastname);
-            ps.setDate(6, Date.valueOf(xdob));
-            ps.setInt(7, xsex);
-            ps.setInt(8, xphone);
-            ps.setString(9, xRole);
+            ps.setString(4, xRole);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("addUser: " + e.getMessage());
         }
     }
+//    public void addUser(String xusername,String xpassword, String xemail, String xfirstname, String xlastname, String xdob, int xsex, int xphone) {
+//        String xRole = "Customer";
+//        try {
+//            xSql = "INSERT INTO user (UserID,UserName,Password,Email,FirstName,LastName,Dob,Sex,Phone,Role)\n" +
+//                    "SELECT IFNULL(MAX(UserID), 0) + 1, ?,?,?,?,?,?,?,LPAD(?, 10, '0'),?\n" +
+//                    "FROM user";
+//            ps = con.prepareStatement(xSql);
+//            ps.setString(1, xusername);
+//            ps.setString(2, xpassword);
+//            ps.setString(3, xemail);
+//            ps.setString(4, xfirstname);
+//            ps.setString(5, xlastname);
+//            ps.setDate(6, Date.valueOf(xdob));
+//            ps.setInt(7, xsex);
+//            ps.setInt(8, xphone);
+//            ps.setString(9, xRole);
+//            ps.executeUpdate();
+//        } catch (Exception e) {
+//            System.out.println("addUser: " + e.getMessage());
+//        }
+//    }
+
     //Nguyễn Đắc Hoàng Đạt - HE70720
 //Đoàn Phan Hưng - HE170721
     public List<User> searchByName(String sName) {
