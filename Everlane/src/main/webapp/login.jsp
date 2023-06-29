@@ -26,14 +26,16 @@
             <h2>Please log in to your account</h2>
             <form action="login-servlet" method="post">
                 <input type="email" id="email" name="email" value="${newemail}" placeholder="Email Address">
-                <br>${EmailErr}<br>
+                <h2>${EmailErr}</h2>
                 <input type="password" id="password" name="password" value="${newpass}" placeholder="Password">
-                <br>${PassErr}<br>
+                <h2>${PassErr}</h2>
                 <input type="submit" value="Login">
-                <br>
-                <div style="color: red">
-                    ${Message} ${success} ${MessageGG}
-                </div>
+                <h2 style="color: red">
+                    ${Message} ${MessageGG}
+                </h2>
+                <h2 style="color: green;">
+                     ${success}
+                </h2>
             </form>
             <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/LoginGoogle/LoginGoogleHandler&response_type=code
 		   &client_id=377412618992-d6fdoanaf6nm1ivg4atd28c4aqffvnqo.apps.googleusercontent.com&approval_prompt=force">Login

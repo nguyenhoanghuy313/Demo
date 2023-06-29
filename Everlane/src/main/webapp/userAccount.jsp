@@ -1,5 +1,3 @@
-
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html
         lang="en"
@@ -113,6 +111,13 @@
                         </li>
                     </ul>
                 </li>
+                <%--logout--%>
+                <li class="menu-item">
+                    <a href="logout-servlet" class="menu-link ">
+                        <i class='menu-icon tf-icons bx bx-user'></i>
+                        <div data-i18n="Account Setting">Log out</div>
+                    </a>
+                </li>
             </ul>
         </aside>
 
@@ -215,7 +220,8 @@
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Last Name</label>
-                                                <input class="form-control" type="text" name="lastName" id="lastName" value="${u.getLastName()}" placeholder="Enter your last name" />
+                                                <input class="form-control" type="text" name="lastName" id="lastName"
+                                                       value="${u.getLastName()}" placeholder="Enter your last name"/>
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="email" class="form-label">E-mail</label>
@@ -252,38 +258,49 @@
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="dob" class="form-label">Date Of Birth</label>
-                                                <input type="date" class="form-control" id="dob" name="dob" value="${u.getDob()}" placeholder="" />
+                                                <input type="date" class="form-control" id="dob" name="dob"
+                                                       value="${u.getDob()}" placeholder=""/>
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="gender" class="form-label">Gender</label>
-                                                <select id="gender" name = "gender" class="select2 form-select">
+                                                <select id="gender" name="gender" class="select2 form-select">
                                                     <c:if test="${u.getSex() == null}">
-                                                        <option value="0" >Choose Your Gender</option>
+                                                        <option value="0">Choose Your Gender</option>
                                                     </c:if>
                                                     <c:if test="${u.getSex() != null}">
-                                                        <option value="1" ${u.getSex() != "1" ? "" : "selected"}>Male</option>
-                                                        <option value="2" ${u.getSex() != "2" ? "" : "selected"}>Female</option>
+                                                        <option value="1" ${u.getSex() != "1" ? "" : "selected"}>Male
+                                                        </option>
+                                                        <option value="2" ${u.getSex() != "2" ? "" : "selected"}>
+                                                            Female
+                                                        </option>
                                                     </c:if>
 
                                                 </select>
                                             </div>
                                             <!--                      cái này để hidden-->
                                             <div class="mb-3 col-md-6">
-                                                <input type="hidden" class="form-control" id="password" name="password" valuer="${u.getPassword()}" />
+                                                <input type="hidden" class="form-control" id="password" name="password"
+                                                       valuer="${u.getPassword()}"/>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <input type="hidden" class="form-control" id="role" name="role" value="${u.getRole()}" />
+                                                <input type="hidden" class="form-control" id="role" name="role"
+                                                       value="${u.getRole()}"/>
                                             </div>
                                             <div style="color: red">
                                                 ${error} ${success}
                                             </div>
                                             <div class="mt-2">
-                                                <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/changePassword">Change password</a>
+                                                <a class="btn btn-outline-secondary"
+                                                   href="${pageContext.request.contextPath}/changePassword">Change
+                                                    password</a>
                                             </div>
                                         </div>
                                         <div class="mt-2">
-                                            <button type="submit" class="btn btn-dark me-2" value="Update" name ="Update">Save changes</button>
-                                            <a href="user-account-detail-servlet?mod=1" type="reset" class="btn btn-outline-secondary">Cancel</a>
+                                            <button type="submit" class="btn btn-dark me-2" value="Update"
+                                                    name="Update">Save changes
+                                            </button>
+                                            <a href="user-account-detail-servlet?mod=1" type="reset"
+                                               class="btn btn-outline-secondary">Cancel</a>
                                         </div>
                                     </form>
                                 </div>
@@ -294,8 +311,10 @@
                                 <div class="card-body">
                                     <div class="mb-3 col-12 mb-0">
                                         <div class="alert alert-warning">
-                                            <h6 class="alert-heading fw-bold mb-1">Are you sure you want to delete your account?</h6>
-                                            <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
+                                            <h6 class="alert-heading fw-bold mb-1">Are you sure you want to delete your
+                                                account?</h6>
+                                            <p class="mb-0">Once you delete your account, there is no going back. Please
+                                                be certain.</p>
                                         </div>
                                     </div>
                                     <form action="deleteAccountSevlet" id="formAccountDeactivation" method="post">
@@ -310,11 +329,13 @@
                                             >I confirm my account deactivation</label
                                             >
                                         </div>
-                                    <div style="color: red">
-                                        ${errorDelete}
-                                    </div>
-                                        <button type="submit" class="btn btn-danger deactivate-account">Deactivate Account</button>
-<%--                                        <a href="user-account-detail-servlet?mod=2" class="btn btn-danger deactivate-account" id="deleteAccount">Deactivate Account</a>--%>
+                                        <div style="color: red">
+                                            ${errorDelete}
+                                        </div>
+                                        <button type="submit" class="btn btn-danger deactivate-account">Deactivate
+                                            Account
+                                        </button>
+                                        <%--                                        <a href="user-account-detail-servlet?mod=2" class="btn btn-danger deactivate-account" id="deleteAccount">Deactivate Account</a>--%>
                                     </form>
                                 </div>
                             </div>

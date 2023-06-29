@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="header/header1.css">
     <link href="header/pop-up/pop-up.css" rel="stylesheet">
     <link href="header/pop-up/policy.css" rel="stylesheet">
-    <link rel="stylesheet" href="account/authentication/authentication1.css">
+    <link rel="stylesheet" href="account/authentication/authentication.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
     <!-- Favicon -->
@@ -62,7 +62,8 @@
                 <input type="text" id="email" name="username" value="" placeholder="User Name">
                 <input type="email" id="email" name="email" value="" placeholder="Email Address">
                 <input type="password" id="password" name="password" value="" placeholder="Password">
-                <input type="password" id="repass" name="repass" value="" placeholder="Repeat Password"><br>${error}<br>
+                <input type="password" id="repass" name="repass" value="" placeholder="Repeat Password">
+                <h2>${error}</h2>
                 <input type="submit" value="Unlock Your Discount">
             </form>
             <h2 style="text-align: center; cursor: pointer" class="open_policy">By providing your email address, you
