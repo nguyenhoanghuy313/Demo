@@ -5270,7 +5270,7 @@
 
 .bx-menu:before {
   content: "\edc2";
-  color: white;
+  color: black;
 }
 
 .bx-menu-alt-left:before {
