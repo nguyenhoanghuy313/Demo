@@ -67,7 +67,6 @@ public class UserAccountDetailServlet extends HttpServlet {
             if (checkAccountExist) {
                 user = u.getUserById(String.valueOf(user.getUserID()));
                 req.setAttribute("u", user);
-                req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
                 req.setAttribute("error", "Email or UserName already exists");
                 req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
             } else {
