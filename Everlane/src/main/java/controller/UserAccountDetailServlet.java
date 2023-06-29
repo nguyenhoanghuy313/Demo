@@ -70,10 +70,8 @@ public class UserAccountDetailServlet extends HttpServlet {
                 req.setAttribute("error", "Email or UserName already exists");
                 req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
             } else {
-//                if (req.getParameter("Update") != null) {
                 phone = Integer.parseInt(phoneString);
                 u.UpdateAccount(username, email, firstname, lastname, dob, gender, phone, (user.getUserID()));
-//                u.addUser(username ,password,email);
                 user = u.getUserById(String.valueOf(user.getUserID()));
                 req.setAttribute("u", user);
                 req.setAttribute("success", "Changing Account successfully");

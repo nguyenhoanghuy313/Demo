@@ -32,7 +32,7 @@
                 <input type="submit" value="Login">
                 <br>
                 <div style="color: red">
-                    ${Message} ${success}
+                    ${Message} ${success} ${MessageGG}
                 </div>
             </form>
             <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/LoginGoogle/LoginGoogleHandler&response_type=code

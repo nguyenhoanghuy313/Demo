@@ -275,6 +275,43 @@ public class UserDAO extends myDAO {
         return sortedUserList;
     }
 
+    public User getUserByEmail(String xEmail){
+        xSql = "select * from user where Email = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, xEmail);
+            rs = ps.executeQuery();
+            int uID;
+            String xUserName;
+            String xPassword;
+            String xFirstName;
+            String xLastName;
+            Date xDob;
+            int xGender;
+            int xPhone;
+            String xRole;
+            while (rs.next()){
+                uID = rs.getInt("UserID");
+                xUserName = rs.getString("UserName");
+                xPassword = rs.getString("Password");
+                xEmail = rs.getString("Email");
+                xFirstName = rs.getString("FirstName");
+                xLastName = rs.getString("LastName");
+                xDob = rs.getDate("Dob");
+                xGender = rs.getInt("Sex");
+                xPhone = rs.getInt("Phone");
+                xRole = rs.getString("Role");
+                User u = new User(uID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xGender, xPhone, xRole);
+            return u;
+            }
+            rs.close();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public User getUserById(String xID){
         User u = null;
         int uID = Integer.parseInt(xID);
@@ -376,11 +413,14 @@ public class UserDAO extends myDAO {
 //Nguyễn Đắc Hoàng Đạt - HE170720
 
 //    public static void main(String[] args) {
+////        System.out.println("hello");
 //        UserDAO test = new UserDAO();
-//        String pass = "1";
+//        User u = new User();
+//        String email = "hoangdatsup2003@gmail.com";
 ////        String date = "12-12-2020";
-//        test.getUserById(id);
-//        System.out.printf(String.valueOf(test.getUserById(id).getDob()));
+//        u = test.getUserByEmail(email);
+//        System.out.println(u);
+////        System.out.printf(u.getUserName());
 //    }
 }
 

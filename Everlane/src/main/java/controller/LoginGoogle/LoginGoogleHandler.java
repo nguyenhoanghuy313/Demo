@@ -3,11 +3,14 @@ package controller.LoginGoogle;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.IOException;
+import java.util.List;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.*;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.fluent.Form;
@@ -18,19 +21,33 @@ import org.apache.http.client.fluent.Form;
 @WebServlet(name = "LoginGoogleHandler",urlPatterns = { "/LoginGoogleHandler","/LoginGoogle/*" })
 public class LoginGoogleHandler extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws jakarta.servlet.ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String code = request.getParameter("code");
         String accessToken = getToken(code);
+        User ugoogle = new User();
+        UserDAO u = new UserDAO();
+        ProductsDAO p = new ProductsDAO();
+        CategoryDAO c = new CategoryDAO();
+        List<Product> data = p.getAllProducts();
+        List<Category> cateList = c.getCategory();
         UserGoogleDto user = getUserInfo(accessToken);
-        System.out.println(user.getEmail());
+        ugoogle = u.getUserByEmail(user.getEmail());
+        request.getSession().setAttribute("acc", ugoogle);
+//        response.sendRedirect(request.getContextPath()+"/home.jsp");
+//        request.getRequestDispatcher("home.jsp").forward(request,response);
+//        System.out.println(user.getEmail());
+//        request.getSession().setAttribute("acc", ugoogle);
+        if(ugoogle != null) {
+            request.setAttribute("data", data);
+            request.getSession().setAttribute("data", data);
+            request.setAttribute("cateList", cateList);
+            request.getSession().setAttribute("cateList", cateList);
+            response.sendRedirect(request.getContextPath()+"/home.jsp");
+        } else {
+            String MessageGG = "Email is incorrect or not exist please register";
+            request.getSession().setAttribute("MessageGG", MessageGG);
+            response.sendRedirect(request.getContextPath()+"/login.jsp");        }
     }
 
     public static String getToken(String code) throws ClientProtocolException, IOException {
@@ -50,9 +67,7 @@ public class LoginGoogleHandler extends HttpServlet {
     public static UserGoogleDto getUserInfo(final String accessToken) throws ClientProtocolException, IOException {
         String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
         String response = Request.Get(link).execute().returnContent().asString();
-
         UserGoogleDto googlePojo = new Gson().fromJson(response, UserGoogleDto.class);
-
         return googlePojo;
     }
 
