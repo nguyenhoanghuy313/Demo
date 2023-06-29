@@ -116,17 +116,19 @@
                 <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-detail"></i>
-                        <div data-i18n="Form Layouts">Form Layouts</div>
+                        <div data-i18n="Marketing">Marketing</div>
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="form-layouts-vertical.html" class="menu-link">
-                                <div data-i18n="Vertical Form">Vertical Form</div>
+                            <a href="seasonCollectionEdit.jsp" class="menu-link">
+                                <div data-i18n="Season Collection">Season Collection (Home Page)</div>
                             </a>
                         </li>
+                    </ul>
+                    <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="form-layouts-horizontal.html" class="menu-link">
-                                <div data-i18n="Horizontal Form">Horizontal Form</div>
+                            <a href="categoryEdit.jsp" class="menu-link">
+                                <div data-i18n="Season Collection">Category (Home Page)</div>
                             </a>
                         </li>
                     </ul>

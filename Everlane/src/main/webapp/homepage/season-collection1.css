@@ -1,7 +1,7 @@
 /*Season_Collection_Banner*/
 .Season_Collection_Banner{
-    position: relative;
     width: 100%;
+    height: 100vh;
 }
 .Season_Collection_Banner img{
     width: 100%;

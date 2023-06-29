@@ -9,7 +9,7 @@
 <%@page import="java.util.*" %>
 <%@page import="model.*" %>
 <%@page import="controller.*" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
@@ -17,14 +17,14 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
-    <link rel="stylesheet" href="header/header.css">
-    <link rel="stylesheet" href="productpage/productdetail/product-detail.css">
-    <link rel="stylesheet" href="homepage/best-seller-slider.css">
+    <link rel="stylesheet" href="header/header1.css">
+    <link rel="stylesheet" href="productpage/productdetail/product-detail1.css">
+    <link rel="stylesheet" href="homepage/best-seller-slider1.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
     <title>Product Detail</title>
-        <!-- Favicon -->
-        <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="Product_Color">
-            <h1>${pi.getColor()}</h1>
+            <h1>Color</h1>
             <div class="Color">
                 <a>
                     <div></div>
@@ -84,24 +84,19 @@
         <i id="left" class='bx bx-chevron-left'></i>
         <div class="carousel">
 
-                <c:forEach var="p" items="${data}">
-                    <div class="Product">
-                        <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=${p.getProductID()}">
-                        <img src=${p.getProductImg()}>
-                        <div class="Product_Name">
-                            <div class="Best_Seller_Text">
-                                <h1>${p.getProductName()}</h1>
-                                <h1>${p.getPrice()}</h1>
-                                    <%--                            </div>--%>
-                                    <%--                            <p>${p.getColor()}</p>--%>
-                            </div>
+            <c:forEach var="p" items="${data}">
+                <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=${p.getProductID()}">
+                    <img src=${p.getProductImg()}>
+                    <div class="Product_Name">
+                        <div class="Best_Seller_Text">
+                            <h1>${p.getProductName()}</h1>
+                            <h1>${p.getPrice()}</h1>
                         </div>
-                        </a>
                     </div>
-                </c:forEach>
+                </a>
+            </c:forEach>
         </div>
         <i id="right" class='bx bx-chevron-right'></i>
-
     </div>
 </section>
 

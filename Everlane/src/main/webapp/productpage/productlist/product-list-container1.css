@@ -43,6 +43,7 @@
     font-family: 'Nunito Sans', sans-serif;
     color: black;
     margin-top: 10px;
+    font-size: 12px;
 }
 .Product_Name{
     display: flex;
@@ -54,6 +55,7 @@
     font-family: 'Nunito Sans', sans-serif;
     color: black;
     margin-top: 10px;
+    font-size: 12px;
 
 }
 @media (max-width: 1490px){

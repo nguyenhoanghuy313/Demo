@@ -10,7 +10,7 @@
         data-template="vertical-menu-template-free"
 >
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
@@ -18,31 +18,31 @@
 
     <title>Dashboard</title>
 
-    <meta name="description" content="" />
+    <meta name="description" content=""/>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet"
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="a.template/assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="a.template/assets/vendor/fonts/boxicons.css"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="a.template/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="a.template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="a.template/assets/css/demo.css" />
+    <link rel="stylesheet" href="a.template/assets/vendor/css/core.css" class="template-customizer-core-css"/>
+    <link rel="stylesheet" href="a.template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css"/>
+    <link rel="stylesheet" href="a.template/assets/css/demo.css"/>
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
-    <link rel="stylesheet" href="a.template/assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" href="a.template/assets/vendor/libs/apex-charts/apex-charts.css"/>
 
     <!-- Page CSS -->
 
@@ -142,13 +142,15 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account Settings /</span> Account</h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account Settings /</span> Account
+                    </h4>
 
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="nav nav-pills flex-column flex-md-row mb-3">
                                 <li class="nav-item">
-                                    <a class="nav-link active"  href="javascript:void(0);"><i class="bx bx-user me-1"></i> Account</a>
+                                    <a class="nav-link active" href="javascript:void(0);"><i
+                                            class="bx bx-user me-1"></i> Account</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="pages-account-settings-notifications.html"
@@ -185,7 +187,8 @@
                                                         accept="image/png, image/jpeg"
                                                 />
                                             </label>
-                                            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                            <button type="button"
+                                                    class="btn btn-outline-secondary account-image-reset mb-4">
                                                 <i class="bx bx-reset d-block d-sm-none"></i>
                                                 <span class="d-none d-sm-block">Reset</span>
                                             </button>
@@ -194,7 +197,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <hr class="my-0" />
+                                <hr class="my-0"/>
                                 <div class="card-body">
                                     <form action="user-account-detail-servlet" method="POST">
                                         <div class="row">

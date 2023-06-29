@@ -147,7 +147,7 @@
                 <!-- Account -->
                 <hr class="my-0" />
                 <div class="card-body">
-                  <form action="changePassword" id="changePasswordHighUser" method="POST" >
+                  <form id="changePasswordHighUser" method="POST" onsubmit="return false">
                     <div class="row">
                       <div class="mb-3 col-md-12">
                         <label for="oldPassword" class="form-label">Old Password</label>
@@ -170,17 +170,16 @@
                                 class="form-control"
                                 type="text"
                                 id="reEnterNewPassword"
-                                name="confirmPassword"
+                                name="reEnterNewPassword"
                                 placeholder="Please reenter your new password"
                         />
                       </div>
-                      <div>
-                        ${error} ${success}
-                      </div>
+
+
                     </div>
                     <div class="mt-2">
                       <button type="submit" class="btn btn-dark me-2">Save changes</button>
-                      <a href="changePassword?mod=1" class="btn btn-outline-secondary">Cancel</a>
+                      <a href="highUserAccount.jsp" class="btn btn-outline-secondary">Cancel</a>
                     </div>
                   </form>
                 </div>
