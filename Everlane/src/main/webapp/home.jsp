@@ -9,6 +9,7 @@
 <%@page import="java.util.*" %>
 <%@page import="model.*" %>
 <%@page import="controller.*" %>
+<%@ page import="model.Collection" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
@@ -39,9 +40,9 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<%--  <%--%>
-<%--      List<Category> cateList = (List<Category>) request.getAttribute("cateList");--%>
-<%--  %>--%>
+  <%
+      Collection collection = (Collection) request.getAttribute("collection");
+  %>
 <div class="pop_up_container">
     <div class="pop_up" style="background: cadetblue">
         <i class='bx bx-x' id="pop_up_x"></i>
@@ -52,13 +53,11 @@
     </div>
 </div>
 <section class="Season_Collection_Banner" id="Season_Collection_Banner">
-    <img src="https://media.everlane.com/image/upload/c_scale,dpr_1.0,f_auto,q_auto,w_auto/c_limit,w_1400/v1/i/7c25c966_a3da.jpg"
+    <img src=<%= collection.getCollectionImg() %>
          alt="">
     <div class="Season_Collection_Banner_text">
-        <h1>Everlane Editions: <br>
-            The Dress Collection</h1>
-        <p>Your occasions. Your style. <br>
-            Forever pieces—to wear on repeat.</p>
+        <h1><%= collection.getCollectionName() %></h1>
+        <p><%= collection.getCollection_description() %></p>
         <button>SHOP THE COLLECTION</button>
     </div>
 </section>
