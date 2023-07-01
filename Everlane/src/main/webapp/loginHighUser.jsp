@@ -75,7 +75,7 @@
                     <h4 class="mb-2">Welcome to High User Login!</h4>
                     <p class="mb-4">Please sign-in to your account</p>
 
-                    <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+                    <form id="loginHighUserServlet" class="mb-3" action="loginHighUserServlet" method="POST">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input
@@ -105,6 +105,12 @@
                                 />
                                 <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                             </div>
+                        </div>
+                        <div style="color: red">
+                            ${error}
+                        </div>
+                        <div style="color: green">
+                            ${success}
                         </div>
                         <div class="mb-3">
                             <div class="form-check">

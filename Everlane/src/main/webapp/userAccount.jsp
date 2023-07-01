@@ -172,6 +172,7 @@
                                 <!-- Account -->
                                 <div class="card-body">
                                     <div class="d-flex align-items-start align-items-sm-center gap-4">
+                                        </div>
                                         <img
                                                 src="../assets/img/avatars/1.png"
                                                 alt="user-avatar"
@@ -368,6 +369,21 @@
 <%--        }--%>
 <%--    });--%>
 <%--</script>--%>
+<script>
+    var file = document.getElementById("upload");
+    var image = document.getElementById("uploadedAvatar");
+    file.addEventListener("change", (e) =>{
+        image.src = URL.createObjectURL(e.target.files[0])})
+    // file.addEventListener("change", function() {
+    //     if (this.files[0]) {
+    //         var fileReader = new FileReader();
+    //         fileReader.onload = function(e) {
+    //             image.setAttribute("src", e.target.result);
+    //         };
+    //         fileReader.readAsDataURL(this.files[0]);
+    //     }
+    // });
+</script>
 <script src="a.template/assets/vendor/libs/jquery/jquery.js"></script>
 <script src="a.template/assets/vendor/libs/popper/popper.js"></script>
 <script src="a.template/assets/vendor/js/bootstrap.js"></script>

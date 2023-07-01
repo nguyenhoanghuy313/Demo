@@ -34,7 +34,7 @@ public class UserAccountDetailServlet extends HttpServlet {
                 session.getAttribute("acc");
                 req.setAttribute("data", data);
                 req.setAttribute("cateList", cateList);
-                req.getRequestDispatcher("home.jsp").forward(req, resp);
+                req .getRequestDispatcher("home.jsp").forward(req, resp);
             }
         }
     }
@@ -52,10 +52,10 @@ public class UserAccountDetailServlet extends HttpServlet {
         HttpSession session = req.getSession();
         UserDAO u = new UserDAO();
         User user = (User) session.getAttribute("acc");
-        if (firstname.isEmpty() || lastname.isEmpty() || phoneString.isEmpty() || dob.isEmpty() || gender == 0 || username.isEmpty() || email.isEmpty()) {
+        if ( username.isEmpty() || email.isEmpty()) {
             user = u.getUserById(String.valueOf(user.getUserID()));
             req.setAttribute("u", user);
-            req.setAttribute("error", "Please fill all the fields");
+            req.setAttribute("error", "Email or UserName cannot be empty");
             req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
         } else if (!u.isValidDate(dob)) {
             user = u.getUserById(String.valueOf(user.getUserID()));
