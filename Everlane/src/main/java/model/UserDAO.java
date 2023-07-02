@@ -139,6 +139,7 @@ public class UserDAO extends myDAO {
         }
         return false;
     }
+
     public boolean checkAccountExistUserDetail(String xusername, String xemail, int xUserID) {
         try {
             xSql = "select *\n" +

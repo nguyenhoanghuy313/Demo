@@ -137,7 +137,59 @@
                     </a>
                 </div>
 
-
+                <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                    <ul class="navbar-nav flex-row align-items-center ms-auto">
+                        <!-- User -->
+                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                               data-bs-toggle="dropdown">
+                                <div class="avatar avatar-online">
+                                    <img src="a.template/assets/img/avatars/1.png" alt
+                                         class="w-px-40 h-auto rounded-circle"/>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="avatar avatar-online">
+                                                    <img src="a.template/assets/img/avatars/1.png" alt
+                                                         class="w-px-40 h-auto rounded-circle"/>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <c:if test=" ${sessionScope.acc!= null}">
+                                                    <span class="fw-semibold d-block">${sessionScope.acc.userName}</span>
+                                                </c:if>
+                                                <small class="text-muted">Admin</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="highUserAccount.jsp">
+                                        <i class="bx bx-user me-2"></i>
+                                        <span class="align-middle">My Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="logout-servlet">
+                                        <i class="bx bx-power-off me-2"></i>
+                                        <span class="align-middle">Log Out</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--/ User -->
+                    </ul>
+                </div>
             </nav>
 
             <!-- / Navbar -->
@@ -205,8 +257,32 @@
                                 </div>
                                 <hr class="my-0"/>
                                 <div class="card-body">
-                                    <form action="user-account-detail-servlet" method="POST">
+                                    <form id="formAccountSettings" action="user-account-detail-servlet" method="POST">
                                         <div class="row">
+                                            <div class="mb-3 col-md-6">
+                                                <label for="username" class="form-label">User Name</label>
+                                                <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        id="username"
+                                                        name="username"
+                                                        value="${u.getUserName()}"
+                                                />
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <input type="hidden" class="form-control" id="password" name="password"
+                                                       value="${u.getPassword()}"/>
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="email" class="form-label">E-mail</label>
+                                                <input
+                                                        class="form-control"
+                                                        type="email"
+                                                        id="email"
+                                                        name="email"
+                                                        value="${u.getEmail()}"
+                                                />
+                                            </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">First Name</label>
                                                 <input
@@ -225,39 +301,6 @@
                                                        value="${u.getLastName()}" placeholder="Enter your last name"/>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="email" class="form-label">E-mail</label>
-                                                <input
-                                                        class="form-control"
-                                                        type="email"
-                                                        id="email"
-                                                        name="email"
-                                                        value="${u.getEmail()}"
-                                                />
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label for="username" class="form-label">User Name</label>
-                                                <input
-                                                        type="text"
-                                                        class="form-control"
-                                                        id="username"
-                                                        name="username"
-                                                        value="${u.getUserName()}"
-                                                />
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label class="form-label" for="phoneNumber">Phone Number</label>
-                                                <div class="input-group input-group-merge">
-                                                    <input
-                                                            type="tel"
-                                                            id="phoneNumber"
-                                                            name="phoneNumber"
-                                                            class="form-control"
-                                                            placeholder="Enter your phone number"
-                                                            value="${u.getPhone()}"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div class="mb-3 col-md-6">
                                                 <label for="dob" class="form-label">Date Of Birth</label>
                                                 <input type="date" class="form-control" id="dob" name="dob"
                                                        value="${u.getDob()}" placeholder=""/>
@@ -274,29 +317,43 @@
                                                         <option value="2" ${u.getSex() != "2" ? "" : "selected"}>
                                                             Female
                                                         </option>
+                                                        <option value="3" ${u.getSex() != "3" ? "" : "selected"}>
+                                                            Other
+                                                        </option>
                                                     </c:if>
 
                                                 </select>
-                                            </div>
-                                            <!--                      cái này để hidden-->
-                                            <div class="mb-3 col-md-6">
-                                                <input type="hidden" class="form-control" id="password" name="password"
-                                                       valuer="${u.getPassword()}"/>
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <input type="hidden" class="form-control" id="role" name="role"
                                                        value="${u.getRole()}"/>
                                             </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label" for="phoneNumber">Phone Number</label>
+                                                <div class="input-group input-group-merge">
+                                                    <input
+                                                            type="tel"
+                                                            id="phoneNumber"
+                                                            name="phoneNumber"
+                                                            class="form-control"
+                                                            placeholder="Enter your phone number"
+                                                            value="${u.getPhone()}"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <input
+                                                    type="hidden"
+                                                    id="userID"
+                                                    name="UserID"
+                                                    class="form-control"
+                                                    value=${u.getUserID()}
+                                            />
+
                                             <div style="color: red">
                                                 ${error}
                                             </div>
                                             <div style="color: green">
                                                 ${success}
-                                            </div>
-                                            <div class="mt-2">
-                                                <a class="btn btn-outline-secondary"
-                                                   href="${pageContext.request.contextPath}/changePassword">Change
-                                                    password</a>
                                             </div>
                                         </div>
                                         <div class="mt-2">
@@ -307,6 +364,11 @@
                                                class="btn btn-outline-secondary">Cancel</a>
                                         </div>
                                     </form>
+                                    <div class="mt-2">
+                                        <a class="btn btn-outline-secondary"
+                                           href="${pageContext.request.contextPath}/changePassword">Change
+                                            password</a>
+                                    </div>
                                 </div>
                                 <!-- /Account -->
                             </div>
@@ -339,7 +401,6 @@
                                         <button type="submit" class="btn btn-danger deactivate-account">Deactivate
                                             Account
                                         </button>
-                                        <%--                                        <a href="user-account-detail-servlet?mod=2" class="btn btn-danger deactivate-account" id="deleteAccount">Deactivate Account</a>--%>
                                     </form>
                                 </div>
                             </div>

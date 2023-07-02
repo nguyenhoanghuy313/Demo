@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import model.*;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 @WebServlet(name = "user-account-detail-servlet", urlPatterns = {"/user-account-detail-servlet"})
@@ -41,14 +42,18 @@ public class UserAccountDetailServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String username = req.getParameter("username").trim();
+        String password = req.getParameter("password").trim();
+        String email = req.getParameter("email").trim();
         String firstname = req.getParameter("firstName").trim();
         String lastname = req.getParameter("lastName").trim();
-        String phoneString = req.getParameter("phoneNumber").trim();
-        int phone = 0;
-        String dob = req.getParameter("dob");
-        int gender = Integer.parseInt(req.getParameter("gender"));
-        String username = req.getParameter("username").trim();
-        String email = req.getParameter("email").trim();
+        Date date=Date.valueOf(req.getParameter("dob").trim());
+        int sex = Integer.parseInt(req.getParameter("gender").trim());
+        int role = Integer.parseInt(req.getParameter("role").trim());
+        String phone = req.getParameter("phoneNumber").trim();
+
+        int xUserID = Integer.parseInt(req.getParameter("UserID").trim());
+
         HttpSession session = req.getSession();
         UserDAO u = new UserDAO();
         User user = (User) session.getAttribute("acc");
@@ -57,26 +62,25 @@ public class UserAccountDetailServlet extends HttpServlet {
             req.setAttribute("u", user);
             req.setAttribute("error", "Email or UserName cannot be empty");
             req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
-        } else if (!u.isValidDate(dob)) {
-            user = u.getUserById(user.getUserID());
-            req.setAttribute("u", user);
-            req.setAttribute("error", "Invalid date of birth");
-            req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
+//        } else if (!u.isValidDate(date)) {
+//            user = u.getUserById(user.getUserID());
+//            req.setAttribute("u", user);
+//            req.setAttribute("error", "Invalid date of birth");
+//            req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
         } else {
-            boolean checkAccountExist = u.checkAccountExistUserDetail(username, email, user.getUserID());
+            boolean checkAccountExist = u.checkAccountExistUserDetail(username, email, xUserID);
             if (checkAccountExist) {
                 user = u.getUserById(user.getUserID());
                 req.setAttribute("u", user);
                 req.setAttribute("error", "Email or UserName already exists");
                 req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
             } else {
-                phone = Integer.parseInt(phoneString);
-//                u.UpdateAccount((username, password, email, firstname, lastname, date, sex, role, phone, (user.getUserID()));
+                u.UpdateAccount(username, password, email, firstname, lastname, date, sex, role, phone, xUserID);
                 user = u.getUserById(user.getUserID());
                 req.setAttribute("u", user);
                 req.setAttribute("success", "Changing Account successfully");
                 req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
-//                }
+
             }
         }
     }

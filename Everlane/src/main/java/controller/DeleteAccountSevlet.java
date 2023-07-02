@@ -24,6 +24,7 @@ public class DeleteAccountSevlet extends HttpServlet {
             User user = (User) session.getAttribute("acc");
             u.deleteUser(String.valueOf(user.getUserID()));
             req.setAttribute("success", "Your account has been deleted");
+            session.removeAttribute("acc");
             req.getRequestDispatcher("login.jsp").forward(req, resp);
         } else {
             HttpSession session = req.getSession();
