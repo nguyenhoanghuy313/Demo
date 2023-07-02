@@ -31,7 +31,7 @@ public class LoginHighUserServlet extends HttpServlet {
             }
             req.getRequestDispatcher("loginHighUser.jsp").forward(req, resp);
         } else {
-            if (Role.getRole().equals("Admin")) {
+            if (Role.getRole() == 1) {
                 HttpSession session = req.getSession();
                 session.setAttribute("acc", checkUser);
 

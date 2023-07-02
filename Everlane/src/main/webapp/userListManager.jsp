@@ -265,16 +265,16 @@
                                        href="${pageContext.request.contextPath}/UserListManagerServlet?role=all">All</a>
                                 </li>
                                 <li><a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/UserListManagerServlet?role=Admin">Admin</a>
+                                       href="${pageContext.request.contextPath}/UserListManagerServlet?role=1">Admin</a>
                                 </li>
                                 <li><a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/UserListManagerServlet?role=Customer">Customer</a>
+                                       href="${pageContext.request.contextPath}/UserListManagerServlet?role=4">Customer</a>
                                 </li>
                                 <li><a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/UserListManagerServlet?role=Sale">Sale</a>
+                                       href="${pageContext.request.contextPath}/UserListManagerServlet?role=3">Sale</a>
                                 </li>
                                 <li><a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/UserListManagerServlet?role=Marketing">Marketing</a>
+                                       href="${pageContext.request.contextPath}/UserListManagerServlet?role=2">Marketing</a>
                                 </li>
                             </ul>
                         </div>
@@ -285,7 +285,7 @@
 
                 <div class="container-xxl flex-grow-1 container-p-y ">
                     <div class="card">
-                        <h5 class="card-header">Products</h5>
+                        <h5 class="card-header">User</h5>
                         <div class="table-responsive text-nowrap listtable ">
                             <table class="table">
                                 <thead>
@@ -312,7 +312,20 @@
                                         <td>${u.getDob()}</td>
                                         <td>${u.getSex()}</td>
                                         <td>${u.getPhone()}</td>
-                                        <td>${u.getRole()}</td>
+                                        <c:choose>
+                                            <c:when test="${u.getRole()  == 1}">
+                                                <td>Admin</td>
+                                            </c:when>
+                                            <c:when test="${u.getRole()  == 2}">
+                                                <td>Marketing</td>
+                                            </c:when>
+                                            <c:when test="${u.getRole()  == 3}">
+                                                <td>Sale</td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td>Customer</td>
+                                            </c:otherwise>
+                                        </c:choose>
                                         <td>
                                             <div class="dropdown">
                                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow"

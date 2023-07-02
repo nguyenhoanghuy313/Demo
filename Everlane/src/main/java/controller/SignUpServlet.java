@@ -30,6 +30,8 @@ public class SignUpServlet extends HttpServlet {
         String email = req.getParameter("email").trim();
         String password = req.getParameter("password").trim();
         String repass = req.getParameter("repass").trim();
+        int role = Integer.parseInt(req.getParameter("role").trim());
+
         UserDAO u = new UserDAO();
         User x = new User();
         if (email.isEmpty() || password.isEmpty() || repass.isEmpty() || username.isEmpty() ) {
@@ -48,7 +50,7 @@ public class SignUpServlet extends HttpServlet {
                 req.getRequestDispatcher("register.jsp").forward(req, resp);
             } else {
 //                phone = Integer.parseInt(phoneString);
-                u.addUser(username ,password,email);
+                u.addUser(username ,password,email, role);
                 req.setAttribute("newemail", email);
                 req.setAttribute("newpass", password);
                 req.setAttribute("success", "Register successfully please sign in");

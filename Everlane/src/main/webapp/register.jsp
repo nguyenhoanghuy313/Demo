@@ -59,10 +59,11 @@
             <h2>Complete your sign up to
                 receive your discount.*</h2>
             <form action="register-servlet" method="post">
-                <input type="text" id="email" name="username" value="" placeholder="User Name">
+                <input type="text" id="username" name="username" value="" placeholder="User Name">
                 <input type="email" id="email" name="email" value="" placeholder="Email Address">
                 <input type="password" id="password" name="password" value="" placeholder="Password">
                 <input type="password" id="repass" name="repass" value="" placeholder="Repeat Password">
+                <input type="hidden" id="role" name="role" value="4">
                 <h2>${error}</h2>
                 <input type="submit" value="Unlock Your Discount">
             </form>
