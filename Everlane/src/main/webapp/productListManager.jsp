@@ -293,9 +293,6 @@
                                 </thead>
                                 <tbody class="table-border-bottom-0">
                                 <%
-                                    if (!productList.isEmpty()) {
-                                %>
-                                <%
                                     for (Product x : productListSorted) {
                                 %>
                                 <tr class="item">
@@ -341,9 +338,6 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <% } %>
-                                <% } else {%>
-                                <h2>No products found</h2>
                                 <% } %>
                                 </tbody>
                             </table>

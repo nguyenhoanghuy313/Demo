@@ -28,7 +28,7 @@ public class DeleteAccountSevlet extends HttpServlet {
         } else {
             HttpSession session = req.getSession();
             User user = (User) session.getAttribute("acc");
-            user = u.getUserById(String.valueOf(user.getUserID()));
+            user = u.getUserById(user.getUserID());
             req.setAttribute("u", user);
             req.setAttribute("errorDelete", "Please check the box to confirm");
             req.getRequestDispatcher("userAccount.jsp").forward(req, resp);

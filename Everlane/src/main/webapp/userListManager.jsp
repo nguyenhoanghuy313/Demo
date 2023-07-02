@@ -13,6 +13,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
     List<User> userList = (List<User>) request.getAttribute("userList");
+    User userNeedEdit = (User) request.getAttribute("userNeedEdit") ;
 %>
 <html
         lang="en"
@@ -216,7 +217,7 @@
                 <div class="list_option_container">
                     <div class="list_option_container1">
                         <div class="input-group ">
-                            <a href="addNewUser.jsp" class="btn btn-outline-dark" type="button">New User</a>
+                            <a href="UserEditServlet?UserID=0" class="btn btn-outline-dark" type="button">New User</a>
                         </div>
                     </div>
                     <div class="list_option_container2">
@@ -310,7 +311,20 @@
                                         <td>${u.getFirstName()}</td>
                                         <td>${u.getLastName()}</td>
                                         <td>${u.getDob()}</td>
-                                        <td>${u.getSex()}</td>
+                                        <c:choose>
+                                            <c:when test="${u.getSex()  == 1}">
+                                                <td>Male</td>
+                                            </c:when>
+                                            <c:when test="${u.getSex()  == 2}">
+                                                <td>Female</td>
+                                            </c:when>
+                                            <c:when test="${u.getSex()  == 3}">
+                                                <td>Other</td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td>null</td>
+                                            </c:otherwise>
+                                        </c:choose>
                                         <td>${u.getPhone()}</td>
                                         <c:choose>
                                             <c:when test="${u.getRole()  == 1}">
@@ -333,7 +347,7 @@
                                                     <i class="bx bx-dots-vertical-rounded"></i>
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="javascript:void(0);"
+                                                    <a class="dropdown-item" href="UserEditServlet?UserID=${u.getUserID()}"
                                                     ><i class="bx bx-edit-alt me-1"></i> Edit</a
                                                     >
                                                     <a class="dropdown-item" href="DeleteUser?UserID=${u.getUserID()}"

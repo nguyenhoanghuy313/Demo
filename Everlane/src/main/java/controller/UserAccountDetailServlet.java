@@ -25,7 +25,7 @@ public class UserAccountDetailServlet extends HttpServlet {
         if (mod == null) {
             HttpSession session = req.getSession();
             User user = (User) session.getAttribute("acc");
-            user = u.getUserById(String.valueOf(user.getUserID()));
+            user = u.getUserById(user.getUserID());
             req.setAttribute("u", user);
             req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
         } else {
@@ -53,26 +53,26 @@ public class UserAccountDetailServlet extends HttpServlet {
         UserDAO u = new UserDAO();
         User user = (User) session.getAttribute("acc");
         if ( username.isEmpty() || email.isEmpty()) {
-            user = u.getUserById(String.valueOf(user.getUserID()));
+            user = u.getUserById(user.getUserID());
             req.setAttribute("u", user);
             req.setAttribute("error", "Email or UserName cannot be empty");
             req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
         } else if (!u.isValidDate(dob)) {
-            user = u.getUserById(String.valueOf(user.getUserID()));
+            user = u.getUserById(user.getUserID());
             req.setAttribute("u", user);
             req.setAttribute("error", "Invalid date of birth");
             req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
         } else {
             boolean checkAccountExist = u.checkAccountExist(username, email);
             if (checkAccountExist) {
-                user = u.getUserById(String.valueOf(user.getUserID()));
+                user = u.getUserById(user.getUserID());
                 req.setAttribute("u", user);
                 req.setAttribute("error", "Email or UserName already exists");
                 req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
             } else {
                 phone = Integer.parseInt(phoneString);
-                u.UpdateAccount(username, email, firstname, lastname, dob, gender, phone, (user.getUserID()));
-                user = u.getUserById(String.valueOf(user.getUserID()));
+//                u.UpdateAccount((username, password, email, firstname, lastname, date, sex, role, phone, (user.getUserID()));
+                user = u.getUserById(user.getUserID());
                 req.setAttribute("u", user);
                 req.setAttribute("success", "Changing Account successfully");
                 req.getRequestDispatcher("userAccount.jsp").forward(req, resp);

@@ -22,7 +22,7 @@ public class ChangePassword extends HttpServlet {
                 HttpSession session = req.getSession();
                 UserDAO u = new UserDAO();
                 User user = (User) session.getAttribute("acc");
-                user = u.getUserById(String.valueOf(user.getUserID()));
+                user = u.getUserById(user.getUserID());
                 req.setAttribute("u", user);
                 req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
             }

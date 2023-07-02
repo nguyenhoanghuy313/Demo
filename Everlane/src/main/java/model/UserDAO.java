@@ -1,13 +1,9 @@
 package model;
 
 import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class UserDAO extends myDAO {
 
@@ -161,6 +157,7 @@ public class UserDAO extends myDAO {
         return false;
     }
 
+    //add User for register Customer
     public void addUser(String xUsername, String xPassword, String xEmail, int xRole) {
         try {
             xSql = "INSERT INTO user (UserName,Password,Email,FirstName,LastName,Dob,Sex,Role, Phone, UserImg) values (?, ?, ?, null, null, null, null, ?, null, null)";
@@ -172,6 +169,26 @@ public class UserDAO extends myDAO {
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("addUser: " + e.getMessage());
+        }
+    }
+
+    //create new User for highUser
+    public void createNewUser(String xUsername, String xPassword, String xEmail, String xFirstName, String xLastName, Date xDob, int xSex, int xRole, String xPhone) {
+        try {
+            xSql = "INSERT INTO user (UserName,Password,Email,FirstName,LastName,Dob,Sex, Role, Phone, UserImg) values (?, ?, ?, ?, ?, ?, ?, ?, ?, null)";
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, xUsername);
+            ps.setString(2, xPassword);
+            ps.setString(3, xEmail);
+            ps.setString(4, xFirstName);
+            ps.setString(5, xLastName);
+            ps.setDate(6, xDob);
+            ps.setInt(7, xSex);
+            ps.setInt(8, xRole);
+            ps.setString(9, xPhone);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Create new User: " + e.getMessage());
         }
     }
 
@@ -202,7 +219,7 @@ public class UserDAO extends myDAO {
                 xRole = rs.getInt("Role");
                 xPhone = rs.getString("Phone");
                 xUserImg = rs.getString("UserImg");
-                u =new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone, xUserImg);
+                u = new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone, xUserImg);
                 userList.add(u);
             }
             rs.close();
@@ -286,7 +303,7 @@ public class UserDAO extends myDAO {
                 xRole = rs.getInt("Role");
                 xPhone = rs.getString("Phone");
                 xUserImg = rs.getString("UserImg");
-                u =new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone, xUserImg);
+                u = new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone, xUserImg);
                 sortedUserList.add(u);
             }
             rs.close();
@@ -320,7 +337,7 @@ public class UserDAO extends myDAO {
                 xRole = rs.getInt("Role");
                 xPhone = rs.getString("Phone");
                 xUserImg = rs.getString("UserImg");
-                User u =new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone, xUserImg);
+                User u = new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone, xUserImg);
                 return u;
             }
             rs.close();
@@ -331,9 +348,8 @@ public class UserDAO extends myDAO {
         return null;
     }
 
-    public User getUserById(String xID) {
+    public User getUserById(int uID) {
         User u = null;
-        int uID = Integer.parseInt(xID);
         xSql = "select * from user where UserID = ?";
         try {
             ps = con.prepareStatement(xSql);
@@ -391,20 +407,20 @@ public class UserDAO extends myDAO {
         }
     }
 
-    public void UpdateAccount(String xusername, String xemail, String xfirstname, String xlastname, String xdob, int xsex, int xphone, int xuserid) {
-//        String xRole = "Customer";
+    public void UpdateAccount(String xusername, String xpassword, String xemail, String xfirstname, String xlastname, Date xdob, int xsex, int xrole, String xphone, int xuserid) {
         try {
-            xSql = "update user set UserName = ?, Email = ?, FirstName=?, LastName = ?,Dob = ?, Sex =?, Phone = ? where UserID=?";
+            xSql = "update user set UserName = ?, Password = ?, Email = ?, FirstName=?, LastName = ?,Dob = ?, Sex =?, Role=?, Phone = ? where UserID=?";
             ps = con.prepareStatement(xSql);
             ps.setString(1, xusername);
-            ps.setString(2, xemail);
-            ps.setString(3, xfirstname);
-            ps.setString(4, xlastname);
-            ps.setDate(5, Date.valueOf(xdob));
-            ps.setInt(6, xsex);
-            ps.setInt(7, xphone);
-            ps.setInt(8, xuserid);
-//            ps.setString(9, xRole);
+            ps.setString(2, xpassword);
+            ps.setString(3, xemail);
+            ps.setString(4, xfirstname);
+            ps.setString(5, xlastname);
+            ps.setDate(6, xdob);
+            ps.setInt(7, xsex);
+            ps.setInt(8, xrole);
+            ps.setString(9, xphone);
+            ps.setInt(10,xuserid);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("UpdateAccount: " + e.getMessage());
