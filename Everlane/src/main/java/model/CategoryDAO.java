@@ -28,6 +28,43 @@ public class CategoryDAO extends myDAO {
         return (t);
     }
 
+    public Category getCollectionsByID(String xId){
+        Category x = null;
+        int i = Integer.parseInt(xId);
+        xSql = "select * from category where CategoryID = ?";
+        try{
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, i);
+            rs = ps.executeQuery();
+            String xcateName;
+            String xcateImg;
+            while(rs.next()){
+                i = rs.getInt("CategoryID");
+                xcateName = rs.getString("CategoryName");
+                xcateImg= rs.getString("Category_img");
+                x = new Category(i, xcateName, xcateImg);
+            }
+            rs.close();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return x;
+    }
+
+    public void updateCategory(String xcateImg, int xcateId) {
+        try {
+            xSql = "update category set  cImg =? where CategoryID =?";
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, xcateImg);
+            ps.setString(2, String.valueOf(xcateId));
+//            ps.setString(9, xRole);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("updateCategory: " + e.getMessage());
+        }
+    }
+
 //    public static void main(String[] args) {
 //        CategoryDAO categoryDAO = new CategoryDAO();
 //        List<Category> categoryList = categoryDAO.getCategory();

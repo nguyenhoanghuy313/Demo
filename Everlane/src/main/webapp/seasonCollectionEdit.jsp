@@ -6,6 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="model.Collection" %>
+<%@ page import="java.util.List" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html
         class="light-style layout-menu-fixed"
         data-assets-path="../a.template/assets/"
@@ -58,7 +62,9 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="a.template/assets/js/config.js"></script>
 </head>
-
+<%
+    List<Collection> collectionList = (List<Collection>) request.getAttribute("collectionList");
+%>
 <body>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -119,14 +125,14 @@
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="seasonCollectionEdit.jsp" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/seasonCollectionEditServlet" class="menu-link">
                                 <div data-i18n="Season Collection">Season Collection (Home Page)</div>
                             </a>
                         </li>
                     </ul>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="categoryEdit.jsp" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/categoryEditServlet" class="menu-link">
                                 <div data-i18n="Season Collection">Category (Home Page)</div>
                             </a>
                         </li>
@@ -219,14 +225,29 @@
                                     <h5 class="mb-0">Edit Season Collection</h5>
                                 </div>
                                 <div class="card-body">
-                                    <form>
+                                    <form action="seasonCollectionEditServlet" method="get" id="frm">
+                                        <div class="row mb-3">
+                                            <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Select
+                                                Collection</label>
+                                            <select class=" form-select col-sm-10" id="exampleFormControlSelect1"
+                                                    name="collectionIDGet"
+                                                    aria-label="Default select example" onchange="change()">
+                                                <option value="${c.getCollectionID()}" selected>${c.getCollectionName()}</option>
+                                                <option value="1" ${c.getCollectionID() != "1" ? "" : "disable"}>${c.getCollectionName()}</option>
+                                                <option value="2" ${c.getCollectionID() != "2" ? "" : "disable"}>${c.getCollectionName()}</option>
+                                                <option value="3" ${c.getCollectionID() != "3" ? "" : "disable"}>${c.getCollectionName()}</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                    <form action="seasonCollectionEditServlet" method="post" >
                                         <div class="row mb-3">
                                             <label class="col-sm-2 col-form-label"
                                                    for="basic-default-image">Image</label>
                                             <div class="col-sm-10">
                                                 <input class="form-control" id="basic-default-image"
-                                                       value="Lấy giá trị ảnh hiện tại"
-                                                       type="text"/>
+                                                       name="collectionImg"
+                                                       value="${c.getCollectionImg()}" type="text"/>
+
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -235,8 +256,9 @@
                                             <div class="col-sm-10">
                                                 <input
                                                         class="form-control"
+                                                        name="collectionName"
                                                         id="basic-default-h1"
-                                                        value="Lấy title h1 hiện tại"
+                                                        value="${c.getCollectionName()}"
                                                         type="text"
                                                 />
                                             </div>
@@ -247,22 +269,18 @@
                                             <div class="col-sm-10">
                                                 <input
                                                         class="form-control"
+                                                        name="collectionDescription"
                                                         id="basic-default-p"
-                                                        value="Lấy content p hiện tại"
+                                                        value="${c.getCollection_description()}"
                                                         type="text"
                                                 />
                                             </div>
                                         </div>
-                                        <div class="row mb-3">
-                                            <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Select
-                                                Collection</label>
-                                            <select class=" form-select col-sm-10" id="exampleFormControlSelect1"
-                                                    aria-label="Default select example">
-                                                <option selected>Select</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
+                                        <input class="form-control"
+                                               name="collectionID"
+                                               value="${c.getCollectionID()}" type="hidden"/>
+                                        <div style="color:green;">
+                                            ${message}
                                         </div>
                                         <div class="mt-2">
                                             <button type="submit" class="btn btn-dark me-2">Save changes</button>
@@ -292,6 +310,11 @@
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
+<script>
+    function change() {
+        document.getElementById("frm").submit();
+    }
+</script>
 <script src="a.template/assets/vendor/libs/jquery/jquery.js"></script>
 <script src="a.template/assets/vendor/libs/popper/popper.js"></script>
 <script src="a.template/assets/vendor/js/bootstrap.js"></script>

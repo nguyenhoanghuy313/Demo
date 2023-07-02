@@ -120,14 +120,14 @@
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="seasonCollectionEdit.jsp" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/seasonCollectionEditServlet" class="menu-link">
                                 <div data-i18n="Season Collection">Season Collection (Home Page)</div>
                             </a>
                         </li>
                     </ul>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="categoryEdit.jsp" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/categoryEditServlet" class="menu-link">
                                 <div data-i18n="Season Collection">Category (Home Page)</div>
                             </a>
                         </li>
