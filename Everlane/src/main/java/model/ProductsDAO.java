@@ -225,19 +225,5 @@ public class ProductsDAO extends myDAO {
             e.printStackTrace();
         }
     }
-
-//    public List<Product> sortProductsByPrice(List<Product> products) {
-//        Collections.sort(products, Comparator.comparing(Product::getPrice));
-//        return products;
-//    }
-//
-//    public List<Product> sortProductsByName(List<Product> products) {
-//        Collections.sort(products, Comparator.comparing(Product::getProductName));
-//        return products;
-//    }
-//    public List<Product> sortProductsByReleaseDate(List<Product> products) {
-//        Collections.sort(products, Comparator.comparing(Product::getReleaseDate, Comparator.reverseOrder()));
-//        return products;
-//    }
 }
 

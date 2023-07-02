@@ -4,21 +4,20 @@ public class Product {
     int productID;
     int categoryID;
     String productName;
-    String collection;
-    String color;
-    String productImg;
-    float price;
+    double price;
+    int collectionID;
+    String description;
+
     public Product() {
     }
 
-    public Product(int productID, int categoryID, String productName, String collection, String color, String productImg, float price) {
+    public Product(int productID, int categoryID, String productName, double price, int collectionID, String description) {
         this.productID = productID;
         this.categoryID = categoryID;
         this.productName = productName;
-        this.collection = collection;
-        this.color = color;
-        this.productImg = productImg;
         this.price = price;
+        this.collectionID = collectionID;
+        this.description = description;
     }
 
     public int getProductID() {
@@ -45,35 +44,27 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getCollection() {
-        return collection;
-    }
-
-    public void setCollection(String collection) {
-        this.collection = collection;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getProductImg() {
-        return productImg;
-    }
-
-    public void setProductImg(String productImg) {
-        this.productImg = productImg;
-    }
-
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getCollectionID() {
+        return collectionID;
+    }
+
+    public void setCollectionID(int collectionID) {
+        this.collectionID = collectionID;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
