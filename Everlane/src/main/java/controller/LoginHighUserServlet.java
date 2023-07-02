@@ -12,6 +12,17 @@ import java.util.List;
 public class LoginHighUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Cookie arr[] = req.getCookies();
+        if (arr != null) {
+            for (Cookie o : arr) {
+                if (o.getName().equals("email")) {
+                    req.setAttribute("email", o.getValue());
+                }
+                if (o.getName().equals("password")) {
+                    req.setAttribute("password", o.getValue());
+                }
+            }
+        }
         req.getRequestDispatcher("loginHighUser.jsp").forward(req, resp);
     }
 
@@ -19,6 +30,7 @@ public class LoginHighUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email").trim();
         String password = req.getParameter("password").trim();
+        String remember = req.getParameter("remember");
         UserDAO u = new UserDAO();
         User checkUser = u.checkUser(email, password);
         User Role = u.getRoleByEmail(email);
@@ -34,12 +46,15 @@ public class LoginHighUserServlet extends HttpServlet {
             if (Role.getRole() == 1) {
                 HttpSession session = req.getSession();
                 session.setAttribute("acc", checkUser);
-
-                // lưu account lên cookie
+                //lưu cookie
                 Cookie cookieAcc = new Cookie("email", email);
                 Cookie cookiePass = new Cookie("password", password);
-                cookieAcc.setMaxAge(60 * 60 * 24 * 30);
-                cookiePass.setMaxAge(60 * 60 * 24 * 30);
+                cookieAcc.setMaxAge(60 * 60 * 24 * 365);
+                if(req.getParameter("remember") != null){
+                    cookiePass.setMaxAge(60 * 60 * 24 * 365);
+                } else {
+                    cookiePass.setMaxAge(0);
+                }
                 resp.addCookie(cookieAcc); // lưu cookie lên client
                 resp.addCookie(cookiePass); // lưu cookie lên client
                 UserDAO ud = new UserDAO();
