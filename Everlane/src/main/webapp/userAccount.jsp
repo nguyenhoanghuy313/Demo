@@ -288,7 +288,10 @@
                                                        value="${u.getRole()}"/>
                                             </div>
                                             <div style="color: red">
-                                                ${error} ${success}
+                                                ${error}
+                                            </div>
+                                            <div style="color: green">
+                                                ${success}
                                             </div>
                                             <div class="mt-2">
                                                 <a class="btn btn-outline-secondary"

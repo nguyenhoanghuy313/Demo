@@ -83,23 +83,25 @@
                                     class="form-control"
                                     id="email"
                                     name="email"
+                                    value="${email}"
                                     placeholder="Enter your email"
                                     autofocus
                             />
                         </div>
                         <div class="mb-3 form-password-toggle">
-                            <div class="d-flex justify-content-between">
-                                <label class="form-label" for="password">Password</label>
-                                <a href="auth-forgot-password-basic.html">
-                                    <small>Forgot Password?</small>
-                                </a>
-                            </div>
+<%--                            <div class="d-flex justify-content-between">--%>
+<%--                                <label class="form-label" for="password">Password</label>--%>
+<%--                                <a href="auth-forgot-password-basic.html">--%>
+<%--                                    <small>Forgot Password?</small>--%>
+<%--                                </a>--%>
+<%--                            </div>--%>
                             <div class="input-group input-group-merge">
                                 <input
                                         type="password"
                                         id="password"
                                         class="form-control"
                                         name="password"
+                                        value="${password}"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                         aria-describedby="password"
                                 />
@@ -114,7 +116,7 @@
                         </div>
                         <div class="mb-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="remember-me"/>
+                                <input class="form-check-input" type="checkbox" id="remember-me" name="remember" />
                                 <label class="form-check-label" for="remember-me"> Remember Me </label>
                             </div>
                         </div>

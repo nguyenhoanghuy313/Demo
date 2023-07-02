@@ -143,6 +143,24 @@ public class UserDAO extends myDAO {
         }
         return false;
     }
+    public boolean checkAccountExistUserDetail(String xusername, String xemail, int xUserID) {
+        try {
+            xSql = "select *\n" +
+                    "from user\n" +
+                    "where UserName=? and Email=? and UserID!=?";
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, xusername);//dau hoi so 1
+            ps.setString(2, xemail);//dau hoi so 2
+            ps.setInt(3, xUserID);//dau hoi so 3
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("CheckAccountExistUserDetail: " + e.getMessage());
+        }
+        return false;
+    }
 
     public boolean checkPasswordExist(String xpassword) {
         try {
@@ -431,10 +449,13 @@ public class UserDAO extends myDAO {
 ////        System.out.println("hello");
 //        UserDAO test = new UserDAO();
 //        User u = new User();
-//        String email = "hoangdatsup2003@gmail.com";
+//        int id = 1;
+//        String email = "datndhhe170720@fpt.edu.vn";
+//        String username = "DatHoang";
 ////        String date = "12-12-2020";
-//        u = test.getUserByEmail(email);
-//        System.out.println(u);
+////         boolean check = test.checkAccountExistUserDetail(email, username, id);
+//        boolean check = test.checkAccountExist(email, username);
+//        System.out.println(check);
 ////        System.out.printf(u.getUserName());
 //    }
 }

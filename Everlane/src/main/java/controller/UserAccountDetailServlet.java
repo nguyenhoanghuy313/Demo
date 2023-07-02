@@ -63,7 +63,7 @@ public class UserAccountDetailServlet extends HttpServlet {
             req.setAttribute("error", "Invalid date of birth");
             req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
         } else {
-            boolean checkAccountExist = u.checkAccountExist(username, email);
+            boolean checkAccountExist = u.checkAccountExistUserDetail(username, email, user.getUserID());
             if (checkAccountExist) {
                 user = u.getUserById(String.valueOf(user.getUserID()));
                 req.setAttribute("u", user);
