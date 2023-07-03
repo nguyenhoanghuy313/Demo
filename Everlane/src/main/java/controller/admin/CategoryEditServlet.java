@@ -17,7 +17,7 @@ public class CategoryEditServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CategoryDAO c = new CategoryDAO();
-        List<Category> cateList = c.getCategory();
+        List<Category> cateList = c.getAllCategory();
         req.setAttribute("cateList", cateList);
         req.getRequestDispatcher("categoryEdit.jsp").forward(req, resp);
     }

@@ -71,7 +71,7 @@
                     <img src="${cate.getCategoryImg()}" alt="">
                     <div class="Category_text">
                         <button value="cateID"><a
-                                href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}"> ${cate.getCategoryName()}</a>
+                                href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all"> ${cate.getCategoryName()}</a>
                         </button>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ public class SearchServlet extends HttpServlet {
 //        ProductsDAO pd = new ProductsDAO();
         CategoryDAO cd = new CategoryDAO();
         String cateID = request.getParameter("categoryID");
-        List<Category> cateList = cd.getCategory();
+        List<Category> cateList = cd.getAllCategory();
         request.setAttribute("cateList", cateList);
 //        List<Product> productList = pd.searchByName(xName);
 //        request.setAttribute("productList", productList);

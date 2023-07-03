@@ -79,6 +79,7 @@
     flex-direction: column;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 14px;
+    margin-right: 30px;
 }
 .Product_Color a div{
     width: 26px;

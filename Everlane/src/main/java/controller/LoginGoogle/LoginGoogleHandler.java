@@ -30,7 +30,7 @@ public class LoginGoogleHandler extends HttpServlet {
 //        ProductsDAO p = new ProductsDAO();
         CategoryDAO c = new CategoryDAO();
 //        List<Product> data = p.getAllProducts();
-        List<Category> cateList = c.getCategory();
+        List<Category> cateList = c.getAllCategory();
         UserGoogleDto user = getUserInfo(accessToken);
         ugoogle = u.getUserByEmail(user.getEmail());
         request.getSession().setAttribute("acc", ugoogle);

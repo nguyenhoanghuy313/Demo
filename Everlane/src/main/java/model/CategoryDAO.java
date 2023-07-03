@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDAO extends myDAO {
-    public List<Category> getCategory() {
+    public List<Category> getAllCategory() {
         List<Category> t = new ArrayList<>();
         xSql = "select * from Category";
         try {
@@ -28,7 +28,7 @@ public class CategoryDAO extends myDAO {
         return (t);
     }
 
-    public Category getCollectionsByID(String xId){
+    public Category getCategory(String xId){
         Category x = null;
         int i = Integer.parseInt(xId);
         xSql = "select * from category where CategoryID = ?";

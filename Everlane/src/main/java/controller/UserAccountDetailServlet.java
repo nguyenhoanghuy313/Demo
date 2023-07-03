@@ -22,7 +22,7 @@ public class UserAccountDetailServlet extends HttpServlet {
 //        ProductsDAO p = new ProductsDAO();
         CategoryDAO c = new CategoryDAO();
 //        List<Product> data = p.getAllProducts();
-        List<Category> cateList = c.getCategory();
+        List<Category> cateList = c.getAllCategory();
         if (mod == null) {
             HttpSession session = req.getSession();
             User user = (User) session.getAttribute("acc");

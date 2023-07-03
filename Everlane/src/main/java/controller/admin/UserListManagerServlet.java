@@ -28,7 +28,7 @@ public class UserListManagerServlet extends HttpServlet {
         UserDAO ud = new UserDAO();
         CategoryDAO cd = new CategoryDAO();
 //        String cateID = request.getParameter("categoryID");
-        List<Category> cateList = cd.getCategory();
+        List<Category> cateList = cd.getAllCategory();
         request.setAttribute("cateList", cateList);
         List<User> userList = ud.searchByName(xName);
         request.setAttribute("userList", userList);

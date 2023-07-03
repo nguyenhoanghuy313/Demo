@@ -22,13 +22,16 @@
     <link rel="stylesheet" href="header/header1.css">
     <link rel="stylesheet" href="footer/footer.css">
     <link rel="stylesheet" href="footer/ad-container.css">
-    <link rel="stylesheet" href="productpage/productlist/filter-container1.css">
+    <link rel="stylesheet" href="productpage/productlist/filter-container.css">
     <link rel="stylesheet" href="productpage/productlist/product-list-container1.css">
 </head>
 <body>
 <jsp:include page="header.jsp"/>
 <%
+    Category category = (Category) request.getAttribute("category");
     List<Product> productList = (List<Product>) request.getAttribute("productList");
+    List<Color> colorList = (List<Color>) request.getAttribute("colorList");
+    List<Size> sizeList = (List<Size>) request.getAttribute("sizeList");
 %>
 <section class="Product_List_Container">
     <div class="Product_List_InnerContainer">
@@ -38,7 +41,7 @@
                 <h1>Category</h1>
                 <c:forEach var="cate" items="${cateList}" varStatus="status">
                     <c:if test="${status.index < 8}">
-                        <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}"
+                        <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all"
                            class="Category_Option">
                             <div class="checkbox"></div>
                             <span>${cate.getCategoryName()}</span>
@@ -49,57 +52,31 @@
             <div class="Color_Container">
                 <h1>Color</h1>
                 <div class="Color">
-                    <a>
-                        <div></div>
-                        <span>Blac</span>
+                    <%
+                        for (Color color : colorList) {
+                    %>
+                    <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=<%=category.getCategoryID()%>&color_ID=<%= color.getColor_ID()%>>">
+                        <div style="background-color: <%= color.getColor_Name()%>"></div>
+                        <span><%= color.getColor_Name()%></span>
                     </a>
-                    <a>
-                        <div></div>
-                        <span>Black</span>
-                    </a>
-                    <a>
-                        <div></div>
-                        <span>Black</span>
-                    </a>
-                    <a>
-                        <div></div>
-                        <span>Black</span>
-                    </a>
-                    <a>
-                        <div></div>
-                        <span>Black</span>
-                    </a>
-                    <a>
-                        <div></div>
-                        <span>Black</span>
-                    </a>
-                    <a>
-                        <div></div>
-                        <span>Black</span>
-                    </a>
-                    <a>
-                        <div></div>
-                        <span>Black</span>
-                    </a>
+                    <%}%>
                 </div>
 
             </div>
-            <div class="Size_Container">
-                <h1>Size</h1>
-                <div class="Size">
-                    <a>XXS</a>
-                    <a>XXS</a>
-                    <a>XXS</a>
-                    <a>XXS</a>
-                    <a>XXS</a>
-                    <a>XXS</a>
-                    <a>XXS</a>
-                </div>
-            </div>
+<%--            <div class="Size_Container">--%>
+<%--                <h1>Size</h1>--%>
+<%--                <div class="Size">--%>
+<%--                    <%--%>
+<%--                        for (Size size : sizeList) {--%>
+<%--                    %>--%>
+<%--                    <a><%= size.getSize_Name()%></a>--%>
+<%--                    <%}%>--%>
+<%--                </div>--%>
+<%--            </div>--%>
         </div>
         <div class="List_Container">
             <div class="Product_List_Headline">
-                <h1>Women's Dresses & Jumpsuits</h1>
+                <h1><%=category.getCategoryName()%></h1>
             </div>
             <a class="bx bx-menu" id="menu_Filter-icon">Filter</a>
             <div class="Product_List">
@@ -114,27 +91,14 @@
                     for (Product x : productList) {
                 %>
                 <div class="Product">
-<%--                    <img src=${p.getProductImg()}>--%>
-<%--                    <div class="Product_Text">--%>
-<%--                        <div class="Product_Name">--%>
-<%--                            <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=<%= x.getProductID()%>"><%= x.getProductName()%></a>--%>
-<%--                            <p><%= x.getPrice()%></p>--%>
-<%--                        </div>--%>
-<%--                        <p>${p.getColor()}</p>--%>
-<%--                    </div>--%>
-
-                    <p><%= x.getProductID()%>
-                    </p>
-                    <p><%= x.getCategoryID()%>
-                    </p>
-                    <p><%= x.getProductName()%>
-                    </p>
-                    <p><%= x.getPrice()%>
-                    </p>
-                    <p><%= x.getCollectionID()%>
-                    </p>
-                    <p><%= x.getDescription()%>
-                    </p>
+                    <img src=<%= x.getThumbnail()%>>
+                    <div class="Product_Text">
+                        <div class="Product_Name">
+                            <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=<%= x.getProductID()%>&color_Name=<%= x.getColor_Name()%>"><%= x.getProductName()%></a>
+                            <p><%= x.getPrice()%></p>
+                        </div>
+                        <p><%= x.getColor_Name()%></p>
+                    </div>
                 </div>
                 <% } %>
                 <% } %>

@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
     <link rel="stylesheet" href="header/header1.css">
-    <link rel="stylesheet" href="productpage/productdetail/product-detail1.css">
+    <link rel="stylesheet" href="productpage/productdetail/product-detail.css">
     <link rel="stylesheet" href="homepage/best-seller-slider1.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
@@ -31,42 +31,51 @@
 <%
     List<Product> productList = (List<Product>) request.getAttribute("productList");
     List<Product> productListOnClick = (List<Product>) request.getAttribute("productListOnClick");
+
     Product pi = (Product) request.getAttribute("pi");
+    List<Color> colors = (List<Color>) request.getAttribute("colors");
+    List<Size> sizes = (List<Size>) request.getAttribute("sizes");
 %>
 <section class="Product_Detail_Container">
     <div class="Product_Image_Container">
-        <img src=${pi.getProductImg()}>
+        <img src=<%= pi.getThumbnail()%>>
+        <img src=<%= pi.getProduct_img_1()%>>
+        <img src=<%= pi.getProduct_img_2()%>>
+        <img src=<%= pi.getProduct_img_3()%>>
     </div>
     <div class="Product_Detail">
         <div class="Product_Name">
-            <p class="Category_Tag">Dresses</p>
+            <p class="Category_Tag"><%= pi.getCategoryName()%></p>
             <div class="Name_And_Price">
-                <h1>${pi.getProductName()}</h1>
+                <h1><%= pi.getProductName()%></h1>
                 <div class="Price">
                     <p>₫2896300</p>
-                    <p>${pi.getPrice()}</p>
+                    <p><%= pi.getPrice()%></p>
                 </div>
             </div>
         </div>
         <div class="Product_Color">
             <h1>Color</h1>
             <div class="Color">
+                <%
+                    for(Color color: colors) {
+                %>
                 <a>
-                    <div></div>
-                    <span>${pi.getColor()}</span>
+                    <div style="background-color: <%= color.getColor_Name()%>"></div>
+                    <span><%= color.getColor_Name()%></span>
                 </a>
+                <% } %>
+
             </div>
         </div>
         <div class="Product_Size">
             <h1>Size</h1>
             <div class="Size">
-                <a>XXS</a>
-                <a>XXS</a>
-                <a>XXS</a>
-                <a>XXS</a>
-                <a>XXS</a>
-                <a>XXS</a>
-                <a>XXS</a>
+                <%
+                    for(Size size: sizes) {
+                %>
+                <a><%= size.getSize_Name()%></a>
+                <% } %>
             </div>
         </div>
         <button>Add To Bag</button>

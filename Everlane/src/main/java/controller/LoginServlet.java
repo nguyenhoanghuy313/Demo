@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
             CollectionDAO col = new CollectionDAO();
 
 //            List<Product> data = p.getAllProducts();
-            List<Category> cateList = c.getCategory();
+            List<Category> cateList = c.getAllCategory();
             Collection collection = col.getCollections("1");
 
             User checkUser = u.checkUser(email, password);
