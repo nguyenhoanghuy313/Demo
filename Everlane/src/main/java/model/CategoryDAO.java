@@ -28,28 +28,29 @@ public class CategoryDAO extends myDAO {
         return (t);
     }
 
-    public Category getCategory(String xId){
-        Category x = null;
+    public Category getCategory(String xId) {
         int i = Integer.parseInt(xId);
         xSql = "select * from category where CategoryID = ?";
-        try{
+        try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, i);
             rs = ps.executeQuery();
             String xcateName;
             String xcateImg;
-            while(rs.next()){
+            Category x;
+            while (rs.next()) {
                 i = rs.getInt("CategoryID");
                 xcateName = rs.getString("CategoryName");
-                xcateImg= rs.getString("Category_img");
+                xcateImg = rs.getString("Category_img");
                 x = new Category(i, xcateName, xcateImg);
+                return x;
             }
             rs.close();
             ps.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return x;
+        return null;
     }
 
     public void updateCategory(String xcateImg, int xcateId) {

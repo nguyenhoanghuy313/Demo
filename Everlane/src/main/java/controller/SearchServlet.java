@@ -13,13 +13,23 @@ public class SearchServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String xName = request.getParameter("productName").trim();
-//        ProductsDAO pd = new ProductsDAO();
-        CategoryDAO cd = new CategoryDAO();
         String cateID = request.getParameter("categoryID");
+
+        ProductDAO pd = new ProductDAO();
+        CategoryDAO cd = new CategoryDAO();
+        ColorDAO col = new ColorDAO();
+
         List<Category> cateList = cd.getAllCategory();
+        Category category = cd.getCategory("9");
         request.setAttribute("cateList", cateList);
-//        List<Product> productList = pd.searchByName(xName);
-//        request.setAttribute("productList", productList);
+        request.setAttribute("category", category);
+
+        List<Color> colorList = col.getAllColors();
+        request.setAttribute("colorList", colorList);
+
+        List<Product> productList = pd.searchByName(xName);
+        request.setAttribute("productList", productList);
+
         request.getRequestDispatcher("productList.jsp").forward(request, response);
     }
 }

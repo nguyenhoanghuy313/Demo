@@ -50,6 +50,9 @@
                 </c:forEach>
             </div>
             <div class="Color_Container">
+                <%
+                    if(category.getCategoryID() != 9){
+                %>
                 <h1>Color</h1>
                 <div class="Color">
                     <%
@@ -61,7 +64,7 @@
                     </a>
                     <%}%>
                 </div>
-
+                <%}%>
             </div>
 <%--            <div class="Size_Container">--%>
 <%--                <h1>Size</h1>--%>
@@ -78,6 +81,7 @@
             <div class="Product_List_Headline">
                 <h1><%=category.getCategoryName()%></h1>
             </div>
+
             <a class="bx bx-menu" id="menu_Filter-icon">Filter</a>
             <div class="Product_List">
                 <%

@@ -60,7 +60,7 @@
                 <%
                     for(Color color: colors) {
                 %>
-                <a>
+                <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=<%= pi.getProductID()%>&color_Name=<%= color.getColor_Name()%>">
                     <div style="background-color: <%= color.getColor_Name()%>"></div>
                     <span><%= color.getColor_Name()%></span>
                 </a>
