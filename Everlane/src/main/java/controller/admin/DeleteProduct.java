@@ -15,8 +15,8 @@ public class DeleteProduct extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String delProductID = request.getParameter("ProductID");
-        ProductsDAO pd = new ProductsDAO();
-        pd.delete(delProductID);
+//        ProductsDAO pd = new ProductsDAO();
+//        pd.delete(delProductID);
         response.sendRedirect("ProductListManagerServlet?categoryID=all");
     }
 }

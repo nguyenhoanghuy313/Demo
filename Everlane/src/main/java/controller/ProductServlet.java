@@ -10,12 +10,12 @@ public class ProductServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ProductsDAO pd = new ProductsDAO();
+        ProductDAO pd = new ProductDAO();
         CategoryDAO cd = new CategoryDAO();
         String cateID = request.getParameter("categoryID");
         List<Category> cateList = cd.getCategory();
         request.setAttribute("cateList", cateList);
-        List<Product> productList = pd.getProductsByCateID(cateID);
+        List<Product> productList = pd.getProductsByCID(cateID);
         request.setAttribute("productList", productList);
         request.getRequestDispatcher("productList.jsp").forward(request, response);
 

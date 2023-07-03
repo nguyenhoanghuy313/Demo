@@ -28,11 +28,11 @@ public class LoginServlet extends HttpServlet {
             String email = req.getParameter("email").trim();
             String password = req.getParameter("password").trim();
             UserDAO u = new UserDAO();
-            ProductsDAO p = new ProductsDAO();
+//            ProductsDAO p = new ProductsDAO();
             CategoryDAO c = new CategoryDAO();
             CollectionDAO col = new CollectionDAO();
 
-            List<Product> data = p.getAllProducts();
+//            List<Product> data = p.getAllProducts();
             List<Category> cateList = c.getCategory();
             Collection collection = col.getCollections("1");
 
@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
                 if (Role.getRole() == 4) {
                     HttpSession session = req.getSession();
                     session.setAttribute("acc", checkUser);
-                    req.setAttribute("data", data);
+//                    req.setAttribute("data", data);
                     req.setAttribute("cateList", cateList);
                     req.setAttribute("collection", collection);
                     req.getRequestDispatcher("home.jsp").forward(req, resp);

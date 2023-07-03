@@ -12,11 +12,11 @@ public class ProductDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         String xId = request.getParameter("ProductID");
         Product x;
-        ProductsDAO pd = new ProductsDAO();
-        x = pd.getProduct(xId);
-        List<Product> data = pd.getAllProducts();
-        request.setAttribute("data", data);
-        request.setAttribute("pi", x);
+//        ProductsDAO pd = new ProductsDAO();
+//        x = pd.getProduct(xId);
+//        List<Product> data = pd.getAllProducts();
+//        request.setAttribute("data", data);
+//        request.setAttribute("pi", x);
         request.getRequestDispatcher("productDetail.jsp").forward(request,response);
     }
 

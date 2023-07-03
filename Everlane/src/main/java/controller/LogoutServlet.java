@@ -17,15 +17,15 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.removeAttribute("acc");
-        ProductsDAO p = new ProductsDAO();
+//        ProductsDAO p = new ProductsDAO();
         CategoryDAO c = new CategoryDAO();
         CollectionDAO col = new CollectionDAO();
 
-        List<Product> data = p.getAllProducts();
+//        List<Product> data = p.getAllProducts();
         List<Category> cateList = c.getCategory();
         Collection collection = col.getCollections("1");
 
-        request.setAttribute("data", data);
+//        request.setAttribute("data", data);\
         request.setAttribute("cateList", cateList);
         request.setAttribute("collection", collection);
         request.getRequestDispatcher("home.jsp").forward(request, response);

@@ -368,7 +368,6 @@ public class UserDAO extends myDAO {
     }
 
     public User getUserById(int uID) {
-        User u = null;
         xSql = "select * from user where UserID = ?";
         try {
             ps = con.prepareStatement(xSql);
@@ -378,6 +377,7 @@ public class UserDAO extends myDAO {
             Date xDob;
             int xSex, xRole;
             String xPhone, xUserImg;
+            User u;
             while (rs.next()) {
                 uID = rs.getInt("UserID");
                 xUserName = rs.getString("UserName");
@@ -391,13 +391,14 @@ public class UserDAO extends myDAO {
                 xPhone = rs.getString("Phone");
                 xUserImg = rs.getString("UserImg");
                 u = new User(uID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone, xUserImg);
+                return u;
             }
             rs.close();
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return u;
+        return null;
     }
 
     public void deleteUser(String userID) {

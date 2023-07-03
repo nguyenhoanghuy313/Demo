@@ -27,9 +27,9 @@ public class LoginGoogleHandler extends HttpServlet {
         String accessToken = getToken(code);
         User ugoogle = new User();
         UserDAO u = new UserDAO();
-        ProductsDAO p = new ProductsDAO();
+//        ProductsDAO p = new ProductsDAO();
         CategoryDAO c = new CategoryDAO();
-        List<Product> data = p.getAllProducts();
+//        List<Product> data = p.getAllProducts();
         List<Category> cateList = c.getCategory();
         UserGoogleDto user = getUserInfo(accessToken);
         ugoogle = u.getUserByEmail(user.getEmail());
@@ -39,8 +39,8 @@ public class LoginGoogleHandler extends HttpServlet {
 //        System.out.println(user.getEmail());
 //        request.getSession().setAttribute("acc", ugoogle);
         if(ugoogle != null) {
-            request.setAttribute("data", data);
-            request.getSession().setAttribute("data", data);
+//            request.setAttribute("data", data);
+//            request.getSession().setAttribute("data", data);
             request.setAttribute("cateList", cateList);
             request.getSession().setAttribute("cateList", cateList);
             response.sendRedirect(request.getContextPath()+"/home.jsp");

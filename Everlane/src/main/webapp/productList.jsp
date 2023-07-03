@@ -104,25 +104,42 @@
             <a class="bx bx-menu" id="menu_Filter-icon">Filter</a>
             <div class="Product_List">
                 <%
-                    if (!productList.isEmpty()) {
+                    if (productList == null) {
                 %>
-                <c:forEach var="p" items="${productList}">
-                    <div class="Product">
-                        <img src=${p.getProductImg()}>
-                        <div class="Product_Text">
-                            <div class="Product_Name">
-                                <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=${p.getProductID()}">${p.getProductName()}</a>
-                                <p>${p.getPrice()}</p>
-                            </div>
-                            <p>${p.getColor()}</p>
-                        </div>
-                    </div>
-                </c:forEach>
-                <% } else {%>
                 <h2>No products found</h2>
-                <% } %>
-            </div>
+                <%
+                } else if (!productList.isEmpty()) {
+                %>
+                <%
+                    for (Product x : productList) {
+                %>
+                <div class="Product">
+<%--                    <img src=${p.getProductImg()}>--%>
+<%--                    <div class="Product_Text">--%>
+<%--                        <div class="Product_Name">--%>
+<%--                            <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=<%= x.getProductID()%>"><%= x.getProductName()%></a>--%>
+<%--                            <p><%= x.getPrice()%></p>--%>
+<%--                        </div>--%>
+<%--                        <p>${p.getColor()}</p>--%>
+<%--                    </div>--%>
 
+                    <p><%= x.getProductID()%>
+                    </p>
+                    <p><%= x.getCategoryID()%>
+                    </p>
+                    <p><%= x.getProductName()%>
+                    </p>
+                    <p><%= x.getPrice()%>
+                    </p>
+                    <p><%= x.getCollectionID()%>
+                    </p>
+                    <p><%= x.getDescription()%>
+                    </p>
+                </div>
+                <% } %>
+                <% } %>
+
+            </div>
         </div>
     </div>
 </section>

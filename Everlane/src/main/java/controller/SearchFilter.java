@@ -1,6 +1,6 @@
 package controller;
 import jakarta.servlet.annotation.WebServlet;
-import model.ProductsDAO;
+//import model.ProductsDAO;
 import model.Product;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -29,10 +29,10 @@ public class SearchFilter extends HttpServlet {
         int priceRange = Integer.parseInt(request.getParameter("priceRange"));
         String color = request.getParameter("color");
         String size = request.getParameter("size");
-        ProductsDAO cd = new ProductsDAO();
-        List<Product> list = cd.searchByFilter(type,priceRange,color);
+//        ProductsDAO cd = new ProductsDAO();
+//        List<Product> list = cd.searchByFilter(type,priceRange,color);
         request.setAttribute("offSet", 0);
-        request.setAttribute("list", list);
+//        request.setAttribute("list", list);
         request.getRequestDispatcher("productList.jsp").forward(request,response);
     }
 

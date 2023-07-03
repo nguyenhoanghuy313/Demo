@@ -19,9 +19,9 @@ public class UserAccountDetailServlet extends HttpServlet {
         String mod = req.getParameter("mod");
         String accountActivation = req.getParameter("accountActivation");
         UserDAO u = new UserDAO();
-        ProductsDAO p = new ProductsDAO();
+//        ProductsDAO p = new ProductsDAO();
         CategoryDAO c = new CategoryDAO();
-        List<Product> data = p.getAllProducts();
+//        List<Product> data = p.getAllProducts();
         List<Category> cateList = c.getCategory();
         if (mod == null) {
             HttpSession session = req.getSession();
@@ -33,7 +33,7 @@ public class UserAccountDetailServlet extends HttpServlet {
             if (mod.equals("1")) {
                 HttpSession session = req.getSession();
                 session.getAttribute("acc");
-                req.setAttribute("data", data);
+//                req.setAttribute("data", data);
                 req.setAttribute("cateList", cateList);
                 req .getRequestDispatcher("home.jsp").forward(req, resp);
             }
