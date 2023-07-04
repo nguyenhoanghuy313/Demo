@@ -66,9 +66,9 @@ public class CategoryDAO extends myDAO {
         }
     }
 
-    public static void main(String[] args) {
-        CategoryDAO categoryDAO = new CategoryDAO();
-        categoryDAO.updateCategory("imge", 1);
-        }
+//    public static void main(String[] args) {
+//        CategoryDAO categoryDAO = new CategoryDAO();
+//        categoryDAO.updateCategory("imge", 1);
+//        }
 
 }

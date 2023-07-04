@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Collection {
@@ -8,11 +9,11 @@ public class Collection {
     int promotionID;
     String collectionImg;
     String collection_description;
-    Date create_date;
+    Timestamp create_date;
     public Collection() {
     }
 
-    public Collection(int collectionID, String collectionName, int promotionID, String collectionImg, String collection_description, Date create_date) {
+    public Collection(int collectionID, String collectionName, int promotionID, String collectionImg, String collection_description, Timestamp create_date) {
         this.collectionID = collectionID;
         this.collectionName = collectionName;
         this.promotionID = promotionID;
@@ -21,11 +22,11 @@ public class Collection {
         this.create_date = create_date;
     }
 
-    public Date getCreate_date() {
+    public Timestamp getCreate_date() {
         return create_date;
     }
 
-    public void setCreate_date(Date create_date) {
+    public void setCreate_date(Timestamp create_date) {
         this.create_date = create_date;
     }
 

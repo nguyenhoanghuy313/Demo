@@ -318,11 +318,11 @@
         var year = currentDateTime.getFullYear();
         var month = currentDateTime.getMonth() + 1; // Tháng được đánh số từ 0 đến 11, nên cần +1
         var day = currentDateTime.getDate();
-        // var hours = currentDateTime.getHours();
-        // var minutes = currentDateTime.getMinutes();
-        // var seconds = currentDateTime.getSeconds();
+        var hours = currentDateTime.getHours();
+        var minutes = currentDateTime.getMinutes();
+        var seconds = currentDateTime.getSeconds();
 
-        var formattedDateTime = year + '-' + month + '-' + day ;
+        var formattedDateTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds ;
 
         return formattedDateTime;
     }

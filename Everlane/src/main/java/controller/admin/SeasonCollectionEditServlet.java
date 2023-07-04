@@ -10,6 +10,7 @@ import model.CollectionDAO;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @WebServlet(name = "seasonCollectionEditServlet", urlPatterns = {"/seasonCollectionEditServlet"})
 public class SeasonCollectionEditServlet extends HttpServlet {
@@ -45,7 +46,7 @@ public class SeasonCollectionEditServlet extends HttpServlet {
         CollectionDAO col = new CollectionDAO();
 //        java.sql.Date create_date =  hcurrentDate;
 //        Date now = LocalDateTime.now();
-        col.updateCollection(collectionName,collectionImage,collectionDescription, Date.valueOf(createDate),Integer.parseInt(collectionID));
+        col.updateCollection(collectionName,collectionImage,collectionDescription, Timestamp.valueOf(createDate),Integer.parseInt(collectionID));
         Collection collection = col.getCollections(collectionID);
         req.setAttribute("c", collection);
         req.setAttribute("message", "Update successfully");

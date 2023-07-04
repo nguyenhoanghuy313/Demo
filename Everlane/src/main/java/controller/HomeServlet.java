@@ -19,7 +19,7 @@ public class HomeServlet extends HttpServlet{
 
 //        List<Product> data = p.getAllProducts();
         List<Category> cateList = c.getAllCategory();
-        Collection collection = col.getCollections("1");
+        Collection collection = col.getCollectionsByDate();
 
 //        request.setAttribute("data", data);
         request.setAttribute("cateList", cateList);
