@@ -9,38 +9,45 @@ import model.Collection;
 import model.CollectionDAO;
 
 import java.io.IOException;
+import java.sql.Date;
+
 @WebServlet(name = "seasonCollectionEditServlet", urlPatterns = {"/seasonCollectionEditServlet"})
 public class SeasonCollectionEditServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(req.getParameter("collectionIDGet")!=null)
+        {
+            CollectionDAO col = new CollectionDAO();
+            Collection collection = col.getCollections(req.getParameter("collectionIDGet"));
+            req.setAttribute("c", collection);
+            req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
+
+        }
+        else
+        {
             CollectionDAO col = new CollectionDAO();
             Collection collection = col.getCollections("1");
             req.setAttribute("c", collection);
             req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
 
+        }
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String collectionName = req.getParameter("collectionName");
         String collectionDescription = req.getParameter("collectionDescription");
         String collectionImage = req.getParameter("collectionImg");
         String collectionID = req.getParameter("collectionID");
+        String createDate = req.getParameter("createDate");
         CollectionDAO col = new CollectionDAO();
-        if(collectionID.equals("1")) {
-            req.setAttribute("c", col.getCollections("1"));
-            req.getSession().setAttribute("collectionS1", col.getCollections("1"));
-            req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
-        } else if(collectionID.equals("2")) {
-            req.setAttribute("c", col.getCollections("2"));
-            req.getSession().setAttribute("collectionS2", col.getCollections("2"));
-            req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
-        } else {
-            req.setAttribute("c", col.getCollections("3"));
-            req.getSession().setAttribute("collectionS3", col.getCollections("3"));
-            req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
-        }
-        col.updateCollection(collectionName,collectionImage,collectionDescription,Integer.parseInt(collectionID));
+//        java.sql.Date create_date =  hcurrentDate;
+//        Date now = LocalDateTime.now();
+        col.updateCollection(collectionName,collectionImage,collectionDescription, Date.valueOf(createDate),Integer.parseInt(collectionID));
+        Collection collection = col.getCollections(collectionID);
+        req.setAttribute("c", collection);
         req.setAttribute("message", "Update successfully");
         req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
     }

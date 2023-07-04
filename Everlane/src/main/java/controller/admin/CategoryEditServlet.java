@@ -24,6 +24,19 @@ public class CategoryEditServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String cateID = req.getParameter("cateImg");
+//        String cateID[] = req.getParameter("cateID");
+//        String cateImg = req.getParameter("cateImg");
+        String cateID[] = req.getParameterValues("cateID");
+        String cateImg[] = req.getParameterValues("cateImg");
+        CategoryDAO c = new CategoryDAO();
+        Category category = new Category();
+        for(int i = 0; i < cateID.length; i++) {
+            c.updateCategory(cateImg[i],Integer.parseInt(cateID[i]));
+        }
+            List<Category> cateList = c.getAllCategory();
+            req.setAttribute("cateList", cateList);
+            req.setAttribute("message", "Update successfully");
+            req.getRequestDispatcher("categoryEdit.jsp").forward(req, resp);
+
     }
 }

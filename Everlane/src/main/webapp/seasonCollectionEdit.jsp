@@ -232,10 +232,10 @@
                                             <select class=" form-select col-sm-10" id="exampleFormControlSelect1"
                                                     name="collectionIDGet"
                                                     aria-label="Default select example" onchange="change()">
-                                                <option value="${c.getCollectionID()}" selected>${c.getCollectionName()}</option>
-                                                <option value="1" ${c.getCollectionID() != "1" ? "" : "disable"}>${c.getCollectionName()}</option>
-                                                <option value="2" ${c.getCollectionID() != "2" ? "" : "disable"}>${c.getCollectionName()}</option>
-                                                <option value="3" ${c.getCollectionID() != "3" ? "" : "disable"}>${c.getCollectionName()}</option>
+<%--                                                <option value="${c.getCollectionID()}" selected>${c.getCollectionName()}</option>--%>
+                                                <option value="1" ${c.getCollectionID() != "1" ? "" : "selected"}>Summer Collection</option>
+                                                <option value="2" ${c.getCollectionID() != "2" ? "" : "selected"}>Winter Collection</option>
+                                                <option value="3" ${c.getCollectionID() != "3" ? "" : "selected"}>Spring Collection</option>
                                             </select>
                                         </div>
                                     </form>
@@ -247,7 +247,6 @@
                                                 <input class="form-control" id="basic-default-image"
                                                        name="collectionImg"
                                                        value="${c.getCollectionImg()}" type="text"/>
-
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -279,6 +278,8 @@
                                         <input class="form-control"
                                                name="collectionID"
                                                value="${c.getCollectionID()}" type="hidden"/>
+                                        <input type="hidden" id="currentTimeInput" name="createDate">
+
                                         <div style="color:green;">
                                             ${message}
                                         </div>
@@ -310,6 +311,28 @@
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
+<script>
+    function getCurrentDateTime() {
+        var currentDateTime = new Date();
+
+        var year = currentDateTime.getFullYear();
+        var month = currentDateTime.getMonth() + 1; // Tháng được đánh số từ 0 đến 11, nên cần +1
+        var day = currentDateTime.getDate();
+        // var hours = currentDateTime.getHours();
+        // var minutes = currentDateTime.getMinutes();
+        // var seconds = currentDateTime.getSeconds();
+
+        var formattedDateTime = year + '-' + month + '-' + day ;
+
+        return formattedDateTime;
+    }
+
+    // Lấy tham chiếu đến phần tử input
+    var inputElement = document.getElementById('currentTimeInput');
+
+    // Gán giá trị thời gian hiện tại vào thuộc tính value của input
+    inputElement.value = getCurrentDateTime();
+</script>
 <script>
     function change() {
         document.getElementById("frm").submit();
