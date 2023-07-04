@@ -99,7 +99,7 @@
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
                 <!-- Product List -->
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/ProductListManagerServlet?categoryID=all"
+                    <a href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
                        class="menu-link">
                         <i class='menu-icon tf-icons bx bxs-package'></i>
                         <div data-i18n="Product List">Product List</div>

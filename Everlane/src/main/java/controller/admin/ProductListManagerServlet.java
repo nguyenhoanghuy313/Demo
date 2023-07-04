@@ -12,15 +12,17 @@ public class ProductListManagerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        ProductsDAO pd = new ProductsDAO();
+        ProductDAO pd = new ProductDAO();
         CategoryDAO cd = new CategoryDAO();
-        String cateID = request.getParameter("categoryID");
+
+        String input = request.getParameter("input");
+
         List<Category> cateList = cd.getAllCategory();
         request.setAttribute("cateList", cateList);
-//        List<Product> productList = pd.getAllProducts();
-//        request.setAttribute("productList", productList);
-//        List<Product> productListSorted = pd.getProductsByCateID(cateID);
-//        request.setAttribute("productListSorted", productListSorted);
+
+            List<Product> productList = pd.getAllProducts(input, 1);
+            request.setAttribute("productList", productList);
+
         request.getRequestDispatcher("productListManager.jsp").forward(request, response);
 
     }
@@ -29,13 +31,17 @@ public class ProductListManagerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String xName = request.getParameter("productName").trim();
-//        ProductsDAO pd = new ProductsDAO();
+        ProductDAO pd = new ProductDAO();
         CategoryDAO cd = new CategoryDAO();
-        String cateID = request.getParameter("categoryID");
+
+        String productName = request.getParameter("productName");
+
         List<Category> cateList = cd.getAllCategory();
         request.setAttribute("cateList", cateList);
-//        List<Product> productList = pd.searchByName(xName);
-//        request.setAttribute("productList", productList);
+
+        List<Product> productList = pd.getAllProducts(productName, 2);
+        request.setAttribute("productList", productList);
+
         request.getRequestDispatcher("productListManager.jsp").forward(request, response);
     }
 }

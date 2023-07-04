@@ -14,7 +14,7 @@
 <%
     List<Product> productList = (List<Product>) request.getAttribute("productList");
     List<Category> cateList = (List<Category>) request.getAttribute("cateList");
-    List<Product> productListSorted = (List<Product>) request.getAttribute("productListSorted");
+//    List<Product> productListSorted = (List<Product>) request.getAttribute("productListSorted");
     Product p = (Product) request.getAttribute("del");
 %>
 <html
@@ -225,7 +225,21 @@
                     </div>
                     <div class="list_option_container2">
 
-
+                        <div class="input-group input-group-merge">
+                            <form action="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
+                                  method="post">
+                                <span class="input-group-text" id="basic-addon-search31"><i
+                                        class="bx bx-search"></i></span>
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Search..."
+                                        aria-label="Search..."
+                                        aria-describedby="basic-addon-search31"
+                                        name="productName"
+                                />
+                            </form>
+                        </div>
                         <div class="input-group">
                             <button
                                     class="btn btn-outline-dark dropdown-toggle"
@@ -236,13 +250,16 @@
                                 Sort by
                             </button>
                             <ul class="dropdown-menu">
+                                <li><a class="dropdown-item"
+                                       href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all">All</a>
+                                </li>
                                 <li><a class="dropdown-item" href="javascript:void(0);">Sort by Latest</a></li>
                                 <li><a class="dropdown-item" href="javascript:void(0);">Sort by Newest</a></li>
                                 <li><a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/ProductListManagerServlet?categoryID=up">Sort
+                                       href="${pageContext.request.contextPath}/ProductListManagerServlet?input=up">Sort
                                     by Price: Up</a></li>
                                 <li><a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/ProductListManagerServlet?categoryID=down">Sort
+                                       href="${pageContext.request.contextPath}/ProductListManagerServlet?input=down">Sort
                                     by Price: Down</a></li>
                             </ul>
                         </div>
@@ -257,22 +274,19 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/ProductListManagerServlet?categoryID=all">All</a>
+                                       href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all">All</a>
                                 </li>
                                 <c:forEach var="cate" items="${cateList}" varStatus="status">
-                                    <%--                                    <c:if test="${status.index < 8}">--%>
-                                    <li><a class="dropdown-item"
-                                           href="${pageContext.request.contextPath}/ProductListManagerServlet?categoryID=${cate.getCategoryID()}">${cate.getCategoryName()}</a>
-                                    </li>
-                                    <%--                                    </c:if>--%>
+                                    <c:if test="${status.index < 8}">
+                                        <li><a class="dropdown-item"
+                                               href="${pageContext.request.contextPath}/ProductListManagerServlet?input=${cate.getCategoryID()}">${cate.getCategoryName()}</a>
+                                        </li>
+                                    </c:if>
                                 </c:forEach>
                             </ul>
                         </div>
                     </div>
-
-
                 </div>
-
                 <div class="container-xxl flex-grow-1 container-p-y ">
                     <div class="card">
                         <h5 class="card-header">Products</h5>
@@ -281,43 +295,45 @@
                                 <thead>
                                 <tr>
                                     <th>PRODUCT ID</th>
-                                    <th>PRODUCT IMAGE</th>
+                                    <th>PRODUCT THUMBNAIL</th>
+                                    <th>PRODUCT IMG1</th>
+                                    <th>PRODUCT IMG2</th>
+                                    <th>PRODUCT IMG3</th>
+                                    <th>CATEGORY NAME</th>
+                                    <th>COLLECTION ID</th>
                                     <th>PRODUCT NAME</th>
-                                    <th>CATEGORY</th>
-                                    <th>COLOR</th>
+                                    <th>COLOR NAME</th>
+                                    <th>SIZE NAME</th>
                                     <th>PRICE</th>
-                                    <th>AMOUNT</th>
-                                    <th>RATE</th>
+                                    <th>QTU IN STOCK</th>
                                     <th>ACTION</th>
                                 </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
                                 <%
-                                    for (Product x : productListSorted) {
+                                    for (Product x : productList) {
                                 %>
                                 <tr class="item">
-                                    <td><%= x.getProductID() %>
+                                    <td><%=x.getProductID()%>
                                     </td>
-                                    <td><img src=<%= x.getProductImg() %>></td>
-                                    <td><%= x.getProductName() %>
+                                    <td><img src=<%=x.getThumbnail()%>></td>
+                                    <td><img src=<%=x.getProduct_img_1()%>></td>
+                                    <td><img src=<%=x.getProduct_img_2()%>></td>
+                                    <td><img src=<%=x.getProduct_img_3()%>></td>
+                                    <td><%=x.getCategoryName()%>
                                     </td>
-                                    <%
-                                        for (int i = 0; i <= cateList.size(); i++) {
-                                    %>
-                                    <%
-                                        if (cateList.get(i).getCategoryID() == x.getCategoryID()) {
-                                    %>
-                                    <td><%= cateList.get(i).getCategoryName()%>
+                                    <td><%=x.getCollectionID()%>
                                     </td>
-                                    <% break;
-                                    } %>
-                                    <% } %>
-                                    <td><%= x.getColor() %>
+                                    <td><%=x.getProductName()%>
                                     </td>
-                                    <td><%= x.getPrice() %>
+                                    <td><%=x.getColor_Name()%>
                                     </td>
-                                    <td>null</td>
-                                    <td>null</td>
+                                    <td><%=x.getSize_Name()%>
+                                    </td>
+                                    <td><%=x.getPrice()%>
+                                    </td>
+                                    <td><%=x.getQty_in_stock()%>
+                                    </td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow"

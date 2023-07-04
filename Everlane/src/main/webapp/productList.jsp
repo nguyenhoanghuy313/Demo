@@ -31,7 +31,6 @@
     Category category = (Category) request.getAttribute("category");
     List<Product> productList = (List<Product>) request.getAttribute("productList");
     List<Color> colorList = (List<Color>) request.getAttribute("colorList");
-    List<Size> sizeList = (List<Size>) request.getAttribute("sizeList");
 %>
 <section class="Product_List_Container">
     <div class="Product_List_InnerContainer">

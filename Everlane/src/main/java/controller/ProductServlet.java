@@ -13,7 +13,6 @@ public class ProductServlet extends HttpServlet{
         ProductDAO pd = new ProductDAO();
         CategoryDAO cd = new CategoryDAO();
         ColorDAO col = new ColorDAO();
-        SizeDAO si = new SizeDAO();
 
         String cateID = request.getParameter("categoryID").trim();
         String colID = request.getParameter("color_ID").trim();
@@ -33,9 +32,6 @@ public class ProductServlet extends HttpServlet{
 
         List<Color> colorList = col.getAllColors();
         request.setAttribute("colorList", colorList);
-
-        List<Size> sizeList = si.getAllSizes();
-        request.setAttribute("sizeList", sizeList);
 
         request.getRequestDispatcher("productList.jsp").forward(request, response);
 
