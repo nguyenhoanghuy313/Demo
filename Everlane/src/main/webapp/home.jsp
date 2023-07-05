@@ -145,7 +145,6 @@
     </a>
 </section>
 
-
 <jsp:include page="footer.jsp"/>
 <script>
     const carousel = document.querySelector(".carousel"),
