@@ -345,11 +345,10 @@
                                                 ><i class="bx bx-edit-alt me-1"></i> Edit</a
                                                 >
                                                 <a class="dropdown-item"
-                                                   href="${pageContext.request.contextPath}/DeleteProduct?ProductID=<%=x.getProductID()%>"
+                                                   href="${pageContext.request.contextPath}/DeleteProduct?ProductID=<%=x.getProductID()%>&color_Name=<%=x.getColor_Name()%>&size_Name=<%=x.getSize_Name()%>"
                                                    onclick="return confirm(
-                                                                    'Are you sure want to delete this ticket?')"
-                                                ><i class="bx bx-trash me-1"></i> Delete</a
-                                                >
+                                                                    'Are you sure want to delete this product?')"
+                                                ><i class="bx bx-trash me-1"></i> Delete</a>
                                             </div>
                                         </div>
                                     </td>

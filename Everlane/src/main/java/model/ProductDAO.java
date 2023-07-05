@@ -7,7 +7,7 @@ public class ProductDAO extends myDAO {
 
     public List<Product> getAllProducts(String input, int task) {
         List<Product> t = new ArrayList<>();
-        if(task == 1){
+        if (task == 1) {
             switch (input) {
                 case "all":
                     xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, c.CategoryName, p.CollectionID, p.ProductName, col.color_Name, s.size_Name, p.Price, v.qty_in_stock\n" + "from variation v, product_img pi, product p , category c, color col, size s\n" + "where p.ProductID = v.ProductID \n" + "and p.CategoryID = c.CategoryID\n" + "and v.product_img_ID = pi.product_img_ID\n" + "and v.color_ID = col.color_ID\n" + "and v.size_ID = s.size_ID";
@@ -23,15 +23,8 @@ public class ProductDAO extends myDAO {
                     xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, c.CategoryName, p.CollectionID, p.ProductName, col.color_Name, s.size_Name, p.Price, v.qty_in_stock\n" + "from variation v, product_img pi, product p , category c, color col, size s\n" + "where c.CategoryID = " + cId + " \n" + "and p.ProductID = v.ProductID \n" + "and p.CategoryID = c.CategoryID\n" + "and v.product_img_ID = pi.product_img_ID\n" + "and v.color_ID = col.color_ID\n" + "and v.size_ID = s.size_ID";
                     break;
             }
-        }else if(task == 2){
-            xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, c.CategoryName, p.CollectionID, p.ProductName, col.color_Name, s.size_Name, p.Price, v.qty_in_stock\n" +
-                    "from variation v, product_img pi, product p , category c, color col, size s\n" +
-                    "where p.ProductName like '%" + input + "%'\n" +
-                    "and p.ProductID = v.ProductID \n" +
-                    "and p.CategoryID = c.CategoryID\n" +
-                    "and v.product_img_ID = pi.product_img_ID\n" +
-                    "and v.color_ID = col.color_ID\n" +
-                    "and v.size_ID = s.size_ID";
+        } else if (task == 2) {
+            xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, c.CategoryName, p.CollectionID, p.ProductName, col.color_Name, s.size_Name, p.Price, v.qty_in_stock\n" + "from variation v, product_img pi, product p , category c, color col, size s\n" + "where p.ProductName like '%" + input + "%'\n" + "and p.ProductID = v.ProductID \n" + "and p.CategoryID = c.CategoryID\n" + "and v.product_img_ID = pi.product_img_ID\n" + "and v.color_ID = col.color_ID\n" + "and v.size_ID = s.size_ID";
         }
 
         try {
@@ -218,5 +211,26 @@ public class ProductDAO extends myDAO {
             e.printStackTrace();
         }
         return (t);
+    }
+
+    public void delete(String productID, String color_Name, String size_Name) {
+        xSql = "DELETE v.*\n" +
+                "FROM variation v\n" +
+                "JOIN product_img pi ON v.product_img_ID = pi.product_img_ID\n" +
+                "JOIN product p ON p.ProductID = v.ProductID\n" +
+                "JOIN category c ON p.CategoryID = c.CategoryID\n" +
+                "JOIN color col ON v.color_ID = col.color_ID\n" +
+                "JOIN size s ON v.size_ID = s.size_ID\n" +
+                "WHERE p.ProductID = ?\n" +
+                "AND col.color_Name LIKE '" + color_Name + "'\n" +
+                "AND s.size_Name LIKE '" + size_Name + "';";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, productID);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
