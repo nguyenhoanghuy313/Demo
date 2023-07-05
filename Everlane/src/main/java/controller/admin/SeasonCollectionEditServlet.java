@@ -44,8 +44,6 @@ public class SeasonCollectionEditServlet extends HttpServlet {
         String collectionID = req.getParameter("collectionID");
         String createDate = req.getParameter("createDate");
         CollectionDAO col = new CollectionDAO();
-//        java.sql.Date create_date =  hcurrentDate;
-//        Date now = LocalDateTime.now();
         col.updateCollection(collectionName,collectionImage,collectionDescription, Timestamp.valueOf(createDate),Integer.parseInt(collectionID));
         Collection collection = col.getCollections(collectionID);
         req.setAttribute("c", collection);

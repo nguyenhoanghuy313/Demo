@@ -236,6 +236,7 @@
                                                 <option value="1" ${c.getCollectionID() != "1" ? "" : "selected"}>Summer Collection</option>
                                                 <option value="2" ${c.getCollectionID() != "2" ? "" : "selected"}>Winter Collection</option>
                                                 <option value="3" ${c.getCollectionID() != "3" ? "" : "selected"}>Spring Collection</option>
+                                                <option value="3" ${c.getCollectionID() != "4" ? "" : "selected"}>Autumn Collection</option>
                                             </select>
                                         </div>
                                     </form>
