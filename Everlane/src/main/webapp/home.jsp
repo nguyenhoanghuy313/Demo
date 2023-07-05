@@ -90,7 +90,7 @@
             <div class="Category_text">
                 <h2>New Arrivals</h2>
                 <button>
-                    <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=1&color_ID=all">Shop Now</a>
+                    <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=1&color_ID=all&mod=bottom">Shop Now</a>
                 </button>
             </div>
         </div>

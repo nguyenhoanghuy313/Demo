@@ -18,35 +18,67 @@ public class ProductServlet extends HttpServlet{
         String colID = request.getParameter("color_ID").trim();
         String collectionID = request.getParameter("collectionID");
         if(collectionID == null){
-            List<Category> cateList = cd.getAllCategory();
-            Category category = cd.getCategory(cateID);
-            request.setAttribute("cateList", cateList);
-            request.setAttribute("category", category);
+            if(request.getParameter("mod")!=null)
+            {
+                List<Category> cateList = cd.getAllCategory();
+                request.setAttribute("cateList", cateList);
 
-            if(colID.equals("all")){
-                List<Product> productList = pd.getProductsByCID(cateID);
-                request.setAttribute("productList", productList);
-            } else{
-                List<Product> productList = pd.getProductsByColIDProID(cateID, colID);
-                request.setAttribute("productList", productList);
+
+                if(colID.equals("all")){
+                    Category category = cd.getCategory(cateID);
+                    request.setAttribute("category", category);
+                    List<Product> productList = pd.getNewArrivalByCid(cateID);
+                    request.setAttribute("productList", productList);
+                } else{
+                    Category category = cd.getCategory(cateID);
+                    request.setAttribute("category", category);
+                    List<Product> productList = pd.getNewArrivalByColIDProID(cateID, colID);
+                    request.setAttribute("productList", productList);
+                }
+
+                List<Color> colorList = col.getAllColors();
+                request.setAttribute("colorList", colorList);
+
+                List<Size> sizeList = si.getAllSizes();
+                request.setAttribute("sizeList", sizeList);
+            }
+            else
+            {
+                List<Category> cateList = cd.getAllCategory();
+                Category category = cd.getCategory(cateID);
+                request.setAttribute("cateList", cateList);
+                request.setAttribute("category", category);
+
+                if(colID.equals("all")){
+                    List<Product> productList = pd.getProductsByCID(cateID);
+                    request.setAttribute("productList", productList);
+                } else{
+                    List<Product> productList = pd.getProductsByColIDProID(cateID, colID);
+                    request.setAttribute("productList", productList);
+                }
+
+                List<Color> colorList = col.getAllColors();
+                request.setAttribute("colorList", colorList);
+
+                List<Size> sizeList = si.getAllSizes();
+                request.setAttribute("sizeList", sizeList);
             }
 
-            List<Color> colorList = col.getAllColors();
-            request.setAttribute("colorList", colorList);
-
-            List<Size> sizeList = si.getAllSizes();
-            request.setAttribute("sizeList", sizeList);
         } else{
             List<Category> cateList = cd.getAllCategory();
-            Category category = cd.getCategory(String.valueOf(1));
             request.setAttribute("cateList", cateList);
-            request.setAttribute("category", category);
             if(colID.equals("all")){
-                List<Product> productList = pd.getProductsByCollectID(collectionID,cateID);
+                Category category = cd.getCategory(cateID);
+                request.setAttribute("category", category);
+                List<Product> productList = pd.getProductsByCollectID(collectionID, cateID);
                 request.setAttribute("productList", productList);
+                System.out.println("runnable1");
             } else{
+                Category category = cd.getCategory(cateID);
+                request.setAttribute("category", category);
                 List<Product> productList = pd.getProductsByColIDCollectID(cateID, colID, collectionID);
                 request.setAttribute("productList", productList);
+                System.out.println("runnable2");
             }
             List<Color> colorList = col.getAllColors();
             request.setAttribute("colorList", colorList);

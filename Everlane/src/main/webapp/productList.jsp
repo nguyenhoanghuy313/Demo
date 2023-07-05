@@ -47,11 +47,23 @@
                         <%
                             if (request.getParameter("collectionID") == null) {
                         %>
-                        <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all&"
+                        <%
+                            if(request.getParameter("mod")!=null) {
+                        %>
+                        <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all&mod=bottom"
                            class="Category_Option">
                             <div class="checkbox"></div>
                             <span>${cate.getCategoryName()}</span>
                         </a>
+                        <%
+                        } else {
+                        %>
+                        <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all"
+                           class="Category_Option">
+                            <div class="checkbox"></div>
+                            <span>${cate.getCategoryName()}</span>
+                        </a>
+                        <%}%>
                         <%
                             } else {
                         %>
@@ -76,10 +88,21 @@
                     <%
                         if (request.getParameter("collectionID") == null) {
                     %>
+                    <%
+                        if(request.getParameter("mod")!=null) {
+                    %>
+                    <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=<%=category.getCategoryID()%>&color_ID=<%= color.getColor_ID()%>&mod=bottom">
+                        <div style="background-color: <%= color.getColor_Name()%>"></div>
+                        <span><%= color.getColor_Name()%></span>
+                    </a>
+                    <%
+                    }else {
+                    %>
                     <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=<%=category.getCategoryID()%>&color_ID=<%= color.getColor_ID()%>>">
                         <div style="background-color: <%= color.getColor_Name()%>"></div>
                         <span><%= color.getColor_Name()%></span>
                     </a>
+                    <%}%>
                         <%
                             }else {
                         %>
