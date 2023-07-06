@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: minileisduk
+  Date: 06/07/2023
+  Time: 5:51 CH
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -14,7 +21,7 @@
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
   />
 
-  <title>Product List</title>
+  <title>Story Detai</title>
 
   <meta name="description" content=""/>
 
@@ -40,8 +47,9 @@
   <!-- Vendors CSS -->
   <link rel="stylesheet" href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
+  <link rel="stylesheet" href="a.template/assets/vendor/libs/apex-charts/apex-charts.css"/>
+
   <!-- Page CSS -->
-  <link rel="stylesheet" href="adminpage/product-list/product-list.css">
 
   <!-- Helpers -->
   <script src="a.template/assets/vendor/js/helpers.js"></script>
@@ -51,8 +59,8 @@
   <script src="a.template/assets/js/config.js"></script>
 </head>
 
-<body>
 
+<body>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
@@ -77,48 +85,63 @@
       <div class="menu-inner-shadow"></div>
 
       <ul class="menu-inner py-1">
-        <!-- Account Settings -->
+        <!-- Dashboard -->
         <li class="menu-item">
-          <a href="#" class="menu-link ">
-            <i class='menu-icon tf-icons bx bx-user'></i>
-            <div data-i18n="Account Setting">Account Setting</div>
+          <a href="dashboardManager.jsp" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+            <div data-i18n="Analytics">Dashboard</div>
+          </a>
+        </li>
+
+        <!-- Layouts -->
+        <!-- Pages -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
+        <!-- Product List -->
+        <li class="menu-item">
+          <a href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
+             class="menu-link">
+            <i class='menu-icon tf-icons bx bxs-package'></i>
+            <div data-i18n="Product List">Product List</div>
           </a>
         </li>
         <!-- User List -->
-        <li class="menu-item  active">
-          <a href="#" class="menu-link">
-            <i class='menu-icon tf-icons bx bxs-package'></i>
-            <div data-i18n="Orders & Returns">Orders List</div>
+        <li class="menu-item">
+          <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=all" class="menu-link">
+            <i class='menu-icon tf-icons bx bx-user'></i>
+            <div data-i18n="User List">User List</div>
           </a>
         </li>
         <!-- Forms -->
-        <li class="menu-item">
+        <li class="menu-item active">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-detail"></i>
-            <div data-i18n="Form Layouts">Form Layouts</div>
+            <div data-i18n="Marketing">Marketing</div>
           </a>
           <ul class="menu-sub">
             <li class="menu-item">
-              <a href="form-layouts-vertical.html" class="menu-link">
-                <div data-i18n="Vertical Form">Vertical Form</div>
+              <a href="${pageContext.request.contextPath}/seasonCollectionEditServlet" class="menu-link">
+                <div data-i18n="Season Collection">Season Collection (Home Page)</div>
               </a>
             </li>
+          </ul>
+          <ul class="menu-sub">
             <li class="menu-item">
-              <a href="form-layouts-horizontal.html" class="menu-link">
-                <div data-i18n="Horizontal Form">Horizontal Form</div>
+              <a href="${pageContext.request.contextPath}/categoryEditServlet" class="menu-link">
+                <div data-i18n="Season Collection">Category (Home Page)</div>
+              </a>
+            </li>
+          </ul>
+          <ul class="menu-sub">
+            <li class="menu-item active">
+              <a href="" class="menu-link">
+                <div data-i18n="Story List">Story List (Story Page)</div>
               </a>
             </li>
           </ul>
         </li>
-        <%--logout--%>
-        <li class="menu-item">
-          <a href="logout-servlet" class="menu-link ">
-            <i class='menu-icon tf-icons bx bx-user'></i>
-            <div data-i18n="Account Setting">Log out</div>
-          </a>
-        </li>
       </ul>
     </aside>
+
     <!-- / Menu -->
 
     <!-- Layout container -->
@@ -189,47 +212,93 @@
         </div>
       </nav>
       <!-- / Navbar -->
+
       <!-- Content wrapper -->
       <div class="content-wrapper">
         <!-- Content -->
-        <div class="container-xxl flex-grow-1 container-p-y ">
-          <div class="card">
-            <h5 class="card-header">Products</h5>
-            <div class="table-responsive text-nowrap listtable">
-              <table class="table">
-                <thead>
-                <tr>
-                  <th>NO></th>
-                  <th>PRODUCT THUMBNAIL</th>
-                  <th>PRODUCT NAME</th>
-                  <th>COLOR NAME</th>
-                  <th>SIZE NAME</th>
-                  <th>Quantity</th>
-                  <th>Amount</th>
-                  <th>Buy at</th>
-                </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                <tr class="item">
-                  <td>1</td>
-                  <td><img src=""></td>
-                  <td>name</td>
-                  <td>name</td>
-                  <td>name</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1/02/2003</td>
-                </tr>
-                </tbody>
-              </table>
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Story List / </span> Story Details
+          </h4>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card mb-4">
+                <h5 class="card-header">Story Detail</h5>
+                <!-- Account -->
+                <hr class="my-0"/>
+                <div class="card-body">
+                  <form>
+                    <div class="mb-3">
+                      <label class="form-label" for="basic-default-storytitle">Story Title</label>
+                      <input type="text" class="form-control" id="basic-default-storytitle" value="Lấy title story hiện tại" placeholder="Please enter story title" />
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label" for="basic-default-storythumbnail">Thumbnail</label>
+                      <input type="text" class="form-control" id="basic-default-storythumbnail" value="Lấy thumbnail story hiện tại" placeholder="Please enter story thumbmail"  />
+                    </div>
+                    <div class="mb-3">
+                      <ul style="height: 20vh; overflow-y: scroll">
+                        <li>1. If you need a header, use this:
+                          <ul>
+                            <li># Heading level 1</li>
+                            <li>## Heading level 2</li>
+                            <li>### Heading level 3</li>
+                          </ul>
+                        </li>
+                        <li>2. To create paragraphs, use a blank line to separate one or more lines of text.</li>
+                        <li>3. To create a line break or new line, end a line with two or more spaces, and then type return.</li>
+                        <li>4. To bold text, italicize, add two asterisks or underscores before and after a word or phrase.
+                          <ul>
+                            <Li>I just love **bold text**.</Li>
+                            <li>Italicized text is the *cat's meow*.</li>
+                            <li>This text is ***really important***. (bold and italicize)</li>
+                          </ul>
+                        </li>
+                        <li>5. Create a list, just ad number, dashes (-), asterisks (*), or plus signs (+) in front of line items
+                          <ul>
+                            <li>
+                              1. First item <br>
+                              2. Second item <br>
+                              3. Third item <br>
+                              &nbsp&nbsp&nbsp1. Indented item <br>
+                              &nbsp&nbsp&nbsp2. Indented item <br>
+                              4. Fourth item
+                            </li>
+                          </ul>
+                        </li>
+                        <li>6. Add link and img
+                          <ul>
+                            <li>
+                              My favorite search engine is [Duck Duck Go](https://duckduckgo.com).
+                              ![Alt text](URL or file path)
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label" for="basic-default-contetn">Content</label>
+                      <textarea
+                              id="basic-default-contetn"
+                              class="form-control"
+                              value="Lấy content hiện tại"
+                      ></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                  </form>
+                </div>
+
+                <!-- /Account -->
+              </div>
             </div>
           </div>
         </div>
         <!-- / Content -->
 
-
         <div class="content-backdrop fade"></div>
       </div>
+      <!-- Content wrapper -->
       <!-- Content wrapper -->
     </div>
     <!-- / Layout page -->
@@ -239,6 +308,7 @@
   <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
+
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
@@ -251,11 +321,13 @@
 <!-- endbuild -->
 
 <!-- Vendors JS -->
+<script src="a.template/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 <!-- Main JS -->
 <script src="a.template/assets/js/main.js"></script>
 
 <!-- Page JS -->
+<script src="a.template/assets/js/dashboards-analytics.js"></script>
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>

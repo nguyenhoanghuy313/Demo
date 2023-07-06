@@ -132,6 +132,13 @@
                             </a>
                         </li>
                     </ul>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="stroyListManager.jsp" class="menu-link">
+                                <div data-i18n="Story List">Story List (Story Page)</div>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </aside>
