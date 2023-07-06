@@ -94,7 +94,7 @@
 
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
-                <li class="menu-item active">
+                <li class="menu-item">
                     <a href="dashboardManager.jsp" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
@@ -106,14 +106,14 @@
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
                 <!-- Product List -->
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/ProductListManagerServlet?categoryID=all"
+                    <a href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
                        class="menu-link">
                         <i class='menu-icon tf-icons bx bxs-package'></i>
                         <div data-i18n="Product List">Product List</div>
                     </a>
                 </li>
                 <!-- User List -->
-                <li class="menu-item">
+                <li class="menu-item active">
                     <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=all" class="menu-link">
                         <i class='menu-icon tf-icons bx bx-user'></i>
                         <div data-i18n="User List">User List</div>
@@ -127,14 +127,14 @@
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="seasonCollectionEdit.jsp" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/seasonCollectionEditServlet" class="menu-link">
                                 <div data-i18n="Season Collection">Season Collection (Home Page)</div>
                             </a>
                         </li>
                     </ul>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="categoryEdit.jsp" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/categoryEditServlet" class="menu-link">
                                 <div data-i18n="Season Collection">Category (Home Page)</div>
                             </a>
                         </li>
@@ -142,6 +142,7 @@
                 </li>
             </ul>
         </aside>
+
         <!-- / Menu -->
 
         <!-- Layout container -->

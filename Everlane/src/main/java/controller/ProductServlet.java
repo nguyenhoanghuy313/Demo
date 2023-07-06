@@ -14,9 +14,11 @@ public class ProductServlet extends HttpServlet{
         CategoryDAO cd = new CategoryDAO();
         ColorDAO col = new ColorDAO();
         SizeDAO si = new SizeDAO();
+
         String cateID = request.getParameter("categoryID").trim();
         String colID = request.getParameter("color_ID").trim();
         String collectionID = request.getParameter("collectionID");
+
         if(collectionID == null){
             if(request.getParameter("mod")!=null)
             {

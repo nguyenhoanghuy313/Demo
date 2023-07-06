@@ -1,5 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<!DOCTYPE html>
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -9,41 +8,40 @@
         data-template="vertical-menu-template-free"
 >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8"/>
   <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
   />
 
-  <title>Dashboard</title>
+  <title>Product List</title>
 
-  <meta name="description" content="" />
+  <meta name="description" content=""/>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png" />
+  <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link
           href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
           rel="stylesheet"
   />
 
   <!-- Icons. Uncomment required icon fonts -->
-  <link rel="stylesheet" href="a.template/assets/vendor/fonts/boxicons.css" />
+  <link rel="stylesheet" href="a.template/assets/vendor/fonts/boxicons.css"/>
 
   <!-- Core CSS -->
-  <link rel="stylesheet" href="a.template/assets/vendor/css/core.css" class="template-customizer-core-css" />
-  <link rel="stylesheet" href="a.template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-  <link rel="stylesheet" href="a.template/assets/css/demo.css" />
+  <link rel="stylesheet" href="a.template/assets/vendor/css/core.css" class="template-customizer-core-css"/>
+  <link rel="stylesheet" href="a.template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css"/>
+  <link rel="stylesheet" href="a.template/assets/css/demo.css"/>
 
   <!-- Vendors CSS -->
-  <link rel="stylesheet" href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
-  <link rel="stylesheet" href="a.template/assets/vendor/libs/apex-charts/apex-charts.css" />
+  <link rel="stylesheet" href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
   <!-- Page CSS -->
+  <link rel="stylesheet" href="adminpage/product-list/product-list.css">
 
   <!-- Helpers -->
   <script src="a.template/assets/vendor/js/helpers.js"></script>
@@ -54,6 +52,7 @@
 </head>
 
 <body>
+
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
@@ -78,57 +77,48 @@
       <div class="menu-inner-shadow"></div>
 
       <ul class="menu-inner py-1">
-        <!-- Dashboard -->
-        <li class="menu-item active">
-          <a href="dashboardManager.jsp" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Dashboard</div>
-          </a>
-        </li>
-
-        <!-- Layouts -->
-        <!-- Pages -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
-        <!-- Product List -->
+        <!-- Account Settings -->
         <li class="menu-item">
-          <a href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
-             class="menu-link">
-            <i class='menu-icon tf-icons bx bxs-package'></i>
-            <div data-i18n="Product List">Product List</div>
+          <a href="#" class="menu-link ">
+            <i class='menu-icon tf-icons bx bx-user'></i>
+            <div data-i18n="Account Setting">Account Setting</div>
           </a>
         </li>
         <!-- User List -->
-        <li class="menu-item">
-          <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=all" class="menu-link">
-            <i class='menu-icon tf-icons bx bx-user'></i>
-            <div data-i18n="User List">User List</div>
+        <li class="menu-item  active">
+          <a href="#" class="menu-link">
+            <i class='menu-icon tf-icons bx bxs-package'></i>
+            <div data-i18n="Orders & Returns">Orders List</div>
           </a>
         </li>
         <!-- Forms -->
         <li class="menu-item">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-detail"></i>
-            <div data-i18n="Marketing">Marketing</div>
+            <div data-i18n="Form Layouts">Form Layouts</div>
           </a>
           <ul class="menu-sub">
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/seasonCollectionEditServlet" class="menu-link">
-                <div data-i18n="Season Collection">Season Collection (Home Page)</div>
+              <a href="form-layouts-vertical.html" class="menu-link">
+                <div data-i18n="Vertical Form">Vertical Form</div>
               </a>
             </li>
-          </ul>
-          <ul class="menu-sub">
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/categoryEditServlet" class="menu-link">
-                <div data-i18n="Season Collection">Category (Home Page)</div>
+              <a href="form-layouts-horizontal.html" class="menu-link">
+                <div data-i18n="Horizontal Form">Horizontal Form</div>
               </a>
             </li>
           </ul>
         </li>
+        <%--logout--%>
+        <li class="menu-item">
+          <a href="logout-servlet" class="menu-link ">
+            <i class='menu-icon tf-icons bx bx-user'></i>
+            <div data-i18n="Account Setting">Log out</div>
+          </a>
+        </li>
       </ul>
     </aside>
-
-
     <!-- / Menu -->
 
     <!-- Layout container -->
@@ -144,71 +134,102 @@
           </a>
         </div>
 
-
+        <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+          <ul class="navbar-nav flex-row align-items-center ms-auto">
+            <!-- User -->
+            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+              <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                 data-bs-toggle="dropdown">
+                <div class="avatar avatar-online">
+                  <img src="a.template/assets/img/avatars/1.png" alt
+                       class="w-px-40 h-auto rounded-circle"/>
+                </div>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar avatar-online">
+                          <img src="a.template/assets/img/avatars/1.png" alt
+                               class="w-px-40 h-auto rounded-circle"/>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <c:if test=" ${sessionScope.acc!= null}">
+                          <span class="fw-semibold d-block">${sessionScope.acc.userName}</span>
+                        </c:if>
+                        <small class="text-muted">Admin</small>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="highUserAccount.jsp">
+                    <i class="bx bx-user me-2"></i>
+                    <span class="align-middle">My Profile</span>
+                  </a>
+                </li>
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="logout-servlet">
+                    <i class="bx bx-power-off me-2"></i>
+                    <span class="align-middle">Log Out</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!--/ User -->
+          </ul>
+        </div>
       </nav>
-
       <!-- / Navbar -->
-
       <!-- Content wrapper -->
       <div class="content-wrapper">
         <!-- Content -->
-
-        <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account Settings / Account /</span> Change Password</h4>
-
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card mb-4">
-                <!-- Account -->
-                <hr class="my-0" />
-                <div class="card-body">
-                  <form id="changePasswordHighUser" method="POST" >
-                    <div class="row">
-                      <div class="mb-3 col-md-12">
-                        <label for="oldPassword" class="form-label">Old Password</label>
-                        <input
-                                class="form-control"
-                                type="text"
-                                id="oldPassword"
-                                name="oldPassword"
-                                placeholder="Please enter your old password"
-                                autofocus
-                        />
-                      </div>
-                      <div class="mb-3 col-md-12">
-                        <label for="newPassword" class="form-label">New Password</label>
-                        <input class="form-control" type="text" name="newPassword" id="newPassword" placeholder="Please enter your new password" />
-                      </div>
-                      <div class="mb-3 col-md-12">
-                        <label for="reEnterNewPassword" class="form-label">Confirm Your New Password</label>
-                        <input
-                                class="form-control"
-                                type="text"
-                                id="reEnterNewPassword"
-                                name="confirmPassword"
-                                placeholder="Please reenter your new password"
-                        />
-                      </div>
-                      <div>
-                        ${error} ${success}
-                      </div>
-                    </div>
-                    <div class="mt-2">
-                      <button type="submit" class="btn btn-dark me-2">Save changes</button>
-                      <a href="changePassword?mod=1" class="btn btn-outline-secondary">Cancel</a>
-                    </div>
-                  </form>
-                </div>
-                <!-- /Account -->
-              </div>
+        <div class="container-xxl flex-grow-1 container-p-y ">
+          <div class="card">
+            <h5 class="card-header">Products</h5>
+            <div class="table-responsive text-nowrap listtable">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>NO></th>
+                  <th>PRODUCT THUMBNAIL</th>
+                  <th>PRODUCT NAME</th>
+                  <th>COLOR NAME</th>
+                  <th>SIZE NAME</th>
+                  <th>Quantity</th>
+                  <th>Amount</th>
+                  <th>Buy at</th>
+                </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                <tr class="item">
+                  <td>1</td>
+                  <td><img src=""></td>
+                  <td>name</td>
+                  <td>name</td>
+                  <td>name</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1/02/2003</td>
+                </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
         <!-- / Content -->
 
+
         <div class="content-backdrop fade"></div>
       </div>
-      <!-- Content wrapper -->
       <!-- Content wrapper -->
     </div>
     <!-- / Layout page -->
@@ -218,7 +239,6 @@
   <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
-
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
@@ -231,16 +251,13 @@
 <!-- endbuild -->
 
 <!-- Vendors JS -->
-<script src="a.template/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 <!-- Main JS -->
 <script src="a.template/assets/js/main.js"></script>
 
 <!-- Page JS -->
-<script src="a.template/assets/js/dashboards-analytics.js"></script>
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>
-
