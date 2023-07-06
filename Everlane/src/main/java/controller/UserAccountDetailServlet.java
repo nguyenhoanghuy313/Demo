@@ -62,11 +62,11 @@ public class UserAccountDetailServlet extends HttpServlet {
             req.setAttribute("u", user);
             req.setAttribute("error", "Email or UserName cannot be empty");
             req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
-//        } else if (!u.isValidDate(date)) {
-//            user = u.getUserById(user.getUserID());
-//            req.setAttribute("u", user);
-//            req.setAttribute("error", "Invalid date of birth");
-//            req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
+        } else if (!u.isValidDate(String.valueOf(date))) {
+            user = u.getUserById(user.getUserID());
+            req.setAttribute("u", user);
+            req.setAttribute("error", "Invalid date of birth");
+            req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
         } else {
             boolean checkAccountExist = u.checkAccountExistUserDetail(username, email, xUserID);
             if (checkAccountExist) {

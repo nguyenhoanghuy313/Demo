@@ -52,16 +52,19 @@
         <button>SHOP NOW</button>
     </div>
 </div>
-<section class="Season_Collection_Banner" id="Season_Collection_Banner">
-    <img src=<%= collection.getCollectionImg() %>
-         alt="">
-    <div class="Season_Collection_Banner_text">
-        <h1><%= collection.getCollectionName() %></h1>
-        <p><%= collection.getCollection_description() %></p>
-        <button>SHOP THE COLLECTION</button>
-    </div>
-</section>
-
+    <section class="Season_Collection_Banner" id="Season_Collection_Banner">
+        <img src=<%= collection.getCollectionImg() %>
+                     alt="">
+        <div class="Season_Collection_Banner_text">
+            <h1><%= collection.getCollectionName() %></h1>
+            <p><%= collection.getCollection_description() %></p>
+            <button value="collectionID" name="collectionID">
+                <a href="${pageContext.request.contextPath}/productList-servlet?collectionID=${collection.getCollectionID()}&categoryID=3&color_ID=all">
+                    SHOP THE COLLECTION
+                </a>
+            </button>
+        </div>
+    </section>
 <section class="Category_Container">
     <h1>Shop by Category</h1>
     <div class="Category_List_Container">
@@ -86,7 +89,9 @@
             <img src="https://media.everlane.com/image/upload/c_scale,dpr_1.0,f_auto,q_auto,w_auto/c_limit,w_900/v1/i/73436bb3_0cdc.png">
             <div class="Category_text">
                 <h2>New Arrivals</h2>
-                <button>Buy</button>
+                <button>
+                    <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=1&color_ID=all&mod=bottom">Shop Now</a>
+                </button>
             </div>
         </div>
         <div class="Category2">

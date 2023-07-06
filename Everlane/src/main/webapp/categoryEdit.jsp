@@ -222,6 +222,7 @@
                                     <form action="categoryEditServlet" method="post">
                                         <c:forEach var="cate" items="${cateList}">
                                             <div class="row mb-3">
+                                                <input type="hidden" name="cateID" value="${cate.getCategoryID()}">
                                                 <label class="col-sm-2 col-form-label" for="basic-default-tees">${cate.getCategoryName()}</label>
                                                 <div class="col-sm-10">
                                                     <input class="form-control" name="cateImg" id="basic-default-tees"
@@ -320,6 +321,9 @@
 <%--                                                       type="text"/>--%>
 <%--                                            </div>--%>
 <%--                                        </div>--%>
+                                        <div style="color: green">
+                                            ${message}
+                                        </div>
                                         <div class="mt-2">
                                             <button type="submit" class="btn btn-dark me-2">Save changes</button>
                                             <a href="" type="reset" class="btn btn-outline-secondary">Cancel</a>

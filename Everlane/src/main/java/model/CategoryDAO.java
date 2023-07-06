@@ -55,10 +55,10 @@ public class CategoryDAO extends myDAO {
 
     public void updateCategory(String xcateImg, int xcateId) {
         try {
-            xSql = "update category set  cImg =? where CategoryID =?";
+            xSql = "update category set category_img =? where CategoryID =?;";
             ps = con.prepareStatement(xSql);
             ps.setString(1, xcateImg);
-            ps.setString(2, String.valueOf(xcateId));
+            ps.setInt(2, xcateId);
 //            ps.setString(9, xRole);
             ps.executeUpdate();
         } catch (Exception e) {
@@ -68,9 +68,7 @@ public class CategoryDAO extends myDAO {
 
 //    public static void main(String[] args) {
 //        CategoryDAO categoryDAO = new CategoryDAO();
-//        List<Category> categoryList = categoryDAO.getCategory();
-//        for (Category category : categoryList) {
-//            System.out.println(category.toString());
+//        categoryDAO.updateCategory("imge", 1);
 //        }
-//    }
+
 }
