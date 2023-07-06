@@ -132,8 +132,6 @@
                             </a>
                         </li>
                     </ul>
-<<<<<<< Updated upstream
-=======
                     <ul class="menu-sub">
                         <li class="menu-item">
                             <a href="${pageContext.request.contextPath}/StoryServlet" class="menu-link">
@@ -141,7 +139,6 @@
                             </a>
                         </li>
                     </ul>
->>>>>>> Stashed changes
                 </li>
             </ul>
         </aside>
