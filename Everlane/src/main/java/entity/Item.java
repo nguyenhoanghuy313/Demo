@@ -22,8 +22,7 @@ public class Item {
         this.quantity = quantity;
         this.size = size;
     }
-//khong tot cho cart
-    // nsatdsfaasfsfdasd
+
     public Product getProduct() {
         return product;
     }
