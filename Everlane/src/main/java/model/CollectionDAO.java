@@ -111,11 +111,6 @@ public class CollectionDAO extends myDAO{
         }
     }
 
-//    public String getCreationTime() {
-//        Date currentDate = new Date();
-//        String creationTime = currentDate.toString();
-//        return creationTime;
-//    }
 
 //    public static void main(String[] args) {
 //
