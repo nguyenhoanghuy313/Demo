@@ -8,19 +8,18 @@ import model.Collection;
 
 
 import java.util.*;
-@WebServlet(name = "category-servlet", value = "/category-servlet")
+@WebServlet(name = "home-servlet", value = "/home-servlet")
 public class HomeServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        ProductsDAO p = new ProductsDAO();
+        ProductDAO p = new ProductDAO();
         CategoryDAO c = new CategoryDAO();
         CollectionDAO col = new CollectionDAO();
-
-//        List<Product> data = p.getAllProducts();
+//        String input = request.getParameter("input");
+//        List<Product> data = p.getAllProducts(input, 1);
         List<Category> cateList = c.getAllCategory();
         Collection collection = col.getCollections("1");
-
 //        request.setAttribute("data", data);
         request.setAttribute("cateList", cateList);
         request.setAttribute("collection", collection);

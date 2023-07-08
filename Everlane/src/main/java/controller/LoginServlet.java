@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet {
             Collection collection = col.getCollections("1");
 
             User checkUser = u.checkUser(email, password);
+            req.getSession().setAttribute("currUser", checkUser);
             User Role = u.getRoleByEmail(email);
             if (checkUser == null) {
                 if (email.isEmpty()) {
