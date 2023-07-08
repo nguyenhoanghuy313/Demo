@@ -14,9 +14,11 @@ public class DeleteProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String delProductID = request.getParameter("ProductID");
-//        ProductsDAO pd = new ProductsDAO();
-//        pd.delete(delProductID);
-        response.sendRedirect("ProductListManagerServlet?categoryID=all");
+        String delProductID = request.getParameter("ProductID").trim();
+        String delColName = request.getParameter("color_Name").trim();
+        String delSizeName = request.getParameter("size_Name").trim();
+        ProductDAO pd = new ProductDAO();
+        pd.delete(delProductID, delColName, delSizeName);
+        response.sendRedirect("ProductListManagerServlet?input=all");
     }
 }

@@ -1,21 +1,33 @@
 package model;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 public class Collection {
     int collectionID;
     String collectionName;
     int promotionID;
     String collectionImg;
     String collection_description;
-
+    Timestamp create_date;
     public Collection() {
     }
 
-    public Collection(int collectionID, String collectionName, int promotionID, String collectionImg, String collection_description) {
+    public Collection(int collectionID, String collectionName, int promotionID, String collectionImg, String collection_description, Timestamp create_date) {
         this.collectionID = collectionID;
         this.collectionName = collectionName;
         this.promotionID = promotionID;
         this.collectionImg = collectionImg;
         this.collection_description = collection_description;
+        this.create_date = create_date;
+    }
+
+    public Timestamp getCreate_date() {
+        return create_date;
+    }
+
+    public void setCreate_date(Timestamp create_date) {
+        this.create_date = create_date;
     }
 
     public int getCollectionID() {

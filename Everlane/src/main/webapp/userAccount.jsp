@@ -60,7 +60,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
-                <a href="dashboardManager.jsp" class="app-brand-link">
+                <a href="${pageContext.request.contextPath}/category-servlet" class="app-brand-link">
               <span class="app-brand-logo demo">
                     <svg width="128" height="14px" class="styles_everlane-logo__4o010" viewBox="0 0 128 14" fill="none"
                          xmlns="http://www.w3.org/2000/svg"><path
@@ -80,16 +80,16 @@
             <ul class="menu-inner py-1">
                 <!-- Account Settings -->
                 <li class="menu-item active">
-                    <a href="#" class="menu-link ">
+                    <a href="user-account-detail-servlet" class="menu-link ">
                         <i class='menu-icon tf-icons bx bx-user'></i>
                         <div data-i18n="Account Setting">Account Setting</div>
                     </a>
                 </li>
                 <!-- User List -->
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="orderListUser.jsp" class="menu-link">
                         <i class='menu-icon tf-icons bx bxs-package'></i>
-                        <div data-i18n="Orders & Returns">Orders & Returns</div>
+                        <div data-i18n="Orders & Returns">Orders List</div>
                     </a>
                 </li>
                 <!-- Forms -->
@@ -115,7 +115,7 @@
                 <li class="menu-item">
                     <a href="logout-servlet" class="menu-link ">
                         <i class='menu-icon tf-icons bx bx-user'></i>
-                        <div data-i18n="Account Setting">Log out</div>
+                        <div data-i18n="Account Setting" style="color:red;">Log out</div>
                     </a>
                 </li>
             </ul>

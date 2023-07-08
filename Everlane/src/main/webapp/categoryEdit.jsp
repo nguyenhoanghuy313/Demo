@@ -87,7 +87,7 @@
 
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
-                <li class="menu-item active">
+                <li class="menu-item">
                     <a href="dashboardManager.jsp" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
@@ -99,7 +99,7 @@
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
                 <!-- Product List -->
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/ProductListManagerServlet?categoryID=all"
+                    <a href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
                        class="menu-link">
                         <i class='menu-icon tf-icons bx bxs-package'></i>
                         <div data-i18n="Product List">Product List</div>
@@ -113,7 +113,7 @@
                     </a>
                 </li>
                 <!-- Forms -->
-                <li class="menu-item">
+                <li class="menu-item active">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-detail"></i>
                         <div data-i18n="Marketing">Marketing</div>
@@ -126,7 +126,7 @@
                         </li>
                     </ul>
                     <ul class="menu-sub">
-                        <li class="menu-item">
+                        <li class="menu-item active">
                             <a href="${pageContext.request.contextPath}/categoryEditServlet" class="menu-link">
                                 <div data-i18n="Season Collection">Category (Home Page)</div>
                             </a>
@@ -135,6 +135,7 @@
                 </li>
             </ul>
         </aside>
+
         <!-- / Menu -->
 
         <!-- Layout container -->
@@ -222,6 +223,7 @@
                                     <form action="categoryEditServlet" method="post">
                                         <c:forEach var="cate" items="${cateList}">
                                             <div class="row mb-3">
+                                                <input type="hidden" name="cateID" value="${cate.getCategoryID()}">
                                                 <label class="col-sm-2 col-form-label" for="basic-default-tees">${cate.getCategoryName()}</label>
                                                 <div class="col-sm-10">
                                                     <input class="form-control" name="cateImg" id="basic-default-tees"
@@ -320,6 +322,9 @@
 <%--                                                       type="text"/>--%>
 <%--                                            </div>--%>
 <%--                                        </div>--%>
+                                        <div style="color: green">
+                                            ${message}
+                                        </div>
                                         <div class="mt-2">
                                             <button type="submit" class="btn btn-dark me-2">Save changes</button>
                                             <a href="" type="reset" class="btn btn-outline-secondary">Cancel</a>
