@@ -38,7 +38,7 @@
     <ul class="navbar">
         <li><a href="#">Women</a></li>
         <li><a href="#">About</a></li>
-        <li><a href="storyList.jsp">Stories</a></li>
+        <li><a href="${pageContext.request.contextPath}/StoryCusServlet?input=all">Stories</a></li>
     </ul>
     <a href="${pageContext.request.contextPath}/category-servlet" class="logo"><img
             src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Everlane_logo.png"></a>
@@ -156,8 +156,8 @@
     <%--        mobile--%>
     <div class="menu_container">
         <div class="menu_container1">
-            <a href="#">Best-Sellers</a>
-            <a href="#">Everworld Stories</a>
+            <a href="">Best-Sellers</a>
+            <a href="">Everworld Stories</a>
         </div>
         <div class="menu_container2">
             <a href="">What's New</a>

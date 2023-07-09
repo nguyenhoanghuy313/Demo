@@ -8,6 +8,7 @@
     height: 14px;
 }
 
-.Stories_List_Container{
-    padding: 20px 60px;
+.Stories_Title_Container p{
+    font-family: 'Nunito Sans', sans-serif;
 }
+

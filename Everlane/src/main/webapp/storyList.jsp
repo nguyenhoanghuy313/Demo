@@ -6,6 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page import="java.util.*" %>
+<%@page import="model.*" %>
+<%@page import="controller.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+    List<Story> storyList = (List<Story>) request.getAttribute("storyList");
+%>
 <html>
 <head>
     <title>everworld stories</title>
@@ -13,9 +21,8 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="header/header1.css">
-    <link rel="stylesheet" href="storyList/story-list-title.css">
-    <link rel="stylesheet" href="storyList/story-list.css">
-    <link rel="stylesheet" href="storyList/scrolling-text-container.css">
+    <link rel="stylesheet" href="storyList/story-list-title1.css">
+    <link rel="stylesheet" href="storyList/story-list1.css">
     <link rel="stylesheet" href="footer/footer.css">
     <link rel="stylesheet" href="footer/ad-container.css">
 
@@ -32,41 +39,24 @@
 </section>
 
 <section class="Stories_List_Container">
-    <p style="font-size: 54px">The Latest</p>
+    <p style="font-size: 54px; font-family: 'Nunito Sans', sans-serif;">The Latest</p>
     <div class="Story_List">
-        <div class="Story">
-            <img src="https://cdn.builder.io/api/v1/image/assets%2F444142b2cae54a19aeb8b5ba245feffe%2Fdfd4c4b833da428186ffab1a304e5b1d">
-            <p>The EverLane Team Celebrates AAPI Heritage Month</p>
-        </div>
-        <div class="Story">
-            <img src="https://cdn.builder.io/api/v1/image/assets%2F444142b2cae54a19aeb8b5ba245feffe%2Fdfd4c4b833da428186ffab1a304e5b1d">
-            <p>The EverLane Team Celebrates AAPI Heritage Month</p>
-        </div>
-        <div class="Story">
-            <img src="https://cdn.builder.io/api/v1/image/assets%2F444142b2cae54a19aeb8b5ba245feffe%2Fdfd4c4b833da428186ffab1a304e5b1d">
-            <p>The EverLane Team Celebrates AAPI Heritage Month</p>
-        </div>
-        <div class="Story">
-            <img src="https://cdn.builder.io/api/v1/image/assets%2F444142b2cae54a19aeb8b5ba245feffe%2Fdfd4c4b833da428186ffab1a304e5b1d">
-            <p>The EverLane Team Celebrates AAPI Heritage Month</p>
-        </div>
-        <div class="Story">
-            <img src="https://cdn.builder.io/api/v1/image/assets%2F444142b2cae54a19aeb8b5ba245feffe%2Fdfd4c4b833da428186ffab1a304e5b1d">
-            <p>The EverLane Team Celebrates AAPI Heritage Month</p>
-        </div>
-        <div class="Story">
-            <img src="https://cdn.builder.io/api/v1/image/assets%2F444142b2cae54a19aeb8b5ba245feffe%2Fdfd4c4b833da428186ffab1a304e5b1d">
-            <p>The EverLane Team Celebrates AAPI Heritage Month</p>
-        </div>
+        <%
+            for (Story s : storyList) {
+        %>
+        <a href="StoryCusServlet?input=<%=s.getStory_ID()%>" class="Story">
+            <div class="Story_img">
+                <img src=<%=s.getThumbnail()%>>
+            </div>
+            <p><%=s.getTitle()%>
+            </p>
+        </a>
+        <%
+            }
+        %>
     </div>
 </section>
 
-<section class="Scrolling_Text_Container">
-    <div class="Scrolling_Text_Inner_Container">
-        <p><- Keep It Cool <- Keep It Clean <- Do right by people <- Keep It Cool <- Keep It Clean <- Do right by people
-            <- Keep It Cool <- Keep It Clean <- Do right by people</p>
-    </div>
-</section>
 <jsp:include page="footer.jsp"/>
 </body>
 </html>
