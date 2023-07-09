@@ -230,7 +230,7 @@
                     <div class="list_option_container2">
 
                         <div class="input-group input-group-merge">
-                            <form action="${pageContext.request.contextPath}/StoryServlet"
+                            <form action="${pageContext.request.contextPath}/StoryServlet?input=2"
                                   method="post">
                                 <span class="input-group-text" id="basic-addon-search31"><i
                                         class="bx bx-search"></i></span>
@@ -276,10 +276,10 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="UserEditServlet?UserID=${u.getUserID()}"
+                                                <a class="dropdown-item" href="StoryEditServlet?StoryID=<%=s.getStory_ID()%>"
                                                 ><i class="bx bx-edit-alt me-1"></i> Edit</a
                                                 >
-                                                <a class="dropdown-item" href="DeleteUser?UserID=${u.getUserID()}"
+                                                <a class="dropdown-item" href="StoryServlet?input=delete&StoryID=<%=s.getStory_ID()%>"
                                                    onclick="return confirm('Are you sure want to delete this story?')"
                                                 ><i class="bx bx-trash me-1"></i> Delete</a
                                                 >

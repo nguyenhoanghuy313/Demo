@@ -134,7 +134,7 @@
                     </ul>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="${pageContext.request.contextPath}/StoryServlet" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/StoryServlet?input=all" class="menu-link">
                                 <div data-i18n="Story List">Story List (Story Page)</div>
                             </a>
                         </li>
