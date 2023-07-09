@@ -31,7 +31,7 @@ public class Product {
         this.productImg = productImg;
         this.price = price;
     }
-
+// nothing to say here
     public Product(int cateID, String productID, String productName, String[] productImg, double price, int size) {
         this.cateID = cateID;
         this.productID = productID;
