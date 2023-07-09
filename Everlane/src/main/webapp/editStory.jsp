@@ -241,7 +241,7 @@
                                             <% if (story == null) {%>
                                             action="StoryServlet?input=1"
                                             <%} else {%>
-                                            action="StoryEditServlet"
+                                            action="StoryEdit"
                                             <%}%>
                                             method="post"
                                             style="width: 100%;"

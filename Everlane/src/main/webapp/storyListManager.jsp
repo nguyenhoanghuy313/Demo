@@ -276,7 +276,7 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="StoryEditServlet?StoryID=<%=s.getStory_ID()%>"
+                                                <a class="dropdown-item" href="StoryEdit?StoryID=<%=s.getStory_ID()%>"
                                                 ><i class="bx bx-edit-alt me-1"></i> Edit</a
                                                 >
                                                 <a class="dropdown-item" href="StoryServlet?input=delete&StoryID=<%=s.getStory_ID()%>"

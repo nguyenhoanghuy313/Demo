@@ -8,8 +8,8 @@ import model.StoryDAO;
 
 import java.io.IOException;
 
-@WebServlet(name = "StoryEditServlet", value = "/StoryEditServlet")
-public class StoryEditServlet extends HttpServlet {
+@WebServlet(name = "StoryEdit", value = "/StoryEdit")
+public class StoryEdit extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String xStoryID = request.getParameter("StoryID").trim();
@@ -28,6 +28,5 @@ public class StoryEditServlet extends HttpServlet {
         StoryDAO sd = new StoryDAO();
         sd.updateStory(xStoryID, xStoryThumbnail, xStoryTitle, xStoryContent);
         response.sendRedirect("StoryServlet?input=all");
-
     }
 }
