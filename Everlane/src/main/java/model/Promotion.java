@@ -5,14 +5,14 @@ import java.sql.Date;
 public class Promotion {
     int promotionID;
     String promotionName, promotionDescription;
-    int discountRate;
+    double discountRate;
     Date startDate, endDate;
     String background_color;
 
     public Promotion() {
     }
 
-    public Promotion(int promotionID, String promotionName, String promotionDescription, int discountRate, Date startDate, Date endDate, String background_color) {
+    public Promotion(int promotionID, String promotionName, String promotionDescription, double discountRate, Date startDate, Date endDate, String background_color) {
         this.promotionID = promotionID;
         this.promotionName = promotionName;
         this.promotionDescription = promotionDescription;
@@ -46,11 +46,11 @@ public class Promotion {
         this.promotionDescription = promotionDescription;
     }
 
-    public int getDiscountRate() {
+    public double getDiscountRate() {
         return discountRate;
     }
 
-    public void setDiscountRate(int discountRate) {
+    public void setDiscountRate(double discountRate) {
         this.discountRate = discountRate;
     }
 

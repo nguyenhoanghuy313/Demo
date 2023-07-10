@@ -42,12 +42,13 @@
 <jsp:include page="header.jsp"/>
   <%
       Collection collection = (Collection) request.getAttribute("collection");
+      Promotion promotion = (Promotion) request.getAttribute("promotion");
   %>
 <div class="pop_up_container">
-    <div class="pop_up" style="background: cadetblue">
+    <div class="pop_up" style="background: <%=promotion.getBackground_color()%>">
         <i class='bx bx-x' id="pop_up_x"></i>
         <h1>
-            New Markdowns Just Added: Now up to 60% off
+            <%=promotion.getPromotionName()%>: Now up to <%=promotion.getDiscountRate()%>% off
         </h1>
         <button>SHOP NOW</button>
     </div>
@@ -126,9 +127,9 @@
     </div>
 </section>
 
-<section class="Sales_Banner">
+<section class="Sales_Banner" style="background: <%=promotion.getBackground_color()%>">
     <h1>
-        New Markdowns Just Added: Now up to 60% off
+        <%=promotion.getPromotionName()%>: Now up to <%=promotion.getDiscountRate()%>% off
     </h1>
     <button>SHOP NOW</button>
 </section>

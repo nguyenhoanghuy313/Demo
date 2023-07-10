@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class PromotionDAO extends myDAO{
             rs = ps.executeQuery();
             int xPromotionID;
             String xPromotionName, xPromotionDescription;
-            int xDiscountRate;
+            double xDiscountRate;
             Date xStartDate, xEndDate;
             String xBackground_color;
             Promotion p;
@@ -21,7 +22,7 @@ public class PromotionDAO extends myDAO{
                 xPromotionID = rs.getInt("PromotionID");
                 xPromotionName = rs.getString("PromotionName");
                 xPromotionDescription = rs.getString("PromotionDescription");
-                xDiscountRate = rs.getInt("DiscountRate");
+                xDiscountRate = rs.getDouble("DiscountRate");
                 xStartDate = rs.getDate("StartDate");
                 xEndDate = rs.getDate("EndDate");
                 xBackground_color = rs.getString("background_color");
@@ -34,6 +35,35 @@ public class PromotionDAO extends myDAO{
             e.printStackTrace();
         }
         return (pl);
+    }
+
+    public Promotion getLastestPromotion(){
+        Promotion p = null;
+        xSql = "select * from promotion order by PromotionID DESC LIMIT 1;";
+        try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            int xPromotionID;
+            String xPromotionName, xPromotionDescription;
+            double xDiscountRate;
+            Date xStartDate, xEndDate;
+            String xBackground_color;
+            while(rs.next()){
+                xPromotionID = rs.getInt("PromotionID");
+                xPromotionName = rs.getString("PromotionName");
+                xPromotionDescription = rs.getString("PromotionDescription");
+                xDiscountRate = rs.getDouble("DiscountRate");
+                xStartDate = rs.getDate("StartDate");
+                xEndDate = rs.getDate("EndDate");
+                xBackground_color = rs.getString("background_color");
+                p = new Promotion(xPromotionID, xPromotionName, xPromotionDescription, xDiscountRate, xStartDate, xEndDate, xBackground_color);
+            }
+            rs.close();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return p;
     }
 
     public void deletePromotion(String promotionID) {
@@ -49,13 +79,13 @@ public class PromotionDAO extends myDAO{
         }
     }
 
-    public void createNewPromotion(String xPromotionName, String xPromotionDescription, int xDiscountRate, Date xStartDate, Date xEndDate, String xBackgroundColour){
+    public void createNewPromotion(String xPromotionName, String xPromotionDescription, double xDiscountRate, Date xStartDate, Date xEndDate, String xBackgroundColour){
         try{
             xSql = "INSERT INTO promotion (PromotionName, PromotionDescription, DiscountRate, StartDate, EndDate, background_color) value (?, ?, ?, ?, ?, ?)";
             ps = con.prepareStatement(xSql);
             ps.setString(1, xPromotionName);
             ps.setString(2, xPromotionDescription);
-            ps.setInt(3, xDiscountRate);
+            ps.setDouble(3, xDiscountRate);
             ps.setDate(4, xStartDate);
             ps.setDate(5, xEndDate);
             ps.setString(6, xBackgroundColour);

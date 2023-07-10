@@ -20,10 +20,16 @@ public class LogoutServlet extends HttpServlet {
 //        ProductsDAO p = new ProductsDAO();
         CategoryDAO c = new CategoryDAO();
         CollectionDAO col = new CollectionDAO();
+        PromotionDAO promotionDAO = new PromotionDAO();
+
 
 //        List<Product> data = p.getAllProducts();
         List<Category> cateList = c.getAllCategory();
         Collection collection = col.getCollections("1");
+
+        Promotion promotion = promotionDAO.getLastestPromotion();
+        request.setAttribute("promotion", promotion);
+
 
 //        request.setAttribute("data", data);\
         request.setAttribute("cateList", cateList);
