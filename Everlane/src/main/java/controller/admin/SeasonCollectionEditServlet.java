@@ -22,15 +22,13 @@ public class SeasonCollectionEditServlet extends HttpServlet {
             Collection collection = col.getCollections(req.getParameter("collectionIDGet"));
             req.setAttribute("c", collection);
             req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
-
         }
         else
         {
             CollectionDAO col = new CollectionDAO();
-            Collection collection = col.getCollections("1");
+            Collection collection = col.getCollectionsByDate();
             req.setAttribute("c", collection);
             req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
-
         }
 
     }

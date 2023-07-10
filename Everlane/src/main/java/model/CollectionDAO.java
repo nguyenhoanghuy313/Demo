@@ -111,6 +111,22 @@ public class CollectionDAO extends myDAO{
         }
     }
 
+    public void updateCollectionPromoID(String xcolname, int xpromotionID, String xcolImg, String xcoldescrip, Timestamp xcreate_date, int xcolId) {
+        try {
+            xSql = "update collection set  CollectionName=?, PromotionID=?,  collectionImg =?,collection_description=?, create_date=? where collectionID =?";
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, xcolname);
+            ps.setInt(2, xpromotionID);
+            ps.setString(3, xcolImg);
+            ps.setString(4, xcoldescrip);
+            ps.setTimestamp(5, xcreate_date);
+            ps.setInt(6, xcolId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("updateCollectionPromoID: " + e.getMessage());
+        }
+    }
+
 
 //    public static void main(String[] args) {
 //
