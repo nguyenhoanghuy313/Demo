@@ -1,10 +1,16 @@
 package model;
-
+//import java.util.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.*;
 
-public class ProCollectionDAO extends myDAO{
-    public ProCollection getAllCollections(){
-        ProCollection x = null;
+public class CollectionDAO extends myDAO{
+    public Collection getAllCollections(){
+        Collection x = null;
         xSql = "select * from collection";
         try{
             ps = con.prepareStatement(xSql);
@@ -22,7 +28,7 @@ public class ProCollectionDAO extends myDAO{
                 xGetCollectionImg = rs.getString("collectionImg");
                 xCollection_description = rs.getString("collection_description");
                 xDate = rs.getTimestamp("create_date");
-                x = new ProCollection(xCollectionID, xCollectionName, xPromotionID , xGetCollectionImg, xCollection_description, xDate);
+                x = new Collection(xCollectionID, xCollectionName, xPromotionID , xGetCollectionImg, xCollection_description, xDate);
             }
             rs.close();
             ps.close();
@@ -32,8 +38,8 @@ public class ProCollectionDAO extends myDAO{
         return x;
     }
 
-    public ProCollection getCollections(String xId){
-        ProCollection x = null;
+    public Collection getCollections(String xId){
+        Collection x = null;
         int i = Integer.parseInt(xId);
         xSql = "select * from collection where CollectionID = ?";
         try{
@@ -52,7 +58,7 @@ public class ProCollectionDAO extends myDAO{
                 xGetCollectionImg = rs.getString("collectionImg");
                 xCollection_description = rs.getString("collection_description");
                 xcreate_date = rs.getTimestamp("create_date");
-                x = new ProCollection(i, xCollectionName, xPromotionID , xGetCollectionImg, xCollection_description, xcreate_date);
+                x = new Collection(i, xCollectionName, xPromotionID , xGetCollectionImg, xCollection_description, xcreate_date);
             }
             rs.close();
             ps.close();
@@ -61,8 +67,8 @@ public class ProCollectionDAO extends myDAO{
         }
         return x;
     }
-    public ProCollection getCollectionsByDate(){
-        ProCollection x = null;
+    public Collection getCollectionsByDate(){
+        Collection x = null;
         xSql = "select * from collection order by create_date desc Limit 1;";
         try{
             ps = con.prepareStatement(xSql);
@@ -80,7 +86,7 @@ public class ProCollectionDAO extends myDAO{
                 xGetCollectionImg = rs.getString("collectionImg");
                 xCollection_description = rs.getString("collection_description");
                 xcreate_date = rs.getTimestamp("create_date");
-                x = new ProCollection(xCollectionID, xCollectionName, xPromotionID , xGetCollectionImg, xCollection_description, xcreate_date);
+                x = new Collection(xCollectionID, xCollectionName, xPromotionID , xGetCollectionImg, xCollection_description, xcreate_date);
             }
             rs.close();
             ps.close();
@@ -105,4 +111,10 @@ public class ProCollectionDAO extends myDAO{
         }
     }
 
+
+//    public static void main(String[] args) {
+//
+//        Date currentDate = new Date();
+//        System.out.println("Thời gian tạo: " + currentTime);
+//    }
 }

@@ -9,7 +9,7 @@
 <%@page import="java.util.*" %>
 <%@page import="model.*" %>
 <%@page import="controller.*" %>
-<%@ page import="model.ProCollection" %>
+<%@ page import="model.Collection" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
@@ -29,11 +29,11 @@
 <body>
 <jsp:include page="header.jsp"/>
 <%
-    ProCollectionDAO col = new ProCollectionDAO();
+    CollectionDAO col = new CollectionDAO();
     Category category = (Category) request.getAttribute("category");
     List<Product> productList = (List<Product>) request.getAttribute("productList");
     List<Color> colorList = (List<Color>) request.getAttribute("colorList");
-    ProCollection proCollection = col.getCollectionsByDate();
+    Collection collection = col.getCollectionsByDate();
     List<Size> sizeList = (List<Size>) request.getAttribute("sizeList");
 %>
 <section class="Product_List_Container">
@@ -67,7 +67,7 @@
                         <%
                             } else {
                         %>
-                        <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all&collectionID=<%=proCollection.getCollectionID()%>"
+                        <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all&collectionID=<%=collection.getCollectionID()%>"
                            class="Category_Option">
                             <div class="checkbox"></div>
                             <span>${cate.getCategoryName()}</span>
@@ -106,7 +106,7 @@
                         <%
                             }else {
                         %>
-                    <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=<%=category.getCategoryID()%>&color_ID=<%= color.getColor_ID()%>&collectionID=<%=proCollection.getCollectionID()%>>">
+                    <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=<%=category.getCategoryID()%>&color_ID=<%= color.getColor_ID()%>&collectionID=<%=collection.getCollectionID()%>>">
                         <div style="background-color: <%= color.getColor_Name()%>"></div>
                         <span><%= color.getColor_Name()%></span>
                     </a>

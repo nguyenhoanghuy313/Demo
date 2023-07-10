@@ -9,7 +9,7 @@
 <%@page import="java.util.*" %>
 <%@page import="model.*" %>
 <%@page import="controller.*" %>
-<%@ page import="model.ProCollection" %>
+<%@ page import="model.Collection" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
@@ -41,7 +41,7 @@
 <body>
 <jsp:include page="header.jsp"/>
   <%
-      ProCollection proCollection = (ProCollection) request.getAttribute("proCollection");
+      Collection collection = (Collection) request.getAttribute("collection");
       Promotion promotion = (Promotion) request.getAttribute("promotion");
   %>
 <div class="pop_up_container">
@@ -54,13 +54,13 @@
     </div>
 </div>
     <section class="Season_Collection_Banner" id="Season_Collection_Banner">
-        <img src=<%= proCollection.getCollectionImg() %>
+        <img src=<%= collection.getCollectionImg() %>
                      alt="">
         <div class="Season_Collection_Banner_text">
-            <h1><%= proCollection.getCollectionName() %></h1>
-            <p><%= proCollection.getCollection_description() %></p>
+            <h1><%= collection.getCollectionName() %></h1>
+            <p><%= collection.getCollection_description() %></p>
             <button value="collectionID" name="collectionID">
-                <a href="${pageContext.request.contextPath}/productList-servlet?collectionID=${proCollection.getCollectionID()}&categoryID=3&color_ID=all">
+                <a href="${pageContext.request.contextPath}/productList-servlet?collectionID=${collection.getCollectionID()}&categoryID=3&color_ID=all">
                     SHOP THE COLLECTION
                 </a>
             </button>
