@@ -15,7 +15,8 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "login-servlet", urlPatterns = {"/login-servlet"})
-public class LoginServlet extends HttpServlet {
+public class
+LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

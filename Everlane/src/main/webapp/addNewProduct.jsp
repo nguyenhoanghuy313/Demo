@@ -17,9 +17,10 @@
   List<Category> cateList = c.getAllCategory();
 
   ProCollectionDAO colDAO = new ProCollectionDAO();
-  List<ProCollection> proCollectionList = (List<ProCollection>) colDAO.getAllCollections();
+  List<ProCollection> proCollectionsList = colDAO.getAllCollections();
 
   ProductImg picheckname = (ProductImg) request.getAttribute("picheckname");
+  ProductForEdit pfe = (ProductForEdit) request.getAttribute("pfe");
 %>
 <html
         class="light-style layout-menu-fixed"
@@ -274,11 +275,20 @@
                   <!-- Account -->
                   <hr class="my-0"/>
                   <div class="card-body">
-                    <form id="formAccountSettings" method="POST" onsubmit="return false" action="">
+                    <form id="formAccountSettings" method="POST"  action="CreateNewProductServlet">
                       <div class="row">
                         <div class="mb-3 col-md-6">
+                          <label class="form-label" for="productName">Product Name</label>
+                          <%if (pfe != null) {%>
+                          it's already in the database with id = <%=pfe.getProductId()%>
+                          <%}%>
+                          <input class="form-control" id="productName" name="productName"
+                                 placeholder="Please enter Product Name" type="text"/>
+                        </div>
+
+                        <div class="mb-3 col-md-6">
                           <label class="form-label" for="categoryID">Category</label>
-                          <select class="select2 form-select" id="categoryID">
+                          <select class="select2 form-select" id="categoryID" name="categoryID">
                             <option value="">Please chose Category</option>
                             <%for (Category category: cateList){%>
                               <option value=<%=category.getCategoryID()%>><%=category.getCategoryName()%></option>
@@ -286,11 +296,6 @@
                           </select>
                         </div>
 
-                        <div class="mb-3 col-md-6">
-                          <label class="form-label" for="productName">Product Name</label>
-                          <input class="form-control" id="productName" name="productName"
-                                 placeholder="Please enter Product Name" type="text"/>
-                        </div>
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="price">Price</label>
                           <input
@@ -304,9 +309,9 @@
 
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="collectionID">Collection</label>
-                          <select class="select2 form-select" id="collectionID">
+                          <select class="select2 form-select" id="collectionID" name="collectionID">
                             <option value="">Please chose Collection</option>
-                            <%for (ProCollection pc: proCollectionList){%>
+                            <%for (ProCollection pc: proCollectionsList ){%>
                             <option value="<%=pc.getCollectionID()%>"><%=pc.getCollectionName()%>
                             </option>
                             <%}%>
@@ -327,8 +332,6 @@
                       <div class="mt-2">
                         <button class="btn btn-dark me-2" type="submit">Create new Product
                         </button>
-                        <a class="btn btn-outline-secondary"
-                           href="${pageContext.request.contextPath}/ProductListManagerServlet?categoryID=all">Cancel</a>
                       </div>
                     </form>
                   </div>
@@ -340,24 +343,21 @@
                   <!-- Account -->
                   <hr class="my-0"/>
                   <div class="card-body">
-                    <form id="formAccountSettings" method="POST" onsubmit="return false">
+                    <form id="formAccountSettings" method="POST" >
                       <div class="row">
-                        <!--                      <div class="mb-3 col-md-6">-->
-                        <!--                        <label for="productID" class="form-label">Product ID</label>-->
-                        <!--                        <input-->
-                        <!--                                class="form-control"-->
-                        <!--                                type="hidden"-->
-                        <!--                                id="productID"-->
-                        <!--                                name="productID"-->
-                        <!--                                placeholder="Please enter Product ID"-->
-                        <!--                                autofocus-->
-                        <!--                        />-->
-                        <!--                      </div>-->
-
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="productID">Product ID</label>
-                          <input class="form-control" id="productID" name="productID"
-                                 placeholder="Please enter Product Name" type="text"/>
+                          <input class="form-control" id="productID" name="productID" list="product"
+                                 placeholder="Please enter Product Name"/>
+                          <datalist id="product">
+                            <option value="Kinh Doanh">
+                            <option value="Kỹ Năng">
+                            <option value="Tâm Lý">
+                            <option value="Y Học">
+                            <option value="Văn Học">
+                            <option value="Tiểu Thuyết">
+                            <option value="Tiểu Sử">
+                          </datalist>
                         </div>
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="colorID">Color</label>
