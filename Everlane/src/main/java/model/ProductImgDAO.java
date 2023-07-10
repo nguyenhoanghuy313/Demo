@@ -1,8 +1,37 @@
 package model;
 
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductImgDAO extends myDAO{
+    public List<ProductImg> getAllProductFolder(){
+        List<ProductImg> t = new ArrayList<>();
+        xSql = "select * from product_img";
+        try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            int xProduct_Img_ID;
+            String xThumbnail, xProduct_Img_1, xProduct_Img_2, xProduct_Img_3, xProduct_img_name;
+            ProductImg pi;
+            while(rs.next()){
+                xProduct_Img_ID = rs.getInt("product_img_ID");
+                xThumbnail = rs.getString("thumbnail");
+                xProduct_Img_1 = rs.getString("product_img_1");
+                xProduct_Img_2 = rs.getString("product_img_2");
+                xProduct_Img_3 = rs.getString("product_img_3");
+                xProduct_img_name = rs.getString("product_img_name");
+                pi = new ProductImg(xProduct_Img_ID, xThumbnail, xProduct_Img_1, xProduct_Img_2, xProduct_Img_3, xProduct_img_name);
+                t.add(pi);
+            }
+            rs.close();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return (t);
+    }
+
+
     public ProductImg getProductFolder(String ProductImgName){
         ProductImg pi = null;
         xSql = "select * from product_img where product_img_name like '"+ProductImgName+"';";

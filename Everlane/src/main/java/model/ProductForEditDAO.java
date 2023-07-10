@@ -5,7 +5,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductForEditDAO extends myDAO{
-    public  List<ProductForEdit> getAllProductFor
+    public  List<ProductForEdit> getAllProductForEdit(){
+        List<ProductForEdit> t = new ArrayList<>();
+        xSql = "select * from product";
+        try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            int xProductId, xCategoryId;
+            String xProductName;
+            double xPrice;
+            int xCollectionId;
+            String xDescription;
+            ProductForEdit p;
+            while(rs.next()){
+                xProductId = rs.getInt("ProductID");
+                xCategoryId = rs.getInt("CategoryID");
+                xProductName = rs.getString("ProductName");
+                xPrice = rs.getDouble("Price");
+                xCollectionId = rs.getInt("CollectionID");
+                xDescription = rs.getString("description");
+                p = new ProductForEdit(xProductId, xCategoryId, xProductName, xPrice, xCollectionId, xDescription);
+                t.add(p);
+            }
+            rs.close();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return (t);
+    }
 
     public ProductForEdit getProduct(String ProductName){
         xSql = "select * from product where ProductName like '"+ProductName+"';";

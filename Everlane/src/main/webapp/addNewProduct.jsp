@@ -19,6 +19,18 @@
   ProCollectionDAO colDAO = new ProCollectionDAO();
   List<ProCollection> proCollectionsList = colDAO.getAllCollections();
 
+  ProductForEditDAO proEditDAO = new ProductForEditDAO();
+  List<ProductForEdit> productForEditList = proEditDAO.getAllProductForEdit();
+
+  ColorDAO colorDAO = new ColorDAO();
+  List<Color> colorList = colorDAO.getAllColors();
+
+  SizeDAO sizeDAO = new SizeDAO();
+  List<Size> sizeList = sizeDAO.getAllSizes();
+
+  ProductImgDAO productImgDAO = new ProductImgDAO();
+  List<ProductImg> productImgList = productImgDAO.getAllProductFolder();
+
   ProductImg picheckname = (ProductImg) request.getAttribute("picheckname");
   ProductForEdit pfe = (ProductForEdit) request.getAttribute("pfe");
 %>
@@ -232,46 +244,7 @@
             <div class="col-md-12">
               <div class="col-md-12">
                 <div class="card mb-4">
-                  <h5 class="card-header">Step 1: Create Image File</h5>
-                  <!-- Account -->
-                  <hr class="my-0"/>
-                  <div class="card-body">
-                    <form action="CreateNewImageFolderServlet" id="formAccountSettings" method="POST">
-                      <div class="mb-3 col-md-6">
-                        <label class="form-label" for="imageName">Image Name (Name / Color Ex: The Satin V-Neck Maxi Dress / Black) </label>
-                        <input class="form-control" id="imageName" name="imageName" placeholder="Please enter Image Name"
-                               type="text" value=""/>
-                      </div>
-                      <%if (picheckname != null) {%>
-                      it's already in the database with id = <%=picheckname.getProduct_Img_ID()%>
-                      <%}%>
-                      <div class="mb-3 col-md-6">
-                        <label class="form-label" for="thumbnail">Select thumbnail image</label>
-                        <input class="form-control" id="thumbnail" name="thumbnail" type="text"/>
-                      </div>
-                      <div class="mb-3 col-md-6">
-                        <label class="form-label" for="productImg1">Select product Image 1</label>
-                        <input class="form-control" id="productImg1" name="productImg1" type="url"/>
-                      </div>
-                      <div class="mb-3 col-md-6">
-                        <label class="form-label" for="productImg2">Select product Image 2</label>
-                        <input class="form-control" id="productImg2" name="productImg2" type="url"/>
-                      </div>
-                      <div class="mb-3 col-md-6">
-                        <label class="form-label" for="productImg3">Select product Image 3</label>
-                        <input class="form-control" id="productImg3" name ="productImg3" type="url"/>
-                      </div>
-                      <div class="mt-2">
-                        <button class="btn btn-dark me-2" type="submit">Create new Image File</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-
-              </div>
-              <div class="col-md-12">
-                <div class="card mb-4">
-                  <h5 class="card-header">Step 2: Create a Product</h5>
+                  <h5 class="card-header">Create a Product</h5>
                   <!-- Account -->
                   <hr class="my-0"/>
                   <div class="card-body">
@@ -291,7 +264,7 @@
                           <select class="select2 form-select" id="categoryID" name="categoryID">
                             <option value="">Please chose Category</option>
                             <%for (Category category: cateList){%>
-                              <option value=<%=category.getCategoryID()%>><%=category.getCategoryName()%></option>
+                            <option value=<%=category.getCategoryID()%>><%=category.getCategoryName()%></option>
                             <%}%>
                           </select>
                         </div>
@@ -339,54 +312,83 @@
               </div>
               <div class="col-md-12">
                 <div class="card mb-4">
-                  <h5 class="card-header">Step 3: Create a variation</h5>
+                  <h5 class="card-header">Create Image File</h5>
                   <!-- Account -->
                   <hr class="my-0"/>
                   <div class="card-body">
-                    <form id="formAccountSettings" method="POST" >
+                    <form action="CreateNewImageFolderServlet" id="formAccountSettings" method="POST">
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label" for="imageName">Image Name (Name / Color Ex: The Satin V-Neck Maxi Dress / Black) </label>
+                        <input class="form-control" id="imageName" name="imageName" placeholder="Please enter Image Name"
+                               type="text" list="product1"/>
+                          <datalist id="product1">
+                            <%for (ProductForEdit productForEdit: productForEditList){%>
+                            <option value="<%=productForEdit.getProductName()%>">
+                            <%}%>
+                          </datalist>
+                      </div>
+                      <%if (picheckname != null) {%>
+                      it's already in the database with id = <%=picheckname.getProduct_Img_ID()%>
+                      <%}%>
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label" for="thumbnail">Select thumbnail image</label>
+                        <input class="form-control" id="thumbnail" name="thumbnail" type="text"/>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label" for="productImg1">Select product Image 1</label>
+                        <input class="form-control" id="productImg1" name="productImg1" type="url"/>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label" for="productImg2">Select product Image 2</label>
+                        <input class="form-control" id="productImg2" name="productImg2" type="url"/>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label" for="productImg3">Select product Image 3</label>
+                        <input class="form-control" id="productImg3" name ="productImg3" type="url"/>
+                      </div>
+                      <div class="mt-2">
+                        <button class="btn btn-dark me-2" type="submit">Create new Image File</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-12">
+                <div class="card mb-4">
+                  <h5 class="card-header">Create a variation</h5>
+                  <!-- Account -->
+                  <hr class="my-0"/>
+                  <div class="card-body">
+                    <form id="formAccountSettings" method="POST" action="CreateVariationServlet">
                       <div class="row">
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="productID">Product ID</label>
                           <input class="form-control" id="productID" name="productID" list="product"
                                  placeholder="Please enter Product Name"/>
                           <datalist id="product">
-                            <option value="Kinh Doanh">
-                            <option value="Kỹ Năng">
-                            <option value="Tâm Lý">
-                            <option value="Y Học">
-                            <option value="Văn Học">
-                            <option value="Tiểu Thuyết">
-                            <option value="Tiểu Sử">
+                            <%for (ProductForEdit productForEdit: productForEditList){%>
+                              <option value="<%=productForEdit.getProductId()%>"><%=productForEdit.getProductName()%></option>
+                            <%}%>
                           </datalist>
                         </div>
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="colorID">Color</label>
                           <select class="select2 form-select" id="colorID" name="colorID">
-                            <option value="">Please chose Collection</option>
-                            <!--                          in ra list các proCollection bằng loop -->
-                            <option value="Truyền value cua proCollection">Tên proCollection
-                            </option>
-                            <option value="Truyền value cua proCollection">Tên proCollection
-                            </option>
-                            <option value="Truyền value cua proCollection">Tên proCollection
-                            </option>
-                            <option value="Truyền value cua proCollection">Tên proCollection
-                            </option>
+                            <option value="">Please chose Color</option>
+                            <%for (Color color: colorList){%>
+                            <option value=<%=color.getColor_ID()%>><%=color.getColor_Name()%></option>
+                            <%}%>
+
                           </select>
                         </div>
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="sizeID">Size</label>
                           <select class="select2 form-select" id="sizeID" name="sizeID">
-                            <option value="">Please chose Collection</option>
-                            <!--                          in ra list các proCollection bằng loop -->
-                            <option value="Truyền value cua proCollection">Tên proCollection
-                            </option>
-                            <option value="Truyền value cua proCollection">Tên proCollection
-                            </option>
-                            <option value="Truyền value cua proCollection">Tên proCollection
-                            </option>
-                            <option value="Truyền value cua proCollection">Tên proCollection
-                            </option>
+                            <option value="">Please chose Size</option>
+                            <%for (Size size: sizeList){%>
+                            <option value=<%=size.getSize_ID()%>><%=size.getSize_Name()%></option>
+                            <%}%>
                           </select>
                         </div>
                         <div class="mb-3 col-md-6">
@@ -399,14 +401,21 @@
                                   type="number"
                           />
                         </div>
-
+                        <div class="mb-3 col-md-6">
+                          <label class="form-label" for="productimgID">Product Img ID</label>
+                          <input class="form-control" id="productimgID" name="productimgID" list="productimg"
+                                 placeholder="Please enter Product Img Name"/>
+                          <datalist id="productimg">
+                            <%for (ProductImg productImg: productImgList){%>
+                            <option value=<%=productImg.getProduct_Img_ID()%>><%=productImg.getProduct_img_name()%></option>
+                            <%}%>
+                          </datalist>
+                        </div>
 
                       </div>
                       <div class="mt-2">
                         <button class="btn btn-dark me-2" type="submit">Create new Variation
                         </button>
-                        <a class="btn btn-outline-secondary"
-                           href="${pageContext.request.contextPath}/ProductListManagerServlet?categoryID=all">Cancel</a>
                       </div>
                     </form>
                   </div>
