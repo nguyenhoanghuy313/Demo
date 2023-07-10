@@ -1,9 +1,8 @@
 package model;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
-public class Collection {
+public class ProCollection {
     int collectionID;
     String collectionName;
     int promotionID;
@@ -11,10 +10,10 @@ public class Collection {
     String collection_description;
     Timestamp create_date;
 
-    public Collection() {
+    public ProCollection() {
     }
 
-    public Collection(int collectionID, String collectionName, int promotionID, String collectionImg, String collection_description, Timestamp create_date) {
+    public ProCollection(int collectionID, String collectionName, int promotionID, String collectionImg, String collection_description, Timestamp create_date) {
         this.collectionID = collectionID;
         this.collectionName = collectionName;
         this.promotionID = promotionID;

@@ -30,11 +30,11 @@ public class LoginServlet extends HttpServlet {
             UserDAO u = new UserDAO();
 //            ProductsDAO p = new ProductsDAO();
             CategoryDAO c = new CategoryDAO();
-            CollectionDAO col = new CollectionDAO();
+            ProCollectionDAO col = new ProCollectionDAO();
 
 //            List<Product> data = p.getAllProducts();
             List<Category> cateList = c.getAllCategory();
-            Collection collection = col.getCollections("1");
+            ProCollection proCollection = col.getCollections("1");
 
             User checkUser = u.checkUser(email, password);
             User Role = u.getRoleByEmail(email);
@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("acc", checkUser);
 //                    req.setAttribute("data", data);
                     req.setAttribute("cateList", cateList);
-                    req.setAttribute("collection", collection);
+                    req.setAttribute("collection", proCollection);
                     req.getRequestDispatcher("home.jsp").forward(req, resp);
 //                    return;
 //                } else if (Role.getRole() == 1) {

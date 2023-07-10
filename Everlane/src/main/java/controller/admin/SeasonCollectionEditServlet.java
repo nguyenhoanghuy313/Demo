@@ -5,11 +5,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Collection;
-import model.CollectionDAO;
+import model.ProCollection;
+import model.ProCollectionDAO;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 @WebServlet(name = "seasonCollectionEditServlet", urlPatterns = {"/seasonCollectionEditServlet"})
@@ -18,16 +17,16 @@ public class SeasonCollectionEditServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(req.getParameter("collectionIDGet")!=null)
         {
-            CollectionDAO col = new CollectionDAO();
-            Collection collection = col.getCollections(req.getParameter("collectionIDGet"));
+            ProCollectionDAO col = new ProCollectionDAO();
+            ProCollection collection = col.getCollections(req.getParameter("collectionIDGet"));
             req.setAttribute("c", collection);
             req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
 
         }
         else
         {
-            CollectionDAO col = new CollectionDAO();
-            Collection collection = col.getCollections("1");
+            ProCollectionDAO col = new ProCollectionDAO();
+            ProCollection collection = col.getCollections("1");
             req.setAttribute("c", collection);
             req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
 
@@ -43,9 +42,9 @@ public class SeasonCollectionEditServlet extends HttpServlet {
         String collectionImage = req.getParameter("collectionImg");
         String collectionID = req.getParameter("collectionID");
         String createDate = req.getParameter("createDate");
-        CollectionDAO col = new CollectionDAO();
+        ProCollectionDAO col = new ProCollectionDAO();
         col.updateCollection(collectionName,collectionImage,collectionDescription, Timestamp.valueOf(createDate),Integer.parseInt(collectionID));
-        Collection collection = col.getCollections(collectionID);
+        ProCollection collection = col.getCollections(collectionID);
         req.setAttribute("c", collection);
         req.setAttribute("message", "Update successfully");
         req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);

@@ -19,13 +19,13 @@ public class LogoutServlet extends HttpServlet {
         session.removeAttribute("acc");
 //        ProductsDAO p = new ProductsDAO();
         CategoryDAO c = new CategoryDAO();
-        CollectionDAO col = new CollectionDAO();
+        ProCollectionDAO col = new ProCollectionDAO();
         PromotionDAO promotionDAO = new PromotionDAO();
 
 
 //        List<Product> data = p.getAllProducts();
         List<Category> cateList = c.getAllCategory();
-        Collection collection = col.getCollections("1");
+        ProCollection proCollection = col.getCollections("1");
 
         Promotion promotion = promotionDAO.getLastestPromotion();
         request.setAttribute("promotion", promotion);
@@ -33,7 +33,7 @@ public class LogoutServlet extends HttpServlet {
 
 //        request.setAttribute("data", data);\
         request.setAttribute("cateList", cateList);
-        request.setAttribute("collection", collection);
+        request.setAttribute("collection", proCollection);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 

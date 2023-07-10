@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="model.Collection" %>
+<%@ page import="model.ProCollection" %>
 <%@ page import="java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -63,7 +63,7 @@
     <script src="a.template/assets/js/config.js"></script>
 </head>
 <%
-    List<Collection> collectionList = (List<Collection>) request.getAttribute("collectionList");
+    List<ProCollection> proCollectionList = (List<ProCollection>) request.getAttribute("proCollectionList");
 %>
 <body>
 <!-- Layout wrapper -->
