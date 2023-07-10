@@ -152,6 +152,13 @@
                             </a>
                         </li>
                     </ul>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="seasonCollectionUpdatePromotion.jsp" class="menu-link">
+                                <div data-i18n="Promotion List">Season Collection (Update Promotion)</div>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </aside>

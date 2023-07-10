@@ -10,6 +10,7 @@ public class Collection {
     String collectionImg;
     String collection_description;
     Timestamp create_date;
+
     public Collection() {
     }
 

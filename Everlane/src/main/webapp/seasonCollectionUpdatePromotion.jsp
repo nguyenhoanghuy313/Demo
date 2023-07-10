@@ -1,47 +1,59 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: minileisduk
+  Date: 29/06/2023
+  Time: 12:02 SA
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="model.Collection" %>
+<%@ page import="java.util.List" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html
-        lang="en"
         class="light-style layout-menu-fixed"
-        dir="ltr"
-        data-theme="theme-default"
         data-assets-path="../a.template/assets/"
         data-template="vertical-menu-template-free"
+        data-theme="theme-default"
+        dir="ltr"
+        lang="en"
 >
 <head>
     <meta charset="utf-8"/>
     <meta
-            name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+            name="viewport"
     />
 
-    <title>Promotion List</title>
+    <title>Season Collection Edit</title>
 
-    <meta name="description" content=""/>
+    <meta content="" name="description"/>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
+    <link href="a.template/assets/img/favicon/favicon.png" rel="icon" type="image/x-icon"/>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
     <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet"
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="a.template/assets/vendor/fonts/boxicons.css"/>
+    <link href="a.template/assets/vendor/fonts/boxicons.css" rel="stylesheet"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="a.template/assets/vendor/css/core.css" class="template-customizer-core-css"/>
-    <link rel="stylesheet" href="a.template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css"/>
-    <link rel="stylesheet" href="a.template/assets/css/demo.css"/>
+    <link class="template-customizer-core-css" href="a.template/assets/vendor/css/core.css" rel="stylesheet"/>
+    <link class="template-customizer-theme-css" href="a.template/assets/vendor/css/theme-default.css" rel="stylesheet"/>
+    <link href="a.template/assets/css/demo.css" rel="stylesheet"/>
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+    <link href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet"/>
+
+    <link href="a.template/assets/vendor/libs/apex-charts/apex-charts.css" rel="stylesheet"/>
 
     <!-- Page CSS -->
-    <link rel="stylesheet" href="adminpage/product-list/product-list.css">
 
     <!-- Helpers -->
     <script src="a.template/assets/vendor/js/helpers.js"></script>
@@ -50,12 +62,15 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="a.template/assets/js/config.js"></script>
 </head>
-
+<%
+    List<Collection> collectionList = (List<Collection>) request.getAttribute("collectionList");
+%>
 <body>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
         <!-- Menu -->
+
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
                 <a href="dashboardManager.jsp" class="app-brand-link">
@@ -109,7 +124,7 @@
                         <div data-i18n="Marketing">Marketing</div>
                     </a>
                     <ul class="menu-sub">
-                        <li class="menu-item">
+                        <li class="menu-item active">
                             <a href="${pageContext.request.contextPath}/seasonCollectionEditServlet" class="menu-link">
                                 <div data-i18n="Season Collection">Season Collection (Home Page)</div>
                             </a>
@@ -119,13 +134,6 @@
                         <li class="menu-item">
                             <a href="${pageContext.request.contextPath}/categoryEditServlet" class="menu-link">
                                 <div data-i18n="Season Collection">Category (Home Page)</div>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="menu-sub">
-                        <li class="menu-item active">
-                            <a href="storyList.jsp" class="menu-link">
-                                <div data-i18n="Story List">Story List (Story Page)</div>
                             </a>
                         </li>
                     </ul>
@@ -203,69 +211,93 @@
                 </div>
             </nav>
             <!-- / Navbar -->
+
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <!-- Content -->
-                <div class="list_option_container">
-                    <div class="list_option_container1">
-                        <div class="input-group ">
-                            <a href="editStory.jsp" class="btn btn-outline-dark" type="button">New Story</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container-xxl flex-grow-1 container-p-y ">
-                    <div class="card">
-                        <h5 class="card-header">Promotion</h5>
-                        <div class="table-responsive text-nowrap listtable ">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>PROMOTION ID</th>
-                                    <th>PROMOTION NAME</th>
-                                    <th>PROMOTION DESCRIPTION</th>
-                                    <th>DISCOUNT RATE</th>
-                                    <th>START DATE</th>
-                                    <th>END DATE</th>
-                                    <th>BACKGROUND COLOR</th>
-                                    <th>ACTION</th>
-                                </tr>
-                                </thead>
-                                <tbody class="table-border-bottom-0">
-                                <%
-                                for (Story s: storyList){
-                                %>
-                                <th>PROMOTION ID</th>
-                                <th>PROMOTION NAME</th>
-                                <th>PROMOTION DESCRIPTION</th>
-                                <th>DISCOUNT RATE</th>
-                                <th>START DATE</th>
-                                <th>END DATE</th>
-                                <th>BACKGROUND COLOR</th>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="StoryEdit?StoryID=<%=s.getStory_ID()%>"
-                                            ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                                            >
-                                            <a class="dropdown-item" href="StoryServlet?input=delete&StoryID=<%=s.getStory_ID()%>"
-                                               onclick="return confirm('Are you sure want to delete this story?')"
-                                            ><i class="bx bx-trash me-1"></i> Delete</a
-                                            >
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Marketing / </span> Season
+                        Collection
+                    </h4>
+                    <div class="row">
+                        <div class="col-xxl">
+                            <div class="card mb-4">
+                                <div class="card-header d-flex align-items-center justify-content-between">
+                                    <h5 class="mb-0">Edit Season Collection</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form action="seasonCollectionEditServlet" method="get" id="frm">
+                                        <div class="row mb-3">
+                                            <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Select
+                                                Collection</label>
+                                            <select class=" form-select col-sm-10" id="exampleFormControlSelect1"
+                                                    name="collectionIDGet"
+                                                    aria-label="Default select example" onchange="change()">
+<%--                                                <option value="${c.getCollectionID()}" selected>${c.getCollectionName()}</option>--%>
+                                                <option value="1" ${c.getCollectionID() != "1" ? "" : "selected"}>Summer Collection</option>
+                                                <option value="2" ${c.getCollectionID() != "2" ? "" : "selected"}>Winter Collection</option>
+                                                <option value="3" ${c.getCollectionID() != "3" ? "" : "selected"}>Spring Collection</option>
+                                                <option value="4" ${c.getCollectionID() != "4" ? "" : "selected"}>Autumn Collection</option>
+                                            </select>
                                         </div>
-                                    </div>
-                                </td>
-                                </tr>
-                                <%
-                                }
-                                %>
-                                </tbody>
-
-                            </table>
+                                    </form>
+                                    <form action="seasonCollectionEditServlet" method="post" >
+                                        <div class="row mb-3">
+                                            <div class="col-sm-10">
+                                                <input class="form-control" id="basic-default-image"
+                                                       name="collectionImg"
+                                                       value="${c.getCollectionImg()}" type="hidden"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-sm-10">
+                                                <input
+                                                        class="form-control"
+                                                        name="collectionName"
+                                                        id="basic-default-h1"
+                                                        value="${c.getCollectionName()}"
+                                                        type="hidden"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-sm-10">
+                                                <input
+                                                        class="form-control"
+                                                        name="collectionDescription"
+                                                        id="basic-default-p"
+                                                        value="${c.getCollection_description()}"
+                                                        type="hidden"
+                                                />
+                                            </div>
+                                        </div>
+                                        <input class="form-control"
+                                               name="collectionID"
+                                               value="${c.getCollectionID()}" type="hidden"/>
+                                        <input type="hidden" id="currentTimeInput" name="createDate">
+                                        <div class="row mb-3">
+                                            <label class="col-sm-2 col-form-label"
+                                                   for="basic-default-promo">Promotion ID</label>
+                                            <div class="col-sm-10">
+                                                <input
+                                                        class="form-control"
+                                                        name="collectionDescription"
+                                                        id="basic-default-promo"
+                                                        value=""
+                                                        type="text"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div style="color:green;">
+                                            ${message}
+                                        </div>
+                                        <div class="mt-2">
+                                            <button type="submit" class="btn btn-dark me-2">Save changes</button>
+                                            <a href="" type="reset" class="btn btn-outline-secondary">Cancel</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -284,8 +316,36 @@
 </div>
 <!-- / Layout wrapper -->
 
+
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
+<script>
+    function getCurrentDateTime() {
+        var currentDateTime = new Date();
+
+        var year = currentDateTime.getFullYear();
+        var month = currentDateTime.getMonth() + 1; // Tháng được đánh số từ 0 đến 11, nên cần +1
+        var day = currentDateTime.getDate();
+        var hours = currentDateTime.getHours();
+        var minutes = currentDateTime.getMinutes();
+        var seconds = currentDateTime.getSeconds();
+
+        var formattedDateTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds ;
+
+        return formattedDateTime;
+    }
+
+    // Lấy tham chiếu đến phần tử input
+    var inputElement = document.getElementById('currentTimeInput');
+
+    // Gán giá trị thời gian hiện tại vào thuộc tính value của input
+    inputElement.value = getCurrentDateTime();
+</script>
+<script>
+    function change() {
+        document.getElementById("frm").submit();
+    }
+</script>
 <script src="a.template/assets/vendor/libs/jquery/jquery.js"></script>
 <script src="a.template/assets/vendor/libs/popper/popper.js"></script>
 <script src="a.template/assets/vendor/js/bootstrap.js"></script>
@@ -295,12 +355,13 @@
 <!-- endbuild -->
 
 <!-- Vendors JS -->
+<script src="a.template/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 <!-- Main JS -->
 <script src="a.template/assets/js/main.js"></script>
 
 <!-- Page JS -->
-<script src="https://md-block.verou.me/md-block.js" type="module"></script>
+<script src="a.template/assets/js/dashboards-analytics.js"></script>
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
