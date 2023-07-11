@@ -93,7 +93,7 @@
 
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
-                <li class="menu-item active">
+                <li class="menu-item">
                     <a href="dashboardManager.jsp" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
@@ -112,7 +112,7 @@
                     </a>
                 </li>
                 <!-- User List -->
-                <li class="menu-item">
+                <li class="menu-item active">
                     <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=all" class="menu-link">
                         <i class='menu-icon tf-icons bx bx-user'></i>
                         <div data-i18n="User List">User List</div>
@@ -141,6 +141,7 @@
                 </li>
             </ul>
         </aside>
+
         <!-- / Menu -->
 
         <!-- Layout container -->
@@ -351,7 +352,7 @@
                                                     ><i class="bx bx-edit-alt me-1"></i> Edit</a
                                                     >
                                                     <a class="dropdown-item" href="DeleteUser?UserID=${u.getUserID()}"
-                                                       onclick="return confirm('Are you sure want to delete this ticket?')"
+                                                       onclick="return confirm('Are you sure want to delete this user?')"
                                                     ><i class="bx bx-trash me-1"></i> Delete</a
                                                     >
                                                 </div>

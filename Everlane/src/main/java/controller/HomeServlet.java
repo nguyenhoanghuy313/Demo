@@ -8,7 +8,7 @@ import model.Collection;
 
 
 import java.util.*;
-@WebServlet(name = "category-servlet", value = "/category-servlet")
+@WebServlet(name = "home-servlet", value = "/home-servlet")
 public class HomeServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -23,8 +23,8 @@ public class CartItemList extends HttpServlet {
     CartDAO cd = new CartDAO();
     CartItemDAO cid = new CartItemDAO();
     int   xProductID = Integer.parseInt(request.getParameter("ProductID"));
-    List<CartItem> cartItemList = cid.getCartItem(u.getUserID(), xProductID);
-    request.setAttribute("cartItemList", cartItemList);
+//    List<CartItem> cartItemList = cid.getCartItem(u.getUserID());
+//    request.setAttribute("cartItemList", cartItemList);
 //    request.getRequestDispatcher("home.jsp").forward(request,response);
 
     }

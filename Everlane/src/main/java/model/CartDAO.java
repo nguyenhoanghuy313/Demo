@@ -3,14 +3,12 @@ import entity.*;
 import java.util.ArrayList;
 import java.util.List;
 public class CartDAO extends myDAO {
-    public void insertProductIntoCart(int userID){
-//        int userID = Integer.parseInt(userIDraw);
-//        int cartID = Integer.parseInt(cartIDraw);
+    public void insertProductIntoCart(String  userID){
+        int xUserID = Integer.parseInt(userID);
         xSql = "insert into Cart(UserID) values (?)";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, userID);
-//            ps.setInt(2, cartID);
+            ps.setInt(1, xUserID);
             ps.executeUpdate();
         } catch (Exception e){
             e.printStackTrace();
@@ -48,5 +46,17 @@ public class CartDAO extends myDAO {
             e.printStackTrace();
         }
         return productList;
+    }
+
+    public void delete(String cartID) {
+        xSql = "delete from cart where CartID=?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, cartID);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

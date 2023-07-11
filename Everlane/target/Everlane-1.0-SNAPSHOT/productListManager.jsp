@@ -96,7 +96,7 @@
 
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
-                <li class="menu-item active">
+                <li class="menu-item">
                     <a href="dashboardManager.jsp" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
@@ -107,7 +107,7 @@
                 <!-- Pages -->
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
                 <!-- Product List -->
-                <li class="menu-item">
+                <li class="menu-item active">
                     <a href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
                        class="menu-link">
                         <i class='menu-icon tf-icons bx bxs-package'></i>
@@ -129,14 +129,14 @@
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="seasonCollectionEdit.jsp" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/seasonCollectionEditServlet" class="menu-link">
                                 <div data-i18n="Season Collection">Season Collection (Home Page)</div>
                             </a>
                         </li>
                     </ul>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="categoryEdit.jsp" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/categoryEditServlet" class="menu-link">
                                 <div data-i18n="Season Collection">Category (Home Page)</div>
                             </a>
                         </li>
@@ -144,6 +144,7 @@
                 </li>
             </ul>
         </aside>
+
         <!-- / Menu -->
 
         <!-- Layout container -->
@@ -345,11 +346,10 @@
                                                 ><i class="bx bx-edit-alt me-1"></i> Edit</a
                                                 >
                                                 <a class="dropdown-item"
-                                                   href="${pageContext.request.contextPath}/DeleteProduct?ProductID=<%=x.getProductID()%>"
+                                                   href="${pageContext.request.contextPath}/DeleteProduct?ProductID=<%=x.getProductID()%>&color_Name=<%=x.getColor_Name()%>&size_Name=<%=x.getSize_Name()%>"
                                                    onclick="return confirm(
-                                                                    'Are you sure want to delete this ticket?')"
-                                                ><i class="bx bx-trash me-1"></i> Delete</a
-                                                >
+                                                                    'Are you sure want to delete this product?')"
+                                                ><i class="bx bx-trash me-1"></i> Delete</a>
                                             </div>
                                         </div>
                                     </td>

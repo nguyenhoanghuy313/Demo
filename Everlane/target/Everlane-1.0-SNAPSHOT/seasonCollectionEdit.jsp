@@ -92,7 +92,7 @@
 
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
-                <li class="menu-item active">
+                <li class="menu-item">
                     <a href="dashboardManager.jsp" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
@@ -104,7 +104,7 @@
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
                 <!-- Product List -->
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/ProductListManagerServlet?categoryID=all"
+                    <a href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
                        class="menu-link">
                         <i class='menu-icon tf-icons bx bxs-package'></i>
                         <div data-i18n="Product List">Product List</div>
@@ -118,13 +118,13 @@
                     </a>
                 </li>
                 <!-- Forms -->
-                <li class="menu-item">
+                <li class="menu-item active">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-detail"></i>
                         <div data-i18n="Marketing">Marketing</div>
                     </a>
                     <ul class="menu-sub">
-                        <li class="menu-item">
+                        <li class="menu-item active">
                             <a href="${pageContext.request.contextPath}/seasonCollectionEditServlet" class="menu-link">
                                 <div data-i18n="Season Collection">Season Collection (Home Page)</div>
                             </a>
@@ -140,6 +140,7 @@
                 </li>
             </ul>
         </aside>
+
         <!-- / Menu -->
 
         <!-- Layout container -->
@@ -232,10 +233,11 @@
                                             <select class=" form-select col-sm-10" id="exampleFormControlSelect1"
                                                     name="collectionIDGet"
                                                     aria-label="Default select example" onchange="change()">
-                                                <option value="${c.getCollectionID()}" selected>${c.getCollectionName()}</option>
-                                                <option value="1" ${c.getCollectionID() != "1" ? "" : "disable"}>${c.getCollectionName()}</option>
-                                                <option value="2" ${c.getCollectionID() != "2" ? "" : "disable"}>${c.getCollectionName()}</option>
-                                                <option value="3" ${c.getCollectionID() != "3" ? "" : "disable"}>${c.getCollectionName()}</option>
+<%--                                                <option value="${c.getCollectionID()}" selected>${c.getCollectionName()}</option>--%>
+                                                <option value="1" ${c.getCollectionID() != "1" ? "" : "selected"}>Summer Collection</option>
+                                                <option value="2" ${c.getCollectionID() != "2" ? "" : "selected"}>Winter Collection</option>
+                                                <option value="3" ${c.getCollectionID() != "3" ? "" : "selected"}>Spring Collection</option>
+                                                <option value="3" ${c.getCollectionID() != "4" ? "" : "selected"}>Autumn Collection</option>
                                             </select>
                                         </div>
                                     </form>
@@ -247,7 +249,6 @@
                                                 <input class="form-control" id="basic-default-image"
                                                        name="collectionImg"
                                                        value="${c.getCollectionImg()}" type="text"/>
-
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -279,6 +280,8 @@
                                         <input class="form-control"
                                                name="collectionID"
                                                value="${c.getCollectionID()}" type="hidden"/>
+                                        <input type="hidden" id="currentTimeInput" name="createDate">
+
                                         <div style="color:green;">
                                             ${message}
                                         </div>
@@ -310,6 +313,28 @@
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
+<script>
+    function getCurrentDateTime() {
+        var currentDateTime = new Date();
+
+        var year = currentDateTime.getFullYear();
+        var month = currentDateTime.getMonth() + 1; // Tháng được đánh số từ 0 đến 11, nên cần +1
+        var day = currentDateTime.getDate();
+        var hours = currentDateTime.getHours();
+        var minutes = currentDateTime.getMinutes();
+        var seconds = currentDateTime.getSeconds();
+
+        var formattedDateTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds ;
+
+        return formattedDateTime;
+    }
+
+    // Lấy tham chiếu đến phần tử input
+    var inputElement = document.getElementById('currentTimeInput');
+
+    // Gán giá trị thời gian hiện tại vào thuộc tính value của input
+    inputElement.value = getCurrentDateTime();
+</script>
 <script>
     function change() {
         document.getElementById("frm").submit();

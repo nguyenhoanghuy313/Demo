@@ -2,7 +2,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="entity.CartItem" %>
 <%@ page import="model.CartItemDAO" %>
-<%@ page import="model.Product" %><%--
+<%@ page import="model.Product" %>
+<%--
   Created by IntelliJ IDEA.
   User: minileisduk
   Date: 5/17/2023
@@ -39,6 +40,7 @@
 <%
     User u = (User) request.getSession().getAttribute("currUser");
     int uID = 0;
+    String xUID = String.valueOf(uID);
     if (u != null) {
         uID = u.getUserID();
     }
@@ -50,6 +52,7 @@
 //    int uID = u.getUserID();
     CartItemDAO cid = new CartItemDAO();
     List<Product> cartItemList = cid.getUserItem(uID);
+
 %>
 <header>
     <%-- web--%>
@@ -84,123 +87,53 @@
 <%--                </div>--%>
 <%--            </c:if>--%>
             <%
+                int itemCount = cartItemList.size();  // Số lượng mục trong giỏ hàng
+                int totalValue = 0;  // Tổng giá trị của các mục
+                List<CartItem> cartItemList2 = cid.getCartItem(xUID);
                 for (Product ci: cartItemList){
+                    totalValue += ci.getPrice();
+
+//                    for(CartItem ci2: cartItemList2){
+
             %>
             <div class="cart_item">
                 <a class="cart_item_img">
-                    <img src="<%=ci.getProduct_img_1()%>"
+                    <img src="<%=ci.getThumbnail()%>"
                          alt="">
                 </a>
                 <div class="cart_item_text">
                     <div class="cart_item_name">
                         <p><%=ci.getProductName()%></p>
-                        <a><i class='bx bx-trash'></i></a>
+                        <a href="DeleteFromCart?ProductID=<%=ci.getProductID()%>&variationID=<%=ci.getVariationID()%>"><i class='bx bx-trash'></i></a>
                     </div>
                     <p><%=ci.getSize_Name()%> | <%=ci.getColor_Name()%>></p>
                     <div class="cart_item_price">
                         <p>₫<%=ci.getPrice()%>></p>
                         <div class="cart_item_quantity">
-                            <button><i class='bx bx-minus'></i></button>
-                            <div><p>1</p></div>
-                            <button><i class='bx bx-plus'></i></button>
+                            <%
+                                for (CartItem ci2: cartItemList2){
+                            %>
+                            <button class='bx bx-minus' onclick="decreaseAmount(this)"></button>
+                            <p id="amount"><%=ci2.getQuantity()%></p>
+                            <button class='bx bx-plus' onclick="increaseAmount(this)"></button>
+                            <%
+                                }
+                            %>
                         </div>
                     </div>
                 </div>
             </div>
             <%
+//                    }
                 }
             %>
-            <div class="cart_item">
-                <a class="cart_item_img">
-                    <img src="https://media.everlane.com/image/upload/c_fill,w_96,ar_72:96,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/2cedb2b6_ade5"
-                         alt="">
-                </a>
-                <div class="cart_item_text">
-                    <div class="cart_item_name">
-                        <p>The Smock Dress</p>
-                        <a><i class='bx bx-trash'></i></a>
-                    </div>
-                    <p>XX Small | Black</p>
-                    <div class="cart_item_price">
-                        <p>₫2,896,300</p>
-                        <div class="cart_item_quantity">
-                            <button><i class='bx bx-minus'></i></button>
-                            <div><p>1</p></div>
-                            <button><i class='bx bx-plus'></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-<%--            <div class="cart_item">--%>
-<%--                <a class="cart_item_img">--%>
-<%--                    <img src="https://media.everlane.com/image/upload/c_fill,w_96,ar_72:96,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/2cedb2b6_ade5"--%>
-<%--                         alt="">--%>
-<%--                </a>--%>
-<%--                <div class="cart_item_text">--%>
-<%--                    <div class="cart_item_name">--%>
-<%--                        <p>The Smock Dress</p>--%>
-<%--                        <a><i class='bx bx-trash'></i></a>--%>
-<%--                    </div>--%>
-<%--                    <p>XX Small | Black</p>--%>
-<%--                    <div class="cart_item_price">--%>
-<%--                        <p>₫2,896,300</p>--%>
-<%--                        <div class="cart_item_quantity">--%>
-<%--                            <button><i class='bx bx-minus'></i></button>--%>
-<%--                            <div><p>1</p></div>--%>
-<%--                            <button><i class='bx bx-plus'></i></button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="cart_item">--%>
-<%--                <a class="cart_item_img">--%>
-<%--                    <img src="https://media.everlane.com/image/upload/c_fill,w_96,ar_72:96,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/2cedb2b6_ade5"--%>
-<%--                         alt="">--%>
-<%--                </a>--%>
-<%--                <div class="cart_item_text">--%>
-<%--                    <div class="cart_item_name">--%>
-<%--                        <p>The Smock Dress</p>--%>
-<%--                        <a><i class='bx bx-trash'></i></a>--%>
-<%--                    </div>--%>
-<%--                    <p>XX Small | Black</p>--%>
-<%--                    <div class="cart_item_price">--%>
-<%--                        <p>₫2,896,300</p>--%>
-<%--                        <div class="cart_item_quantity">--%>
-<%--                            <button><i class='bx bx-minus'></i></button>--%>
-<%--                            <div><p>1</p></div>--%>
-<%--                            <button><i class='bx bx-plus'></i></button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="cart_item">--%>
-<%--                <a class="cart_item_img">--%>
-<%--                    <img src="https://media.everlane.com/image/upload/c_fill,w_96,ar_72:96,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/2cedb2b6_ade5"--%>
-<%--                         alt="">--%>
-<%--                </a>--%>
-<%--                <div class="cart_item_text">--%>
-<%--                    <div class="cart_item_name">--%>
-<%--                        <p>The Smock Dress</p>--%>
-<%--                        <a><i class='bx bx-trash'></i></a>--%>
-<%--                    </div>--%>
-<%--                    <p>XX Small | Black</p>--%>
-<%--                    <div class="cart_item_price">--%>
-<%--                        <p>₫2,896,300</p>--%>
-<%--                        <div class="cart_item_quantity">--%>
-<%--                            <button><i class='bx bx-minus'></i></button>--%>
-<%--                            <div><p>1</p></div>--%>
-<%--                            <button><i class='bx bx-plus'></i></button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
         </div>
         <div class="checkout_container">
             <div class="subtotal_container">
-                <p>Subtotal (3 items)</p>
-                <p>₫4,737,200</p>
+                <p>Subtotal (<%=itemCount%> items)</p>  <!-- Hiển thị số lượng mục trong giỏ hàng -->
+                <p>₫<%=totalValue%></p>
             </div>
-            <button>Continue To Checkout</button>
+            <a href="${pageContext.request.contextPath}/Checkout">Continue To Checkout</a>
         </div>
     </div>
 

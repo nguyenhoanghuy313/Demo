@@ -9,6 +9,8 @@ public class User {
     Date dob;
     int sex, role;
     String phone, userImg;
+    String address;
+    String city;
 
     public User() {
     }

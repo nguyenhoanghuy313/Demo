@@ -13,6 +13,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
+    <%
+        List<Product> productList = (List<Product>) request.getAttribute("productList");
+        List<Product> productListOnClick = (List<Product>) request.getAttribute("productListOnClick");
+        String mess = (String) request.getAttribute("Message");
+        Product pi = (Product) request.getAttribute("pi");
+        List<Color> colors = (List<Color>) request.getAttribute("colors");
+        List<Size> sizes = (List<Size>) request.getAttribute("sizes");
+    %>
     <%--    icon--%>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -22,20 +30,13 @@
     <link rel="stylesheet" href="homepage/best-seller-slider1.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
-    <title>Product Detail</title>
+    <title><%=pi.getProductName()%></title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<%
-    List<Product> productList = (List<Product>) request.getAttribute("productList");
-    List<Product> productListOnClick = (List<Product>) request.getAttribute("productListOnClick");
 
-    Product pi = (Product) request.getAttribute("pi");
-    List<Color> colors = (List<Color>) request.getAttribute("colors");
-    List<Size> sizes = (List<Size>) request.getAttribute("sizes");
-%>
 <section class="Product_Detail_Container">
     <div class="Product_Image_Container">
         <img src=<%= pi.getThumbnail()%>>
@@ -78,28 +79,17 @@
                 <% } %>
             </div>
         </div>
-<%--        <%--%>
-<%--            int xUserID = 0; // Set a default value for xUserID--%>
-<%--            int xCart_itemID = 0; // Set a default value for xCart_itemID--%>
-<%--            int xCartID = 0;--%>
-
-<%--            if (request.getAttribute("xUserID") != null) {--%>
-<%--                xUserID = (int) request.getAttribute("xUserID");--%>
-<%--            }--%>
-
-<%--            if (request.getAttribute("xCart_itemID") != null) {--%>
-<%--                xCart_itemID = (int) request.getAttribute("xCart_itemID");--%>
-<%--            }--%>
-
-<%--            if (request.getAttribute("xCartID") != null) {--%>
-<%--                xCartID = (int) request.getAttribute("xCart_itemID");--%>
-<%--            }--%>
-<%--        %>--%>
-            <a href="${pageContext.request.contextPath}/addToCart?ProductID=<%=pi.getProductID()%>">Add To Bag</a>
+            <a href="${pageContext.request.contextPath}/addToCart?ProductID=<%=pi.getProductID()%>&VariationID=<%=pi.getVariationID()%>">Add To Bag</a>
         <div class="Product_Description">
             <h1>Description</h1>
             <p>Made of 100% cotton poplin with a subtle sheen, the Smock Dress has a comfortable, breathable feel with
                 an effortlessly polished look.</p>
+            <p> <%=mess%></p>
+<%--            <form action="addToCart" method="post">--%>
+<%--                <h2>--%>
+<%--                    ${Message}--%>
+<%--                </h2>--%>
+<%--            </form>--%>
         </div>
     </div>
 

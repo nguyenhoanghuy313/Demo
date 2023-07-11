@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -459,6 +460,23 @@ public class UserDAO extends myDAO {
             System.out.println("ChangePass: " + e.getMessage());
         }
     }
+
+    public void insertDetailed(String FirstName, String phone, String userID){
+        int xUserID = Integer.parseInt(userID);
+        xSql = "update swp_project.user set FirstName = " + "'"+ FirstName + "'" + ", Phone = "+ "'"+ phone + "'" +" where UserID = " +userID;
+        try {
+            ps = con.prepareStatement(xSql);
+//            ps.setString(1, firstName);
+//            ps.setString(2, phoneNum);
+//            ps.setInt(1, xUserID);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("insertDetailed: " + e.getMessage());
+        }
+    }
+
+
 
 
 //Nguyễn Đắc Hoàng Đạt - HE170720
