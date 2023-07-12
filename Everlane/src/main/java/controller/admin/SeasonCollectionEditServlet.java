@@ -22,15 +22,13 @@ public class SeasonCollectionEditServlet extends HttpServlet {
             Collection collection = col.getCollections(req.getParameter("collectionIDGet"));
             req.setAttribute("c", collection);
             req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
-
         }
         else
         {
             CollectionDAO col = new CollectionDAO();
-            Collection collection = col.getCollections("1");
+            Collection collection = col.getCollectionsByDate();
             req.setAttribute("c", collection);
             req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
-
         }
 
     }
@@ -44,10 +42,25 @@ public class SeasonCollectionEditServlet extends HttpServlet {
         String collectionID = req.getParameter("collectionID");
         String createDate = req.getParameter("createDate");
         CollectionDAO col = new CollectionDAO();
-        col.updateCollection(collectionName,collectionImage,collectionDescription, Timestamp.valueOf(createDate),Integer.parseInt(collectionID));
-        Collection collection = col.getCollections(collectionID);
-        req.setAttribute("c", collection);
-        req.setAttribute("message", "Update successfully");
-        req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
+        if (collectionName.equals("") || collectionDescription.equals("") || collectionImage.equals("")) {
+            Collection collection = col.getCollections(collectionID);
+            req.setAttribute("c", collection);
+            req.setAttribute("message", "Must Enter All Field");
+            req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
+        }
+         else if(!collectionImage.endsWith(".jpg") && !collectionImage.endsWith(".png"))
+        {
+            Collection collection = col.getCollections(collectionID);
+            req.setAttribute("c", collection);
+            req.setAttribute("message", "Must Enter Image Link End With .jpg or .png");
+            req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
+        } else {
+            col.updateCollection(collectionName,collectionImage,collectionDescription, Timestamp.valueOf(createDate),Integer.parseInt(collectionID));
+            Collection collection = col.getCollections(collectionID);
+            req.setAttribute("c", collection);
+            req.setAttribute("message", "Update successfully");
+            req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
+        }
+
     }
 }
