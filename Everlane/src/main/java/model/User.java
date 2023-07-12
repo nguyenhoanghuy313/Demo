@@ -5,9 +5,10 @@ import java.util.Date;
 
 public class User {
     int userID;
-    String userName, password, email, firstName, lastName,dob;
-    int sex, phone;
-    String role;
+    String userName, password, email, firstName, lastName;
+    Date dob;
+    int sex, role;
+    String phone, userImg;
 
     public User() {
     }
@@ -17,17 +18,11 @@ public class User {
         this.email = email;
     }
 
-    public User(String password, String email, String role) {
-        this.password = password;
-        this.email = email;
+    public User(int role) {
         this.role = role;
     }
 
-    public User(String role) {
-        this.role = role;
-    }
-
-    public User(int userID, String userName, String password, String email, String firstName, String lastName, String dob, int sex, int phone, String role) {
+    public User(int userID, String userName, String password, String email, String firstName, String lastName, Date dob, int sex, int role, String phone, String userImg) {
         this.userID = userID;
         this.userName = userName;
         this.password = password;
@@ -36,8 +31,9 @@ public class User {
         this.lastName = lastName;
         this.dob = dob;
         this.sex = sex;
-        this.phone = phone;
         this.role = role;
+        this.phone = phone;
+        this.userImg = userImg;
     }
 
     public int getUserID() {
@@ -88,11 +84,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getDob() {
+    public Date getDob() {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(Date dob) {
         this.dob = dob;
     }
 
@@ -104,19 +100,27 @@ public class User {
         this.sex = sex;
     }
 
-    public int getPhone() {
-        return phone;
-    }
-
-    public void setPhone(int phone) {
-        this.phone = phone;
-    }
-
-    public String getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.role = role;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getUserImg() {
+        return userImg;
+    }
+
+    public void setUserImg(String userImg) {
+        this.userImg = userImg;
     }
 }

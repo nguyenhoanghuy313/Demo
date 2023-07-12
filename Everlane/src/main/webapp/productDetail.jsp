@@ -17,56 +17,65 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
-    <link rel="stylesheet" href="header/header.css">
+    <link rel="stylesheet" href="header/header1.css">
     <link rel="stylesheet" href="productpage/productdetail/product-detail.css">
-    <link rel="stylesheet" href="homepage/best-seller-slider.css">
+    <link rel="stylesheet" href="homepage/best-seller-slider1.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
     <title>Product Detail</title>
-        <!-- Favicon -->
-        <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
 <%
     List<Product> productList = (List<Product>) request.getAttribute("productList");
     List<Product> productListOnClick = (List<Product>) request.getAttribute("productListOnClick");
+
     Product pi = (Product) request.getAttribute("pi");
+    List<Color> colors = (List<Color>) request.getAttribute("colors");
+    List<Size> sizes = (List<Size>) request.getAttribute("sizes");
 %>
 <section class="Product_Detail_Container">
     <div class="Product_Image_Container">
-        <img src=${pi.getProductImg()}>
+        <img src=<%= pi.getThumbnail()%>>
+        <img src=<%= pi.getProduct_img_1()%>>
+        <img src=<%= pi.getProduct_img_2()%>>
+        <img src=<%= pi.getProduct_img_3()%>>
     </div>
     <div class="Product_Detail">
         <div class="Product_Name">
-            <p class="Category_Tag">Dresses</p>
+            <p class="Category_Tag"><%= pi.getCategoryName()%></p>
             <div class="Name_And_Price">
-                <h1>${pi.getProductName()}</h1>
+                <h1><%= pi.getProductName()%></h1>
                 <div class="Price">
                     <p>₫2896300</p>
-                    <p>${pi.getPrice()}</p>
+                    <p><%= pi.getPrice()%></p>
                 </div>
             </div>
         </div>
         <div class="Product_Color">
-            <h1>${pi.getColor()}</h1>
+            <h1>Color</h1>
             <div class="Color">
-                <a>
-                    <div></div>
-                    <span>${pi.getColor()}</span>
+                <%
+                    for(Color color: colors) {
+                %>
+                <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=<%= pi.getProductID()%>&color_Name=<%= color.getColor_Name()%>">
+                    <div style="background-color: <%= color.getColor_Name()%>"></div>
+                    <span><%= color.getColor_Name()%></span>
                 </a>
+                <% } %>
+
             </div>
         </div>
         <div class="Product_Size">
             <h1>Size</h1>
             <div class="Size">
-                <a>XXS</a>
-                <a>XXS</a>
-                <a>XXS</a>
-                <a>XXS</a>
-                <a>XXS</a>
-                <a>XXS</a>
-                <a>XXS</a>
+                <%
+                    for(Size size: sizes) {
+                %>
+                <a><%= size.getSize_Name()%></a>
+                <% } %>
             </div>
         </div>
         <button>Add To Bag</button>
@@ -84,24 +93,19 @@
         <i id="left" class='bx bx-chevron-left'></i>
         <div class="carousel">
 
-                <c:forEach var="p" items="${data}">
-                    <div class="Product">
-                        <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=${p.getProductID()}">
-                        <img src=${p.getProductImg()}>
-                        <div class="Product_Name">
-                            <div class="Best_Seller_Text">
-                                <h1>${p.getProductName()}</h1>
-                                <h1>${p.getPrice()}</h1>
-                                    <%--                            </div>--%>
-                                    <%--                            <p>${p.getColor()}</p>--%>
-                            </div>
+            <c:forEach var="p" items="${data}">
+                <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=${p.getProductID()}">
+                    <img src=${p.getProductImg()}>
+                    <div class="Product_Name">
+                        <div class="Best_Seller_Text">
+                            <h1>${p.getProductName()}</h1>
+                            <h1>${p.getPrice()}</h1>
                         </div>
-                        </a>
                     </div>
-                </c:forEach>
+                </a>
+            </c:forEach>
         </div>
         <i id="right" class='bx bx-chevron-right'></i>
-
     </div>
 </section>
 

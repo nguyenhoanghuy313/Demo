@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDAO extends myDAO {
-    public List<Category> getCategory() {
+    public List<Category> getAllCategory() {
         List<Category> t = new ArrayList<>();
         xSql = "select * from Category";
         try {
@@ -28,11 +28,47 @@ public class CategoryDAO extends myDAO {
         return (t);
     }
 
+    public Category getCategory(String xId) {
+        int i = Integer.parseInt(xId);
+        xSql = "select * from category where CategoryID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, i);
+            rs = ps.executeQuery();
+            String xcateName;
+            String xcateImg;
+            Category x;
+            while (rs.next()) {
+                i = rs.getInt("CategoryID");
+                xcateName = rs.getString("CategoryName");
+                xcateImg = rs.getString("Category_img");
+                x = new Category(i, xcateName, xcateImg);
+                return x;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void updateCategory(String xcateImg, int xcateId) {
+        try {
+            xSql = "update category set category_img =? where CategoryID =?;";
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, xcateImg);
+            ps.setInt(2, xcateId);
+//            ps.setString(9, xRole);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("updateCategory: " + e.getMessage());
+        }
+    }
+
 //    public static void main(String[] args) {
 //        CategoryDAO categoryDAO = new CategoryDAO();
-//        List<Category> categoryList = categoryDAO.getCategory();
-//        for (Category category : categoryList) {
-//            System.out.println(category.toString());
+//        categoryDAO.updateCategory("imge", 1);
 //        }
-//    }
+
 }
