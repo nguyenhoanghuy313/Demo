@@ -22,16 +22,15 @@ public class LogoutServlet extends HttpServlet {
         CollectionDAO col = new CollectionDAO();
         PromotionDAO promotionDAO = new PromotionDAO();
 
-
 //        List<Product> data = p.getAllProducts();
         List<Category> cateList = c.getAllCategory();
-        Collection collection = col.getCollections("1");
+        Collection collection = col.getCollectionsByDate();
+        request.getSession().setAttribute("collection", collection);
 
-        Promotion promotion = promotionDAO.getLastestPromotion();
+        Promotion promotion = promotionDAO.getPromotionByID(String.valueOf(collection.getPromotionID()));
         request.setAttribute("promotion", promotion);
 
-
-//        request.setAttribute("data", data);\
+//        request.setAttribute("data", data);
         request.setAttribute("cateList", cateList);
         request.setAttribute("collection", collection);
         request.getRequestDispatcher("home.jsp").forward(request, response);

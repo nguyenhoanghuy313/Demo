@@ -422,4 +422,28 @@ public class ProductDAO extends myDAO {
             e.printStackTrace();
         }
     }
+
+    public int count(String productID){
+        xSql = "select distinct count(*)\n" +
+                "from variation v, product_img pi, product p , category c, color col, size s\n" +
+                "where p.ProductID = '"+productID+"'\n" +
+                "and p.ProductID = v.ProductID \n" +
+                "and p.CategoryID = c.CategoryID\n" +
+                "and v.product_img_ID = pi.product_img_ID\n" +
+                "and v.color_ID = col.color_ID\n" +
+                "and v.size_ID = s.size_ID;";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                int c = rs.getInt(1);
+                return c;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

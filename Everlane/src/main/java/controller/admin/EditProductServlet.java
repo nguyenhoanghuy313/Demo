@@ -65,7 +65,7 @@ public class EditProductServlet extends HttpServlet {
             String productImg3 = request.getParameter("productImg3").trim();
             pid.updateImgFolder(thumbnail, productImg1, productImg2, productImg3, imageName, product_img_ID);
             response.sendRedirect("ProductListManagerServlet?input=all");
-        }else if(input.equals("editVariation")){
+        }else if(input.equals("editVariation1")){
             int variationID = Integer.parseInt(request.getParameter("variationID").trim());
             String productID = request.getParameter("productID").trim();
 
@@ -94,6 +94,15 @@ public class EditProductServlet extends HttpServlet {
                 out.println("location='ProductListManagerServlet?input=all';");
                 out.println("</script>");
             }
+        }else if (input.equals("editVariation2")){
+            int variationID = Integer.parseInt(request.getParameter("variationID").trim());
+            String productID = request.getParameter("productID").trim();
+            String colorID = request.getParameter("colorID").trim();
+            String sizeID = request.getParameter("sizeID").trim();
+            String qty_in_stock = request.getParameter("qty_in_stock").trim();
+            String productimgID = request.getParameter("productimgID").trim();
+            vd.updateVariation(Integer.parseInt(productID), Integer.parseInt(colorID), Integer.parseInt(sizeID), Integer.parseInt(qty_in_stock), Integer.parseInt(productimgID), variationID);
+            response.sendRedirect("ProductListManagerServlet?input=all");
         }
     }
 }

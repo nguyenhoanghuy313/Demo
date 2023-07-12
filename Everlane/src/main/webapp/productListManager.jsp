@@ -379,7 +379,7 @@
                                                 ><i class="bx bx-edit-alt me-1"></i> Edit Variation</a
                                                 >
                                                 <a class="dropdown-item"
-                                                   href="${pageContext.request.contextPath}/DeleteProduct?ProductID=<%=x.getProductID()%>&color_Name=<%=x.getColor_Name()%>&size_Name=<%=x.getSize_Name()%>"
+                                                   href="${pageContext.request.contextPath}/DeleteProduct?ProductID=<%=x.getProductID()%>&color_Name=<%=x.getColor_Name()%>&size_Name=<%=x.getSize_Name()%>&"
                                                    onclick="return confirm(
                                                                     'Are you sure want to delete this product?')"
                                                 ><i class="bx bx-trash me-1"></i> Delete</a>
@@ -396,6 +396,7 @@
                 <div class="container-xxl flex-grow-1 container-p-y ">
                     <div class="card">
                         <h5 class="card-header">Product Img File List</h5>
+                        <h6 class="card-header" style="color: red">${error}</h6>
                         <div class="table-responsive text-nowrap listtable">
                             <table class="table">
                                 <thead>
@@ -430,7 +431,7 @@
                                                 <a class="dropdown-item" href="EditProductServlet?input=2&ImageID=<%=pi.getProduct_Img_ID()%>"
                                                 ><i class="bx bx-edit-alt me-1"></i> Edit Product Image</a>
                                                 <a class="dropdown-item"
-                                                   href="${pageContext.request.contextPath}/DeleteProduct?ProductID"
+                                                   href="${pageContext.request.contextPath}/DeleteImgFolderServlet?ImageID=<%=pi.getProduct_Img_ID()%>"
                                                    onclick="return confirm(
                                                                     'Are you sure want to delete this image folder?')"
                                                 ><i class="bx bx-trash me-1"></i> Delete</a>
