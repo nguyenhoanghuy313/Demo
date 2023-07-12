@@ -20,6 +20,6 @@ public class OrderDetailServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String xOrderID = request.getParameter("OrderID");
         OrderDetailDAO odd = new OrderDetailDAO();
-        List<OrderDetail> od = odd.getOrderItems(Integer.parseInt(xOrderID));
+//        List<OrderDetail> od = odd.getOrderItems(Integer.parseInt(xOrderID));
     }
 }

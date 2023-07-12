@@ -91,8 +91,9 @@
 
 
                 for (Product ci: cartItemList){
-                    totalValue += ci.getPrice();
+
                     CartItem cartItemList2 = cid.getCartItem(String.valueOf(ci.getProductID()) ,String.valueOf(ci.getVariationID()));
+                    totalValue += (ci.getPrice() * cartItemList2.getQuantity());
             %>
             <div class="cart_item">
                 <a class="cart_item_img">

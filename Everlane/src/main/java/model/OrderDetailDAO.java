@@ -8,16 +8,16 @@ import java.util.Date;
 import java.util.List;
 
 public class OrderDetailDAO extends myDAO{
-    public List<OrderDetail> getOrderItems(int orderID) {
+    public List<OrderDetail> getOrderItems(String orderID) {
+        int xOrderID = Integer.parseInt(orderID);
         List<OrderDetail> od = new ArrayList<>();
         xSql = "select * from orderdetails od, product p where od.OrderID = ? and od.ProductID = p.ProductID";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1,orderID);
+            ps.setInt(1,xOrderID);
             rs = ps.executeQuery();
             int xOrder_detailID;
             int xProductID;
-            int xOrderID;
             int xQuantity;
             int xPrice;
             Date xOrderDate;

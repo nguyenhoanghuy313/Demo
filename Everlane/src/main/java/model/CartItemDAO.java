@@ -1,6 +1,6 @@
 package model;
 import entity.*;
-
+import model.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -138,8 +138,8 @@ public class CartItemDAO extends myDAO{
         xSql = "update cart_item set Quantity = Quantity + 1 where ProductID = ? and variationID = ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(2, xProID);
-            ps.setInt(3, xVariID);
+            ps.setInt(1, xProID);
+            ps.setInt(2, xVariID);
             ps.executeUpdate();
             ps.close();
         }catch (Exception e){

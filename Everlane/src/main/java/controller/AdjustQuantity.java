@@ -16,8 +16,11 @@ public class AdjustQuantity extends HttpServlet{
         String choice = request.getParameter("choice");
         if(choice.equals("plus")){
             cid.plusQuantity(xProductID,xVariationID);
+            response.sendRedirect(request.getHeader("referer"));
         }else {
             cid.minusQuantity(xProductID,xVariationID);
+            response.sendRedirect(request.getHeader("referer"));
+
         }
     }
 

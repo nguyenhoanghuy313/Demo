@@ -91,8 +91,9 @@
 
 
                 for (Product ci: cartItemList){
-                    totalValue += ci.getPrice();
+
                     CartItem cartItemList2 = cid.getCartItem(String.valueOf(ci.getProductID()) ,String.valueOf(ci.getVariationID()));
+                    totalValue += (ci.getPrice() * cartItemList2.getQuantity());
             %>
             <div class="cart_item">
                 <a class="cart_item_img">
@@ -107,11 +108,22 @@
                     <p><%=ci.getSize_Name()%> | <%=ci.getColor_Name()%>></p>
                     <div class="cart_item_price">
                         <p>₫<%=ci.getPrice()%>></p>
-                        <div class="cart_item_quantity">
-                            <button class='bx bx-minus' name="choice" value="minus" ></button>
-                            <p id="amount" ><%=cartItemList2.getQuantity()%></p>
-                            <button class='bx bx-plus' ></button>
-                        </div>
+                        <form action="${pageContext.request.contextPath}/adjustQuantity" method="post">
+                            <div class="cart_item_quantity">
+                                <button class='bx bx-minus' name="choice" value="minus"></button>
+                                <p id="amount"><%= cartItemList2.getQuantity() %></p>
+                                <button class='bx bx-plus' name="choice" value="plus"></button>
+                            </div>
+                            <input type="hidden" name="ProductID" value="<%= cartItemList2.getProductID() %>">
+                            <input type="hidden" name="VariationID" value="<%= cartItemList2.getVariationID() %>">
+                            <input type="submit" style="display: none;">
+                        </form>
+
+                    <%--                        <div class="cart_item_quantity">--%>
+<%--                            <button class='bx bx-minus' name="choice" value="minus" ></button>--%>
+<%--                            <p id="amount" ><%=cartItemList2.getQuantity()%></p>--%>
+<%--                            <button class='bx bx-plus' ></button>--%>
+<%--                        </div>--%>
                     </div>
                 </div>
             </div>
