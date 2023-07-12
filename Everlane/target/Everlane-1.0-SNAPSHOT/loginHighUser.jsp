@@ -127,7 +127,7 @@
 
                     <p class="text-center">
                         <span>Forget your password?</span>
-                        <a href="forgotPasswordHighUser.jsp">
+                        <a href="${pageContext.request.contextPath}/ForgotPasswordServlet">
                             <span>Click here</span>
                         </a>
                     </p>

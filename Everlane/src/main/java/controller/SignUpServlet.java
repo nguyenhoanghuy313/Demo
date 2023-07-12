@@ -37,6 +37,9 @@ public class SignUpServlet extends HttpServlet {
         if (email.isEmpty() || password.isEmpty() || repass.isEmpty() || username.isEmpty() ) {
             req.setAttribute("error", "Please fill all the fields");
             req.getRequestDispatcher("register.jsp").forward(req, resp);
+        } else if (password.length() < 3 || password.length() > 20) {
+            req.setAttribute("error", "Password must be between 3 and 20 characters");
+            req.getRequestDispatcher("register.jsp").forward(req, resp);
         } else if (!password.equals(repass)) {
             req.setAttribute("error", "Password and repassword are not the same");
             req.getRequestDispatcher("register.jsp").forward(req, resp);

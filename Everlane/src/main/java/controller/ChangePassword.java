@@ -39,6 +39,12 @@ public class ChangePassword extends HttpServlet {
         if (oldPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
             req.setAttribute("error", "Please fill all the fields");
             req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
+        } else if (newPassword.length() < 3 || newPassword.length() > 20) {
+            req.setAttribute("error", "Password must be between 3 and 20 characters");
+            req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
+        } else if (confirmPassword.length() < 3 || confirmPassword.length() > 20) {
+            req.setAttribute("error", "Password must be between 3 and 20 characters");
+            req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
         } else if (!newPassword.equals(confirmPassword)) {
             req.setAttribute("error", "New password and confirm password are not the same");
             req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
