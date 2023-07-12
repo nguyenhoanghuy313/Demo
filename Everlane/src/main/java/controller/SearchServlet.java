@@ -1,33 +1,35 @@
 package controller;
 
-import jakarta.servlet.ServletException;
+import java.io.*;
+import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
+import model.*;
+import java.util.*;
 
-import java.util.List;
-import java.io.IOException;
-import java.io.PrintWriter;
-import model.ProductsDAO;
-import model.Product;
-
-@WebServlet(name = "search-servlet", value = "/search-servlet")
+@WebServlet(name = "SearchServlet", value = "/SearchServlet")
 public class SearchServlet extends HttpServlet {
-    private String message;
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        String xName = request.getParameter("productName").trim();
+        String cateID = request.getParameter("categoryID");
 
-    public void init() {
-        message = "Hello World!";
-    }
+        ProductDAO pd = new ProductDAO();
+        CategoryDAO cd = new CategoryDAO();
+        ColorDAO col = new ColorDAO();
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        String name = request.getParameter("name").trim();
-        ProductsDAO cd = new ProductsDAO();
-        List<Product> foundList = cd.searchByName(name);
-        request.setAttribute("offSet", 0);
-        request.setAttribute("list", foundList);
-        request.getRequestDispatcher("productlist.jsp").forward(request,response);
+        List<Category> cateList = cd.getAllCategory();
+        Category category = cd.getCategory("9");
+        request.setAttribute("cateList", cateList);
+        request.setAttribute("category", category);
+
+        List<Color> colorList = col.getAllColors();
+        request.setAttribute("colorList", colorList);
+
+        List<Product> productList = pd.searchByName(xName);
+        request.setAttribute("productList", productList);
+
+        request.getRequestDispatcher("productList.jsp").forward(request, response);
     }
 }
