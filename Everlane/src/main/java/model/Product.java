@@ -6,13 +6,13 @@ public class Product {
     int collectionID;
     String productName, color_Name, size_Name;
     double price;
-    int qty_in_stock;
+    int qty_in_stock, qty_in_cart;
     int variationID;
 
     public Product() {
     }
 
-    public Product(int productID, String thumbnail, String product_img_1, String product_img_2, String product_img_3, String categoryName, int collectionID, String productName, String color_Name, String size_Name, double price, int qty_in_stock, int variationID) {
+    public Product(int productID, String thumbnail, String product_img_1, String product_img_2, String product_img_3, String categoryName, int collectionID, String productName, String color_Name, String size_Name, double price, int qty_in_cart, int variationID) {
         this.productID = productID;
         this.thumbnail = thumbnail;
         this.product_img_1 = product_img_1;
@@ -24,7 +24,7 @@ public class Product {
         this.color_Name = color_Name;
         this.size_Name = size_Name;
         this.price = price;
-        this.qty_in_stock = qty_in_stock;
+        this.qty_in_cart = qty_in_cart;
         this.variationID = variationID;
     }
 
@@ -41,6 +41,14 @@ public class Product {
         this.size_Name = size_Name;
         this.price = price;
         this.qty_in_stock = qty_in_stock;
+    }
+
+    public int getQty_in_cart() {
+        return qty_in_cart;
+    }
+
+    public void setQty_in_cart(int qty_in_cart) {
+        this.qty_in_cart = qty_in_cart;
     }
 
     public int getProductID() {

@@ -62,13 +62,13 @@ public class CartItemDAO extends myDAO{
         }
     }
     public List<Product> getUserItem(int userID){
-        xSql = "Select DISTINCT ci.VariationID, v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, ca.CategoryName, p.CollectionID, p.ProductName, col.color_Name, s.size_Name, p.Price, v.qty_in_stock from variation v, product_img pi, product p , category ca, color col, size s, cart c, cart_item ci where p.ProductID = v.ProductID and p.CategoryID = ca.CategoryID and v.product_img_ID = pi.product_img_ID and v.color_ID = col.color_ID and v.size_ID = s.size_ID and p.ProductID = ci.ProductID and c.CartID = ci.CartID and v.VariationID = ci.variationID and c.UserID = ?";
+        xSql = "Select DISTINCT ci.VariationID, v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, ca.CategoryName, p.CollectionID, p.ProductName, col.color_Name, s.size_Name, p.Price, ci.Quantity from variation v, product_img pi, product p , category ca, color col, size s, cart c, cart_item ci where p.ProductID = v.ProductID and p.CategoryID = ca.CategoryID and v.product_img_ID = pi.product_img_ID and v.color_ID = col.color_ID and v.size_ID = s.size_ID and p.ProductID = ci.ProductID and c.CartID = ci.CartID and v.VariationID = ci.variationID and c.UserID = ?";
         int xProductID;
         String xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName;
         int xCollectionID;
         String xProductName, xColor_Name, xSize_Name;
         double xPrice;
-        int xQty_in_stock, xVariationID;
+        int xQty_in_cart, xVariationID;
         Product x;
         List<Product> ci = new ArrayList<>();
         try {
@@ -87,9 +87,9 @@ public class CartItemDAO extends myDAO{
                 xColor_Name = rs.getString("color_Name");
                 xSize_Name = rs.getString("size_Name");
                 xPrice = rs.getDouble("Price");
-                xQty_in_stock = rs.getInt("qty_in_stock");
+                xQty_in_cart = rs.getInt("Quantity");
                 xVariationID = rs.getInt("variationID");
-                x = new Product(xProductID, xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName, xCollectionID, xProductName, xColor_Name, xSize_Name, xPrice, xQty_in_stock,xVariationID);
+                x = new Product(xProductID, xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName, xCollectionID, xProductName, xColor_Name, xSize_Name, xPrice, xQty_in_cart,xVariationID);
                 ci.add(x);
             }
             rs.close();
@@ -190,16 +190,18 @@ public class CartItemDAO extends myDAO{
         }
     }
 
-    public void deleteCartItemByProdID(String ProductID) {
+    public void deleteCartItemByProdID(String ProductID, String VariationID) {
         int xProductID = Integer.parseInt(ProductID);
-        xSql = "delete from cart_item where ProductID=? ";
+        int xVariationID = Integer.parseInt(VariationID);
+        xSql = "delete from cart_item where ProductID=? and variationID=?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, xProductID);
+            ps.setInt(2, xVariationID);
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("deleteCartItemByProdID: " + e.getMessage());
         }
     }
 

@@ -9,6 +9,17 @@ public class OrderDetail {
     int quantity;
     int price;
     Date order_date;
+    int variationID;
+
+    public OrderDetail(int orderDetailID, int productID, int orderID, int quantity, int price, Date order_date, int variationID) {
+        this.orderDetailID = orderDetailID;
+        this.productID = productID;
+        this.orderID = orderID;
+        this.quantity = quantity;
+        this.price = price;
+        this.order_date = order_date;
+        this.variationID = variationID;
+    }
 
     public OrderDetail(int orderDetailID, int productID, int orderID, int quantity, int price, Date order_date) {
         this.orderDetailID = orderDetailID;

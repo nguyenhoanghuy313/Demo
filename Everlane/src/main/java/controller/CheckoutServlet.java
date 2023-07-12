@@ -37,6 +37,7 @@ public class CheckoutServlet extends HttpServlet{
         } else {
             ud.insertDetailed(xFirstName,xPhone,buyerID);
             ad.insertAddress(xStreet,xAddressLine,xCity,xRegion,xPostalCode);
+            request.setAttribute("ErrMessage", "Address has been added Successfully");
             request.getRequestDispatcher("checkout.jsp").forward(request,response);
         }
 

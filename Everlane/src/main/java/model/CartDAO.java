@@ -48,7 +48,7 @@ public class CartDAO extends myDAO {
         return productList;
     }
 
-    public void delete(String cartID) {
+    public void deleteFromCart(String cartID) {
         xSql = "delete from cart where CartID=?";
         try {
             ps = con.prepareStatement(xSql);

@@ -38,7 +38,6 @@ public class AddToCart extends HttpServlet{
             response.sendRedirect(request.getHeader("referer"));
         }else {
             request.setAttribute("CartMess", "Product has been added to cart!!!");
-
             cid.insert(xProductID, String.valueOf(1), xVariationID);
             cd.insertProductIntoCart(buyerID);
             cid.setCartID(xProductID, xVariationID, buyerID);

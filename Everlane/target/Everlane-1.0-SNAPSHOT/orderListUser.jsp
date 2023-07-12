@@ -1,4 +1,7 @@
-<%--
+<%@ page import="model.User" %>
+<%@ page import="model.OrderDetailDAO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.Product" %><%--
   Created by IntelliJ IDEA.
   User: minileisduk
   Date: 06/07/2023
@@ -21,7 +24,7 @@
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
   />
 
-  <title>Product List</title>
+  <title>Order List</title>
 
   <meta name="description" content=""/>
 
@@ -59,7 +62,12 @@
 </head>
 
 <body>
-
+<%
+  User u = (User) request.getSession().getAttribute("currUser");
+  String xUID = String.valueOf(u.getUserID());
+  OrderDetailDAO odd = new OrderDetailDAO();
+  List<Product> odredPro = odd.getUserOrder(xUID);
+%>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
@@ -208,7 +216,7 @@
               <table class="table">
                 <thead>
                 <tr>
-                  <th>NO></th>
+                  <th>NO</th>
                   <th>PRODUCT THUMBNAIL</th>
                   <th>PRODUCT NAME</th>
                   <th>COLOR NAME</th>
@@ -218,18 +226,26 @@
                   <th>Buy at</th>
                 </tr>
                 </thead>
+                <%
+                  for (Product p: odredPro){
+
+
+                %>
                 <tbody class="table-border-bottom-0">
                 <tr class="item">
                   <td>1</td>
-                  <td><img src=""></td>
-                  <td>name</td>
-                  <td>name</td>
-                  <td>name</td>
-                  <td>1</td>
-                  <td>1</td>
+                  <td><img src="<%=p.getThumbnail()%>"></td>
+                  <td><%=p.getProductName()%></td>
+                  <td><%=p.getColor_Name()%></td>
+                  <td><%=p.getSize_Name()%></td>
+                  <td><%=p.getQty_in_cart()%></td>
+                  <td><%=p.getQty_in_stock()%></td>
                   <td>1/02/2003</td>
                 </tr>
                 </tbody>
+                <%
+                  }
+                %>
               </table>
             </div>
           </div>

@@ -2,6 +2,7 @@
 <%@ page import="model.CartItemDAO" %>
 <%@ page import="model.Product" %>
 <%@ page import="java.util.List" %>
+<%@ page import="entity.CartItem" %>
 <%--
   Created by IntelliJ IDEA.
   User: minileisduk
@@ -182,7 +183,8 @@
                     int cartSize = cartItemList.size();
                     int totalValue = 0;  // Tổng giá trị của các mục
                     for (Product p: cartItemList) {
-                        totalValue += p.getPrice();
+                        CartItem cartItemList2 = cid.getCartItem(String.valueOf(p.getProductID()) ,String.valueOf(p.getVariationID()));
+                        totalValue += (p.getPrice() * cartItemList2.getQuantity());
                     }
                 %>
                 <h1>Cart (<%=cartSize%>)</h1>
@@ -194,7 +196,8 @@
                 int itemCount = cartItemList.size();  // Số lượng mục trong giỏ hàng
                 int totalValue2 = 0;  // Tổng giá trị của các mục
                 for (Product ci: cartItemList){
-                    totalValue2 += ci.getPrice();
+                    CartItem cartItemList2 = cid.getCartItem(String.valueOf(ci.getProductID()) ,String.valueOf(ci.getVariationID()));
+                    totalValue2 += (ci.getPrice() * cartItemList2.getQuantity());
             %>
             <div class="Cart_Item">
                 <img src="<%=ci.getThumbnail()%>" alt="">
@@ -207,13 +210,19 @@
                     <div class="Cart_Item_Price">
                         <div class="Price">
                             <p style="text-decoration: line-through">₫981800</p>
-                            <p style="font-weight: bold; margin-left: 4px">₫<%=ci.getPrice()%>></p>
+                            <p style="font-weight: bold; margin-left: 4px">₫<%=ci.getPrice()*cartItemList2.getQuantity()%>></p>
                         </div>
-                        <div class="Cart_Item_Amount_Change">
-                            <button class='bx bx-minus' onclick="decreaseAmount(this)"></button>
-                            <p id="amount">1</p>
-                            <button class='bx bx-plus' onclick="increaseAmount(this)"></button>
-                        </div>
+                        <form action="${pageContext.request.contextPath}/adjustQuantity" method="post">
+                            <div class="Cart_Item_Amount_Change">
+                                <button class='bx bx-minus' name="choice" value="minus"></button>
+                                <p id="amount"><%= cartItemList2.getQuantity() %></p>
+                                <button class='bx bx-plus' name="choice" value="plus"></button>
+                            </div>
+                            <input type="hidden" name="ProductID" value="<%= cartItemList2.getProductID() %>">
+                            <input type="hidden" name="VariationID" value="<%= cartItemList2.getVariationID() %>">
+                            <input type="submit" style="display: none;">
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -246,7 +255,7 @@
             </table>
         </div>
         <div class="Place_Order_Container">
-            <button>Place Order</button>
+            <a href="${pageContext.request.contextPath}/order?UserID=<%=u.getUserID()%>">Place Order</a>
         </div>
     </div>
 </section>

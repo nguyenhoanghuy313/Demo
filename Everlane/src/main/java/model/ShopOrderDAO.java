@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 public class ShopOrderDAO extends myDAO {
-    public List<ShopOrder> getOrders(int userID){
+    public List<ShopOrder> getOrdersByUserID(int userID){
         List<ShopOrder> so = new ArrayList<>();
         xSql = "select * from shop_order where UserID = ?";
         try {
@@ -35,7 +35,7 @@ public class ShopOrderDAO extends myDAO {
     }
 
     public ShopOrder getLatestOrder(){
-        xSql = "select top 1 * from shop_order order by shop_orderID desc ";
+        xSql = "SELECT * FROM shop_order ORDER BY shop_orderID DESC LIMIT 1 ";
         int xShop_orderID;
         int xUserID;
         int xAddressID;
@@ -55,13 +55,13 @@ public class ShopOrderDAO extends myDAO {
             }
             rs.close();
             ps.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            System.out.println("getLatestOrder: " + e.getMessage());
         }
         return so;
     }
 
-    public void insert(ShopOrder so){
+    public void insertOrder(ShopOrder so){
         xSql = "insert into shop_order(UserID,Order_total) values (?,?)";
         try {
             ps = con.prepareStatement(xSql);
@@ -72,5 +72,20 @@ public class ShopOrderDAO extends myDAO {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public int getCurrentMaxOrderID(){
+        xSql = "select max(shop_orderID) as maxOID from shop_order";
+        int currMaxOID = 0;
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                currMaxOID = rs.getInt("maxOID");
+            }
+        } catch (Exception e) {
+            System.out.println("getCurrMaxOID: " + e.getMessage());
+        }
+        return currMaxOID;
     }
 }

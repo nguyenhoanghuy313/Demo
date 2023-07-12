@@ -107,7 +107,7 @@
                     </div>
                     <p><%=ci.getSize_Name()%> | <%=ci.getColor_Name()%>></p>
                     <div class="cart_item_price">
-                        <p>₫<%=ci.getPrice()%>></p>
+                        <p>₫<%=ci.getPrice()*cartItemList2.getQuantity()%></p>
                         <form action="${pageContext.request.contextPath}/adjustQuantity" method="post">
                             <div class="cart_item_quantity">
                                 <button class='bx bx-minus' name="choice" value="minus"></button>

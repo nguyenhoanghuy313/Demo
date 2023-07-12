@@ -12,11 +12,10 @@ public class ProductDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         String xId = request.getParameter("ProductID").trim();
         String xColor_Name = request.getParameter("color_Name").trim();
-
+//        String xSize_Name = request.getParameter("size_name").trim();
         ProductDAO pd = new ProductDAO();
         ColorDAO col = new ColorDAO();
         SizeDAO si = new SizeDAO();
-
         Product x = pd.getProductByProIDColName(xId, xColor_Name);
         List<Color> colors = col.getColorsByProductID(xId);
         List<Size> sizes = si.getSizesOfThatProduct(xId, xColor_Name);
