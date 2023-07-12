@@ -16,7 +16,6 @@
     <%
         List<Product> productList = (List<Product>) request.getAttribute("productList");
         List<Product> productListOnClick = (List<Product>) request.getAttribute("productListOnClick");
-        String mess = (String) request.getAttribute("Message");
         Product pi = (Product) request.getAttribute("pi");
         List<Color> colors = (List<Color>) request.getAttribute("colors");
         List<Size> sizes = (List<Size>) request.getAttribute("sizes");
@@ -36,7 +35,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-
+<%--<form action="addToCart" method="post">--%>
 <section class="Product_Detail_Container">
     <div class="Product_Image_Container">
         <img src=<%= pi.getThumbnail()%>>
@@ -61,6 +60,7 @@
                 <%
                     for(Color color: colors) {
                 %>
+
                 <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=<%= pi.getProductID()%>&color_Name=<%= color.getColor_Name()%>">
                     <div style="background-color: <%= color.getColor_Name()%>"></div>
                     <span><%= color.getColor_Name()%></span>
@@ -80,21 +80,21 @@
             </div>
         </div>
             <a href="${pageContext.request.contextPath}/addToCart?ProductID=<%=pi.getProductID()%>&VariationID=<%=pi.getVariationID()%>">Add To Bag</a>
+<%--        href="${pageContext.request.contextPath}/addToCart?ProductID=<%=pi.getProductID()%>&VariationID=<%=pi.getVariationID()%>"--%>
         <div class="Product_Description">
             <h1>Description</h1>
             <p>Made of 100% cotton poplin with a subtle sheen, the Smock Dress has a comfortable, breathable feel with
                 an effortlessly polished look.</p>
-            <p> <%=mess%></p>
-<%--            <form action="addToCart" method="post">--%>
-<%--                <h2>--%>
-<%--                    ${Message}--%>
-<%--                </h2>--%>
-<%--            </form>--%>
+<%--            <p> ${CartMess}</p>--%>
+            <form action="addToCart" method="GET">
+                <h2>
+                    ${CartMess}
+                </h2>
+            </form>
         </div>
     </div>
-
-
 </section>
+<%--</form>--%>
 <section class="Best_Seller_Slider">
     <div class="wrapper">
         <i id="left" class='bx bx-chevron-left'></i>

@@ -37,6 +37,10 @@
     int uID = 0;
     if (u != null) {
         uID = u.getUserID();
+    }else {
+        request.setAttribute("Message", "Please Login to perform this action!");
+        request.getRequestDispatcher("login-servlet").forward(request,response);
+        return;
     }
 //    if(u == null){
 //        response.setStatus(response.SC_MOVED_TEMPORARILY);
@@ -73,6 +77,7 @@
                 <input id="postalcode" name="postalcode" placeholder="Postal Code*" type="text"><br>
                 <input id="phone" name="phone" placeholder="Phone Number*" type="text"><br>
                 <input type="submit" value="Save Address">
+                <h2 style="color: red">${ErrMessage}</h2>
             </form>
         <%--            <form>--%>
 <%--                <input id="FirstName" name="FullName" placeholder="Full Name*" type="text"><br>--%>

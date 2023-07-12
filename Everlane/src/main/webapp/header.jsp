@@ -52,7 +52,6 @@
 //    int uID = u.getUserID();
     CartItemDAO cid = new CartItemDAO();
     List<Product> cartItemList = cid.getUserItem(uID);
-
 %>
 <header>
     <%-- web--%>
@@ -89,12 +88,11 @@
             <%
                 int itemCount = cartItemList.size();  // Số lượng mục trong giỏ hàng
                 int totalValue = 0;  // Tổng giá trị của các mục
-                List<CartItem> cartItemList2 = cid.getCartItem(xUID);
+
+
                 for (Product ci: cartItemList){
                     totalValue += ci.getPrice();
-
-//                    for(CartItem ci2: cartItemList2){
-
+                    CartItem cartItemList2 = cid.getCartItem(String.valueOf(ci.getProductID()) ,String.valueOf(ci.getVariationID()));
             %>
             <div class="cart_item">
                 <a class="cart_item_img">
@@ -109,22 +107,26 @@
                     <p><%=ci.getSize_Name()%> | <%=ci.getColor_Name()%>></p>
                     <div class="cart_item_price">
                         <p>₫<%=ci.getPrice()%>></p>
-                        <div class="cart_item_quantity">
-                            <%
-                                for (CartItem ci2: cartItemList2){
-                            %>
-                            <button class='bx bx-minus' onclick="decreaseAmount(this)"></button>
-                            <p id="amount"><%=ci2.getQuantity()%></p>
-                            <button class='bx bx-plus' onclick="increaseAmount(this)"></button>
-                            <%
-                                }
-                            %>
-                        </div>
+                        <form action="${pageContext.request.contextPath}/adjustQuantity" method="post">
+                            <div class="cart_item_quantity">
+                                <button class='bx bx-minus' name="choice" value="minus"></button>
+                                <p id="amount"><%= cartItemList2.getQuantity() %></p>
+                                <button class='bx bx-plus' name="choice" value="plus"></button>
+                            </div>
+                            <input type="hidden" name="ProductID" value="<%= cartItemList2.getProductID() %>">
+                            <input type="hidden" name="VariationID" value="<%= cartItemList2.getVariationID() %>">
+                            <input type="submit" style="display: none;">
+                        </form>
+
+                    <%--                        <div class="cart_item_quantity">--%>
+<%--                            <button class='bx bx-minus' name="choice" value="minus" ></button>--%>
+<%--                            <p id="amount" ><%=cartItemList2.getQuantity()%></p>--%>
+<%--                            <button class='bx bx-plus' ></button>--%>
+<%--                        </div>--%>
                     </div>
                 </div>
             </div>
             <%
-//                    }
                 }
             %>
         </div>
@@ -133,7 +135,7 @@
                 <p>Subtotal (<%=itemCount%> items)</p>  <!-- Hiển thị số lượng mục trong giỏ hàng -->
                 <p>₫<%=totalValue%></p>
             </div>
-            <a href="${pageContext.request.contextPath}/Checkout">Continue To Checkout</a>
+            <a href="${pageContext.request.contextPath}/checkout.jsp">Continue To Checkout</a>
         </div>
     </div>
 

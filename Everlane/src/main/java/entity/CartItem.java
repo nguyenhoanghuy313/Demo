@@ -5,12 +5,22 @@ public class CartItem {
     int cartID;
     int productID;
     int quantity;
+    int variationID;
 
-    public CartItem(int cart_itemID, int cartID, int productID, int quantity) {
+    public CartItem(int cart_itemID, int cartID, int productID, int quantity, int variationID) {
         this.cart_itemID = cart_itemID;
         this.cartID = cartID;
         this.productID = productID;
         this.quantity = quantity;
+        this.variationID = variationID;
+    }
+
+    public int getVariationID() {
+        return variationID;
+    }
+
+    public void setVariationID(int variationID) {
+        this.variationID = variationID;
     }
 
     public int getCart_itemID() {

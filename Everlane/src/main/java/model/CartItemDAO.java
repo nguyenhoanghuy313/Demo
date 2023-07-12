@@ -8,16 +8,36 @@ import java.util.List;
 //Đoàn Phan Hưng - HE170721
 public class CartItemDAO extends myDAO{
 
-    public void insert(String proID, String varID){
+    public void insert(String proID, String quan, String varID){
         int xProID = Integer.parseInt(proID);
+        int xQuan = Integer.parseInt(quan);
         int xVarID = Integer.parseInt(varID);
-        xSql = "insert into cart_item (ProductID, Quantity, VariationID) values (?, 1, ?)";
+        xSql = "insert into cart_item (ProductID,  VariationID) values (?, ?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, xProID);
             ps.setInt(2, xVarID);
             ps.executeUpdate();
             ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void setQuantity(String proID, String varID){
+        int xProID = Integer.parseInt(proID);
+        int xVarID = Integer.parseInt(varID);
+//        int xUserID = Integer.parseInt(userID);
+        xSql = "update cart_item \n" +
+                "set Quantity = '1' WHERE productID = " + proID + " AND variationID = " + varID + ";";
+        try {
+            ps = con.prepareStatement(xSql);
+//            ps.setInt(1, xProID);
+//            ps.setInt(2, xVarID);
+            ps.executeUpdate();
+            ps.close();
+//            System.out.println("Setted");
+//            System.out.println(xSql);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -80,43 +100,65 @@ public class CartItemDAO extends myDAO{
         return ci;
     }
 
-    public List<CartItem> getCartItem(String userID){
-        xSql = "select ci.* from cart_item ci, product p, cart c where c.UserID = ? and ci.ProductID = p.ProductID";
-        int xUserId = Integer.parseInt(userID);
+    public CartItem getCartItem(String proID, String variID){
+        int xProID = Integer.parseInt(proID);
+        int xVariID = Integer.parseInt(variID);
+        xSql = "select ci.*, c.UserID from cart_item ci, product p, cart c, variation v where ci.ProductID = p.ProductID and ci.variationID = v.VariationID and c.CartID = ci.CartID and ci.ProductID = ? and ci.variationID = ?;";
         int xCart_itemID;
         int xCartID;
         int xProductID;
         int xQuantity;
-        List<CartItem> c = new ArrayList<>();
+        int xVariationID;
+        CartItem c = null;
         try{
             ps = con.prepareStatement(xSql);
-            ps.setInt(1,xUserId);
+            ps.setInt(1, xProID);
+            ps.setInt(2, xVariID);
             rs = ps.executeQuery();
             while (rs.next()){
                 xCart_itemID = rs.getInt("cart_itemID");
                 xCartID = rs.getInt("CartID");
                 xProductID = rs.getInt("ProductID");
                 xQuantity = rs.getInt("Quantity");
-                c.add(new CartItem(xCart_itemID,xCartID,xProductID,xQuantity));
+                xVariationID = rs.getInt("variationID");
+                c=new CartItem(xCart_itemID,xCartID,xProductID,xQuantity,xVariationID) ;
             }
             rs.close();
             ps.close();
+//            System.out.println(xSql);
         }catch (Exception e){
             e.printStackTrace();
         }
         return c;
     }
 
-    public void addQuantity (CartItem ci, int Quan){
-        xSql = "update cart_item set Quantity = Quantity + ? where ProductID = ?";
+    public void plusQuantity (String proID, String variID){
+        int xProID = Integer.parseInt(proID);
+        int xVariID = Integer.parseInt(variID);
+        xSql = "update cart_item set Quantity = Quantity + 1 where ProductID = ? and variationID = ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, Quan);
-            ps.setInt(2, ci.getProductID());
+            ps.setInt(2, xProID);
+            ps.setInt(3, xVariID);
             ps.executeUpdate();
             ps.close();
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("plusQuantity: " + e.getMessage());
+        }
+    }
+
+    public void minusQuantity(String proID, String variID){
+        int xProID = Integer.parseInt(proID);
+        int xVariID = Integer.parseInt(variID);
+        xSql = "update cart_item set Quantity = Quantity - 1 where ProductID = ? and variationID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, xProID);
+            ps.setInt(2, xVariID);
+            ps.executeUpdate();
+            ps.close();
+        }catch (Exception e){
+            System.out.println("minusQuantity: " + e.getMessage());
         }
     }
 
