@@ -25,7 +25,10 @@
   List<ProductImg> productImgList = productImgDAO.getAllProductFolder();
 
   ProductImg picheckname = (ProductImg) request.getAttribute("picheckname");
+
   ProductForEdit pfe = (ProductForEdit) request.getAttribute("pfe");
+  ProductImg pi = (ProductImg) request.getAttribute("productImg");
+  Variation variation = (Variation) request.getAttribute("variation");
 %>
 <html
         class="light-style layout-menu-fixed"
@@ -228,36 +231,39 @@
       <!-- Content wrapper -->
       <div class="content-wrapper">
         <!-- Content -->
-
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Product List / </span> New Product
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Product List / </span> Edit Product
           </h4>
 
           <div class="row">
             <div class="col-md-12">
+              <%if (pfe != null){%>
               <div class="col-md-12">
                 <div class="card mb-4">
-                  <h5 class="card-header">Create a Product</h5>
+                  <h5 class="card-header">Edit Product</h5>
                   <!-- Account -->
                   <hr class="my-0"/>
                   <div class="card-body">
-                    <form method="POST"  action="CreateNewProductServlet">
+                    <form method="POST" action="EditProductServlet?input=editProduct">
                       <div class="row">
+                          <input class="form-control" name="productID"
+                                 value="<%=pfe.getProductId()%>" type="hidden"/>
+
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="productName">Product Name</label>
-
                           <input class="form-control" id="productName" name="productName"
-                                 placeholder="Please enter Product Name" type="text" required/>
+                                 placeholder="Please enter Product Name" value="<%=pfe.getProductName()%>" type="text" readonly/>
                         </div>
 
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="categoryID">Category</label>
-                          <select class="select2 form-select" id="categoryID" name="categoryID" required>
-                            <option value="">Please chose Category</option>
+                          <input class="form-control" id="categoryID" name="categoryID" list="category"
+                                 placeholder="Please enter Product Img Name" value="<%=pfe.getCategoryId()%>" required/>
+                          <datalist id="category">
                             <%for (Category category: cateList){%>
                             <option value=<%=category.getCategoryID()%>><%=category.getCategoryName()%></option>
                             <%}%>
-                          </select>
+                          </datalist>
                         </div>
 
                         <div class="mb-3 col-md-6">
@@ -270,18 +276,20 @@
                                   type="number"
                                   min="500000"
                                   required
+                                  value="<%=pfe.getPrice()%>"
                           />
                         </div>
 
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="collectionID">Collection</label>
-                          <select class="select2 form-select" id="collectionID" name="collectionID" required>
-                            <option value="">Please chose Collection</option>
+                          <input class="form-control" id="collectionID" name="collectionID" list="collection"
+                                 placeholder="Please enter Product Img Name" value="<%=pfe.getCollectionId()%>" required/>
+                          <datalist id="collection">
                             <%for (ProCollection pc: proCollectionsList ){%>
                             <option value="<%=pc.getCollectionID()%>"><%=pc.getCollectionName()%>
                             </option>
                             <%}%>
-                          </select>
+                          </datalist>
                         </div>
 
                         <div class="mb-3 col-md-6">
@@ -292,113 +300,105 @@
                                   name="description"
                                   placeholder="Please enter Product Price"
                                   type=text"
+                                  value="<%=pfe.getDescription()%>"
                           />
                         </div>
                       </div>
-                      <%if (pfe != null) {%>
-                        <h6 style="color: red">Product's already in the database with id = <%=pfe.getProductId()%></h6>
-                      <%}%>
-                        <h6 style="color: green">${alert}</h6>
                       <div class="mt-2">
-                        <button class="btn btn-dark me-2" type="submit">Create new Product
+                        <button class="btn btn-dark me-2" type="submit">Save Product
                         </button>
+                        <a href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
+                           class="btn btn-outline-secondary">Cancel</a>
                       </div>
                     </form>
                   </div>
                 </div>
               </div>
+              <%}%>
+
+              <%if (pi != null){%>
               <div class="col-md-12">
                 <div class="card mb-4">
-                  <h5 class="card-header">Create Image File</h5>
+                  <h5 class="card-header">Edit Image File</h5>
                   <!-- Account -->
                   <hr class="my-0"/>
                   <div class="card-body">
-                    <form action="CreateNewImageFolderServlet" method="POST">
+                    <form action="EditProductServlet?input=editImg" method="POST">
+                      <input class="form-control" name="product_img_ID"
+                             value="<%=pi.getProduct_Img_ID()%>" type="hidden"/>
                       <div class="mb-3 col-md-6">
                         <label class="form-label" for="imageName">Image Name</label>
                         <input class="form-control" id="imageName" name="imageName" placeholder="Please enter Image Name"
-                               type="text" list="product1" required/>
-                          <datalist id="product1">
-                            <%for (ProductForEdit productForEdit: productForEditList){%>
-                            <option value="<%=productForEdit.getProductName()%>">
-                            <%}%>
-                          </datalist>
-                      </div>
-
-                      <div class="mb-3 col-md-6">
-                        <label class="form-label" for="colorID">Color</label>
-                        <select class="select2 form-select"  name="colorName" required>
-                          <option value="">Please chose Color</option>
-                          <%for (Color color: colorList){%>
-                          <option value="<%=color.getColor_Name()%>"><%=color.getColor_Name()%></option>
-                          <%}%>
-                        </select>
-                      </div>
-
-                      <div class="mb-3 col-md-6">
-                        <label class="form-label" for="thumbnail">Select thumbnail image</label>
-                        <input class="form-control" id="thumbnail" name="thumbnail" type="url" required/>
-                      </div>
-                      <div class="mb-3 col-md-6">
-                        <label class="form-label" for="productImg1">Select product Image 1</label>
-                        <input class="form-control" id="productImg1" name="productImg1" type="url" required/>
-                      </div>
-                      <div class="mb-3 col-md-6">
-                        <label class="form-label" for="productImg2">Select product Image 2</label>
-                        <input class="form-control" id="productImg2" name="productImg2" type="url" required/>
-                      </div>
-                      <div class="mb-3 col-md-6">
-                        <label class="form-label" for="productImg3">Select product Image 3</label>
-                        <input class="form-control" id="productImg3" name ="productImg3" type="url" required/>
+                               type="text" list="product1" value="<%=pi.getProduct_img_name()%>"  readonly/>
+                        <datalist id="product1">
+                          <%for (ProductForEdit productForEdit: productForEditList){%>
+                          <option value="<%=productForEdit.getProductName()%>">
+                              <%}%>
+                        </datalist>
                       </div>
                       <%if (picheckname != null) {%>
-                      <h6 style="color: red">Product Img Folder is already in the database with id = <%=picheckname.getProduct_Img_ID()%></h6>
+                      it's already in the database with id = <%=picheckname.getProduct_Img_ID()%>
                       <%}%>
-                      <h6 style="color: green">${alert2}</h6>
-                      <h6 style="color: red">${alert21}</h6>
+                      <div class="mb-3 col-md-6">
+                        <img src="<%=pi.getThumbnail()%>" alt="..." style="width: 72px; height: 96px">
+                        <label class="form-label" for="thumbnail">Select thumbnail image</label>
+                        <input class="form-control" id="thumbnail" name="thumbnail" type="url" value="<%=pi.getThumbnail()%>" required/>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <img src="<%=pi.getProduct_Img_1()%>" alt="..." style="width: 72px; height: 96px">
+                        <label class="form-label" for="productImg1">Select product Image 1</label>
+                        <input class="form-control" id="productImg1" name="productImg1" type="url" value="<%=pi.getProduct_Img_1()%>" required/>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <img src="<%=pi.getProduct_Img_2()%>" alt="..." style="width: 72px; height: 96px">
+                        <label class="form-label" for="productImg2">Select product Image 2</label>
+                        <input class="form-control" id="productImg2" name="productImg2" type="url" value="<%=pi.getProduct_Img_2()%>" required/>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <img src="<%=pi.getProduct_Img_3()%>" alt="..." style="width: 72px; height: 96px">
+                        <label class="form-label" for="productImg3">Select product Image 3</label>
+                        <input class="form-control" id="productImg3" name ="productImg3" type="url" value="<%=pi.getProduct_Img_3()%>" required/>
+                      </div>
                       <div class="mt-2">
-                        <button class="btn btn-dark me-2" type="submit">Create new Image File</button>
+                        <button class="btn btn-dark me-2" type="submit">Save</button>
                       </div>
                     </form>
                   </div>
                 </div>
-
               </div>
+              <%}%>
+
+              <%if (variation != null){%>
               <div class="col-md-12">
                 <div class="card mb-4">
-                  <h5 class="card-header">Create a variation</h5>
+                  <h5 class="card-header">Edit variation</h5>
                   <!-- Account -->
                   <hr class="my-0"/>
                   <div class="card-body">
-                    <form method="POST" action="CreateVariationServlet">
+                    <form id="formAccountSettings" method="POST" action="EditProductServlet?input=editVariation">
+                      <input class="form-control" id="variationID" name="variationID" type="hidden" value="<%=variation.getVariationID()%>"/>
+                      <input class="form-control" id="productID" name="productID" type="hidden" value="<%=variation.getProductID()%>"/>
                       <div class="row">
                         <div class="mb-3 col-md-6">
-                          <label class="form-label" for="productID">Product ID</label>
-                          <input class="form-control" id="productID" name="productID" list="product"
-                                 placeholder="Please enter Product Name" required/>
-                          <datalist id="product">
-                            <%for (ProductForEdit productForEdit: productForEditList){%>
-                            <option value="<%=productForEdit.getProductId()%>"><%=productForEdit.getProductName()%></option>
-                            <%}%>
-                          </datalist>
-                        </div>
-                        <div class="mb-3 col-md-6">
                           <label class="form-label" for="colorID">Color</label>
-                          <select class="select2 form-select" id="colorID" name="colorID" required>
-                            <option value="">Please chose Color</option>
+                          <input class="form-control" id="colorID" name="colorID" list="color"
+                                 placeholder="Please enter Product Img Name" value="<%=variation.getColor_ID()%>" required/>
+                          <datalist id="color">
                             <%for (Color color: colorList){%>
                             <option value=<%=color.getColor_ID()%>><%=color.getColor_Name()%></option>
                             <%}%>
-                          </select>
+                          </datalist>
                         </div>
+
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="sizeID">Size</label>
-                          <select class="select2 form-select" id="sizeID" name="sizeID" required>
-                            <option value="">Please chose Size</option>
+                          <input class="form-control" id="sizeID" name="sizeID" list="size"
+                                 placeholder="Please enter Product Size" value="<%=variation.getSize_ID()%>" required/>
+                          <datalist id="size">
                             <%for (Size size: sizeList){%>
                             <option value=<%=size.getSize_ID()%>><%=size.getSize_Name()%></option>
                             <%}%>
-                          </select>
+                          </datalist>
                         </div>
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="qty_in_stock">Quantity in Stock</label>
@@ -407,15 +407,16 @@
                                   id="qty_in_stock"
                                   name="qty_in_stock"
                                   placeholder="Please enter Product Price"
+                                  value="<%=variation.getQtu_in_stock()%>"
                                   type="number"
-                                  min="0"
+                                  min="500000"
                                   required
                           />
                         </div>
                         <div class="mb-3 col-md-6">
                           <label class="form-label" for="productimgID">Product Img ID</label>
                           <input class="form-control" id="productimgID" name="productimgID" list="productimg"
-                                 placeholder="Please enter Product Img Name" required/>
+                                 placeholder="Please enter Product Img Name" value="<%=variation.getProduct_img_ID()%>" required/>
                           <datalist id="productimg">
                             <%for (ProductImg productImg: productImgList){%>
                             <option value=<%=productImg.getProduct_Img_ID()%>><%=productImg.getProduct_img_name()%></option>
@@ -424,16 +425,15 @@
                         </div>
 
                       </div>
-                      <h6 style="color: green">${alert3}</h6>
-                      <h6 style="color: red">${alert31}</h6>
                       <div class="mt-2">
-                        <button class="btn btn-dark me-2" type="submit">Create new Variation
+                        <button class="btn btn-dark me-2" type="submit">Save
                         </button>
                       </div>
                     </form>
                   </div>
                 </div>
               </div>
+              <%}%>
             </div>
 
           </div>

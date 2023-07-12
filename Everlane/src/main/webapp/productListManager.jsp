@@ -16,6 +16,8 @@
     List<Category> cateList = (List<Category>) request.getAttribute("cateList");
 //    List<Product> productListSorted = (List<Product>) request.getAttribute("productListSorted");
     Product p = (Product) request.getAttribute("del");
+    ProductImgDAO productImgDAO = new ProductImgDAO();
+    List<ProductImg> productImgList = productImgDAO.getAllProductFolder();
 %>
 <html
         lang="en"
@@ -342,13 +344,67 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
+                                                <a class="dropdown-item" href="EditProductServlet?input=1&ProductID=<%=x.getProductID()%>"
+                                                ><i class="bx bx-edit-alt me-1"></i> Edit Product Information</a
+                                                >
+                                                <a class="dropdown-item" href="EditProductServlet?input=3&ProductID=<%=x.getProductID()%>&ColorName=<%=x.getColor_Name()%>&SizeName=<%=x.getSize_Name()%>"
+                                                ><i class="bx bx-edit-alt me-1"></i> Edit Variation</a
                                                 >
                                                 <a class="dropdown-item"
                                                    href="${pageContext.request.contextPath}/DeleteProduct?ProductID=<%=x.getProductID()%>&color_Name=<%=x.getColor_Name()%>&size_Name=<%=x.getSize_Name()%>"
                                                    onclick="return confirm(
                                                                     'Are you sure want to delete this product?')"
+                                                ><i class="bx bx-trash me-1"></i> Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-xxl flex-grow-1 container-p-y ">
+                    <div class="card">
+                        <h5 class="card-header">Product Img File List</h5>
+                        <div class="table-responsive text-nowrap listtable">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>PRODUCT IMG ID</th>
+                                    <th>PRODUCT IMG NAME</th>
+                                    <th>PRODUCT THUMBNAIL</th>
+                                    <th>PRODUCT IMG1</th>
+                                    <th>PRODUCT IMG2</th>
+                                    <th>PRODUCT IMG3</th>
+                                    <th>ACTION</th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-0">
+                                <%
+                                    for (ProductImg pi : productImgList) {
+                                %>
+                                <tr class="item">
+                                    <th><%=pi.getProduct_Img_ID()%></th>
+                                    <th><%=pi.getProduct_img_name()%></th>
+                                    <th><img src="<%=pi.getThumbnail()%>"></th>
+                                    <th><img src="<%=pi.getProduct_Img_1()%>"></th>
+                                    <th><img src="<%=pi.getProduct_Img_2()%>"></th>
+                                    <th><img src="<%=pi.getProduct_Img_3()%>"></th>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                                    data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="EditProductServlet?input=2&ImageID=<%=pi.getProduct_Img_ID()%>"
+                                                ><i class="bx bx-edit-alt me-1"></i> Edit Product Image</a>
+                                                <a class="dropdown-item"
+                                                   href="${pageContext.request.contextPath}/DeleteProduct?ProductID"
+                                                   onclick="return confirm(
+                                                                    'Are you sure want to delete this image folder?')"
                                                 ><i class="bx bx-trash me-1"></i> Delete</a>
                                             </div>
                                         </div>

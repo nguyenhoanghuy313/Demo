@@ -27,6 +27,27 @@ public class SizeDAO extends  myDAO{
         return (t);
     }
 
+    public Size getSizebyId(String id) {
+        Size t = null;
+        xSql = "select * from size where size_ID = '"+id+"';";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            int xSize_ID;
+            String xSize_Name;
+            Size x;
+            while (rs.next()) {
+                xSize_ID = rs.getInt("size_ID");
+                xSize_Name = rs.getString("size_Name");
+                t = new Size(xSize_ID, xSize_Name);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
 
     public List<Size> getSizesOfThatProduct(String pid, String colname) {
         List<Size> t = new ArrayList<>();

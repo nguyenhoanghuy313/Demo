@@ -5,8 +5,22 @@
   Time: 3:18 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page import="java.util.*" %>
+<%@page import="model.*" %>
+<%@page import="controller.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+    List<Product> productList = (List<Product>) request.getAttribute("productList");
+    List<Category> cateList = (List<Category>) request.getAttribute("cateList");
+    Product p = (Product) request.getAttribute("del");
+    ProductImgDAO productImgDAO = new ProductImgDAO();
+    List<ProductImg> productImgList = productImgDAO.getAllProductFolder();
+
+    ProductForEditDAO proEditDAO = new ProductForEditDAO();
+    List<ProductForEdit> productForEditList = proEditDAO.getAllProductForEdit();
+%>
 <html>
 <head>
     <title>Title</title>
@@ -187,7 +201,12 @@
 
 <div class="search_container">
     <form action="${pageContext.request.contextPath}/SearchServlet" method="post" class="search_inner">
-        <input type="text" id="site-search" name="productName" placeholder="Search...">
+        <input type="text" id="site-search" name="productName" placeholder="Search..." list="search">
+        <datalist id="search">
+            <%for (ProductForEdit productForEdit: productForEditList){%>
+            <option value="<%=productForEdit.getProductName()%>">
+                    <%}%>
+        </datalist>
         <button class='bx bx-search-alt'></button>
     </form>
 </div>

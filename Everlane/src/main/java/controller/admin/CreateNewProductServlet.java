@@ -27,7 +27,8 @@ public class CreateNewProductServlet extends HttpServlet {
             String collectionID = request.getParameter("collectionID").trim();
             String description = request.getParameter("description").trim();
             pfed.createNewProduct(Integer.parseInt(categoryID), productName,  Integer.parseInt(price), Integer.parseInt(collectionID), description);
-            response.sendRedirect("addNewProduct.jsp");
+            request.setAttribute("alert", "Create done");
+            request.getRequestDispatcher("addNewProduct.jsp").forward(request, response);
         }else{
             request.setAttribute("pfe", pfe);
             request.getRequestDispatcher("addNewProduct.jsp").forward(request, response);
