@@ -254,7 +254,7 @@
                                     <h5 class="mb-0">Edit Season Collection</h5>
                                 </div>
                                 <div class="card-body">
-                                    <form action="seasonCollectionEditServlet" method="get" id="frm">
+                                    <form action="CollectionUpdatePromotion" method="get" id="frm">
                                         <div class="row mb-3">
                                             <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Select
                                                 Collection</label>
@@ -269,7 +269,7 @@
                                             </select>
                                         </div>
                                     </form>
-                                    <form action="seasonCollectionEditServlet" method="post" >
+                                    <form action="CollectionUpdatePromotion" method="post" >
                                         <div class="row mb-3">
                                             <div class="col-sm-10">
                                                 <input class="form-control" id="basic-default-image"
@@ -309,9 +309,9 @@
                                             <div class="col-sm-10">
                                                 <input
                                                         class="form-control"
-                                                        name="collectionDescription"
+                                                        name="promotionID"
                                                         id="basic-default-promo"
-                                                        value=""
+                                                        value="${c.getPromotionID()}"
                                                         type="text"
                                                 />
                                             </div>
