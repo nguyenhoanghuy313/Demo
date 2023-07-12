@@ -85,19 +85,19 @@
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
     <!-- Menu -->
-    <aside class="layout-menu menu-vertical menu bg-menu-theme" id="layout-menu">
+    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
       <div class="app-brand demo">
-        <a class="app-brand-link" href="dashboardManager.jsp">
+        <a href="dashboardManager.jsp" class="app-brand-link">
               <span class="app-brand-logo demo">
-                    <svg class="styles_everlane-logo__4o010" fill="none" height="14px" viewBox="0 0 128 14" width="128"
+                    <svg width="128" height="14px" class="styles_everlane-logo__4o010" viewBox="0 0 128 14" fill="none"
                          xmlns="http://www.w3.org/2000/svg"><path
                             d="M116.776 0V14H127.933V11.2198H119.6V8.38015H127.032V5.61985H119.6V2.78015H127.933V0H116.776ZM108.221 0V9.45982L101.311 0H98.5062V14H101.311V4.54018L108.222 14H111.066V0H108.222H108.221ZM86.0055 0L80.3766 14H83.3211L84.4828 11.1397H90.2922L91.4341 14H94.4191L88.7902 0H86.0055ZM87.3875 3.7201L89.2307 8.48018H85.5046L87.3875 3.7201ZM67.1754 0V14H77.3717V11.2198H69.9998V0H67.1754ZM52.4714 2.71982V5.70003H57.6201C58.4017 5.70003 59.0625 5.09986 59.0625 4.22024C59.0625 3.34063 58.4216 2.71982 57.6201 2.71982H52.4714ZM58.7619 14L55.396 8.38015H52.4714V14H49.647V0H57.6201C60.0238 0 61.867 1.74018 61.867 4.17976C61.867 6.35974 60.4651 7.9197 58.5019 8.28012L61.9672 14H58.7619ZM32.9201 0V14H44.0785V11.2198H35.7453V8.38015H43.1776V5.61985H35.7453V2.78015H44.0785V0H32.9201ZM26.1494 0L22.1227 10.1997L18.0753 0H15.0307L20.6596 14H23.484L29.1336 0H26.1486H26.1494ZM0.0865293 0L0.0666504 14H11.245V11.2198H2.91092V8.38015H10.3432V5.61985H2.91092V2.78015H11.2442V0H0.0865293Z"
                             fill="black"></path></svg>
               </span>
         </a>
 
-        <a class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none"
-           href="dashboardManager.jsp">
+        <a href="dashboardManager.jsp"
+           class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
           <i class="bx bx-chevron-left bx-sm align-middle"></i>
         </a>
       </div>
@@ -106,8 +106,8 @@
 
       <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item">
-          <a class="menu-link" href="dashboardManager.jsp">
+        <li class="menu-item active">
+          <a href="dashboardManager.jsp" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
             <div data-i18n="Analytics">Dashboard</div>
           </a>
@@ -117,43 +117,71 @@
         <!-- Pages -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
         <!-- Product List -->
-        <li class="menu-item active">
-          <a class="menu-link"
-             href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all">
+        <li class="menu-item">
+          <a href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
+             class="menu-link">
             <i class='menu-icon tf-icons bx bxs-package'></i>
             <div data-i18n="Product List">Product List</div>
           </a>
         </li>
         <!-- User List -->
         <li class="menu-item">
-          <a class="menu-link" href="${pageContext.request.contextPath}/UserListManagerServlet?role=all">
+          <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=all" class="menu-link">
             <i class='menu-icon tf-icons bx bx-user'></i>
             <div data-i18n="User List">User List</div>
           </a>
         </li>
         <!-- Forms -->
         <li class="menu-item">
-          <a class="menu-link menu-toggle" href="javascript:void(0);">
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-detail"></i>
             <div data-i18n="Marketing">Marketing</div>
           </a>
           <ul class="menu-sub">
             <li class="menu-item">
-              <a class="menu-link" href="${pageContext.request.contextPath}/seasonCollectionEditServlet">
+              <a href="${pageContext.request.contextPath}/seasonCollectionEditServlet" class="menu-link">
                 <div data-i18n="Season Collection">Season Collection (Home Page)</div>
               </a>
             </li>
           </ul>
           <ul class="menu-sub">
             <li class="menu-item">
-              <a class="menu-link" href="${pageContext.request.contextPath}/categoryEditServlet">
+              <a href="${pageContext.request.contextPath}/categoryEditServlet" class="menu-link">
                 <div data-i18n="Season Collection">Category (Home Page)</div>
+              </a>
+            </li>
+          </ul>
+          <ul class="menu-sub">
+            <li class="menu-item">
+              <a href="${pageContext.request.contextPath}/StoryServlet?input=all" class="menu-link">
+                <div data-i18n="Story List">Story List (Story Page)</div>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bx-detail"></i>
+            <div data-i18n="Sale">Sale</div>
+          </a>
+          <ul class="menu-sub">
+            <li class="menu-item">
+              <a href="PromotionServlet?input=all" class="menu-link">
+                <div data-i18n="Promotion List">Promotion List</div>
+              </a>
+            </li>
+          </ul>
+          <ul class="menu-sub">
+            <li class="menu-item">
+              <a href="seasonCollectionUpdatePromotion.jsp" class="menu-link">
+                <div data-i18n="Promotion List">Season Collection (Update Promotion)</div>
               </a>
             </li>
           </ul>
         </li>
       </ul>
     </aside>
+
 
     <!-- / Menu -->
 

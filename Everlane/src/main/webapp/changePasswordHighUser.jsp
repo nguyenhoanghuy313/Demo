@@ -95,7 +95,7 @@ changePasswordHighUser
 
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
-                <li class="menu-item">
+                <li class="menu-item active">
                     <a href="dashboardManager.jsp" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
@@ -140,9 +140,37 @@ changePasswordHighUser
                             </a>
                         </li>
                     </ul>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="${pageContext.request.contextPath}/StoryServlet?input=all" class="menu-link">
+                                <div data-i18n="Story List">Story List (Story Page)</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-detail"></i>
+                        <div data-i18n="Sale">Sale</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="PromotionServlet?input=all" class="menu-link">
+                                <div data-i18n="Promotion List">Promotion List</div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="seasonCollectionUpdatePromotion.jsp" class="menu-link">
+                                <div data-i18n="Promotion List">Season Collection (Update Promotion)</div>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </aside>
+
 
         <!-- / Menu -->
 
