@@ -24,8 +24,8 @@ public class HomeServlet extends HttpServlet{
         request.getSession().setAttribute("collection", collection);
 
         Promotion promotion = promotionDAO.getPromotionByID(String.valueOf(collection.getPromotionID()));
-        request.setAttribute("promotion", promotion);
 
+        request.setAttribute("promotion", promotion);
 //        request.setAttribute("data", data);
         request.setAttribute("cateList", cateList);
         request.setAttribute("collection", collection);
