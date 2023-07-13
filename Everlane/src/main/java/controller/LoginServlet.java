@@ -31,10 +31,12 @@ public class LoginServlet extends HttpServlet {
 //            ProductsDAO p = new ProductsDAO();
             CategoryDAO c = new CategoryDAO();
             CollectionDAO col = new CollectionDAO();
+            PromotionDAO promotionDAO = new PromotionDAO();
 
 //            List<Product> data = p.getAllProducts();
             List<Category> cateList = c.getAllCategory();
-            Collection collection = col.getCollections("1");
+            Collection collection = col.getCollectionsByDate();
+            Promotion promotion = promotionDAO.getPromotionByID(String.valueOf(collection.getPromotionID()));
 
             User checkUser = u.checkUser(email, password);
             User Role = u.getRoleByEmail(email);
@@ -48,12 +50,16 @@ public class LoginServlet extends HttpServlet {
                 if(!email.isEmpty() && !password.isEmpty()){
                     req.setAttribute("Message", "Email or Password is incorrect or not exist!!!");
                 }
+                if(password.length() < 3 || password.length() > 20){
+                    req.setAttribute("PassErr", "Password must be from 3 to 20 characters!!!");
+                }
                 req.getRequestDispatcher("login.jsp").forward(req, resp);
             } else {
                 if (Role.getRole() == 4) {
                     HttpSession session = req.getSession();
                     session.setAttribute("acc", checkUser);
 //                    req.setAttribute("data", data);
+                    req.setAttribute("promotion", promotion);
                     req.setAttribute("cateList", cateList);
                     req.setAttribute("collection", collection);
                     req.getRequestDispatcher("home.jsp").forward(req, resp);

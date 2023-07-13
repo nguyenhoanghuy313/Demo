@@ -30,12 +30,29 @@ public class CategoryEditServlet extends HttpServlet {
         String cateImg[] = req.getParameterValues("cateImg");
         CategoryDAO c = new CategoryDAO();
         Category category = new Category();
-        for(int i = 0; i < cateID.length; i++) {
-            c.updateCategory(cateImg[i],Integer.parseInt(cateID[i]));
+
+        for (int i = 0; i < cateID.length; i++) {
+            if (cateImg[i].equals("")) {
+                List<Category> cateList = c.getAllCategory();
+                req.setAttribute("cateList", cateList);
+                req.setAttribute("message", "Must Enter All Field");
+                req.getRequestDispatcher("categoryEdit.jsp").forward(req, resp);
+            } else if (!cateImg[i].endsWith(".jpg") && !cateImg[i].endsWith(".png")) {
+                List<Category> cateList = c.getAllCategory();
+                req.setAttribute("cateList", cateList);
+                req.setAttribute("message", "Must Enter Image Link End With .jpg or .png");
+                req.getRequestDispatcher("categoryEdit.jsp").forward(req, resp);
+            } else {
+                c.updateCategory(cateImg[i],Integer.parseInt(cateID[i]));
+                req.setAttribute("message", "Update successfully");
+            }
         }
+//        for(int i = 0; i < cateID.length; i++) {
+//            c.updateCategory(cateImg[i],Integer.parseInt(cateID[i]));
+//        }
             List<Category> cateList = c.getAllCategory();
             req.setAttribute("cateList", cateList);
-            req.setAttribute("message", "Update successfully");
+//            req.setAttribute("message", "Update successfully");
             req.getRequestDispatcher("categoryEdit.jsp").forward(req, resp);
 
     }

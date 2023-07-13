@@ -108,7 +108,7 @@ public class ProductDAO extends myDAO {
                 "and v.product_img_ID = pi.product_img_ID\n" +
                 "and v.color_ID = col.color_ID\n" +
                 "and v.size_ID = s.size_ID\n" +
-                "order by v.ProductID limit 1;";
+                "order by v.ProductID limit 10;";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, cid);
