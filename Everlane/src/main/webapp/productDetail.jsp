@@ -14,8 +14,6 @@
 <html>
 <head>
     <%
-        List<Product> productList = (List<Product>) request.getAttribute("productList");
-        List<Product> productListOnClick = (List<Product>) request.getAttribute("productListOnClick");
         Product pi = (Product) request.getAttribute("pi");
         List<Color> colors = (List<Color>) request.getAttribute("colors");
         List<Size> sizes = (List<Size>) request.getAttribute("sizes");
@@ -29,7 +27,9 @@
     <link rel="stylesheet" href="homepage/best-seller-slider1.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
-    <title><%=pi.getProductName()%></title>
+    <%--    <title>Product Detail</title>--%>
+    <title><%=pi.getProductName()%>
+    </title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
 </head>
@@ -45,12 +45,16 @@
     </div>
     <div class="Product_Detail">
         <div class="Product_Name">
-            <p class="Category_Tag"><%= pi.getCategoryName()%></p>
+            <p class="Category_Tag"><%= pi.getCategoryName()%>
+            </p>
             <div class="Name_And_Price">
-                <h1><%= pi.getProductName()%></h1>
+                <h1><%= pi.getProductName()%>
+                </h1>
+                <%--                <h2><%=pi.getVariationID()%></h2>--%>
                 <div class="Price">
                     <p>₫2896300</p>
-                    <p><%= pi.getPrice()%></p>
+                    <p><%= pi.getPrice()%>
+                    </p>
                 </div>
             </div>
         </div>
@@ -58,34 +62,42 @@
             <h1>Color</h1>
             <div class="Color">
                 <%
-                    for(Color color: colors) {
+                    for (Color color : colors) {
                 %>
-
                 <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=<%= pi.getProductID()%>&color_Name=<%= color.getColor_Name()%>">
                     <div style="background-color: <%= color.getColor_Name()%>"></div>
                     <span><%= color.getColor_Name()%></span>
                 </a>
                 <% } %>
-
             </div>
         </div>
+
         <div class="Product_Size">
             <h1>Size</h1>
             <div class="Size">
-                <%
-                    for(Size size: sizes) {
-                %>
-                <a><%= size.getSize_Name()%></a>
-                <% } %>
+                <form action="productDetail-servlet" method="POST">
+
+                    <input type="hidden" name="ProductID" value="<%= pi.getProductID() %>">
+                    <input type="hidden" name="color_Name" value="<%= pi.getColor_Name() %>">
+                    <input type="hidden" name="VariationID" value="<%= pi.getVariationID() %>">
+                    <%--                    <input type="hidden" name="productName" value="<%= pi.getProductName() %>">--%>
+                    <% for (Size size : sizes) { %>
+                    <button type="submit" name="size_name" value="<%= size.getSize_Name() %>"><%= size.getSize_Name() %>
+                    </button>
+                    <% } %>
+                </form>
             </div>
         </div>
-            <a href="${pageContext.request.contextPath}/addToCart?ProductID=<%=pi.getProductID()%>&VariationID=<%=pi.getVariationID()%>">Add To Bag</a>
-<%--        href="${pageContext.request.contextPath}/addToCart?ProductID=<%=pi.getProductID()%>&VariationID=<%=pi.getVariationID()%>"--%>
+
+
+        <a href="${pageContext.request.contextPath}/addToCart?ProductID=<%=pi.getProductID()%>&VariationID=<%=pi.getVariationID()%>">Add
+            To Bag</a>
+        <%--        href="${pageContext.request.contextPath}/addToCart?ProductID=<%=pi.getProductID()%>&VariationID=<%=pi.getVariationID()%>"--%>
         <div class="Product_Description">
             <h1>Description</h1>
             <p>Made of 100% cotton poplin with a subtle sheen, the Smock Dress has a comfortable, breathable feel with
                 an effortlessly polished look.</p>
-<%--            <p> ${CartMess}</p>--%>
+            <%--            <p> ${CartMess}</p>--%>
             <form action="addToCart" method="GET">
                 <h2>
                     ${CartMess}

@@ -9,10 +9,6 @@ import entity.*;
 @WebServlet(name = "addToCart", urlPatterns = {"/addToCart"})
 
 public class AddToCart extends HttpServlet{
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException{
-//        response.sendRedirect(request.getHeader("referer"));
-//    }
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -30,11 +26,9 @@ public class AddToCart extends HttpServlet{
         CartItemDAO cid = new CartItemDAO();
         CartDAO cd = new CartDAO();
         String buyerID = String.valueOf(currUser.getUserID());
-//        CartItem ci = cid.getCartItem(buyerID);
         boolean isCartItemExist = cid.checkCartItemExist(xProductID, xVariationID, buyerID);
         if(isCartItemExist){
             request.setAttribute("CartMess", "Product has already been in cart!!!");
-//            request.getRequestDispatcher("productDetail.jsp").forward(request,response);
             response.sendRedirect(request.getHeader("referer"));
         }else {
             request.setAttribute("CartMess", "Product has been added to cart!!!");
@@ -42,12 +36,8 @@ public class AddToCart extends HttpServlet{
             cd.insertProductIntoCart(buyerID);
             cid.setCartID(xProductID, xVariationID, buyerID);
             cid.setQuantity(xProductID, xVariationID);
-//            request.getRequestDispatcher("productDetail.jsp").forward(request,response);
             response.sendRedirect(request.getHeader("referer"));
         }
-//        response.sendRedirect(request.getHeader("referer"));
-
     }
-
 }
 
