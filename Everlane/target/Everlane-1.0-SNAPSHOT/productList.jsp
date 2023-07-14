@@ -65,7 +65,7 @@
                         </a>
                         <%}%>
                         <%
-                            } else {
+                        } else {
                         %>
                         <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all&collectionID=<%=collection.getCollectionID()%>"
                            class="Category_Option">
@@ -103,28 +103,28 @@
                         <span><%= color.getColor_Name()%></span>
                     </a>
                     <%}%>
-                        <%
-                            }else {
-                        %>
+                    <%
+                    }else {
+                    %>
                     <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=<%=category.getCategoryID()%>&color_ID=<%= color.getColor_ID()%>&collectionID=<%=collection.getCollectionID()%>>">
                         <div style="background-color: <%= color.getColor_Name()%>"></div>
                         <span><%= color.getColor_Name()%></span>
                     </a>
-                        <%}%>
+                    <%}%>
                     <%}%>
                 </div>
                 <%}%>
             </div>
-<%--            <div class="Size_Container">--%>
-<%--                <h1>Size</h1>--%>
-<%--                <div class="Size">--%>
-<%--                    <%--%>
-<%--                        for (Size size : sizeList) {--%>
-<%--                    %>--%>
-<%--                    <a><%= size.getSize_Name()%></a>--%>
-<%--                    <%}%>--%>
-<%--                </div>--%>
-<%--            </div>--%>
+            <%--            <div class="Size_Container">--%>
+            <%--                <h1>Size</h1>--%>
+            <%--                <div class="Size">--%>
+            <%--                    <%--%>
+            <%--                        for (Size size : sizeList) {--%>
+            <%--                    %>--%>
+            <%--                    <a><%= size.getSize_Name()%></a>--%>
+            <%--                    <%}%>--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
         </div>
         <div class="List_Container">
             <div class="Product_List_Headline">

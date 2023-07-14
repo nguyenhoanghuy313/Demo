@@ -8,9 +8,9 @@ import java.util.List;
 //Đoàn Phan Hưng - HE170721
 public class CartItemDAO extends myDAO{
 
-    public void insert(String proID, String quan, String varID){
+    public void insert(String proID, String varID){
         int xProID = Integer.parseInt(proID);
-        int xQuan = Integer.parseInt(quan);
+//        int xQuan = Integer.parseInt(quan);
         int xVarID = Integer.parseInt(varID);
         xSql = "insert into cart_item (ProductID,  VariationID) values (?, ?)";
         try {
@@ -19,8 +19,9 @@ public class CartItemDAO extends myDAO{
             ps.setInt(2, xVarID);
             ps.executeUpdate();
             ps.close();
+            System.out.println(xSql);
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("insert: " + e.getMessage());
         }
     }
 
@@ -39,7 +40,7 @@ public class CartItemDAO extends myDAO{
 //            System.out.println("Setted");
 //            System.out.println(xSql);
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("setQuantity: " + e.getMessage());
         }
     }
 
@@ -58,7 +59,7 @@ public class CartItemDAO extends myDAO{
             ps.executeUpdate();
             ps.close();
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("setCartID: " + e.getMessage());
         }
     }
     public List<Product> getUserItem(int userID){

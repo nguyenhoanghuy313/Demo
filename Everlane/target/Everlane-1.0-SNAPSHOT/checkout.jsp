@@ -1,3 +1,8 @@
+<%@ page import="model.User" %>
+<%@ page import="model.CartItemDAO" %>
+<%@ page import="model.Product" %>
+<%@ page import="java.util.List" %>
+<%@ page import="entity.CartItem" %>
 <%--
   Created by IntelliJ IDEA.
   User: minileisduk
@@ -28,6 +33,25 @@
     <link href="a.template/assets/img/favicon/favicon.png" rel="icon" type="image/x-icon"/>
 </head>
 <body>
+<%
+    User u = (User) request.getSession().getAttribute("currUser");
+    int uID = 0;
+    if (u != null) {
+        uID = u.getUserID();
+    }else {
+        request.setAttribute("Message", "Please Login to perform this action!");
+        request.getRequestDispatcher("login-servlet").forward(request,response);
+        return;
+    }
+//    if(u == null){
+//        response.setStatus(response.SC_MOVED_TEMPORARILY);
+//        response.setHeader("Location", "login-servlet");
+//        return;
+//    }
+//    int uID = u.getUserID();
+    CartItemDAO cid = new CartItemDAO();
+    List<Product> cartItemList = cid.getUserItem(uID);
+%>
 <jsp:include page="header.jsp"/>
 
 <section class="Checkout_Container">
@@ -37,24 +61,37 @@
                 <h1>1</h1>
                 <h1>Your Email</h1>
             </div>
-            <p>leminhductod@gmail.com</p>
+            <p><%=u.getEmail()%></p>
         </div>
         <div class="Shipping">
             <div class="Information_Title">
                 <h1>2</h1>
                 <h1>Shipping</h1>
             </div>
-            <form>
-                <input id="fname" name="fname" placeholder="Full Name*" type="text"><br>
-                <input id="fname" name="fname" placeholder="Country*" type="text"><br>
-                <input id="fname" name="fname" placeholder="Street Address*" type="text"><br>
-                <input id="fname" name="fname" placeholder="Apartment, Suite, Building (Optional)" type="text"><br>
-                <input id="fname" name="fname" placeholder="City*" type="text"><br>
-                <input id="fname" name="fname" placeholder="State/Province/Region" type="text"><br>
-                <input id="fname" name="fname" placeholder="Postal Code*" type="text"><br>
-                <input id="fname" name="fname" placeholder="Phone Number*" type="text"><br>
+            <form action="Checkout" method="post">
+                <input id="FirstName" name="FirstName" placeholder="Full Name*" type="text"><br>
+                <input id="country" name="Country" placeholder="Country*" type="text"><br>
+                <input id="Street" name="Street" placeholder="Street Address*" type="text"><br>
+                <input id="address_line1" name="address_line1" placeholder="Apartment, Suite, Building (Optional)" type="text"><br>
+                <input id="city" name="city" placeholder="City*" type="text"><br>
+                <input id="region" name="region" placeholder="State/Province/Region" type="text"><br>
+                <input id="postalcode" name="postalcode" placeholder="Postal Code*" type="text"><br>
+                <input id="phone" name="phone" placeholder="Phone Number*" type="text"><br>
                 <input type="submit" value="Save Address">
+                <h2 style="color: red">${ErrMessage}</h2>
             </form>
+            <%--            <form>--%>
+            <%--                <input id="FirstName" name="FullName" placeholder="Full Name*" type="text"><br>--%>
+            <%--                <input id="country" name="Country" placeholder="Country*" type="text"><br>--%>
+            <%--                <input id="address_line1" name="Address" placeholder="Street Address*" type="text"><br>--%>
+            <%--                <input id="apm" name="apartment" placeholder="Apartment, Suite, Building (Optional)" type="text"><br>--%>
+            <%--                <input id="city" name="City" placeholder="City*" type="text"><br>--%>
+            <%--                <input id="region" name="Region" placeholder="State/Province/Region" type="text"><br>--%>
+            <%--                <input id="postalCode" name="PCode" placeholder="Postal Code*" type="text"><br>--%>
+            <%--                <input id="phone" name="PhoneNumber" placeholder="Phone Number*" type="text"><br>--%>
+            <%--                <a href="Checkout?FullName=FirstName&Country=country&Address=address_line1&apartment=apm&City=city&Region=region&PCode=postalCode&PhoneNumber=phone">Save Address</a>--%>
+            <%--&lt;%&ndash;                <input type="submit" value="Save Address" href="Checkout?FullName=FirstName&Country=country&Address=address_line1&apartment=apm&City=city&Region=region&PCode=postalCode&PhoneNumber=phone">&ndash;%&gt;--%>
+            <%--            </form>--%>
             <div class="Shipping_Option">
                 <h2>Select Shipping Option</h2>
                 <form>
@@ -142,101 +179,62 @@
                     <circle cx="8.64752" cy="18.0587" fill="black" r="1.76471"></circle>
                     <circle cx="16.8819" cy="18.0587" fill="black" r="1.76471"></circle>
                 </svg>
-                <h1>Cart (5)</h1>
+                <%
+                    int cartSize = cartItemList.size();
+                    int totalValue = 0;  // Tổng giá trị của các mục
+                    for (Product p: cartItemList) {
+                        CartItem cartItemList2 = cid.getCartItem(String.valueOf(p.getProductID()) ,String.valueOf(p.getVariationID()));
+                        totalValue += (p.getPrice() * cartItemList2.getQuantity());
+                    }
+                %>
+                <h1>Cart (<%=cartSize%>)</h1>
             </div>
-            <h1>15,910,888.66</h1>
+            <h1><%=totalValue%></h1>
         </div>
         <div class="Cart_List">
+            <%
+                int itemCount = cartItemList.size();  // Số lượng mục trong giỏ hàng
+                int totalValue2 = 0;  // Tổng giá trị của các mục
+                for (Product ci: cartItemList){
+                    CartItem cartItemList2 = cid.getCartItem(String.valueOf(ci.getProductID()) ,String.valueOf(ci.getVariationID()));
+                    totalValue2 += (ci.getPrice() * cartItemList2.getQuantity());
+            %>
             <div class="Cart_Item">
-                <img src="https://media.everlane.com/image/upload/c_fill,w_96,ar_72:96,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/9db7bdc0_1bd4">
+                <img src="<%=ci.getThumbnail()%>" alt="">
                 <div class="Cart_Item_Content">
                     <div class="Cart_Item_Header">
-                        <h1>The Nylon 5-Panel Cap</h1>
-                        <p>Size | Color</p>
-                        <button class='bx bx-trash'></button>
+                        <h1><%=ci.getProductName()%></h1>
+                        <p><%=ci.getSize_Name()%> | <%=ci.getColor_Name()%></p>
+                        <a href="DeleteFromCart?ProductID=<%=ci.getProductID()%>&variationID=<%=ci.getVariationID()%>" class='bx bx-trash'></a>
                     </div>
                     <div class="Cart_Item_Price">
                         <div class="Price">
                             <p style="text-decoration: line-through">₫981800</p>
-                            <p style="font-weight: bold; margin-left: 4px">₫687,300</p>
+                            <p style="font-weight: bold; margin-left: 4px">₫<%=ci.getPrice()*cartItemList2.getQuantity()%>></p>
                         </div>
-                        <div class="Cart_Item_Amount_Change">
-                            <button class='bx bx-minus'></button>
-                            <p>1</p>
-                            <button class='bx bx-plus'></button>
-                        </div>
+                        <form action="${pageContext.request.contextPath}/adjustQuantity" method="post">
+                            <div class="Cart_Item_Amount_Change">
+                                <button class='bx bx-minus' name="choice" value="minus"></button>
+                                <p id="amount"><%= cartItemList2.getQuantity() %></p>
+                                <button class='bx bx-plus' name="choice" value="plus"></button>
+                            </div>
+                            <input type="hidden" name="ProductID" value="<%= cartItemList2.getProductID() %>">
+                            <input type="hidden" name="VariationID" value="<%= cartItemList2.getVariationID() %>">
+                            <input type="submit" style="display: none;">
+                        </form>
+
                     </div>
                 </div>
             </div>
-            <div class="Cart_Item">
-                <img src="https://media.everlane.com/image/upload/c_fill,w_96,ar_72:96,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/9db7bdc0_1bd4">
-                <div class="Cart_Item_Content">
-                    <div class="Cart_Item_Header">
-                        <h1>The Nylon 5-Panel Cap</h1>
-                        <p>Size | Color</p>
-                        <button class='bx bx-trash'></button>
-                    </div>
-                    <div class="Cart_Item_Price">
-                        <div class="Price">
-                            <p style="text-decoration: line-through">₫981800</p>
-                            <p style="font-weight: bold; margin-left: 4px">₫687,300</p>
-                        </div>
-                        <div class="Cart_Item_Amount_Change">
-                            <button class='bx bx-minus'></button>
-                            <p>1</p>
-                            <button class='bx bx-plus'></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="Cart_Item">
-                <img src="https://media.everlane.com/image/upload/c_fill,w_96,ar_72:96,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/9db7bdc0_1bd4">
-                <div class="Cart_Item_Content">
-                    <div class="Cart_Item_Header">
-                        <h1>The Nylon 5-Panel Cap</h1>
-                        <p>Size | Color</p>
-                        <button class='bx bx-trash'></button>
-                    </div>
-                    <div class="Cart_Item_Price">
-                        <div class="Price">
-                            <p style="text-decoration: line-through">₫981800</p>
-                            <p style="font-weight: bold; margin-left: 4px">₫687,300</p>
-                        </div>
-                        <div class="Cart_Item_Amount_Change">
-                            <button class='bx bx-minus'></button>
-                            <p>1</p>
-                            <button class='bx bx-plus'></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="Cart_Item">
-                <img src="https://media.everlane.com/image/upload/c_fill,w_96,ar_72:96,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/9db7bdc0_1bd4">
-                <div class="Cart_Item_Content">
-                    <div class="Cart_Item_Header">
-                        <h1>The Nylon 5-Panel Cap</h1>
-                        <p>Size | Color</p>
-                        <button class='bx bx-trash'></button>
-                    </div>
-                    <div class="Cart_Item_Price">
-                        <div class="Price">
-                            <p style="text-decoration: line-through">₫981800</p>
-                            <p style="font-weight: bold; margin-left: 4px">₫687,300</p>
-                        </div>
-                        <div class="Cart_Item_Amount_Change">
-                            <button class='bx bx-minus'></button>
-                            <p>1</p>
-                            <button class='bx bx-plus'></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <%
+                }
+            %>
         </div>
         <div class="Cart_Total_Info">
             <table>
                 <tr>
                     <td>Subtotal</td>
-                    <td>₫11315400</td>
+                    <td>₫<%=totalValue2%></td>
                 </tr>
                 <tr>
                     <td>Duties</td>
@@ -252,12 +250,12 @@
                 </tr>
                 <tr style="font-weight: bold">
                     <td>Total</td>
-                    <td>₫8464079</td>
+                    <td>₫<%=totalValue2%></td>
                 </tr>
             </table>
         </div>
         <div class="Place_Order_Container">
-            <button>Place Order</button>
+            <a href="${pageContext.request.contextPath}/order?UserID=<%=u.getUserID()%>">Place Order</a>
         </div>
     </div>
 </section>

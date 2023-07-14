@@ -11,7 +11,7 @@ public class CartDAO extends myDAO {
             ps.setInt(1, xUserID);
             ps.executeUpdate();
         } catch (Exception e){
-            e.printStackTrace();
+            System.out.println("insertProductIntoCart: " + e.getMessage());
         }
     }
     public List<Product> getProductInCart(int userID){

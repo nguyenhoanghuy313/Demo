@@ -40,6 +40,7 @@ LoginServlet extends HttpServlet {
             Promotion promotion = promotionDAO.getPromotionByID(String.valueOf(collection.getPromotionID()));
 
             User checkUser = u.checkUser(email, password);
+            req.getSession().setAttribute("currUser", checkUser);
             User Role = u.getRoleByEmail(email);
             if (checkUser == null) {
                 if (email.isEmpty()) {

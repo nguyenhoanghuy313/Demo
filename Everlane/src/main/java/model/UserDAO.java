@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -140,23 +141,6 @@ public class UserDAO extends myDAO {
         return false;
     }
 
-//    public boolean checkEmailExist(String xemail) {
-//        try {
-//            xSql = "select *\n" +
-//                    "from user\n" +
-//                    "where Email=?";
-//            ps = con.prepareStatement(xSql);
-//            ps.setString(1, xemail);//dau hoi so 2
-//            rs = ps.executeQuery();
-//            if (rs.next()) {
-//                return true;
-//            }
-//        } catch (Exception e) {
-//            System.out.println("CheckEmailExist: " + e.getMessage());
-//        }
-//        return false;
-//    }
-
     public boolean checkAccountExistUserDetail(String xusername, String xemail, int xUserID) {
         try {
             xSql = "select *\n" +
@@ -176,22 +160,22 @@ public class UserDAO extends myDAO {
         return false;
     }
 
-//    public boolean checkPasswordExist(String xpassword) {
-//        try {
-//            xSql = "select *\n" +
-//                    "from user\n" +
-//                    "where Password=?";
-//            ps = con.prepareStatement(xSql);
-//            ps.setString(1, xpassword);//dau hoi so 1
-//            rs = ps.executeQuery();
-//            if (rs.next()) {
-//                return true;
-//            }
-//        } catch (Exception e) {
-//            System.out.println("CheckPasswordExist: " + e.getMessage());
-//        }
-//        return false;
-//    }
+    public boolean checkPasswordExist(String xpassword) {
+        try {
+            xSql = "select *\n" +
+                    "from user\n" +
+                    "where Password=?";
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, xpassword);//dau hoi so 1
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("CheckPasswordExist: " + e.getMessage());
+        }
+        return false;
+    }
 
     //add User for register Customer
     public void addUser(String xUsername, String xPassword, String xEmail, int xRole) {
@@ -477,22 +461,39 @@ public class UserDAO extends myDAO {
         }
     }
 
+    public void insertDetailed(String FirstName, String phone, String userID){
+        int xUserID = Integer.parseInt(userID);
+        xSql = "update swp_project.user set FirstName = " + "'"+ FirstName + "'" + ", Phone = "+ "'"+ phone + "'" +" where UserID = " +userID;
+        try {
+            ps = con.prepareStatement(xSql);
+//            ps.setString(1, firstName);
+//            ps.setString(2, phoneNum);
+//            ps.setInt(1, xUserID);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("insertDetailed: " + e.getMessage());
+        }
+    }
+
+
+
 
 //Nguyễn Đắc Hoàng Đạt - HE170720
 
-    public static void main(String[] args) {
-//        System.out.println("hello");
-        UserDAO test = new UserDAO();
-        User u = new User();
-        int id = 1;
-        String email = "datndhhe170720@fpt.edu.vn";
+//    public static void main(String[] args) {
+////        System.out.println("hello");
+//        UserDAO test = new UserDAO();
+//        User u = new User();
+//        int id = 1;
+//        String email = "datndhhe170720@fpt.edu.vn";
 //        String username = "DatHoang";
-//        String date = "12-12-2020";
-//         boolean check = test.checkAccountExistUserDetail(email, username, id);
-        User check = test.getUserByEmail(email);
-        System.out.println(check);
-//        System.out.printf(u.getUserName());
-    }
+////        String date = "12-12-2020";
+////         boolean check = test.checkAccountExistUserDetail(email, username, id);
+//        boolean check = test.checkAccountExist(email, username);
+//        System.out.println(check);
+////        System.out.printf(u.getUserName());
+//    }
 }
 
 
