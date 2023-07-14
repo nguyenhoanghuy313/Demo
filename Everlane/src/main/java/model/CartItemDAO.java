@@ -19,7 +19,7 @@ public class CartItemDAO extends myDAO{
             ps.setInt(2, xVarID);
             ps.executeUpdate();
             ps.close();
-            System.out.println(xSql);
+//            System.out.println(xSql);
         }catch (Exception e){
             System.out.println("insert: " + e.getMessage());
         }

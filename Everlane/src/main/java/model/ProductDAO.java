@@ -369,7 +369,7 @@ public class ProductDAO extends myDAO {
 
     public Product getProductByProIDColName(String xId, String xColor_Name) {
         int i = Integer.parseInt(xId);
-        xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name\n" + "from variation v, product_img pi, product p , category c, color col, size s\n" + "where col.color_Name like '%" + xColor_Name + "%'\n" + "and p.ProductID = ?\n" + "and p.ProductID = v.ProductID \n" + "and v.product_img_ID = pi.product_img_ID\n" + "and v.color_ID = col.color_ID\n" + "and v.size_ID = s.size_ID;";
+        xSql = "select DISTINCT s.size_Name, v.VariationID, v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name\n" + "from variation v, product_img pi, product p , category c, color col, size s\n" + "where col.color_Name like '%" + xColor_Name + "%'\n" + "and p.ProductID = ?\n" + "and p.ProductID = v.ProductID \n" + "and v.product_img_ID = pi.product_img_ID\n" + "and v.color_ID = col.color_ID\n" + "and v.size_ID = s.size_ID;";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, i);
@@ -380,6 +380,7 @@ public class ProductDAO extends myDAO {
             String xProductName, xSize_Name;
             double xPrice;
             int xQty_in_stock;
+            int xVariationID;
             Product x = null;
             while (rs.next()) {
                 i = rs.getInt("ProductID");
@@ -391,10 +392,11 @@ public class ProductDAO extends myDAO {
                 xCollectionID = 0;
                 xProductName = rs.getString("ProductName");
                 xColor_Name = rs.getString("color_Name");
-                xSize_Name = null;
+                xSize_Name = rs.getString("size_name");
                 xPrice = rs.getDouble("Price");
                 xQty_in_stock = 0;
-                x = new Product(i, xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName, xCollectionID, xProductName, xColor_Name, xSize_Name, xPrice, xQty_in_stock);
+                xVariationID = rs.getInt("VariationID");
+                x = new Product(i, xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName, xCollectionID, xProductName, xColor_Name, xSize_Name, xPrice, xQty_in_stock, xVariationID);
                 return x;
             }
             rs.close();

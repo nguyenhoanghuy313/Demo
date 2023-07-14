@@ -101,7 +101,7 @@
         </li>
         <!-- User List -->
         <li class="menu-item active">
-          <a href="orderListUser.jsp" class="menu-link">
+          <a href="orderDetailUser.jsp" class="menu-link">
             <i class='menu-icon tf-icons bx bxs-package'></i>
             <div data-i18n="Orders & Returns">Orders List</div>
           </a>
@@ -217,13 +217,10 @@
                 <thead>
                 <tr>
                   <th>NO</th>
-                  <th>PRODUCT THUMBNAIL</th>
-                  <th>PRODUCT NAME</th>
-                  <th>COLOR NAME</th>
-                  <th>SIZE NAME</th>
-                  <th>Quantity</th>
+                  <th>Order ID</th>
                   <th>Amount</th>
                   <th>Buy at</th>
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <%
@@ -233,14 +230,22 @@
                 %>
                 <tbody class="table-border-bottom-0">
                 <tr class="item">
-                  <td>1</td>
-                  <td><img src="<%=p.getThumbnail()%>"></td>
-                  <td><%=p.getProductName()%></td>
-                  <td><%=p.getColor_Name()%></td>
-                  <td><%=p.getSize_Name()%></td>
-                  <td><%=p.getQty_in_cart()%></td>
-                  <td><%=p.getQty_in_stock()%></td>
-                  <td>1/02/2003</td>
+                  <td>NO</td>
+                  <td>Order ID</td>
+                  <td>Amount</td>
+                  <td>Buy at</td>
+                  <td>
+                    <div class="dropdown">
+                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                              data-bs-toggle="dropdown">
+                        <i class="bx bx-dots-vertical-rounded"></i>
+                      </button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="EditProductServlet?input=1&ProductID=<%=x.getProductID()%>"
+                        >Detail</a>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 </tbody>
                 <%

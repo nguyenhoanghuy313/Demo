@@ -89,6 +89,26 @@
             <artifactId>google-oauth-client-jetty</artifactId>
             <version>1.34.1</version>
         </dependency>
+        <dependency>
+            <groupId>cloud.piranha.webapp</groupId>
+            <artifactId>piranha-webapp-webservlet</artifactId>
+            <version>20.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cloud.piranha.webapp</groupId>
+            <artifactId>piranha-webapp-webservlet</artifactId>
+            <version>20.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cloud.piranha.webapp</groupId>
+            <artifactId>piranha-webapp-webservlet</artifactId>
+            <version>20.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cloud.piranha.webapp</groupId>
+            <artifactId>piranha-webapp-webservlet</artifactId>
+            <version>20.5.0</version>
+        </dependency>
 
     </dependencies>
 

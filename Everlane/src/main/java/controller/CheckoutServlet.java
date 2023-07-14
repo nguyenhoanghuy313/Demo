@@ -35,7 +35,7 @@ public class CheckoutServlet extends HttpServlet{
             request.setAttribute("ErrMessage", "Please fill all the fields");
             request.getRequestDispatcher("checkout.jsp").forward(request,response);
         } else {
-//            ud.insertDetailed(xFirstName,xPhone,buyerID);
+            ud.insertDetailed(xFirstName,xPhone,buyerID);
             ad.insertAddress(xStreet,xAddressLine,xCity,xRegion,xPostalCode);
             request.setAttribute("ErrMessage", "Address has been added Successfully");
             request.getRequestDispatcher("checkout.jsp").forward(request,response);

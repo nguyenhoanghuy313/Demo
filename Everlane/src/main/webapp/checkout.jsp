@@ -69,14 +69,18 @@
                 <h1>Shipping</h1>
             </div>
             <form action="Checkout" method="post">
-                <input id="FirstName" name="FirstName" placeholder="Full Name*" type="text"><br>
-                <input id="country" name="Country" placeholder="Country*" type="text"><br>
-                <input id="Street" name="Street" placeholder="Street Address*" type="text"><br>
-                <input id="address_line1" name="address_line1" placeholder="Apartment, Suite, Building (Optional)" type="text"><br>
-                <input id="city" name="city" placeholder="City*" type="text"><br>
-                <input id="region" name="region" placeholder="State/Province/Region" type="text"><br>
-                <input id="postalcode" name="postalcode" placeholder="Postal Code*" type="text"><br>
-                <input id="phone" name="phone" placeholder="Phone Number*" type="text"><br>
+                <input list="country" name="Country" placeholder="Country" type="text" required><br>
+                <datalist id="country">
+                    <%for (Category category : cateList) {%>
+                    <option value=<%=category.getCategoryID()%>><%=category.getCategoryName()%>
+                    </option>
+                    <%}%>
+                </datalist>
+                <input id="Street" name="Street" placeholder="Street Address*" type="text" required><br>
+                <input id="address_line" name="address_line" placeholder="Address" type="text" required><br>
+                <input id="city" name="city" placeholder="City*" type="text" required><br>
+                <input id="postalcode" name="postalcode" placeholder="Postal Code*" type="number" min="0" required><br>
+                <input id="phone" name="phone" placeholder="Phone Number*" type="tel" required><br>
                 <input type="submit" value="Save Address">
                 <h2 style="color: red">${ErrMessage}</h2>
             </form>

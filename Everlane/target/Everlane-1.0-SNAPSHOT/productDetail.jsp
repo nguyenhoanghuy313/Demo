@@ -50,7 +50,8 @@
             <div class="Name_And_Price">
                 <h1><%= pi.getProductName()%>
                 </h1>
-                <%--                <h2><%=pi.getVariationID()%></h2>--%>
+                <%--                                <h2>variationID: <%=pi.getVariationID()%></h2>--%>
+                <%--                                <h2>prodID: <%=pi.getProductID()%></h2>--%>
                 <div class="Price">
                     <p>₫2896300</p>
                     <p><%= pi.getPrice()%>
@@ -58,51 +59,56 @@
                 </div>
             </div>
         </div>
-        <div class="Product_Color">
-            <h1>Color</h1>
-            <div class="Color">
-                <%
-                    for (Color color : colors) {
-                %>
-                <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=<%= pi.getProductID()%>&color_Name=<%= color.getColor_Name()%>">
-                    <div style="background-color: <%= color.getColor_Name()%>"></div>
-                    <span><%= color.getColor_Name()%></span>
-                </a>
-                <% } %>
+        <form action="addToCart" method="POST">
+            <div class="Product_Color">
+                <h1>Color</h1>
+                <div class="Color">
+                    <%
+                        for (Color color : colors) {
+                    %>
+                    <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=<%= pi.getProductID()%>&color_Name=<%= color.getColor_Name()%>">
+                        <div style="background-color: <%= color.getColor_Name()%>"></div>
+                        <span><%= color.getColor_Name()%></span>
+                    </a>
+                    <% } %>
+                </div>
             </div>
-        </div>
 
-        <div class="Product_Size">
-            <h1>Size</h1>
-            <div class="Size">
-                <form action="productDetail-servlet" method="POST">
-
+            <div class="Product_Size">
+                <h1>Size</h1>
+                <div class="Size">
                     <input type="hidden" name="ProductID" value="<%= pi.getProductID() %>">
                     <input type="hidden" name="color_Name" value="<%= pi.getColor_Name() %>">
                     <input type="hidden" name="VariationID" value="<%= pi.getVariationID() %>">
                     <%--                    <input type="hidden" name="productName" value="<%= pi.getProductName() %>">--%>
                     <% for (Size size : sizes) { %>
-                    <button type="submit" name="size_name" value="<%= size.getSize_Name() %>"><%= size.getSize_Name() %>
-                    </button>
+                    <input type="radio" id="size_name" name="size_name" value="<%= size.getSize_Name() %>">
+                    <label for="size_name"><%= size.getSize_Name() %>
+                    </label><br>
+                    <%--                    <button type="submit" name="size_name" value="<%= size.getSize_Name() %>"><%= size.getSize_Name() %>--%>
+                    <%--                    </button>--%>
                     <% } %>
-                </form>
+                </div>
             </div>
-        </div>
+            <button color="white" type="submit"
+<%--                    href="addToCart?ProductID=<%=pi.getProductID()%>&VariationID=<%=pi.getVariationID()%>">--%>
+                Add
+                To Bag
+            </button>
+        </form>
 
 
-        <a href="${pageContext.request.contextPath}/addToCart?ProductID=<%=pi.getProductID()%>&VariationID=<%=pi.getVariationID()%>">Add
-            To Bag</a>
         <%--        href="${pageContext.request.contextPath}/addToCart?ProductID=<%=pi.getProductID()%>&VariationID=<%=pi.getVariationID()%>"--%>
         <div class="Product_Description">
             <h1>Description</h1>
             <p>Made of 100% cotton poplin with a subtle sheen, the Smock Dress has a comfortable, breathable feel with
                 an effortlessly polished look.</p>
             <%--            <p> ${CartMess}</p>--%>
-<%--            <form action="addToCart" method="GET">--%>
-<%--                <h2>--%>
-<%--                    ${CartMess}--%>
-<%--                </h2>--%>
-<%--            </form>--%>
+            <%--            <form action="addToCart" method="GET">--%>
+            <%--                <h2>--%>
+            <%--                    ${CartMess}--%>
+            <%--                </h2>--%>
+            <%--            </form>--%>
         </div>
     </div>
 </section>

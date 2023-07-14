@@ -87,7 +87,7 @@
                 </li>
                 <!-- User List -->
                 <li class="menu-item">
-                    <a href="orderListUser.jsp" class="menu-link">
+                    <a href="orderDetailUser.jsp" class="menu-link">
                         <i class='menu-icon tf-icons bx bxs-package'></i>
                         <div data-i18n="Orders & Returns">Orders List</div>
                     </a>

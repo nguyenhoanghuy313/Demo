@@ -1,7 +1,7 @@
 package controller;
 import java.io.*;
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import model.*;
 import java.util.*;
