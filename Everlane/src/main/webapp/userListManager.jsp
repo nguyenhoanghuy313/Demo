@@ -380,7 +380,7 @@
                                                     ><i class="bx bx-edit-alt me-1"></i> Edit</a
                                                     >
                                                     <a class="dropdown-item" href="DeleteUser?UserID=${u.getUserID()}"
-                                                       onclick="return confirm('Are you sure want to delete this ticket?')"
+                                                       onclick="return confirm('Are you sure want to delete this user?')"
                                                     ><i class="bx bx-trash me-1"></i> Delete</a
                                                     >
                                                 </div>

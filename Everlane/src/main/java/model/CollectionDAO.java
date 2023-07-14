@@ -69,7 +69,8 @@ public class CollectionDAO extends myDAO{
     }
     public Collection getCollectionsByDate(){
         Collection x = null;
-        xSql = "select * from collection order by create_date desc Limit 1;";
+        xSql = "select * from collection";
+//        order by create_date desc Limit 1
         try{
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
