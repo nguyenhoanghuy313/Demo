@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="homepage/category.css">
     <link rel="stylesheet" href="homepage/best-seller-slider1.css">
     <link rel="stylesheet" href="homepage/sale-banner.css">
-    <link rel="stylesheet" href="homepage/story-container.css">
+    <link rel="stylesheet" href="homepage/story-container1.css">
     <link rel="stylesheet" href="footer/footer.css">
 
     <!-- Favicon -->
@@ -135,20 +135,17 @@
 </section>
 
 <section class="Stories_Container">
-    <a class="Story">
-        <h1>Cleaner Fashion</h1>
-        <p>At Everlane, we carefully consider our materials and work with our production partners to reduce waste,
-            minimize natural resource use, and remove harmful chemicals and plastics.</p>
+<c:forEach var="story" items="${storyList}" varStatus="a">
+    <c:if test="${a.index < 2}">
+    <a style="color: black" href="StoryCusServlet?input=${story.getStory_ID()}" class="Story">
+        <h1>${story.getTitle()}</h1>
         <button>Learn More</button>
-        <img src="https://media.everlane.com/image/upload/c_scale,dpr_1.0,f_auto,q_auto,w_auto/c_limit,w_1100/v1/i/06b35363_a6a7.png">
+        <div class="Storyimg">
+            <img src="${story.getThumbnail()}">
+        </div>
     </a>
-    <a class="Story">
-        <h1>Cleaner Fashion</h1>
-        <p>At Everlane, we carefully consider our materials and work with our production partners to reduce waste,
-            minimize natural resource use, and remove harmful chemicals and plastics.</p>
-        <button>Learn More</button>
-        <img src="https://media.everlane.com/image/upload/c_scale,dpr_1.0,f_auto,q_auto,w_auto/c_limit,w_1100/v1/i/06b35363_a6a7.png">
-    </a>
+    </c:if>
+</c:forEach>
 </section>
 
 <jsp:include page="footer.jsp"/>

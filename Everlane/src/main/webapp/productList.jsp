@@ -52,7 +52,6 @@
                         %>
                         <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all&mod=bottom"
                            class="Category_Option">
-                            <div class="checkbox"></div>
                             <span>${cate.getCategoryName()}</span>
                         </a>
                         <%
@@ -60,7 +59,6 @@
                         %>
                         <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all"
                            class="Category_Option">
-                            <div class="checkbox"></div>
                             <span>${cate.getCategoryName()}</span>
                         </a>
                         <%}%>
@@ -69,7 +67,6 @@
                         %>
                         <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all&collectionID=<%=collection.getCollectionID()%>"
                            class="Category_Option">
-                            <div class="checkbox"></div>
                             <span>${cate.getCategoryName()}</span>
                         </a>
                         <%}%>
@@ -115,16 +112,6 @@
                 </div>
                 <%}%>
             </div>
-            <%--            <div class="Size_Container">--%>
-            <%--                <h1>Size</h1>--%>
-            <%--                <div class="Size">--%>
-            <%--                    <%--%>
-            <%--                        for (Size size : sizeList) {--%>
-            <%--                    %>--%>
-            <%--                    <a><%= size.getSize_Name()%></a>--%>
-            <%--                    <%}%>--%>
-            <%--                </div>--%>
-            <%--            </div>--%>
         </div>
         <div class="List_Container">
             <div class="Product_List_Headline">
@@ -134,11 +121,11 @@
             <a class="bx bx-menu" id="menu_Filter-icon">Filter</a>
             <div class="Product_List">
                 <%
-                    if (productList == null) {
+                    if (productList.isEmpty()) {
                 %>
-                <h2>No products found</h2>
+                <h2 style="font-family: 'Nunito Sans', sans-serif;">No products found</h2>
                 <%
-                } else if (!productList.isEmpty()) {
+                } else {
                 %>
                 <%
                     for (Product x : productList) {
