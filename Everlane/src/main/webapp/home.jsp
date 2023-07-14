@@ -45,20 +45,20 @@
       Promotion promotion = (Promotion) request.getAttribute("promotion");
   %>
 <div class="pop_up_container">
-    <div class="pop_up" style="background: <%=promotion.getBackground_color()%>">
+    <div class="pop_up" style="background: ${promotion.getBackground_color()}">
         <i class='bx bx-x' id="pop_up_x"></i>
         <h1>
-            <%=promotion.getPromotionName()%>: Now up to <%=promotion.getDiscountRate()%>% off
+            ${promotion.getPromotionName()}: Now up to ${promotion.getDiscountRate()}% off
         </h1>
         <button>SHOP NOW</button>
     </div>
 </div>
     <section class="Season_Collection_Banner" id="Season_Collection_Banner">
-        <img src=<%= collection.getCollectionImg() %>
+        <img src="${collection.getCollectionImg()}"
                      alt="">
         <div class="Season_Collection_Banner_text">
-            <h1><%= collection.getCollectionName() %></h1>
-            <p><%= collection.getCollection_description() %></p>
+            <h1>${collection.getCollectionName()}</h1>
+            <p>${collection.getCollection_description()}</p>
             <button value="collectionID" name="collectionID">
                 <a href="${pageContext.request.contextPath}/productList-servlet?collectionID=${collection.getCollectionID()}&categoryID=3&color_ID=all">
                     SHOP THE COLLECTION

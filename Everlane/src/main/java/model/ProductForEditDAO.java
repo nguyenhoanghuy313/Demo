@@ -161,4 +161,16 @@ public class ProductForEditDAO extends myDAO{
             System.out.println("UpdateAccount: " + e.getMessage());
         }
     }
+
+    public void delete(String productID) {
+        xSql = "delete from product where ProductID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, productID);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

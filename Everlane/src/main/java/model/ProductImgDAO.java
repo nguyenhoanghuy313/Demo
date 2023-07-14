@@ -146,4 +146,16 @@ public class ProductImgDAO extends myDAO{
             System.out.println("Update: " + e.getMessage());
         }
     }
+
+    public void delete(String productImgID) {
+        xSql = "delete from product_img where product_img_ID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, productImgID);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

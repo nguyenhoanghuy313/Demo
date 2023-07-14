@@ -25,14 +25,17 @@ public class LoginGoogleHandler extends HttpServlet {
             throws ServletException, IOException {
         String code = request.getParameter("code");
         String accessToken = getToken(code);
-        User ugoogle = new User();
         UserDAO u = new UserDAO();
+        CollectionDAO col = new CollectionDAO();
 //        ProductsDAO p = new ProductsDAO();
         CategoryDAO c = new CategoryDAO();
 //        List<Product> data = p.getAllProducts();
         List<Category> cateList = c.getAllCategory();
+        PromotionDAO promotionDAO = new PromotionDAO();
         UserGoogleDto user = getUserInfo(accessToken);
-        ugoogle = u.getUserByEmail(user.getEmail());
+        Collection collection = col.getCollectionsByDate();
+        Promotion promotion = promotionDAO.getPromotionByID(String.valueOf(collection.getPromotionID()));
+        User ugoogle = u.getUserByEmail(user.getEmail());
         request.getSession().setAttribute("acc", ugoogle);
 //        response.sendRedirect(request.getContextPath()+"/home.jsp");
 //        request.getRequestDispatcher("home.jsp").forward(request,response);
@@ -41,7 +44,11 @@ public class LoginGoogleHandler extends HttpServlet {
         if(ugoogle != null) {
 //            request.setAttribute("data", data);
 //            request.getSession().setAttribute("data", data);
+            request.setAttribute("promotion", promotion);
             request.setAttribute("cateList", cateList);
+            request.setAttribute("collection", collection);
+            request.getSession().setAttribute("promotion", promotion);
+            request.getSession().setAttribute("collection", collection);
             request.getSession().setAttribute("cateList", cateList);
             response.sendRedirect(request.getContextPath()+"/home.jsp");
         } else {
