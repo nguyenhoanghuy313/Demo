@@ -1,8 +1,6 @@
-<%@ page import="model.User" %>
+<%@ page import="model.*" %>
 <%@ page import="java.util.List" %>
 <%@ page import="entity.CartItem" %>
-<%@ page import="model.CartItemDAO" %>
-<%@ page import="model.Product" %>
 <%--
   Created by IntelliJ IDEA.
   User: minileisduk
@@ -52,6 +50,8 @@
 //    int uID = u.getUserID();
     CartItemDAO cid = new CartItemDAO();
     List<Product> cartItemList = cid.getUserItem(uID);
+    ProductForEditDAO proEditDAO = new ProductForEditDAO();
+    List<ProductForEdit> productForEditList = proEditDAO.getAllProductForEdit();
 %>
 <header>
     <%-- web--%>
@@ -174,7 +174,12 @@
 
 <div class="search_container">
     <form action="${pageContext.request.contextPath}/SearchServlet" method="post" class="search_inner">
-        <input type="text" id="site-search" name="productName" placeholder="Search...">
+        <input type="text" id="site-search" name="productName" placeholder="Search..." list="productL">
+        <datalist id="productL">
+            <%for (ProductForEdit productForEdit: productForEditList){%>
+            <option value="<%=productForEdit.getProductName()%>">
+            <%}%>
+        </datalist>
         <button class='bx bx-search-alt'></button>
     </form>
 </div>

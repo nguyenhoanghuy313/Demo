@@ -14,7 +14,7 @@
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Dashboard</title>
+    <title>User Account</title>
 
     <meta name="description" content=""/>
 
@@ -204,60 +204,12 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="javascript:void(0);"><i
-                                            class="bx bx-user me-1"></i> Account</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="pages-account-settings-notifications.html"
-                                    ><i class="bx bx-bell me-1"></i> Notifications</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="pages-account-settings-connections.html"
-                                    ><i class="bx bx-link-alt me-1"></i> Connections</a
-                                    >
-                                </li>
-                            </ul>
                             <div class="card mb-4">
                                 <h5 class="card-header">Profile Details</h5>
                                 <!-- Account -->
-                                <div class="card-body">
-                                    <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                        </div>
-                                        <img
-                                                src="../assets/img/avatars/1.png"
-                                                alt="user-avatar"
-                                                class="d-block rounded"
-                                                height="100"
-                                                width="100"
-                                                id="uploadedAvatar"
-                                        />
-                                        <div class="button-wrapper">
-                                            <label for="upload" class="btn btn-dark me-2 mb-4" tabindex="0">
-                                                <span class="d-none d-sm-block">Upload new photo</span>
-                                                <i class="bx bx-upload d-block d-sm-none"></i>
-                                                <input
-                                                        type="file"
-                                                        id="upload"
-                                                        class="account-file-input"
-                                                        hidden
-                                                        accept="image/png, image/jpeg"
-                                                />
-                                            </label>
-                                            <button type="button"
-                                                    class="btn btn-outline-secondary account-image-reset mb-4">
-                                                <i class="bx bx-reset d-block d-sm-none"></i>
-                                                <span class="d-none d-sm-block">Reset</span>
-                                            </button>
-
-                                            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
-                                        </div>
-                                    </div>
-                                </div>
                                 <hr class="my-0"/>
                                 <div class="card-body">
-                                    <form id="formAccountSettings" action="user-account-detail-servlet" method="POST">
+                                    <form action="user-account-detail-servlet?input=username" method="POST">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
                                                 <label for="username" class="form-label">User Name</label>
@@ -267,12 +219,50 @@
                                                         id="username"
                                                         name="username"
                                                         value="${u.getUserName()}"
+                                                        placeholder="Please enter your User Name"
+                                                        required
                                                 />
                                             </div>
-                                            <div class="mb-3 col-md-6">
-                                                <input type="hidden" class="form-control" id="password" name="password"
-                                                       value="${u.getPassword()}"/>
+                                            <input type="hidden" class="form-control" name="password"
+                                                   value="${u.getPassword()}"/>
+                                            <input class="form-control" type="hidden" name="email"
+                                                   value="${u.getEmail()}"/>
+                                            <input class="form-control" type="hidden" name="firstName"
+                                                   value="${u.getFirstName()}"/>
+                                            <input class="form-control" type="hidden" name="lastName"
+                                                   value="${u.getLastName()}"/>
+                                            <input class="form-control" type="hidden" name="dob" value="${u.getDob()}"/>
+                                            <input class="form-control" type="hidden" name="gender"
+                                                   value="${u.getSex()}"/>
+                                            <input type="hidden" class="form-control" name="role"
+                                                   value="${u.getRole()}"/>
+                                            <input type="hidden" name="phoneNumber" class="form-control"
+                                                   value="${u.getPhone()}"/>
+                                            <input type="hidden" name="UserID" class="form-control"
+                                                   value="${u.getUserID()}"/>
+
+                                            <div style="color: red">
+                                                ${error1}
                                             </div>
+                                            <div style="color: green">
+                                                ${success1}
+                                            </div>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button type="submit" class="btn btn-dark me-2">Change username
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <hr class="my-0"/>
+
+                                <div class="card-body">
+                                    <form action="user-account-detail-servlet?input=email" method="POST">
+                                        <div class="row">
+                                            <input type="hidden" class="form-control" name="username"
+                                                   value="${u.getUserName()}"/>
+                                            <input type="hidden" class="form-control" name="password"
+                                                   value="${u.getPassword()}"/>
                                             <div class="mb-3 col-md-6">
                                                 <label for="email" class="form-label">E-mail</label>
                                                 <input
@@ -281,33 +271,73 @@
                                                         id="email"
                                                         name="email"
                                                         value="${u.getEmail()}"
+                                                        required
+                                                        placeholder="Please enter your Email"
                                                 />
                                             </div>
+                                            <input class="form-control" type="hidden" name="firstName"
+                                                   value="${u.getFirstName()}"/>
+                                            <input class="form-control" type="hidden" name="lastName"
+                                                   value="${u.getLastName()}"/>
+                                            <input class="form-control" type="hidden" name="dob" value="${u.getDob()}"/>
+                                            <input class="form-control" type="hidden" name="gender"
+                                                   value="${u.getSex()}"/>
+                                            <input type="hidden" class="form-control" name="role"
+                                                   value="${u.getRole()}"/>
+                                            <input type="hidden" name="phoneNumber" class="form-control"
+                                                   value="${u.getPhone()}"/>
+                                            <input type="hidden" name="UserID" class="form-control"
+                                                   value="${u.getUserID()}"/>
+
+                                            <div style="color: red">
+                                                ${error2}
+                                            </div>
+                                            <div style="color: green">
+                                                ${success2}
+                                            </div>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button type="submit" class="btn btn-dark me-2" value="Update"
+                                                    name="Update">Change email
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <hr class="my-0"/>
+
+                                <div class="card-body">
+                                    <form action="user-account-detail-servlet?input=detail" method="POST">
+                                        <div class="row">
+                                            <input type="hidden" class="form-control" name="username"
+                                                   value="${u.getUserName()}"/>
+                                            <input type="hidden" class="form-control" id="password" name="password"
+                                                   value="${u.getPassword()}"/>
+                                            <input class="form-control" type="hidden" name="email"
+                                                   value="${u.getEmail()}"/>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">First Name</label>
-                                                <input
-                                                        class="form-control"
-                                                        type="text"
-                                                        id="firstName"
-                                                        name="firstName"
-                                                        value="${u.getFirstName()}"
-                                                        placeholder="Enter your first name"
-                                                        autofocus
+                                                <input class="form-control" type="text" id="firstName" name="firstName"
+                                                       value="${u.getFirstName()}" placeholder="Enter your First Name"
+                                                       required
+                                                       pattern="([A-Z][a-zA-Z]*)" title="First letter must be uppercase, no number and white space"
                                                 />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Last Name</label>
                                                 <input class="form-control" type="text" name="lastName" id="lastName"
-                                                       value="${u.getLastName()}" placeholder="Enter your last name"/>
+                                                       value="${u.getLastName()}" placeholder="Enter your last name"
+                                                       required
+                                                       pattern="([A-Z][a-zA-Z]*)" title="First letter must be uppercase, no number and white space"
+                                                />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="dob" class="form-label">Date Of Birth</label>
                                                 <input type="date" class="form-control" id="dob" name="dob"
-                                                       value="${u.getDob()}" placeholder=""/>
+                                                       value="${u.getDob()}" required/>
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="gender" class="form-label">Gender</label>
-                                                <select id="gender" name="gender" class="select2 form-select">
+                                                <select id="gender" name="gender" class="select2 form-select" required>
                                                     <c:if test="${u.getSex() == null}">
                                                         <option value="0">Choose Your Gender</option>
                                                     </c:if>
@@ -324,10 +354,8 @@
 
                                                 </select>
                                             </div>
-                                            <div class="mb-3 col-md-6">
-                                                <input type="hidden" class="form-control" id="role" name="role"
-                                                       value="${u.getRole()}"/>
-                                            </div>
+                                            <input type="hidden" class="form-control" id="role" name="role"
+                                                   value="${u.getRole()}"/>
                                             <div class="mb-3 col-md-6">
                                                 <label class="form-label" for="phoneNumber">Phone Number</label>
                                                 <div class="input-group input-group-merge">
@@ -338,6 +366,7 @@
                                                             class="form-control"
                                                             placeholder="Enter your phone number"
                                                             value="${u.getPhone()}"
+                                                            required
                                                     />
                                                 </div>
                                             </div>
@@ -350,26 +379,28 @@
                                             />
 
                                             <div style="color: red">
-                                                ${error}
+                                                ${error3}
                                             </div>
                                             <div style="color: green">
-                                                ${success}
+                                                ${success3}
                                             </div>
                                         </div>
                                         <div class="mt-2">
-                                            <button type="submit" class="btn btn-dark me-2" value="Update"
-                                                    name="Update">Save changes
+                                            <button type="submit" class="btn btn-dark me-2">Save changes
                                             </button>
-                                            <a href="user-account-detail-servlet?mod=1" type="reset"
-                                               class="btn btn-outline-secondary">Cancel</a>
                                         </div>
                                     </form>
+                                </div>
+                                <hr class="my-0"/>
+
+                                <div class="card-body">
                                     <div class="mt-2">
                                         <a class="btn btn-outline-secondary"
                                            href="${pageContext.request.contextPath}/changePassword">Change
                                             password</a>
                                     </div>
                                 </div>
+
                                 <!-- /Account -->
                             </div>
                             <div class="card">
@@ -436,8 +467,9 @@
 <script>
     var file = document.getElementById("upload");
     var image = document.getElementById("uploadedAvatar");
-    file.addEventListener("change", (e) =>{
-        image.src = URL.createObjectURL(e.target.files[0])})
+    file.addEventListener("change", (e) => {
+        image.src = URL.createObjectURL(e.target.files[0])
+    })
     // file.addEventListener("change", function() {
     //     if (this.files[0]) {
     //         var fileReader = new FileReader();

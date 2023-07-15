@@ -9,8 +9,10 @@ import model.User;
 import model.UserDAO;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 @WebServlet(name = "register-servlet", urlPatterns = {"/register-servlet"})
 public class SignUpServlet extends HttpServlet {
@@ -30,12 +32,20 @@ public class SignUpServlet extends HttpServlet {
         String email = req.getParameter("email").trim();
         String password = req.getParameter("password").trim();
         String repass = req.getParameter("repass").trim();
+        Date date = Date.valueOf(req.getParameter("dob").trim());
+
         int role = Integer.parseInt(req.getParameter("role").trim());
 
+
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - 18);
         UserDAO u = new UserDAO();
         User x = new User();
         if (email.isEmpty() || password.isEmpty() || repass.isEmpty() || username.isEmpty() ) {
             req.setAttribute("error", "Please fill all the fields");
+            req.getRequestDispatcher("register.jsp").forward(req, resp);
+        }else if(!username.matches("^(?=[a-zA-Z0-9._]{5,20}$)(?!.*[_.]{2})[^_.].*[^_.]$")){
+            req.setAttribute("error", "Username must be 5-20 letters, no _ or . ,");
             req.getRequestDispatcher("register.jsp").forward(req, resp);
         } else if (password.length() < 3 || password.length() > 20) {
             req.setAttribute("error", "Password must be between 3 and 20 characters");
@@ -43,9 +53,9 @@ public class SignUpServlet extends HttpServlet {
         } else if (!password.equals(repass)) {
             req.setAttribute("error", "Password and repassword are not the same");
             req.getRequestDispatcher("register.jsp").forward(req, resp);
-//        } else if (!u.isValidDate(dob)) {
-//            req.setAttribute("error", "Invalid date of birth");
-//            req.getRequestDispatcher("register.jsp").forward(req, resp);
+        } else if (!calendar.getTime().after(date)) {
+            req.setAttribute("error", "User must be 18 or older");
+            req.getRequestDispatcher("register.jsp").forward(req, resp);
         } else {
             boolean checkAccountExist = u.checkAccountExist(username, email);
             if (checkAccountExist) {
@@ -53,7 +63,7 @@ public class SignUpServlet extends HttpServlet {
                 req.getRequestDispatcher("register.jsp").forward(req, resp);
             } else {
 //                phone = Integer.parseInt(phoneString);
-                u.addUser(username ,password,email, role);
+                u.addUser(username ,password,email, role, date);
                 req.setAttribute("newemail", email);
                 req.setAttribute("newpass", password);
                 req.setAttribute("success", "Register successfully please sign in");
