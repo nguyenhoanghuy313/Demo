@@ -1,12 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: minileisduk
-  Date: 6/13/2023
-  Time: 10:04 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page import="model.*" %>
+<%
+    User user = (User) request.getAttribute("u");
+%>
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -98,6 +95,7 @@
                 <!-- Pages -->
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
                 <!-- Product List -->
+                <%if(user.getRole() == 1 || user.getRole() == 2){%>
                 <li class="menu-item">
                     <a href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
                        class="menu-link">
@@ -112,7 +110,28 @@
                         <div data-i18n="User List">User List</div>
                     </a>
                 </li>
-                <!-- Forms -->
+                <li class="menu-item">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-detail"></i>
+                        <div data-i18n="Sale">Sale</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="PromotionServlet?input=all" class="menu-link">
+                                <div data-i18n="Promotion List">Promotion List</div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="${pageContext.request.contextPath}/CollectionUpdatePromotion" class="menu-link">
+                                <div data-i18n="Promotion List">Season Collection (Update Promotion)</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <%}%>
+                <%if(user.getRole() == 1 || user.getRole() == 3){%>
                 <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-detail"></i>
@@ -140,26 +159,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons bx bx-detail"></i>
-                        <div data-i18n="Sale">Sale</div>
-                    </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="PromotionServlet?input=all" class="menu-link">
-                                <div data-i18n="Promotion List">Promotion List</div>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="${pageContext.request.contextPath}/CollectionUpdatePromotion" class="menu-link">
-                                <div data-i18n="Promotion List">Season Collection (Update Promotion)</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                <%}%>
             </ul>
         </aside>
         <!-- / Menu -->
@@ -211,7 +211,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="highUserAccount.jsp">
+                                    <a class="dropdown-item" href="HighUserAccountDetailServlet">
                                         <i class="bx bx-user me-2"></i>
                                         <span class="align-middle">My Profile</span>
                                     </a>

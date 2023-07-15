@@ -105,7 +105,7 @@
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                         aria-describedby="password"
                                 />
-                                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                                <span onclick="ShowPassword()" class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                             </div>
                         </div>
                         <div style="color: red">
@@ -156,7 +156,16 @@
 <script src="../assets/js/main.js"></script>
 
 <!-- Page JS -->
-
+<script>
+    function ShowPassword() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>

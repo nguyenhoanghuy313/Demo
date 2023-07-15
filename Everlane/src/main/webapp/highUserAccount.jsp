@@ -244,83 +244,13 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                                <li class="nav-item">
-                                    <a class="nav-link active"  href="javascript:void(0);"><i class="bx bx-user me-1"></i> Account</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="pages-account-settings-notifications.html"
-                                    ><i class="bx bx-bell me-1"></i> Notifications</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="pages-account-settings-connections.html"
-                                    ><i class="bx bx-link-alt me-1"></i> Connections</a
-                                    >
-                                </li>
-                            </ul>
                             <div class="card mb-4">
                                 <h5 class="card-header">Profile Details</h5>
                                 <!-- Account -->
+                                <hr class="my-0"/>
                                 <div class="card-body">
-                                    <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                        <img
-                                                src="../assets/img/avatars/1.png"
-                                                alt="user-avatar"
-                                                class="d-block rounded"
-                                                height="100"
-                                                width="100"
-                                                id="uploadedAvatar"
-                                        />
-                                        <div class="button-wrapper">
-                                            <label for="upload" class="btn btn-dark me-2 mb-4" tabindex="0">
-                                                <span class="d-none d-sm-block">Upload new photo</span>
-                                                <i class="bx bx-upload d-block d-sm-none"></i>
-                                                <input
-                                                        type="file"
-                                                        id="upload"
-                                                        class="account-file-input"
-                                                        hidden
-                                                        accept="image/png, image/jpeg"
-                                                />
-                                            </label>
-                                            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-                                                <i class="bx bx-reset d-block d-sm-none"></i>
-                                                <span class="d-none d-sm-block">Reset</span>
-                                            </button>
-
-                                            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr class="my-0" />
-                                <div class="card-body">
-                                    <form id="formAccountSettings" method="POST" onsubmit="return false">
+                                    <form action="HighUserAccountDetailServlet?input=username" method="POST">
                                         <div class="row">
-                                            <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">First Name</label>
-                                                <input
-                                                        class="form-control"
-                                                        type="text"
-                                                        id="firstName"
-                                                        name="firstName"
-                                                        value="Lấy sẵn first name người dùng vào đây"
-                                                        autofocus
-                                                />
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Last Name</label>
-                                                <input class="form-control" type="text" name="lastName" id="lastName" value="Lấy sẵn last name người dùng vào đây" />
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label for="email" class="form-label">E-mail</label>
-                                                <input
-                                                        class="form-control"
-                                                        type="email"
-                                                        id="email"
-                                                        name="email"
-                                                        value="Lấy sẵn email người dùng vào đây"
-                                                />
-                                            </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="username" class="form-label">User Name</label>
                                                 <input
@@ -328,9 +258,144 @@
                                                         class="form-control"
                                                         id="username"
                                                         name="username"
-                                                        value="Lấy sẵn username vào đây"
+                                                        value="${u.getUserName()}"
+                                                        placeholder="Please enter your User Name"
+                                                        required
                                                 />
                                             </div>
+                                            <input type="hidden" class="form-control" name="password"
+                                                   value="${u.getPassword()}"/>
+                                            <input class="form-control" type="hidden" name="email"
+                                                   value="${u.getEmail()}"/>
+                                            <input class="form-control" type="hidden" name="firstName"
+                                                   value="${u.getFirstName()}"/>
+                                            <input class="form-control" type="hidden" name="lastName"
+                                                   value="${u.getLastName()}"/>
+                                            <input class="form-control" type="hidden" name="dob" value="${u.getDob()}"/>
+                                            <input class="form-control" type="hidden" name="gender"
+                                                   value="${u.getSex()}"/>
+                                            <input type="hidden" class="form-control" name="role"
+                                                   value="${u.getRole()}"/>
+                                            <input type="hidden" name="phoneNumber" class="form-control"
+                                                   value="${u.getPhone()}"/>
+                                            <input type="hidden" name="UserID" class="form-control"
+                                                   value="${u.getUserID()}"/>
+
+                                            <div style="color: red">
+                                                ${error1}
+                                            </div>
+                                            <div style="color: green">
+                                                ${success1}
+                                            </div>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button type="submit" class="btn btn-dark me-2">Change username
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <hr class="my-0"/>
+
+                                <div class="card-body">
+                                    <form action="HighUserAccountDetailServlet?input=email" method="POST">
+                                        <div class="row">
+                                            <input type="hidden" class="form-control" name="username"
+                                                   value="${u.getUserName()}"/>
+                                            <input type="hidden" class="form-control" name="password"
+                                                   value="${u.getPassword()}"/>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="email" class="form-label">E-mail</label>
+                                                <input
+                                                        class="form-control"
+                                                        type="email"
+                                                        id="email"
+                                                        name="email"
+                                                        value="${u.getEmail()}"
+                                                        required
+                                                        placeholder="Please enter your Email"
+                                                />
+                                            </div>
+                                            <input class="form-control" type="hidden" name="firstName"
+                                                   value="${u.getFirstName()}"/>
+                                            <input class="form-control" type="hidden" name="lastName"
+                                                   value="${u.getLastName()}"/>
+                                            <input class="form-control" type="hidden" name="dob" value="${u.getDob()}"/>
+                                            <input class="form-control" type="hidden" name="gender"
+                                                   value="${u.getSex()}"/>
+                                            <input type="hidden" class="form-control" name="role"
+                                                   value="${u.getRole()}"/>
+                                            <input type="hidden" name="phoneNumber" class="form-control"
+                                                   value="${u.getPhone()}"/>
+                                            <input type="hidden" name="UserID" class="form-control"
+                                                   value="${u.getUserID()}"/>
+
+                                            <div style="color: red">
+                                                ${error2}
+                                            </div>
+                                            <div style="color: green">
+                                                ${success2}
+                                            </div>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button type="submit" class="btn btn-dark me-2" value="Update"
+                                                    name="Update">Change email
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <hr class="my-0"/>
+
+                                <div class="card-body">
+                                    <form action="HighUserAccountDetailServlet?input=detail" method="POST">
+                                        <div class="row">
+                                            <input type="hidden" class="form-control" name="username"
+                                                   value="${u.getUserName()}"/>
+                                            <input type="hidden" class="form-control" id="password" name="password"
+                                                   value="${u.getPassword()}"/>
+                                            <input class="form-control" type="hidden" name="email"
+                                                   value="${u.getEmail()}"/>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="firstName" class="form-label">First Name</label>
+                                                <input class="form-control" type="text" id="firstName" name="firstName"
+                                                       value="${u.getFirstName()}" placeholder="Enter your First Name"
+                                                       required
+                                                       pattern="([A-Z][a-zA-Z]*)" title="First letter must be uppercase, no number and white space"
+                                                />
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="lastName" class="form-label">Last Name</label>
+                                                <input class="form-control" type="text" name="lastName" id="lastName"
+                                                       value="${u.getLastName()}" placeholder="Enter your last name"
+                                                       required
+                                                       pattern="([A-Z][a-zA-Z]*)" title="First letter must be uppercase, no number and white space"
+                                                />
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="dob" class="form-label">Date Of Birth</label>
+                                                <input type="date" class="form-control" id="dob" name="dob"
+                                                       value="${u.getDob()}" required/>
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="gender" class="form-label">Gender</label>
+                                                <select id="gender" name="gender" class="select2 form-select" required>
+                                                    <c:if test="${u.getSex() == null}">
+                                                        <option value="0">Choose Your Gender</option>
+                                                    </c:if>
+                                                    <c:if test="${u.getSex() != null}">
+                                                        <option value="1" ${u.getSex() != "1" ? "" : "selected"}>Male
+                                                        </option>
+                                                        <option value="2" ${u.getSex() != "2" ? "" : "selected"}>
+                                                            Female
+                                                        </option>
+                                                        <option value="3" ${u.getSex() != "3" ? "" : "selected"}>
+                                                            Other
+                                                        </option>
+                                                    </c:if>
+
+                                                </select>
+                                            </div>
+                                            <input type="hidden" class="form-control" id="role" name="role"
+                                                   value="${u.getRole()}"/>
                                             <div class="mb-3 col-md-6">
                                                 <label class="form-label" for="phoneNumber">Phone Number</label>
                                                 <div class="input-group input-group-merge">
@@ -339,73 +404,44 @@
                                                             id="phoneNumber"
                                                             name="phoneNumber"
                                                             class="form-control"
-                                                            value="Lấy sẵn phone number vào đây"
+                                                            placeholder="Enter your phone number"
+                                                            value="${u.getPhone()}"
+                                                            required
                                                     />
                                                 </div>
                                             </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label for="dob" class="form-label">Date Of Birth</label>
-                                                <input type="date" class="form-control" id="dob" name="dob" placeholder="Tự độgn lấy ngày tháng năm sinh người đùng" />
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label for="gender" class="form-label">Gender</label>
-                                                <select id="gender" class="select2 form-select">
-                                                    <option value="Lấy gender hiện tại của người dùng">Lấy gender hiện tại của người dùng</option>
-                                                    <option value="1">Male</option>
-                                                    <option value="2">Female</option>
-                                                    <option value="3">Other</option>
-                                                </select>
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label for="role" class="form-label">Role</label>
-                                                <select id="role" class="select2 form-select" >
-                                                    <option value="Lấy roll hiện tại của người dùng ">Lấy roll hiện tại của người dùng </option>
-                                                    <option value="Admin">Admin</option>
-                                                    <option value="Saler">Saler</option>
-                                                    <option value="Marketing">Marketing</option>
-                                                    <option value="Customer">Customer</option>
-                                                </select>
-                                            </div>
-                                            <!--                      cái này để hidden-->
-                                            <div class="mb-3 col-md-6">
-                                                <input type="hidden" class="form-control" id="password" name="password" placeholder="Lấy password hiện tại của người dùng" />
-                                            </div>
+                                            <input
+                                                    type="hidden"
+                                                    id="userID"
+                                                    name="UserID"
+                                                    class="form-control"
+                                                    value=${u.getUserID()}
+                                            />
 
-                                            <a class="text-primary " href="changePasswordHighUser.jsp">Change password</a>
-
+                                            <div style="color: red">
+                                                ${error3}
+                                            </div>
+                                            <div style="color: green">
+                                                ${success3}
+                                            </div>
                                         </div>
                                         <div class="mt-2">
-                                            <button type="submit" class="btn btn-dark me-2">Save changes</button>
-                                            <a href="dashboardManager.jsp" type="reset" class="btn btn-outline-secondary">Cancel</a>
+                                            <button type="submit" class="btn btn-dark me-2">Save changes
+                                            </button>
                                         </div>
                                     </form>
                                 </div>
-                                <!-- /Account -->
-                            </div>
-                            <div class="card">
-                                <h5 class="card-header">Delete Account</h5>
+                                <hr class="my-0"/>
+
                                 <div class="card-body">
-                                    <div class="mb-3 col-12 mb-0">
-                                        <div class="alert alert-warning">
-                                            <h6 class="alert-heading fw-bold mb-1">Are you sure you want to delete your account?</h6>
-                                            <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
-                                        </div>
+                                    <div class="mt-2">
+                                        <a class="btn btn-outline-secondary"
+                                           href="${pageContext.request.contextPath}/changePassword?mod=2">Change
+                                            password</a>
                                     </div>
-                                    <form id="formAccountDeactivation" onsubmit="return false">
-                                        <div class="form-check mb-3">
-                                            <input
-                                                    class="form-check-input"
-                                                    type="checkbox"
-                                                    name="accountActivation"
-                                                    id="accountActivation"
-                                            />
-                                            <label class="form-check-label" for="accountActivation"
-                                            >I confirm my account deactivation</label
-                                            >
-                                        </div>
-                                        <button type="submit" class="btn btn-danger deactivate-account">Deactivate Account</button>
-                                    </form>
                                 </div>
+
+                                <!-- /Account -->
                             </div>
                         </div>
                     </div>

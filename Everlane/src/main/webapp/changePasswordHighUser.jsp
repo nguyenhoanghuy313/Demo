@@ -257,7 +257,7 @@ changePasswordHighUser
                                 <!-- Account -->
                                 <hr class="my-0"/>
                                 <div class="card-body">
-                                    <form id="changePasswordHighUser" method="POST" onsubmit="return false">
+                                    <form id="changePasswordHighUser?mod=2" method="POST" >
                                         <div class="row">
                                             <div class="mb-3 col-md-12">
                                                 <label for="oldPassword" class="form-label">Old Password</label>
@@ -272,26 +272,25 @@ changePasswordHighUser
                                             </div>
                                             <div class="mb-3 col-md-12">
                                                 <label for="newPassword" class="form-label">New Password</label>
-                                                <input class="form-control" type="text" name="newPassword"
-                                                       id="newPassword" placeholder="Please enter your new password"/>
+                                                <input class="form-control" type="text" name="newPassword" id="newPassword" placeholder="Please enter your new password" />
                                             </div>
                                             <div class="mb-3 col-md-12">
-                                                <label for="reEnterNewPassword" class="form-label">Confirm Your New
-                                                    Password</label>
+                                                <label for="reEnterNewPassword" class="form-label">Confirm Your New Password</label>
                                                 <input
                                                         class="form-control"
                                                         type="text"
                                                         id="reEnterNewPassword"
-                                                        name="reEnterNewPassword"
+                                                        name="confirmPassword"
                                                         placeholder="Please reenter your new password"
                                                 />
                                             </div>
-
-
+                                            <div>
+                                                ${error} ${success}
+                                            </div>
                                         </div>
                                         <div class="mt-2">
                                             <button type="submit" class="btn btn-dark me-2">Save changes</button>
-                                            <a href="highUserAccount.jsp" class="btn btn-outline-secondary">Cancel</a>
+                                            <a href="changePassword?mod=1" class="btn btn-outline-secondary">Cancel</a>
                                         </div>
                                     </form>
                                 </div>

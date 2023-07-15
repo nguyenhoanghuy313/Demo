@@ -43,7 +43,7 @@ public class LoginHighUserServlet extends HttpServlet {
             }
             req.getRequestDispatcher("loginHighUser.jsp").forward(req, resp);
         } else {
-            if (Role.getRole() == 1) {
+            if (Role.getRole() == 1 || Role.getRole() == 2 || Role.getRole() == 3) {
                 HttpSession session = req.getSession();
                 session.setAttribute("acc", checkUser);
                 //lưu cookie
@@ -60,11 +60,13 @@ public class LoginHighUserServlet extends HttpServlet {
                 UserDAO ud = new UserDAO();
                 List<User> userList = ud.getAllUser();
                 req.setAttribute("userList", userList);
+                User user = (User) session.getAttribute("acc");
+                req.setAttribute("u", user);
                 req.getRequestDispatcher("dashboardManager.jsp").forward(req, resp);
+            }else{
+                req.setAttribute("error", "Email or Password is incorrect or not exist!!!");
+                req.getRequestDispatcher("loginHighUser.jsp").forward(req, resp);
             }
-//            else if (Role.getRole().equals("Customer")) {
-//                req.getRequestDispatcher("home.jsp").forward(req, resp);
-//            }
         }
     }
 }
