@@ -8,7 +8,7 @@ import java.util.List;
 public class ShopOrderDAO extends myDAO {
     public List<ShopOrder> getOrdersByUserID(int userID){
         List<ShopOrder> so = new ArrayList<>();
-        xSql = "select so.* from shop_order so, orderdetails od where UserID = ? and so.shop_orderID = od.OrderID";
+        xSql = "select DISTINCT so.* from shop_order so, orderdetails od where UserID = ? and so.shop_orderID = od.OrderID";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, userID);

@@ -30,5 +30,6 @@ public class CheckoutServlet extends HttpServlet{
         ad.setAddressIDtoShopOrder();
         request.setAttribute("ErrMessage", "Address has been added Successfully");
         request.getRequestDispatcher("checkout.jsp").forward(request,response);
+//        response.sendRedirect("checkout.jsp");
     }
 }

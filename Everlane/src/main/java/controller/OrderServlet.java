@@ -57,7 +57,8 @@ public class OrderServlet extends HttpServlet {
             ad.setAddressIDtoShopOrder();
         }
         request.setAttribute("ErrMessage", "Order Placed");
-        response.sendRedirect(request.getHeader("referer"));
+        request.getRequestDispatcher("checkout.jsp").forward(request,response);
+//        response.sendRedirect(request.getHeader("referer"));
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{

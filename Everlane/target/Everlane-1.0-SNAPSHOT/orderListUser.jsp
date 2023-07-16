@@ -70,7 +70,7 @@
   OrderDetailDAO odd = new OrderDetailDAO();
   ShopOrderDAO sod = new ShopOrderDAO();
   List<ShopOrder> Bill = sod.getOrdersByUserID(Integer.parseInt(xUID));
-  List<Product> odredPro = odd.getUserOrder(xUID);
+//  List<Product> odredPro = odd.getUserOrder(xUID);
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -105,7 +105,7 @@
         </li>
         <!-- User List -->
         <li class="menu-item active">
-          <a href="orderDetailUser.jsp" class="menu-link">
+          <a href="orderListUser.jsp" class="menu-link">
             <i class='menu-icon tf-icons bx bxs-package'></i>
             <div data-i18n="Orders & Returns">Orders List</div>
           </a>
@@ -236,8 +236,8 @@
                 <tbody class="table-border-bottom-0">
                 <tr class="item">
                   <td>1</td>
-                  <td><%=so.getShop_orderID()%>></td>
-                  <th><%=so.getOrder_total()%>/th>
+                  <td><%=so.getShop_orderID()%></td>
+                  <th><%=so.getOrder_total()%></th>
                   <th><%=so.getOrder_status()%></th>
                   <th><%=so.getRecipient()%></th>
                   <th><%=so.getRecipent_phone()%></th>
@@ -248,7 +248,7 @@
                         <i class="bx bx-dots-vertical-rounded"></i>
                       </button>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="orderDetailUser.jsp"
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/OrderDetail?buyerID=<%=xUID%>&OrderID=<%=so.getShop_orderID()%>"
                         >Detail</a>
                       </div>
                     </div>

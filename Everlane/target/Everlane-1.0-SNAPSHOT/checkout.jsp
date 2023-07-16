@@ -53,8 +53,8 @@
 //    int uID = u.getUserID();
     CartItemDAO cid = new CartItemDAO();
     List<Product> cartItemList = cid.getUserItem(uID);
-//    CountryDAO ctd = new CountryDAO();
-//    List<Country> c = ctd.getAllCountry();
+    CountryDAO ctd = new CountryDAO();
+    List<Country> c = ctd.getAllCountry();
 %>
 <jsp:include page="header.jsp"/>
 
@@ -74,13 +74,13 @@
                 <h1>Shipping</h1>
             </div>
             <form action="Checkout" method="post">
-<%--                                <input list="country" name="Country" placeholder="Country" type="text" required><br>--%>
-<%--                                <datalist id="country">--%>
-<%--                                    <%for (Country ct : c) {%>--%>
-<%--                                    <option value=<%=ct.getCountryName()%>><%=ct.getCountryName()%>--%>
-<%--                                    </option>--%>
-<%--                                    <%}%>--%>
-<%--                                </datalist>--%>
+                                <input list="country" name="Country" placeholder="Country" type="text" required><br>
+                                <datalist id="country">
+                                    <%for (Country ct : c) {%>
+                                    <option value=<%=ct.getCountryName()%>><%=ct.getCountryName()%>
+                                    </option>
+                                    <%}%>
+                                </datalist>
                 <input id="recipient" name="recipient" placeholder="Full Name" type="text" required><br>
                 <input id="Street" name="Street" placeholder="Street Address*" type="text" required><br>
                 <input id="address_line" name="address_line" placeholder="Address" type="text" required><br>

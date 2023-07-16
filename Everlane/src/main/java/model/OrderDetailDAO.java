@@ -47,9 +47,10 @@ public class OrderDetailDAO extends myDAO{
         }
         return ci;
     }
-    public List<Product> getUserOrder(String userID){
+    public List<Product> getUserOrder(String userID, String orderID){
         int xUserID = Integer.parseInt(userID);
-        xSql = "Select DISTINCT od.VariationID, v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, ca.CategoryName, p.CollectionID, p.ProductName, col.color_Name, s.size_Name, p.Price, od.Quantity from variation v, product_img pi, product p , category ca, color col, size s, orderdetails od, shop_order so where p.ProductID = v.ProductID and p.CategoryID = ca.CategoryID and v.product_img_ID = pi.product_img_ID and od.OrderID = so.shop_orderID and v.color_ID = col.color_ID and v.size_ID = s.size_ID and p.ProductID = od.ProductID and v.VariationID = od.VariationID and so.UserID = ?;";
+        int xOrderID = Integer.parseInt(orderID);
+        xSql = "Select DISTINCT od.VariationID, v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, ca.CategoryName, p.CollectionID, p.ProductName, col.color_Name, s.size_Name, p.Price, od.Quantity from variation v, product_img pi, product p , category ca, color col, size s, orderdetails od, shop_order so where p.ProductID = v.ProductID and p.CategoryID = ca.CategoryID and v.product_img_ID = pi.product_img_ID and od.OrderID = so.shop_orderID and v.color_ID = col.color_ID and v.size_ID = s.size_ID and p.ProductID = od.ProductID and v.VariationID = od.VariationID and so.UserID = ? and OrderID = ?;";
         int xProductID;
         String xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName;
         int xCollectionID;
@@ -61,6 +62,7 @@ public class OrderDetailDAO extends myDAO{
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, xUserID);
+            ps.setInt(2, xOrderID);
             rs = ps.executeQuery();
             while (rs.next()){
                 xProductID = rs.getInt("ProductID");
