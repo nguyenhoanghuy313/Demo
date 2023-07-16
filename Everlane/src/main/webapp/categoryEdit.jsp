@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: minileisduk
-  Date: 29/06/2023
-  Time: 12:35 SA
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="model.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html
@@ -59,13 +53,14 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="a.template/assets/js/config.js"></script>
 </head>
-
+<%
+    User user = (User) session.getAttribute("acc");
+%>
 <body>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
         <!-- Menu -->
-
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
                 <a href="dashboardManager.jsp" class="app-brand-link">
@@ -98,6 +93,15 @@
                 <!-- Pages -->
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
                 <!-- Product List -->
+                <%if (user.getRole() == 1) {%>
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/StaffListManagerServlet?role=all" class="menu-link">
+                        <i class='menu-icon tf-icons bx bx-user'></i>
+                        <div data-i18n="User List">Staff List</div>
+                    </a>
+                </li>
+                <%}%>
+                <%if (user.getRole() == 1 || user.getRole() == 2) {%>
                 <li class="menu-item">
                     <a href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
                        class="menu-link">
@@ -107,12 +111,33 @@
                 </li>
                 <!-- User List -->
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=all" class="menu-link">
+                    <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=4" class="menu-link">
                         <i class='menu-icon tf-icons bx bx-user'></i>
-                        <div data-i18n="User List">User List</div>
+                        <div data-i18n="User List">Customer List</div>
                     </a>
                 </li>
-                <!-- Forms -->
+                <li class="menu-item">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-detail"></i>
+                        <div data-i18n="Sale">Sale</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="PromotionServlet?input=all" class="menu-link">
+                                <div data-i18n="Promotion List">Promotion List</div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="${pageContext.request.contextPath}/CollectionUpdatePromotion" class="menu-link">
+                                <div data-i18n="Promotion List">Season Collection (Update Promotion)</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <%}%>
+                <%if (user.getRole() == 1 || user.getRole() == 3) {%>
                 <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-detail"></i>
@@ -140,30 +165,9 @@
                         </li>
                     </ul>
                 </li>
-                <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons bx bx-detail"></i>
-                        <div data-i18n="Sale">Sale</div>
-                    </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="PromotionServlet?input=all" class="menu-link">
-                                <div data-i18n="Promotion List">Promotion List</div>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="seasonCollectionUpdatePromotion.jsp" class="menu-link">
-                                <div data-i18n="Promotion List">Season Collection (Update Promotion)</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                <%}%>
             </ul>
         </aside>
-
-
         <!-- / Menu -->
 
         <!-- Layout container -->
@@ -201,10 +205,20 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <c:if test=" ${sessionScope.acc!= null}">
-                                                    <span class="fw-semibold d-block">${sessionScope.acc.userName}</span>
-                                                </c:if>
-                                                <small class="text-muted">Admin</small>
+                                                <span class="fw-semibold d-block"><%=user.getFirstName()%> <%=user.getLastName()%></span>
+                                                <%if (user.getRole() == 1) {%>
+                                                <small class="text-muted">Admin
+                                                </small>
+                                                <%} else if (user.getRole() == 2) {%>
+                                                <small class="text-muted">Sale
+                                                </small>
+                                                <%} else if (user.getRole() == 3) {%>
+                                                <small class="text-muted">Marketing
+                                                </small>
+                                                <%} else {%>
+                                                <small class="text-muted">Customer
+                                                </small>
+                                                <%}%>
                                             </div>
                                         </div>
                                     </a>
@@ -213,7 +227,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="highUserAccount.jsp">
+                                    <a class="dropdown-item" href="HighUserAccountDetailServlet">
                                         <i class="bx bx-user me-2"></i>
                                         <span class="align-middle">My Profile</span>
                                     </a>

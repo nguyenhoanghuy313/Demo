@@ -229,10 +229,12 @@ public class UserDAO extends myDAO {
     }
 
 
-    //Nguyễn Đắc Hoàng Đạt - HE70720
-//Đoàn Phan Hưng - HE170721
-    public List<User> searchByName(String sName) {
-        xSql = "select * from User where UserName like '%" + sName + "%'";
+    public List<User> searchByName(String sName, String role) {
+        if(role.equalsIgnoreCase("all")) {
+            xSql = "select * from User where UserName like '%" + sName + "%' and Role != 4";
+        }else{
+            xSql = "select * from User where UserName like '%" + sName + "%' and Role = 4";
+        }
         List<User> userList = new ArrayList<>();
         try {
             int xUserID;
@@ -266,52 +268,10 @@ public class UserDAO extends myDAO {
         return userList;
     }
 
-
-    //Đoàn Phan Hưng - HE170721
-//    public void setUserID(User u) {
-//        xSql = "INSERT INTO user (UserID, UserName, Password, Email, FirstName, LastName, Dob, Sex, Phone, Role) " +
-//                "                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//        try {
-//            ps = con.prepareStatement(xSql, Statement.RETURN_GENERATED_KEYS);
-//            Random rand = new Random();
-//            int userID = rand.nextInt(900) + 100;
-//            ps.setInt(1, userID);
-//            ps.setString(2, u.getUserName());
-//            ps.setString(3, u.getPassword());
-//            ps.setString(4, u.getEmail());
-//            ps.setString(5, u.getFirstName());
-//            ps.setString(6, u.getLastName());
-//            ps.setDate(7, (java.sql.Date) u.getDob());
-//            ps.setInt(8, u.getSex());
-//            ps.setInt(9, u.getPhone());
-//            ps.setString(10, u.getRole());
-//            ps.executeUpdate();
-//            // Lấy giá trị UserID được tự động tạo
-//            ResultSet generatedKeys = ps.getGeneratedKeys();
-//            if (generatedKeys.next()) {
-//                int generatedUserID = generatedKeys.getInt(1);
-//                u.setUserID(generatedUserID);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                if (ps != null) {
-//                    ps.close();
-//                }
-//                if (con != null) {
-//                    con.close();
-//                }
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-
     public List<User> getUsersByRoleAndSort(String role) {
         List<User> sortedUserList = new ArrayList<>();
         if (role.equalsIgnoreCase("all")) {
-            xSql = "select * from user";
+            xSql = "select * from user where Role != 4 ";
         } else {
             xSql = "select * from user where Role = ?";
         }

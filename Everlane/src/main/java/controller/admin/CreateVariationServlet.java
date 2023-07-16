@@ -20,25 +20,33 @@ public class CreateVariationServlet extends HttpServlet {
         ColorDAO colorDAO = new ColorDAO();
         ProductImgDAO productImgDAO = new ProductImgDAO();
         SizeDAO sizeDAO = new SizeDAO();
+        ProductForEditDAO productForEditDAO = new ProductForEditDAO();
 
-        String productID = request.getParameter("productID").trim();
+        String productName = request.getParameter("productName").trim();
+        ProductForEdit pfr = productForEditDAO.getProduct(productName);
+        String productID = String.valueOf(pfr.getProductId());
 
-        String colorID = request.getParameter("colorID").trim();
-        Color color = colorDAO.getColorsByID(colorID);
+        String colorName = request.getParameter("colorName").trim();
+        Color color = colorDAO.getColorsByName(colorName);
 
-        String sizeID = request.getParameter("sizeID").trim();
-        Size size = sizeDAO.getSizebyId(sizeID);
-        Variation variationcheck = variationDAO.getVariation(productID, color.getColor_Name(), size.getSize_Name());
+        String sizeName = request.getParameter("sizeName").trim();
+        Size size = sizeDAO.getSizebyName(sizeName);
+        Variation variationcheck = variationDAO.getVariation(productID, colorName, sizeName);
         if(variationcheck == null){
             String qty_in_stock = request.getParameter("qty_in_stock").trim();
-            String productimgID = request.getParameter("productimgID").trim();
-            ProductImg productImg = productImgDAO.getProductFolderByID(productimgID);
-            if(productImg.getProduct_img_name().contains(color.getColor_Name())){
-                variationDAO.createNewVariation(Integer.parseInt(productID),Integer.parseInt(colorID) ,Integer.parseInt(sizeID) ,Integer.parseInt(qty_in_stock) ,Integer.parseInt(productimgID) );
-                request.setAttribute("alert3", "Create done");
-                request.getRequestDispatcher("addNewProduct.jsp").forward(request, response);
+            String productimgName = request.getParameter("productimgName").trim();
+            ProductImg productImg = productImgDAO.getProductFolder(productimgName);
+            if(productName.contains(productImg.getProduct_img_name())){
+                if(productImg.getProduct_img_name().contains(color.getColor_Name())){
+                    variationDAO.createNewVariation(Integer.parseInt(productID),color.getColor_ID() ,size.getSize_ID() ,Integer.parseInt(qty_in_stock) ,productImg.getProduct_Img_ID());
+                    request.setAttribute("alert3", "Create done");
+                    request.getRequestDispatcher("addNewProduct.jsp").forward(request, response);
+                }else{
+                    request.setAttribute("alert31", "Must choose an image folder that matches the color");
+                    request.getRequestDispatcher("addNewProduct.jsp").forward(request, response);
+                }
             }else{
-                request.setAttribute("alert31", "Must choose an image folder that matches the color");
+                request.setAttribute("alert31", "Product IMG must be used for right Product");
                 request.getRequestDispatcher("addNewProduct.jsp").forward(request, response);
             }
         }else{

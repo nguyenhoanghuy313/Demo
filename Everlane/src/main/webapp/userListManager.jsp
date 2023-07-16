@@ -14,6 +14,7 @@
 <%
     List<User> userList = (List<User>) request.getAttribute("userList");
     User userNeedEdit = (User) request.getAttribute("userNeedEdit") ;
+    User user = (User) session.getAttribute("acc");
 %>
 <html
         lang="en"
@@ -104,6 +105,15 @@
                 <!-- Pages -->
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
                 <!-- Product List -->
+                <%if (user.getRole() == 1) {%>
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/StaffListManagerServlet?role=all" class="menu-link">
+                        <i class='menu-icon tf-icons bx bx-user'></i>
+                        <div data-i18n="User List">Staff List</div>
+                    </a>
+                </li>
+                <%}%>
+                <%if (user.getRole() == 1 || user.getRole() == 2) {%>
                 <li class="menu-item">
                     <a href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
                        class="menu-link">
@@ -113,12 +123,33 @@
                 </li>
                 <!-- User List -->
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=all" class="menu-link">
+                    <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=4" class="menu-link">
                         <i class='menu-icon tf-icons bx bx-user'></i>
-                        <div data-i18n="User List">User List</div>
+                        <div data-i18n="User List">Customer List</div>
                     </a>
                 </li>
-                <!-- Forms -->
+                <li class="menu-item">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-detail"></i>
+                        <div data-i18n="Sale">Sale</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="PromotionServlet?input=all" class="menu-link">
+                                <div data-i18n="Promotion List">Promotion List</div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="${pageContext.request.contextPath}/CollectionUpdatePromotion" class="menu-link">
+                                <div data-i18n="Promotion List">Season Collection (Update Promotion)</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <%}%>
+                <%if (user.getRole() == 1 || user.getRole() == 3) {%>
                 <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-detail"></i>
@@ -146,30 +177,9 @@
                         </li>
                     </ul>
                 </li>
-                <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons bx bx-detail"></i>
-                        <div data-i18n="Sale">Sale</div>
-                    </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="PromotionServlet?input=all" class="menu-link">
-                                <div data-i18n="Promotion List">Promotion List</div>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="seasonCollectionUpdatePromotion.jsp" class="menu-link">
-                                <div data-i18n="Promotion List">Season Collection (Update Promotion)</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                <%}%>
             </ul>
         </aside>
-
-
         <!-- / Menu -->
 
         <!-- Layout container -->
@@ -207,10 +217,20 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <c:if test=" ${sessionScope.acc!= null}">
-                                                    <span class="fw-semibold d-block">${sessionScope.acc.userName}</span>
-                                                </c:if>
-                                                <small class="text-muted">Admin</small>
+                                                <span class="fw-semibold d-block"><%=user.getFirstName()%> <%=user.getLastName()%></span>
+                                                <%if (user.getRole() == 1) {%>
+                                                <small class="text-muted">Admin
+                                                </small>
+                                                <%} else if (user.getRole() == 2) {%>
+                                                <small class="text-muted">Sale
+                                                </small>
+                                                <%} else if (user.getRole() == 3) {%>
+                                                <small class="text-muted">Marketing
+                                                </small>
+                                                <%} else {%>
+                                                <small class="text-muted">Customer
+                                                </small>
+                                                <%}%>
                                             </div>
                                         </div>
                                     </a>
@@ -219,7 +239,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="highUserAccount.jsp">
+                                    <a class="dropdown-item" href="HighUserAccountDetailServlet">
                                         <i class="bx bx-user me-2"></i>
                                         <span class="align-middle">My Profile</span>
                                     </a>
@@ -244,69 +264,15 @@
             <div class="content-wrapper">
                 <!-- Content -->
                 <div class="list_option_container">
-                    <div class="list_option_container1">
-                        <div class="input-group ">
-                            <a href="UserEditServlet?UserID=0" class="btn btn-outline-dark" type="button">New User</a>
-                        </div>
-                    </div>
                     <div class="list_option_container2">
-
                         <div class="input-group input-group-merge">
-                            <form action="${pageContext.request.contextPath}/UserListManagerServlet?role=all"
-                                  method="post">
-                                <span class="input-group-text" id="basic-addon-search31"><i
-                                        class="bx bx-search"></i></span>
-                                <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Search..."
-                                        aria-label="Search..."
-                                        aria-describedby="basic-addon-search31"
-                                        name="userName"
-                                />
+                            <form action="${pageContext.request.contextPath}/UserListManagerServlet?role=4"
+                                  method="post" style="display: flex; flex-direction: row">
+                            <input name="userName" type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon2">
+                            <div  class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button"><i class='bx bx-search'></i></button>
+                            </div>
                             </form>
-                        </div>
-
-                        <div class="input-group">
-                            <button
-                                    class="btn btn-outline-dark dropdown-toggle"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                            >
-                                Sort by
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:void(0);">Sort by LatestUser</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Sort by NewestUser</a></li>
-                            </ul>
-                        </div>
-                        <div class="input-group">
-                            <button
-                                    class="btn btn-outline-dark dropdown-toggle"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                            >
-                                Category
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/UserListManagerServlet?role=all">All</a>
-                                </li>
-                                <li><a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/UserListManagerServlet?role=1">Admin</a>
-                                </li>
-                                <li><a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/UserListManagerServlet?role=4">Customer</a>
-                                </li>
-                                <li><a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/UserListManagerServlet?role=3">Sale</a>
-                                </li>
-                                <li><a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/UserListManagerServlet?role=2">Marketing</a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
 
@@ -320,7 +286,6 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>USER ID</th>
                                     <th>USER NAME</th>
                                     <th>EMAIL</th>
                                     <th>FIRST NAME</th>
@@ -328,13 +293,11 @@
                                     <th>DATE OF BIRTH</th>
                                     <th>GENDER</th>
                                     <th>PHONE NUMBER</th>
-                                    <th>ROLE</th>
                                 </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
                                 <c:forEach var="u" items="${userList}" varStatus="status">
                                     <tr class="item">
-                                        <td>${u.getUserID()}</td>
                                         <td>${u.getUserName()}</td>
                                         <td>${u.getEmail()}</td>
                                         <td>${u.getFirstName()}</td>
@@ -355,20 +318,6 @@
                                             </c:otherwise>
                                         </c:choose>
                                         <td>${u.getPhone()}</td>
-                                        <c:choose>
-                                            <c:when test="${u.getRole()  == 1}">
-                                                <td>Admin</td>
-                                            </c:when>
-                                            <c:when test="${u.getRole()  == 2}">
-                                                <td>Marketing</td>
-                                            </c:when>
-                                            <c:when test="${u.getRole()  == 3}">
-                                                <td>Sale</td>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <td>Customer</td>
-                                            </c:otherwise>
-                                        </c:choose>
                                         <td>
                                             <div class="dropdown">
                                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -377,11 +326,7 @@
                                                 </button>
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="UserEditServlet?UserID=${u.getUserID()}"
-                                                    ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                                                    >
-                                                    <a class="dropdown-item" href="DeleteUser?UserID=${u.getUserID()}"
-                                                       onclick="return confirm('Are you sure want to delete this ticket?')"
-                                                    ><i class="bx bx-trash me-1"></i> Delete</a
+                                                    ><i class="bx bx-edit-alt me-1"></i> Order List ???</a
                                                     >
                                                 </div>
                                             </div>

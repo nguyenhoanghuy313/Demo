@@ -13,6 +13,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
     User userNeedEdit = (User) request.getAttribute("userNeedEdit");
+    User user = (User) session.getAttribute("acc");
 %>
 <html
         lang="en"
@@ -105,6 +106,15 @@
                 <!-- Pages -->
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
                 <!-- Product List -->
+                <%if (user.getRole() == 1) {%>
+                <li class="menu-item">
+                    <a href="${pageContext.request.contextPath}/StaffListManagerServlet?role=all" class="menu-link">
+                        <i class='menu-icon tf-icons bx bx-user'></i>
+                        <div data-i18n="User List">Staff List</div>
+                    </a>
+                </li>
+                <%}%>
+                <%if (user.getRole() == 1 || user.getRole() == 2) {%>
                 <li class="menu-item">
                     <a href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
                        class="menu-link">
@@ -114,12 +124,33 @@
                 </li>
                 <!-- User List -->
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=all" class="menu-link">
+                    <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=4" class="menu-link">
                         <i class='menu-icon tf-icons bx bx-user'></i>
-                        <div data-i18n="User List">User List</div>
+                        <div data-i18n="User List">Customer List</div>
                     </a>
                 </li>
-                <!-- Forms -->
+                <li class="menu-item">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-detail"></i>
+                        <div data-i18n="Sale">Sale</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="PromotionServlet?input=all" class="menu-link">
+                                <div data-i18n="Promotion List">Promotion List</div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="${pageContext.request.contextPath}/CollectionUpdatePromotion" class="menu-link">
+                                <div data-i18n="Promotion List">Season Collection (Update Promotion)</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <%}%>
+                <%if (user.getRole() == 1 || user.getRole() == 3) {%>
                 <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-detail"></i>
@@ -147,30 +178,9 @@
                         </li>
                     </ul>
                 </li>
-                <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons bx bx-detail"></i>
-                        <div data-i18n="Sale">Sale</div>
-                    </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="PromotionServlet?input=all" class="menu-link">
-                                <div data-i18n="Promotion List">Promotion List</div>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="seasonCollectionUpdatePromotion.jsp" class="menu-link">
-                                <div data-i18n="Promotion List">Season Collection (Update Promotion)</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                <%}%>
             </ul>
         </aside>
-
-
         <!-- / Menu -->
 
         <!-- Layout container -->
@@ -208,10 +218,20 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <c:if test=" ${sessionScope.acc!= null}">
-                                                    <span class="fw-semibold d-block">${sessionScope.acc.userName}</span>
-                                                </c:if>
-                                                <small class="text-muted">Admin</small>
+                                                <span class="fw-semibold d-block"><%=user.getFirstName()%> <%=user.getLastName()%></span>
+                                                <%if (user.getRole() == 1) {%>
+                                                <small class="text-muted">Admin
+                                                </small>
+                                                <%} else if (user.getRole() == 2) {%>
+                                                <small class="text-muted">Sale
+                                                </small>
+                                                <%} else if (user.getRole() == 3) {%>
+                                                <small class="text-muted">Marketing
+                                                </small>
+                                                <%} else {%>
+                                                <small class="text-muted">Customer
+                                                </small>
+                                                <%}%>
                                             </div>
                                         </div>
                                     </a>
@@ -220,7 +240,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="highUserAccount.jsp">
+                                    <a class="dropdown-item" href="HighUserAccountDetailServlet">
                                         <i class="bx bx-user me-2"></i>
                                         <span class="align-middle">My Profile</span>
                                     </a>
@@ -257,8 +277,15 @@
                                 <!-- Account -->
                                 <hr class="my-0"/>
                                 <div class="card-body">
-                                    <form id="formAccountSettings" method="POST" action="UserEditServlet">
+                                    <form method="POST" action="UserEditServlet?input=username">
                                         <div class="row">
+                                            <input type="hidden" class="form-control"  name="userID"
+                                                    <% if (userNeedEdit == null) {%>
+                                                   value=""
+                                                    <%} else {%>
+                                                   value=<%= userNeedEdit.getUserID()%>
+                                                       <%}%>
+                                            />
                                             <div class="mb-3 col-md-6">
                                                 <label for="username" class="form-label">User Name</label>
                                                 <input
@@ -272,21 +299,135 @@
                                                         <%} else {%>
                                                         value=<%= userNeedEdit.getUserName()%>
                                                             <%}%>
-                                                                autofocus
                                                 />
                                             </div>
+                                            <input type="hidden" class="form-control" id="password" name="password"
+                                                    <% if (userNeedEdit == null) {%>
+                                                   value="123456"
+                                                    <%} else {%>
+                                                   value=<%= userNeedEdit.getPassword()%>
+                                                       <%}%>
+                                            />
+                                            <input
+                                                    class="form-control"
+                                                    type="hidden"
+                                                    id="email"
+                                                    name="email"
+                                                    placeholder="Please enter Password"
+                                                    <% if (userNeedEdit == null) {%>
+                                                    value=""
+                                                    <%} else {%>
+                                                    value=<%= userNeedEdit.getEmail()%>
+                                                        <%}%>
+                                            />
+                                            <input
+                                                    class="form-control"
+                                                    type="hidden"
+                                                    id="firstName"
+                                                    name="firstName"
+                                                    placeholder="Please enter First Name"
+                                                    <% if (userNeedEdit == null) {%>
+                                                    value=""
+                                                    <%} else {%>
+                                                    value=<%= userNeedEdit.getFirstName()%>
+                                                        <%}%>
+                                            />
+                                            <input class="form-control" type="hidden" name="lastName" id="lastName"
+                                                   placeholder="Please enter Last Name"
+                                                    <% if (userNeedEdit == null) {%>
+                                                   value=""
+                                                    <%} else {%>
+                                                   value=<%= userNeedEdit.getLastName()%>
+                                                       <%}%>
+                                            />
+                                            <input type="hidden" class="form-control" id="dob" name="dob"
+                                                   placeholder=""
+                                                    <% if (userNeedEdit == null) {%>
+                                                   value=""
+                                                    <%} else {%>
+                                                   value=<%= userNeedEdit.getDob()%>
+                                                       <%}%>
+                                            />
+                                            <input type="hidden" class="form-control" name="gender"
+                                                   placeholder=""
+                                                    <% if (userNeedEdit == null) {%>
+                                                   value=""
+                                                    <%} else {%>
+                                                   value="<%= userNeedEdit.getSex()%>"
+                                                       <%}%>
+                                            />
+                                            <input type="hidden" class="form-control" name="role"
+                                                   placeholder=""
+                                                    <% if (userNeedEdit == null) {%>
+                                                   value=""
+                                                    <%} else {%>
+                                                   value="<%= userNeedEdit.getRole()%>"
+                                                    <%}%>
+                                            />
+                                            <input
+                                                    type="hidden"
+                                                    id="phoneNumber"
+                                                    name="phoneNumber"
+                                                    class="form-control"
+                                                    placeholder="Please enter Phone Number"
+                                                    <% if (userNeedEdit == null) {%>
+                                                    value=""
+                                                    <%} else {%>
+                                                    value=<%= userNeedEdit.getPhone()%>
+                                                        <%}%>
+                                            />
+                                            <% if (userNeedEdit == null) {%>
+                                            <input
+                                                    type="hidden"
+                                                    id="userID"
+                                                    name="UserID"
+                                                    class="form-control"
+                                                    value=0
+                                            />
+                                            <%} else {%>
+                                            <input
+                                                    type="hidden"
+                                                    id="userID"
+                                                    name="UserID"
+                                                    class="form-control"
+                                                    value=<%= userNeedEdit.getUserID()%>
+                                            />
+                                            <%}%>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button type="submit" class="btn btn-dark me-2">Save</button>
+                                            <a href="${pageContext.request.contextPath}/StaffListManagerServlet?role=all"
+                                               class="btn btn-outline-secondary">Cancel</a>
+                                        </div>
+                                    </form>
+                                    <h5 style="color:red;">${error1}</h5>
+                                    <h5 style="color:green;">${success1}</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form method="POST" action="UserEditServlet?input=email">
+                                        <div class="row">
+                                            <input type="hidden" class="form-control"  name="userID"
+                                                    <% if (userNeedEdit == null) {%>
+                                                   value=""
+                                                    <%} else {%>
+                                                   value=<%= userNeedEdit.getUserID()%>
+                                                       <%}%>
+                                            />
+                                            <input
+                                                    type="hidden"
+                                                    class="form-control"
+                                                    id="username"
+                                                    name="username"
+                                                    placeholder="Please enter User Name"
+                                                    <% if (userNeedEdit == null) {%>
+                                                    value=""
+                                                    <%} else {%>
+                                                    value=<%= userNeedEdit.getUserName()%>
+                                                        <%}%>
+                                                            autofocus
+                                            />
                                             <div class="mb-3 col-md-6">
-                                                <label for="Password" class="form-label">Password</label>
-                                                <input type="text" class="form-control" id="password" name="password"
-                                                        <% if (userNeedEdit == null) {%>
-                                                       value="123456"
-                                                        <%} else {%>
-                                                       value=<%= userNeedEdit.getPassword()%>
-                                                           <%}%>
-                                                />
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label for="email" class="form-label">E-mail</label>
+                                                <label for="email" class="form-label">Email</label>
                                                 <input
                                                         class="form-control"
                                                         type="email"
@@ -300,6 +441,140 @@
                                                             <%}%>
                                                 />
                                             </div>
+                                            <input type="hidden" class="form-control" id="password" name="password"
+                                                    <% if (userNeedEdit == null) {%>
+                                                   value="123456"
+                                                    <%} else {%>
+                                                   value=<%= userNeedEdit.getPassword()%>
+                                                       <%}%>
+                                            />
+
+                                            <input
+                                                    class="form-control"
+                                                    type="hidden"
+                                                    id="firstName"
+                                                    name="firstName"
+                                                    placeholder="Please enter First Name"
+                                                    <% if (userNeedEdit == null) {%>
+                                                    value=""
+                                                    <%} else {%>
+                                                    value=<%= userNeedEdit.getFirstName()%>
+                                                        <%}%>
+                                            />
+                                            <input class="form-control" type="hidden" name="lastName" id="lastName"
+                                                   placeholder="Please enter Last Name"
+                                                    <% if (userNeedEdit == null) {%>
+                                                   value=""
+                                                    <%} else {%>
+                                                   value=<%= userNeedEdit.getLastName()%>
+                                                       <%}%>
+                                            />
+                                            <input type="hidden" class="form-control" id="dob" name="dob"
+                                                   placeholder=""
+                                                    <% if (userNeedEdit == null) {%>
+                                                   value=""
+                                                    <%} else {%>
+                                                   value=<%= userNeedEdit.getDob()%>
+                                                       <%}%>
+                                            />
+                                            <input type="hidden" class="form-control" name="gender"
+                                                   placeholder=""
+                                                    <% if (userNeedEdit == null) {%>
+                                                   value=""
+                                                    <%} else {%>
+                                                   value="<%= userNeedEdit.getSex()%>"
+                                                    <%}%>
+                                            />
+                                            <input type="hidden" class="form-control" name="role"
+                                                   placeholder=""
+                                                    <% if (userNeedEdit == null) {%>
+                                                   value=""
+                                                    <%} else {%>
+                                                   value="<%= userNeedEdit.getRole()%>"
+                                                    <%}%>
+                                            />
+                                            <input
+                                                    type="hidden"
+                                                    id="phoneNumber"
+                                                    name="phoneNumber"
+                                                    class="form-control"
+                                                    placeholder="Please enter Phone Number"
+                                                    <% if (userNeedEdit == null) {%>
+                                                    value=""
+                                                    <%} else {%>
+                                                    value=<%= userNeedEdit.getPhone()%>
+                                                        <%}%>
+                                            />
+                                            <% if (userNeedEdit == null) {%>
+                                            <input
+                                                    type="hidden"
+                                                    id="userID"
+                                                    name="UserID"
+                                                    class="form-control"
+                                                    value=0
+                                            />
+                                            <%} else {%>
+                                            <input
+                                                    type="hidden"
+                                                    id="userID"
+                                                    name="UserID"
+                                                    class="form-control"
+                                                    value=<%= userNeedEdit.getUserID()%>
+                                            />
+                                            <%}%>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button type="submit" class="btn btn-dark me-2">Save</button>
+                                            <a href="${pageContext.request.contextPath}/StaffListManagerServlet?role=all"
+                                               class="btn btn-outline-secondary">Cancel</a>
+                                        </div>
+                                    </form>
+                                    <h5 style="color:red;">${error2}</h5>
+                                    <h5 style="color:green;">${success2}</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form method="POST" action="UserEditServlet?input=detail">
+                                        <div class="row">
+                                            <input type="hidden" class="form-control"  name="userID"
+                                                    <% if (userNeedEdit == null) {%>
+                                                   value=""
+                                                    <%} else {%>
+                                                   value=<%= userNeedEdit.getUserID()%>
+                                                       <%}%>
+                                            />
+                                                <input
+                                                        type="hidden"
+                                                        class="form-control"
+                                                        id="username"
+                                                        name="username"
+                                                        placeholder="Please enter User Name"
+                                                        <% if (userNeedEdit == null) {%>
+                                                        value=""
+                                                        <%} else {%>
+                                                        value=<%= userNeedEdit.getUserName()%>
+                                                            <%}%>
+                                                                autofocus
+                                                />
+
+                                                <input type="hidden" class="form-control" id="password" name="password"
+                                                        <% if (userNeedEdit == null) {%>
+                                                       value="123456"
+                                                        <%} else {%>
+                                                       value=<%= userNeedEdit.getPassword()%>
+                                                           <%}%>
+                                                />
+                                                <input
+                                                        class="form-control"
+                                                        type="hidden"
+                                                        id="email"
+                                                        name="email"
+                                                        placeholder="Please enter Password"
+                                                        <% if (userNeedEdit == null) {%>
+                                                        value=""
+                                                        <%} else {%>
+                                                        value=<%= userNeedEdit.getEmail()%>
+                                                            <%}%>
+                                                />
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">First Name</label>
                                                 <input
@@ -308,6 +583,8 @@
                                                         id="firstName"
                                                         name="firstName"
                                                         placeholder="Please enter First Name"
+                                                        pattern="([A-Z][a-zA-Z]*)" title="First letter must be uppercase, no number and white space"
+                                                        required
                                                         <% if (userNeedEdit == null) {%>
                                                         value=""
                                                         <%} else {%>
@@ -319,6 +596,8 @@
                                                 <label for="lastName" class="form-label">Last Name</label>
                                                 <input class="form-control" type="text" name="lastName" id="lastName"
                                                        placeholder="Please enter Last Name"
+                                                       pattern="([A-Z][a-zA-Z]*)" title="First letter must be uppercase, no number and white space"
+                                                       required
                                                         <% if (userNeedEdit == null) {%>
                                                        value=""
                                                         <%} else {%>
@@ -330,24 +609,26 @@
                                                 <label for="dob" class="form-label">Date Of Birth</label>
                                                 <input type="date" class="form-control" id="dob" name="dob"
                                                        placeholder=""
+                                                       required
                                                         <% if (userNeedEdit == null) {%>
                                                        value=""
                                                         <%} else {%>
                                                        value=<%= userNeedEdit.getDob()%>
                                                            <%}%>
+
                                                 />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="gender" class="form-label">Gender</label>
                                                 <% if (userNeedEdit == null) {%>
-                                                <select id="gender" name="gender" class="select2 form-select">
+                                                <select id="gender" name="gender" class="select2 form-select" required>
                                                     <option value="0">Select</option>
                                                     <option value="1">Male</option>
                                                     <option value="2">Female</option>
                                                     <option value="3">Other</option>
                                                 </select>
                                                 <%} else {%>
-                                                <select id="gender" name="gender" class="select2 form-select">
+                                                <select id="gender" name="gender" class="select2 form-select" required>
                                                     <option value="<%= userNeedEdit.getSex()%>">Select
                                                     </option>
                                                     <option value="1">Male</option>
@@ -360,7 +641,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="role" class="form-label">Role</label>
                                                 <% if (userNeedEdit == null) {%>
-                                                <select id="role" name="role" class="select2 form-select">
+                                                <select id="role" name="role" class="select2 form-select" required>
                                                     <option value="0">Select</option>
                                                     <option value="1">Admin</option>
                                                     <option value="2">Marketing</option>
@@ -368,7 +649,7 @@
                                                     <option value="4">Customer</option>
                                                 </select>
                                                 <%} else {%>
-                                                <select id="role" name="role" class="select2 form-select">
+                                                <select id="role" name="role" class="select2 form-select" required>
                                                     <option value="<%= userNeedEdit.getRole()%>">Select
                                                     </option>
                                                     <option value="1">Admin</option>
@@ -388,6 +669,7 @@
                                                             name="phoneNumber"
                                                             class="form-control"
                                                             placeholder="Please enter Phone Number"
+                                                            required
                                                             <% if (userNeedEdit == null) {%>
                                                             value=""
                                                             <%} else {%>
@@ -416,10 +698,12 @@
                                         </div>
                                         <div class="mt-2">
                                             <button type="submit" class="btn btn-dark me-2">Save</button>
-                                            <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=all"
+                                            <a href="${pageContext.request.contextPath}/StaffListManagerServlet?role=all"
                                                class="btn btn-outline-secondary">Cancel</a>
                                         </div>
                                     </form>
+                                    <h5 style="color:red;">${error3}</h5>
+                                    <h5 style="color:green;">${success3}</h5>
                                 </div>
                                 <!-- /Account -->
                             </div>

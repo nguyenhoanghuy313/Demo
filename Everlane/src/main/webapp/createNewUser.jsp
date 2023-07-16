@@ -1,7 +1,20 @@
-<%@ page import="model.User" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: minileisduk
+  Date: 22/06/2023
+  Time: 11:28 CH
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@page import="java.util.*" %>
+<%@page import="model.*" %>
+<%@page import="controller.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+    User userNeedEdit = (User) request.getAttribute("userNeedEdit");
+    User user = (User) session.getAttribute("acc");
+%>
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -17,7 +30,7 @@
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Dashboard</title>
+    <title>Create New User</title>
 
     <meta name="description" content=""/>
 
@@ -54,9 +67,8 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="a.template/assets/js/config.js"></script>
 </head>
-<%
-    User user = (User) session.getAttribute("acc");
-%>
+
+
 <body>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -255,50 +267,182 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account Settings / Account /</span>
-                        Change Password</h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">User List / </span> User Details
+                    </h4>
 
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card mb-4">
+                                <h5 class="card-header">User Detail</h5>
                                 <!-- Account -->
                                 <hr class="my-0"/>
                                 <div class="card-body">
-                                    <form id="changePasswordHighUser?mod=2" method="POST" >
+                                    <form id="formAccountSettings" method="POST" action="CreateNewUserServlet">
                                         <div class="row">
-                                            <div class="mb-3 col-md-12">
-                                                <label for="oldPassword" class="form-label">Old Password</label>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="username" class="form-label">User Name</label>
+                                                <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        id="username"
+                                                        name="username"
+                                                        placeholder="Please enter User Name"
+                                                        <% if (userNeedEdit == null) {%>
+                                                        value=""
+                                                        <%} else {%>
+                                                        value=<%= userNeedEdit.getUserName()%>
+                                                            <%}%>
+                                                                autofocus
+                                                />
+                                            </div>
+
+                                            <div class="mb-3 col-md-6">
+                                                <label for="Password" class="form-label">Password</label>
+                                                <input type="text" class="form-control" id="password" name="password"
+                                                        <% if (userNeedEdit == null) {%>
+                                                       value="123456"
+                                                        <%} else {%>
+                                                       value=<%= userNeedEdit.getPassword()%>
+                                                           <%}%>
+                                                />
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="email" class="form-label">E-mail</label>
+                                                <input
+                                                        class="form-control"
+                                                        type="email"
+                                                        id="email"
+                                                        name="email"
+                                                        placeholder="Please enter Password"
+                                                        <% if (userNeedEdit == null) {%>
+                                                        value=""
+                                                        <%} else {%>
+                                                        value=<%= userNeedEdit.getEmail()%>
+                                                            <%}%>
+                                                />
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="firstName" class="form-label">First Name</label>
                                                 <input
                                                         class="form-control"
                                                         type="text"
-                                                        id="oldPassword"
-                                                        name="oldPassword"
-                                                        placeholder="Please enter your old password"
-                                                        autofocus
+                                                        id="firstName"
+                                                        name="firstName"
+                                                        placeholder="Please enter First Name"
+                                                        <% if (userNeedEdit == null) {%>
+                                                        value=""
+                                                        <%} else {%>
+                                                        value=<%= userNeedEdit.getFirstName()%>
+                                                            <%}%>
                                                 />
                                             </div>
-                                            <div class="mb-3 col-md-12">
-                                                <label for="newPassword" class="form-label">New Password</label>
-                                                <input class="form-control" type="text" name="newPassword" id="newPassword" placeholder="Please enter your new password" />
-                                            </div>
-                                            <div class="mb-3 col-md-12">
-                                                <label for="reEnterNewPassword" class="form-label">Confirm Your New Password</label>
-                                                <input
-                                                        class="form-control"
-                                                        type="text"
-                                                        id="reEnterNewPassword"
-                                                        name="confirmPassword"
-                                                        placeholder="Please reenter your new password"
+                                            <div class="mb-3 col-md-6">
+                                                <label for="lastName" class="form-label">Last Name</label>
+                                                <input class="form-control" type="text" name="lastName" id="lastName"
+                                                       placeholder="Please enter Last Name"
+                                                        <% if (userNeedEdit == null) {%>
+                                                       value=""
+                                                        <%} else {%>
+                                                       value=<%= userNeedEdit.getLastName()%>
+                                                           <%}%>
                                                 />
                                             </div>
-                                            <div>
-                                                ${error} ${success}
+                                            <div class="mb-3 col-md-6">
+                                                <label for="dob" class="form-label">Date Of Birth</label>
+                                                <input type="date" class="form-control" id="dob" name="dob"
+                                                       placeholder=""
+                                                        <% if (userNeedEdit == null) {%>
+                                                       value=""
+                                                        <%} else {%>
+                                                       value=<%= userNeedEdit.getDob()%>
+                                                           <%}%>
+                                                />
                                             </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="gender" class="form-label">Gender</label>
+                                                <% if (userNeedEdit == null) {%>
+                                                <select id="gender" name="gender" class="select2 form-select">
+                                                    <option value="0">Select</option>
+                                                    <option value="1">Male</option>
+                                                    <option value="2">Female</option>
+                                                    <option value="3">Other</option>
+                                                </select>
+                                                <%} else {%>
+                                                <select id="gender" name="gender" class="select2 form-select">
+                                                    <option value="<%= userNeedEdit.getSex()%>">Select
+                                                    </option>
+                                                    <option value="1">Male</option>
+                                                    <option value="2">Female</option>
+                                                    <option value="3">Other</option>
+                                                </select>
+                                                <%}%>
+
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="role" class="form-label">Role</label>
+                                                <% if (userNeedEdit == null) {%>
+                                                <select id="role" name="role" class="select2 form-select">
+                                                    <option value="0">Select</option>
+                                                    <option value="1">Admin</option>
+                                                    <option value="2">Sale</option>
+                                                    <option value="3">Marketing</option>
+                                                    <option value="4">Customer</option>
+                                                </select>
+                                                <%} else {%>
+                                                <select id="role" name="role" class="select2 form-select">
+                                                    <option value="<%= userNeedEdit.getRole()%>">Select
+                                                    </option>
+                                                    <option value="1">Admin</option>
+                                                    <option value="2">Marketing</option>
+                                                    <option value="3">Sale</option>
+                                                    <option value="4">Customer</option>
+                                                </select>
+                                                <%}%>
+
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label" for="phoneNumber">Phone Number</label>
+                                                <div class="input-group input-group-merge">
+                                                    <input
+                                                            type="tel"
+                                                            id="phoneNumber"
+                                                            name="phoneNumber"
+                                                            class="form-control"
+                                                            placeholder="Please enter Phone Number"
+                                                            <% if (userNeedEdit == null) {%>
+                                                            value=""
+                                                            <%} else {%>
+                                                            value=<%= userNeedEdit.getPhone()%>
+                                                                <%}%>
+                                                    />
+                                                </div>
+                                            </div>
+                                            <% if (userNeedEdit == null) {%>
+                                            <input
+                                                    type="hidden"
+                                                    id="userID"
+                                                    name="UserID"
+                                                    class="form-control"
+                                                    value=0
+                                            />
+                                            <%} else {%>
+                                            <input
+                                                    type="hidden"
+                                                    id="userID"
+                                                    name="UserID"
+                                                    class="form-control"
+                                                    value=<%= userNeedEdit.getUserID()%>
+                                            />
+                                            <%}%>
                                         </div>
                                         <div class="mt-2">
-                                            <button type="submit" class="btn btn-dark me-2">Save changes</button>
+                                            <button type="submit" class="btn btn-dark me-2">Save</button>
+                                            <a href="${pageContext.request.contextPath}/StaffListManagerServlet?role=all"
+                                               class="btn btn-outline-secondary">Cancel</a>
                                         </div>
                                     </form>
+                                    <h5 style="color:red;">${error}</h5>
+                                    <h5 style="color:green;">${done}</h5>
                                 </div>
                                 <!-- /Account -->
                             </div>

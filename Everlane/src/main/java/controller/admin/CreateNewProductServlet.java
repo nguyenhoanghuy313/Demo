@@ -12,7 +12,11 @@ import java.io.IOException;
 public class CreateNewProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        session.removeAttribute("newProduct");
+        session.removeAttribute("colorName");
+        session.removeAttribute("newProductImg");
+        request.getRequestDispatcher("addNewProduct.jsp").forward(request, response);
     }
 
     @Override
@@ -22,11 +26,14 @@ public class CreateNewProductServlet extends HttpServlet {
         ProductForEditDAO pfed = new ProductForEditDAO();
         ProductForEdit pfe = pfed.getProduct(productName);
         if(pfe == null){
+            HttpSession session = request.getSession();
             String categoryID = request.getParameter("categoryID").trim();
             String price = request.getParameter("price").trim();
             String collectionID = request.getParameter("collectionID").trim();
             String description = request.getParameter("description").trim();
             pfed.createNewProduct(Integer.parseInt(categoryID), productName,  Integer.parseInt(price), Integer.parseInt(collectionID), description);
+            ProductForEdit product = pfed.getProduct(productName);
+            session.setAttribute("newProduct", product);
             request.setAttribute("alert", "Create done");
             request.getRequestDispatcher("addNewProduct.jsp").forward(request, response);
         }else{

@@ -19,7 +19,6 @@ public class ChangePassword extends HttpServlet {
             req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
         }else if(mod.equals("2")){
             req.getRequestDispatcher("changePasswordHighUser.jsp").forward(req, resp);
-
         }
         else {
             if(mod.equals("1")){
