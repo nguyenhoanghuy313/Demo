@@ -74,13 +74,20 @@
                 <h1>Shipping</h1>
             </div>
             <form action="Checkout" method="post">
-                                <input list="country" name="Country" placeholder="Country" type="text" required><br>
-                                <datalist id="country">
-                                    <%for (Country ct : c) {%>
-                                    <option value=<%=ct.getCountryName()%>><%=ct.getCountryName()%>
-                                    </option>
-                                    <%}%>
-                                </datalist>
+                <%--                                <input list="country" name="Country" placeholder="Country" type="text" required><br>--%>
+                <%--                                <datalist id="country">--%>
+                <%--                                    <%for (Country ct : c) {%>--%>
+                <%--                                    <option value=<%=ct.getCountryName()%>><%=ct.getCountryName()%>--%>
+                <%--                                    </option>--%>
+                <%--                                    <%}%>--%>
+                <%--                                </datalist>--%>
+                <label for="CountryID">Choose a country:</label>
+                <select id="CountryID" name="CountryID">
+                    <% for (Country ct : c) { %>
+                    <option value="<%= ct.getCountryID() %>"><%= ct.getCountryName() %>
+                    </option>
+                    <% } %>
+                </select>
                 <input id="recipient" name="recipient" placeholder="Full Name" type="text" required><br>
                 <input id="Street" name="Street" placeholder="Street Address*" type="text" required><br>
                 <input id="address_line" name="address_line" placeholder="Address" type="text" required><br>
@@ -90,7 +97,7 @@
                 <input type="submit" value="Save Address">
                 <h2 style="color: red">${ErrMessage}</h2>
             </form>
-        <%--            <form>--%>
+            <%--            <form>--%>
             <%--                <input id="FirstName" name="FullName" placeholder="Full Name*" type="text"><br>--%>
             <%--                <input id="country" name="Country" placeholder="Country*" type="text"><br>--%>
             <%--                <input id="address_line1" name="Address" placeholder="Street Address*" type="text"><br>--%>

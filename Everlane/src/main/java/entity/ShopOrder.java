@@ -39,6 +39,13 @@ public class ShopOrder {
         Order_total = order_total;
     }
 
+    public ShopOrder(int userID, String order_status, String recipient, String recipent_phone) {
+        UserID = userID;
+        Order_status = order_status;
+        this.recipient = recipient;
+        this.recipent_phone = recipent_phone;
+    }
+
     public int getShop_orderID() {
         return shop_orderID;
     }

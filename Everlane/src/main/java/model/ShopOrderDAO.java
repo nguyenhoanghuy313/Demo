@@ -31,8 +31,8 @@ public class ShopOrderDAO extends myDAO {
             }
             rs.close();
             ps.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            System.out.println("getOrdersByUserID: " + e.getMessage());
         }
         return so;
     }
@@ -69,11 +69,11 @@ public class ShopOrderDAO extends myDAO {
     }
 
     public void insertOrder(ShopOrder so){
-        xSql = "insert into shop_order(UserID,Order_total,recipient,recipent_phone) values (?,?,?,?)";
+        xSql = "insert into shop_order(UserID,Order_status,recipient,recipent_phone) values (?,?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1,so.getUserID());
-            ps.setInt(2,so.getOrder_total());
+            ps.setString(2,so.getOrder_status());
             ps.setString(3,so.getRecipient());
             ps.setString(4,so.getRecipent_phone());
             ps.executeUpdate();

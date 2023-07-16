@@ -10,7 +10,7 @@ public class CountryDAO extends myDAO{
 
         try {
             ps = con.prepareStatement(xSql);
-            ps.executeQuery();
+            rs = ps.executeQuery();
             int xCountryID;
             String xCountryName;
             while (rs.next()){
@@ -18,6 +18,8 @@ public class CountryDAO extends myDAO{
                 xCountryName = rs.getString("CountryName");
                 c.add(new Country(xCountryID,xCountryName));
             }
+            rs.close();
+            ps.close();
         }catch (Exception e){
             System.out.println("getAllCountry: " + e.getMessage());
         }
