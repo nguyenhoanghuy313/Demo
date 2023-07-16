@@ -1,3 +1,6 @@
+<%@ page import="model.*" %>
+<%@ page import="java.util.List" %>
+<%@ page import="entity.CartItem" %>
 <%--
   Created by IntelliJ IDEA.
   User: minileisduk
@@ -32,6 +35,24 @@
 
 </head>
 <body>
+<%
+    User u = (User) request.getSession().getAttribute("currUser");
+    int uID = 0;
+    String xUID = String.valueOf(uID);
+    if (u != null) {
+        uID = u.getUserID();
+    }
+//    if(u == null){
+//        response.setStatus(response.SC_MOVED_TEMPORARILY);
+//        response.setHeader("Location", "login-servlet");
+//        return;
+//    }
+//    int uID = u.getUserID();
+    CartItemDAO cid = new CartItemDAO();
+    List<Product> cartItemList = cid.getUserItem(uID);
+    ProductForEditDAO proEditDAO = new ProductForEditDAO();
+    List<ProductForEdit> productForEditList = proEditDAO.getAllProductForEdit();
+%>
 <header>
     <%-- web--%>
     <a class="bx bx-menu" id="menu-icon"></a>
@@ -40,124 +61,90 @@
         <li><a href="#">About</a></li>
         <li><a href="${pageContext.request.contextPath}/StoryCusServlet?input=all">Stories</a></li>
     </ul>
-    <a href="${pageContext.request.contextPath}/category-servlet" class="logo"><img
+    <a href="${pageContext.request.contextPath}/home-servlet" class="logo"><img
             src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Everlane_logo.png"></a>
 
-        <div class="main">
-            <a href="#" class="search" id="search-icon"><i class="ri-search-line"></i></a>
-            <c:if test="${sessionScope.acc != null}">
-                <a href="${pageContext.request.contextPath}/user-account-detail-servlet" class="user"><i class="ri-user-3-line"></i></a>
-            </c:if>
-            <c:if test="${sessionScope.acc == null}">
-                <a href="${pageContext.request.contextPath}/login-servlet" class="user"><i class="ri-user-3-line"></i></a>
-            </c:if>
-<%--            <a href="login.jsp" class="user"><i class="ri-user-3-line"></i></a>--%>
-            <a class="cart" id="cart-icon"><i class="ri-shopping-cart-2-line"></i></a>
-        </div>
+    <div class="main">
+        <a href="#" class="search" id="search-icon"><i class="ri-search-line"></i></a>
+        <c:if test="${sessionScope.acc != null}">
+            <a href="${pageContext.request.contextPath}/user-account-detail-servlet" class="user"><i class="ri-user-3-line"></i></a>
+        </c:if>
+        <c:if test="${sessionScope.acc == null}">
+            <a href="${pageContext.request.contextPath}/login-servlet" class="user"><i class="ri-user-3-line"></i></a>
+        </c:if>
+        <%--            <a href="login.jsp" class="user"><i class="ri-user-3-line"></i></a>--%>
+        <a class="cart" id="cart-icon"><i class="ri-shopping-cart-2-line"></i></a>
+    </div>
 
     <div class="cart_container">
         <a class='bx bx-x' id="x-icon"></a>
         <div class="cart_list">
             <h1>Your cart</h1>
+            <%--            <c:if test="${not empty addedProduct}">--%>
+            <%--                <div class="popup">--%>
+            <%--                    <p>Sản phẩm ${addedProduct} đã được thêm vào giỏ hàng.</p>--%>
+            <%--                </div>--%>
+            <%--            </c:if>--%>
+            <%
+                int itemCount = cartItemList.size();  // Số lượng mục trong giỏ hàng
+                int totalValue = 0;  // Tổng giá trị của các mục
+
+
+                for (Product ci: cartItemList){
+
+                    CartItem cartItemList2 = cid.getCartItem(String.valueOf(ci.getProductID()) ,String.valueOf(ci.getVariationID()));
+                    totalValue += (ci.getPrice() * cartItemList2.getQuantity());
+            %>
             <div class="cart_item">
                 <a class="cart_item_img">
-                    <img src="https://media.everlane.com/image/upload/c_fill,w_96,ar_72:96,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/2cedb2b6_ade5"
+                    <img src="<%=ci.getThumbnail()%>"
                          alt="">
                 </a>
                 <div class="cart_item_text">
                     <div class="cart_item_name">
-                        <p>The Smock Dress</p>
-                        <a><i class='bx bx-trash'></i></a>
+                        <p><%=ci.getProductName()%></p>
+                        <a href="DeleteFromCart?ProductID=<%=ci.getProductID()%>&variationID=<%=ci.getVariationID()%>"><i class='bx bx-trash'></i></a>
                     </div>
-                    <p>XX Small | Black</p>
+                    <p><%=ci.getSize_Name()%> | <%=ci.getColor_Name()%>></p>
                     <div class="cart_item_price">
-                        <p>₫2,896,300</p>
-                        <div class="cart_item_quantity">
-                            <button><i class='bx bx-minus'></i></button>
-                            <div><p>1</p></div>
-                            <button><i class='bx bx-plus'></i></button>
-                        </div>
+                        <p>₫<%=ci.getPrice()*cartItemList2.getQuantity()%></p>
+                        <form action="${pageContext.request.contextPath}/adjustQuantity" method="post">
+                            <div class="cart_item_quantity">
+                                <button class='bx bx-minus' name="choice" value="minus"></button>
+                                <p id="amount"><%= cartItemList2.getQuantity() %></p>
+                                <button class='bx bx-plus' name="choice" value="plus"></button>
+                            </div>
+                            <input type="hidden" name="ProductID" value="<%= cartItemList2.getProductID() %>">
+                            <input type="hidden" name="VariationID" value="<%= cartItemList2.getVariationID() %>">
+                            <input type="submit" style="display: none;">
+                        </form>
+
+                        <%--                        <div class="cart_item_quantity">--%>
+                        <%--                            <button class='bx bx-minus' name="choice" value="minus" ></button>--%>
+                        <%--                            <p id="amount" ><%=cartItemList2.getQuantity()%></p>--%>
+                        <%--                            <button class='bx bx-plus' ></button>--%>
+                        <%--                        </div>--%>
                     </div>
                 </div>
             </div>
-            <div class="cart_item">
-                <a class="cart_item_img">
-                    <img src="https://media.everlane.com/image/upload/c_fill,w_96,ar_72:96,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/2cedb2b6_ade5"
-                         alt="">
-                </a>
-                <div class="cart_item_text">
-                    <div class="cart_item_name">
-                        <p>The Smock Dress</p>
-                        <a><i class='bx bx-trash'></i></a>
-                    </div>
-                    <p>XX Small | Black</p>
-                    <div class="cart_item_price">
-                        <p>₫2,896,300</p>
-                        <div class="cart_item_quantity">
-                            <button><i class='bx bx-minus'></i></button>
-                            <div><p>1</p></div>
-                            <button><i class='bx bx-plus'></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="cart_item">
-                <a class="cart_item_img">
-                    <img src="https://media.everlane.com/image/upload/c_fill,w_96,ar_72:96,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/2cedb2b6_ade5"
-                         alt="">
-                </a>
-                <div class="cart_item_text">
-                    <div class="cart_item_name">
-                        <p>The Smock Dress</p>
-                        <a><i class='bx bx-trash'></i></a>
-                    </div>
-                    <p>XX Small | Black</p>
-                    <div class="cart_item_price">
-                        <p>₫2,896,300</p>
-                        <div class="cart_item_quantity">
-                            <button><i class='bx bx-minus'></i></button>
-                            <div><p>1</p></div>
-                            <button><i class='bx bx-plus'></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="cart_item">
-                <a class="cart_item_img">
-                    <img src="https://media.everlane.com/image/upload/c_fill,w_96,ar_72:96,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/2cedb2b6_ade5"
-                         alt="">
-                </a>
-                <div class="cart_item_text">
-                    <div class="cart_item_name">
-                        <p>The Smock Dress</p>
-                        <a><i class='bx bx-trash'></i></a>
-                    </div>
-                    <p>XX Small | Black</p>
-                    <div class="cart_item_price">
-                        <p>₫2,896,300</p>
-                        <div class="cart_item_quantity">
-                            <button><i class='bx bx-minus'></i></button>
-                            <div><p>1</p></div>
-                            <button><i class='bx bx-plus'></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <%
+                }
+            %>
         </div>
         <div class="checkout_container">
             <div class="subtotal_container">
-                <p>Subtotal (3 items)</p>
-                <p>₫4,737,200</p>
+                <p>Subtotal (<%=itemCount%> items)</p>  <!-- Hiển thị số lượng mục trong giỏ hàng -->
+                <p>₫<%=totalValue%></p>
             </div>
-            <button>Continue To Checkout</button>
+            <a href="${pageContext.request.contextPath}/checkout.jsp">Continue To Checkout</a>
         </div>
     </div>
 
     <%--        mobile--%>
     <div class="menu_container">
         <div class="menu_container1">
-            <a href="">Best-Sellers</a>
-            <a href="">Everworld Stories</a>
+            <a href="#">Best-Sellers</a>
+            <a href="#">Everworld Stories</a>
         </div>
         <div class="menu_container2">
             <a href="">What's New</a>
@@ -187,7 +174,12 @@
 
 <div class="search_container">
     <form action="${pageContext.request.contextPath}/SearchServlet" method="post" class="search_inner">
-        <input type="text" id="site-search" name="productName" placeholder="Search...">
+        <input type="text" id="site-search" name="productName" placeholder="Search..." list="productL">
+        <datalist id="productL">
+            <%for (ProductForEdit productForEdit: productForEditList){%>
+            <option value="<%=productForEdit.getProductName()%>">
+            <%}%>
+        </datalist>
         <button class='bx bx-search-alt'></button>
     </form>
 </div>

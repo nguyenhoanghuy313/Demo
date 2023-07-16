@@ -61,10 +61,11 @@
             <form action="register-servlet" method="post">
                 <input type="text" id="username" name="username" value="" placeholder="User Name">
                 <input type="email" id="email" name="email" value="" placeholder="Email Address">
+                <input type="date"  name="dob" value="" required>
                 <input type="password" id="password" name="password" value="" placeholder="Password">
                 <input type="password" id="repass" name="repass" value="" placeholder="Repeat Password">
                 <input type="hidden" id="role" name="role" value="4">
-                <h2>${error}</h2>
+                <h2 style="color: red">${error}</h2>
                 <input type="submit" value="Unlock Your Discount">
             </form>
             <h2 style="text-align: center; cursor: pointer" class="open_policy">By providing your email address, you

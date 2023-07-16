@@ -31,12 +31,6 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<section class="Stories_Title_Container">
-    <div></div>
-    <p style="font-size: 160px">everworld</p>
-    <p style="font-size: 22px">We’re on a mission to clean up a dirty industry.</p>
-    <p style="font-size: 22px">These are the people, stories, and ideas that will help us get there.</p>
-</section>
 
 <section class="Stories_List_Container">
     <p style="font-size: 54px; font-family: 'Nunito Sans', sans-serif;">The Latest</p>

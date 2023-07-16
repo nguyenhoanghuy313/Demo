@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -140,68 +141,67 @@ public class UserDAO extends myDAO {
         return false;
     }
 
-//    public boolean checkEmailExist(String xemail) {
-//        try {
-//            xSql = "select *\n" +
-//                    "from user\n" +
-//                    "where Email=?";
-//            ps = con.prepareStatement(xSql);
-//            ps.setString(1, xemail);//dau hoi so 2
-//            rs = ps.executeQuery();
-//            if (rs.next()) {
-//                return true;
-//            }
-//        } catch (Exception e) {
-//            System.out.println("CheckEmailExist: " + e.getMessage());
-//        }
-//        return false;
-//    }
-
-    public boolean checkAccountExistUserDetail(String xusername, String xemail, int xUserID) {
+    public boolean checkUsername(String xusername) {
         try {
             xSql = "select *\n" +
                     "from user\n" +
-                    "where UserName=? and Email=? and UserID!=?";
+                    "where UserName like ?";
             ps = con.prepareStatement(xSql);
             ps.setString(1, xusername);//dau hoi so 1
-            ps.setString(2, xemail);//dau hoi so 2
-            ps.setInt(3, xUserID);//dau hoi so 3
             rs = ps.executeQuery();
             if (rs.next()) {
                 return true;
             }
         } catch (Exception e) {
-            System.out.println("CheckAccountExistUserDetail: " + e.getMessage());
+            System.out.println("CheckAccountExist: " + e.getMessage());
         }
         return false;
     }
 
-//    public boolean checkPasswordExist(String xpassword) {
-//        try {
-//            xSql = "select *\n" +
-//                    "from user\n" +
-//                    "where Password=?";
-//            ps = con.prepareStatement(xSql);
-//            ps.setString(1, xpassword);//dau hoi so 1
-//            rs = ps.executeQuery();
-//            if (rs.next()) {
-//                return true;
-//            }
-//        } catch (Exception e) {
-//            System.out.println("CheckPasswordExist: " + e.getMessage());
-//        }
-//        return false;
-//    }
+    public boolean checkEmail(String xemail) {
+        try {
+            xSql = "select *\n" +
+                    "from user\n" +
+                    "where Email like ?";
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, xemail);//dau hoi so 1
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("CheckAccountExist: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean checkPasswordExist(String xpassword) {
+        try {
+            xSql = "select *\n" +
+                    "from user\n" +
+                    "where Password=?";
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, xpassword);//dau hoi so 1
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("CheckPasswordExist: " + e.getMessage());
+        }
+        return false;
+    }
 
     //add User for register Customer
-    public void addUser(String xUsername, String xPassword, String xEmail, int xRole) {
+    public void addUser(String xUsername, String xPassword, String xEmail, int xRole, Date dob) {
         try {
-            xSql = "INSERT INTO user (UserName,Password,Email,FirstName,LastName,Dob,Sex,Role, Phone, UserImg) values (?, ?, ?, null, null, null, null, ?, null, null)";
+            xSql = "INSERT INTO user (UserName,Password,Email,FirstName,LastName,Dob,Sex,Role, Phone, UserImg) values (?, ?, ?, null, null, ?, null, ?, null, null)";
             ps = con.prepareStatement(xSql);
             ps.setString(1, xUsername);
             ps.setString(2, xPassword);
             ps.setString(3, xEmail);
-            ps.setInt(4, xRole);
+            ps.setDate(4, dob);
+            ps.setInt(5, xRole);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("addUser: " + e.getMessage());
@@ -477,22 +477,21 @@ public class UserDAO extends myDAO {
         }
     }
 
-
-//Nguyễn Đắc Hoàng Đạt - HE170720
-
-    public static void main(String[] args) {
-//        System.out.println("hello");
-        UserDAO test = new UserDAO();
-        User u = new User();
-        int id = 1;
-        String email = "datndhhe170720@fpt.edu.vn";
-//        String username = "DatHoang";
-//        String date = "12-12-2020";
-//         boolean check = test.checkAccountExistUserDetail(email, username, id);
-        User check = test.getUserByEmail(email);
-        System.out.println(check);
-//        System.out.printf(u.getUserName());
+    public void insertDetailed(String FirstName, String phone, String userID){
+        int xUserID = Integer.parseInt(userID);
+        xSql = "update swp_project.user set FirstName = " + "'"+ FirstName + "'" + ", Phone = "+ "'"+ phone + "'" +" where UserID = " +userID;
+        try {
+            ps = con.prepareStatement(xSql);
+//            ps.setString(1, firstName);
+//            ps.setString(2, phoneNum);
+//            ps.setInt(1, xUserID);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("insertDetailed: " + e.getMessage());
+        }
     }
+
 }
 
 

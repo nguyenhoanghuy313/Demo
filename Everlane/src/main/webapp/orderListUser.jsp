@@ -1,4 +1,7 @@
-<%--
+<%@ page import="model.User" %>
+<%@ page import="model.OrderDetailDAO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.Product" %><%--
   Created by IntelliJ IDEA.
   User: minileisduk
   Date: 06/07/2023
@@ -21,7 +24,7 @@
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
   />
 
-  <title>Product List</title>
+  <title>Order List</title>
 
   <meta name="description" content=""/>
 
@@ -59,14 +62,19 @@
 </head>
 
 <body>
-
+<%
+  User u = (User) request.getSession().getAttribute("currUser");
+  String xUID = String.valueOf(u.getUserID());
+  OrderDetailDAO odd = new OrderDetailDAO();
+  List<Product> odredPro = odd.getUserOrder(xUID);
+%>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
     <!-- Menu -->
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
       <div class="app-brand demo">
-        <a href="${pageContext.request.contextPath}/category-servlet" class="app-brand-link">
+        <a href="${pageContext.request.contextPath}/home-servlet" class="app-brand-link">
               <span class="app-brand-logo demo">
                     <svg width="128" height="14px" class="styles_everlane-logo__4o010" viewBox="0 0 128 14" fill="none"
                          xmlns="http://www.w3.org/2000/svg"><path
@@ -93,7 +101,7 @@
         </li>
         <!-- User List -->
         <li class="menu-item active">
-          <a href="orderListUser.jsp" class="menu-link">
+          <a href="orderDetailUser.jsp" class="menu-link">
             <i class='menu-icon tf-icons bx bxs-package'></i>
             <div data-i18n="Orders & Returns">Orders List</div>
           </a>
@@ -208,28 +216,41 @@
               <table class="table">
                 <thead>
                 <tr>
-                  <th>NO></th>
-                  <th>PRODUCT THUMBNAIL</th>
-                  <th>PRODUCT NAME</th>
-                  <th>COLOR NAME</th>
-                  <th>SIZE NAME</th>
-                  <th>Quantity</th>
+                  <th>NO</th>
+                  <th>Order ID</th>
                   <th>Amount</th>
                   <th>Buy at</th>
+                  <th>Action</th>
                 </tr>
                 </thead>
+                <%
+                  for (Product p: odredPro){
+
+
+                %>
                 <tbody class="table-border-bottom-0">
                 <tr class="item">
-                  <td>1</td>
-                  <td><img src=""></td>
-                  <td>name</td>
-                  <td>name</td>
-                  <td>name</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1/02/2003</td>
+                  <td>NO</td>
+                  <td>Order ID</td>
+                  <td>Amount</td>
+                  <td>Buy at</td>
+                  <td>
+                    <div class="dropdown">
+                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                              data-bs-toggle="dropdown">
+                        <i class="bx bx-dots-vertical-rounded"></i>
+                      </button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="EditProductServlet?input=1&ProductID=<%=x.getProductID()%>"
+                        >Detail</a>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 </tbody>
+                <%
+                  }
+                %>
               </table>
             </div>
           </div>

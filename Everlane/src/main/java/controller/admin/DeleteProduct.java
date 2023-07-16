@@ -1,6 +1,7 @@
 package controller.admin;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,8 +18,18 @@ public class DeleteProduct extends HttpServlet {
         String delProductID = request.getParameter("ProductID").trim();
         String delColName = request.getParameter("color_Name").trim();
         String delSizeName = request.getParameter("size_Name").trim();
+
         ProductDAO pd = new ProductDAO();
-        pd.delete(delProductID, delColName, delSizeName);
+        ProductForEditDAO pfed = new ProductForEditDAO();
+
+        int productCount = pd.count(delProductID);
+        if (productCount > 1){
+            pd.delete(delProductID, delColName, delSizeName);
+            System.out.println(pd.count(delProductID));
+        }else{
+            pd.delete(delProductID, delColName, delSizeName);
+            pfed.delete(delProductID);
+        }
         response.sendRedirect("ProductListManagerServlet?input=all");
     }
 }

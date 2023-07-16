@@ -41,8 +41,7 @@
 		   &client_id=377412618992-d6fdoanaf6nm1ivg4atd28c4aqffvnqo.apps.googleusercontent.com&approval_prompt=force">Login
                 With Google</a>
             <a href="register.jsp">Don’t have an account? Sign up</a>
-            <a href="dashboardManager.jsp">Forgot your password</a>
-            <a href="/user-account-detail-servlet">user account</a>
+            <a href="forgotPassword.jsp">Forgot your password</a>
         </div>
     </div>
 </section>

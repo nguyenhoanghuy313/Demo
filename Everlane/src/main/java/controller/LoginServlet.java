@@ -15,7 +15,8 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "login-servlet", urlPatterns = {"/login-servlet"})
-public class LoginServlet extends HttpServlet {
+public class
+LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,6 +40,7 @@ public class LoginServlet extends HttpServlet {
             Promotion promotion = promotionDAO.getPromotionByID(String.valueOf(collection.getPromotionID()));
 
             User checkUser = u.checkUser(email, password);
+            req.getSession().setAttribute("currUser", checkUser);
             User Role = u.getRoleByEmail(email);
             if (checkUser == null) {
                 if (email.isEmpty()) {

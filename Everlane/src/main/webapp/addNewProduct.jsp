@@ -1,54 +1,74 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: minileisduk
-  Date: 22/06/2023
-  Time: 10:14 CH
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
+<%@page import="java.util.*" %>
+<%@page import="model.*" %>
+<%@page import="controller.*" %>
+<%@ page import="java.util.Collection" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+  CategoryDAO c = new CategoryDAO();
+  List<Category> cateList = c.getAllCategory();
+
+  ProCollectionDAO colDAO = new ProCollectionDAO();
+  List<ProCollection> proCollectionsList = colDAO.getAllCollections();
+
+  ProductForEditDAO proEditDAO = new ProductForEditDAO();
+  List<ProductForEdit> productForEditList = proEditDAO.getAllProductForEdit();
+
+  ColorDAO colorDAO = new ColorDAO();
+  List<Color> colorList = colorDAO.getAllColors();
+
+  SizeDAO sizeDAO = new SizeDAO();
+  List<Size> sizeList = sizeDAO.getAllSizes();
+
+  ProductImgDAO productImgDAO = new ProductImgDAO();
+  List<ProductImg> productImgList = productImgDAO.getAllProductFolder();
+
+  ProductImg picheckname = (ProductImg) request.getAttribute("picheckname");
+  ProductForEdit pfe = (ProductForEdit) request.getAttribute("pfe");
+%>
 <html
-        lang="en"
         class="light-style layout-menu-fixed"
-        dir="ltr"
-        data-theme="theme-default"
         data-assets-path="../a.template/assets/"
         data-template="vertical-menu-template-free"
+        data-theme="theme-default"
+        dir="ltr"
+        lang="en"
 >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8"/>
   <meta
-          name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+          name="viewport"
   />
 
   <title>Create New Product</title>
 
-  <meta name="description" content="" />
+  <meta content="" name="description"/>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png" />
+  <link href="a.template/assets/img/favicon/favicon.png" rel="icon" type="image/x-icon"/>
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
   <link
           href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
           rel="stylesheet"
   />
 
   <!-- Icons. Uncomment required icon fonts -->
-  <link rel="stylesheet" href="a.template/assets/vendor/fonts/boxicons.css" />
+  <link href="a.template/assets/vendor/fonts/boxicons.css" rel="stylesheet"/>
 
   <!-- Core CSS -->
-  <link rel="stylesheet" href="a.template/assets/vendor/css/core.css" class="template-customizer-core-css" />
-  <link rel="stylesheet" href="a.template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-  <link rel="stylesheet" href="a.template/assets/css/demo.css" />
+  <link class="template-customizer-core-css" href="a.template/assets/vendor/css/core.css" rel="stylesheet"/>
+  <link class="template-customizer-theme-css" href="a.template/assets/vendor/css/theme-default.css" rel="stylesheet"/>
+  <link href="a.template/assets/css/demo.css" rel="stylesheet"/>
 
   <!-- Vendors CSS -->
-  <link rel="stylesheet" href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+  <link href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet"/>
 
-  <link rel="stylesheet" href="a.template/assets/vendor/libs/apex-charts/apex-charts.css" />
+  <link href="a.template/assets/vendor/libs/apex-charts/apex-charts.css" rel="stylesheet"/>
 
   <!-- Page CSS -->
 
@@ -86,7 +106,7 @@
 
       <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item">
+        <li class="menu-item active">
           <a href="dashboardManager.jsp" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
             <div data-i18n="Analytics">Dashboard</div>
@@ -97,7 +117,7 @@
         <!-- Pages -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
         <!-- Product List -->
-        <li class="menu-item active">
+        <li class="menu-item">
           <a href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
              class="menu-link">
             <i class='menu-icon tf-icons bx bxs-package'></i>
@@ -131,9 +151,37 @@
               </a>
             </li>
           </ul>
+          <ul class="menu-sub">
+            <li class="menu-item">
+              <a href="${pageContext.request.contextPath}/StoryServlet?input=all" class="menu-link">
+                <div data-i18n="Story List">Story List (Story Page)</div>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bx-detail"></i>
+            <div data-i18n="Sale">Sale</div>
+          </a>
+          <ul class="menu-sub">
+            <li class="menu-item">
+              <a href="PromotionServlet?input=all" class="menu-link">
+                <div data-i18n="Promotion List">Promotion List</div>
+              </a>
+            </li>
+          </ul>
+          <ul class="menu-sub">
+            <li class="menu-item">
+              <a href="seasonCollectionUpdatePromotion.jsp" class="menu-link">
+                <div data-i18n="Promotion List">Season Collection (Update Promotion)</div>
+              </a>
+            </li>
+          </ul>
         </li>
       </ul>
     </aside>
+
 
     <!-- / Menu -->
 
@@ -154,11 +202,11 @@
           <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
-              <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                 data-bs-toggle="dropdown">
+              <a class="nav-link dropdown-toggle hide-arrow" data-bs-toggle="dropdown"
+                 href="javascript:void(0);">
                 <div class="avatar avatar-online">
-                  <img src="a.template/assets/img/avatars/1.png" alt
-                       class="w-px-40 h-auto rounded-circle"/>
+                  <img alt class="w-px-40 h-auto rounded-circle"
+                       src="a.template/assets/img/avatars/1.png"/>
                 </div>
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
@@ -167,8 +215,8 @@
                     <div class="d-flex">
                       <div class="flex-shrink-0 me-3">
                         <div class="avatar avatar-online">
-                          <img src="a.template/assets/img/avatars/1.png" alt
-                               class="w-px-40 h-auto rounded-circle"/>
+                          <img alt class="w-px-40 h-auto rounded-circle"
+                               src="a.template/assets/img/avatars/1.png"/>
                         </div>
                       </div>
                       <div class="flex-grow-1">
@@ -210,104 +258,215 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Product List / </span> New Product</h4>
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Product List / </span> New Product
+          </h4>
 
           <div class="row">
             <div class="col-md-12">
-              <div class="card mb-4">
-                <h5 class="card-header">Create New Product</h5>
-                <!-- Account -->
+              <div class="col-md-12">
+                <div class="card mb-4">
+                  <h5 class="card-header">Create a Product</h5>
+                  <!-- Account -->
+                  <hr class="my-0"/>
+                  <div class="card-body">
+                    <form method="POST"  action="CreateNewProductServlet">
+                      <div class="row">
+                        <div class="mb-3 col-md-6">
+                          <label class="form-label" for="productName">Product Name</label>
 
-                <hr class="my-0" />
-                <div class="card-body">
-                  <form id="formAccountSettings" method="POST" onsubmit="return false">
-                    <div class="row">
-                      <div class="mb-3 col-md-6">
-                        <label for="productID" class="form-label">Product ID</label>
-                        <input
-                                class="form-control"
-                                type="text"
-                                id="productID"
-                                name="productID"
-                                placeholder="Please enter Product ID"
-                                autofocus
-                        />
+                          <input class="form-control" id="productName" name="productName"
+                                 placeholder="Please enter Product Name" type="text" required/>
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                          <label class="form-label" for="categoryID">Category</label>
+                          <select class="select2 form-select" id="categoryID" name="categoryID" required>
+                            <option value="">Please chose Category</option>
+                            <%for (Category category: cateList){%>
+                            <option value=<%=category.getCategoryID()%>><%=category.getCategoryName()%></option>
+                            <%}%>
+                          </select>
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                          <label class="form-label" for="price">Price</label>
+                          <input
+                                  class="form-control"
+                                  id="price"
+                                  name="price"
+                                  placeholder="Please enter Product Price"
+                                  type="number"
+                                  min="500000"
+                                  required
+                          />
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                          <label class="form-label" for="collectionID">Collection</label>
+                          <select class="select2 form-select" id="collectionID" name="collectionID" required>
+                            <option value="">Please chose Collection</option>
+                            <%for (ProCollection pc: proCollectionsList ){%>
+                            <option value="<%=pc.getCollectionID()%>"><%=pc.getCollectionName()%>
+                            </option>
+                            <%}%>
+                          </select>
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                          <label class="form-label" for="description">Description</label>
+                          <input
+                                  class="form-control"
+                                  id="description"
+                                  name="description"
+                                  placeholder="Please enter Product Price"
+                                  type=text"
+                          />
+                        </div>
                       </div>
-                      <div class="mb-3 col-md-6">
-                        <label for="productName" class="form-label">Product Name</label>
-                        <input class="form-control" type="text" name="productName" id="productName" placeholder="Please enter Product Name" />
+                      <%if (pfe != null) {%>
+                        <h6 style="color: red">Product's already in the database with id = <%=pfe.getProductId()%></h6>
+                      <%}%>
+                        <h6 style="color: green">${alert}</h6>
+                      <div class="mt-2">
+                        <button class="btn btn-dark me-2" type="submit">Create new Product
+                        </button>
                       </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="card mb-4">
+                  <h5 class="card-header">Create Image File</h5>
+                  <!-- Account -->
+                  <hr class="my-0"/>
+                  <div class="card-body">
+                    <form action="CreateNewImageFolderServlet" method="POST">
                       <div class="mb-3 col-md-6">
-                        <label for="thumbnail" class="form-label">Select thumbnail image</label>
-                        <input class="form-control" type="file" id="thumbnail" />
+                        <label class="form-label" for="imageName">Image Name</label>
+                        <input class="form-control" id="imageName" name="imageName" placeholder="Please enter Image Name"
+                               type="text" list="product1" required/>
+                          <datalist id="product1">
+                            <%for (ProductForEdit productForEdit: productForEditList){%>
+                            <option value="<%=productForEdit.getProductName()%>">
+                            <%}%>
+                          </datalist>
                       </div>
+
                       <div class="mb-3 col-md-6">
-                        <label for="productImg1" class="form-label">Select product Image</label>
-                        <input class="form-control" type="file" id="productImg1" />
-                      </div>
-                      <div class="mb-3 col-md-6">
-                        <label for="productImg2" class="form-label">Select product Image</label>
-                        <input class="form-control" type="file" id="productImg2" />
-                      </div>
-                      <div class="mb-3 col-md-6">
-                        <label for="productImg3" class="form-label">Select product Image</label>
-                        <input class="form-control" type="file" id="productImg3" />
-                      </div>
-                      <div class="mb-3 col-md-6">
-                        <label for="categoryID" class="form-label">Category</label>
-                        <select id="categoryID" class="select2 form-select" >
-                          <option value="">Please chose Category</option>
-                          <!--                          in ra list các category bằng loop -->
-                          <option value="Truyền value cua category">Tên category</option>
-                          <option value="Truyền value cua category">Tên category</option>
-                          <option value="Truyền value cua category">Tên category</option>
-                          <option value="Truyền value cua category">Tên category</option>
+                        <label class="form-label" for="colorID">Color</label>
+                        <select class="select2 form-select"  name="colorName" required>
+                          <option value="">Please chose Color</option>
+                          <%for (Color color: colorList){%>
+                          <option value="<%=color.getColor_Name()%>"><%=color.getColor_Name()%></option>
+                          <%}%>
                         </select>
                       </div>
-                      <div class="mb-3 col-md-6">
-                        <label for="collectionID" class="form-label">Collection</label>
-                        <select id="collectionID" class="select2 form-select" >
-                          <option value="">Please chose Collection</option>
-                          <!--                          in ra list các collection bằng loop -->
-                          <option value="Truyền value cua collection">Tên collection</option>
-                          <option value="Truyền value cua collection">Tên collection</option>
-                          <option value="Truyền value cua collection">Tên collection</option>
-                          <option value="Truyền value cua collection">Tên collection</option>
-                        </select>
-                      </div>
-                      <div class="mb-3 col-md-6">
-                        <label for="colourID" class="form-label">Colour</label>
-                        <select id="colourID" class="select2 form-select" >
-                          <option value="">Please chose Colour</option>
-                          <!--                          in ra list các colour trong bẳng colour bằng loop -->
-                          <option value="Truyền value cua colour">Tên colour</option>
-                          <option value="Truyền value cua colour">Tên colour</option>
-                          <option value="Truyền value cua colour">Tên colour</option>
-                          <option value="Truyền value cua colour">Tên colour</option>
-                        </select>
-                      </div>
-                      <div class="mb-3 col-md-6">
-                        <label for="price" class="form-label">Price</label>
-                        <input
-                                class="form-control"
-                                type="number"
-                                id="price"
-                                name="price"
-                                placeholder="Please enter Product Price"
-                        />
-                      </div>
 
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label" for="thumbnail">Select thumbnail image</label>
+                        <input class="form-control" id="thumbnail" name="thumbnail" type="url" required/>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label" for="productImg1">Select product Image 1</label>
+                        <input class="form-control" id="productImg1" name="productImg1" type="url" required/>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label" for="productImg2">Select product Image 2</label>
+                        <input class="form-control" id="productImg2" name="productImg2" type="url" required/>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label" for="productImg3">Select product Image 3</label>
+                        <input class="form-control" id="productImg3" name ="productImg3" type="url" required/>
+                      </div>
+                      <%if (picheckname != null) {%>
+                      <h6 style="color: red">Product Img Folder is already in the database with id = <%=picheckname.getProduct_Img_ID()%></h6>
+                      <%}%>
+                      <h6 style="color: green">${alert2}</h6>
+                      <h6 style="color: red">${alert21}</h6>
+                      <div class="mt-2">
+                        <button class="btn btn-dark me-2" type="submit">Create new Image File</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
 
-                    </div>
-                    <div class="mt-2">
-                      <button type="submit" class="btn btn-dark me-2">Create new Product</button>
-                      <a href="${pageContext.request.contextPath}/ProductListManagerServlet?categoryID=all" class="btn btn-outline-secondary">Cancel</a>
-                    </div>
-                  </form>
+              </div>
+              <div class="col-md-12">
+                <div class="card mb-4">
+                  <h5 class="card-header">Create a variation</h5>
+                  <!-- Account -->
+                  <hr class="my-0"/>
+                  <div class="card-body">
+                    <form method="POST" action="CreateVariationServlet">
+                      <div class="row">
+                        <div class="mb-3 col-md-6">
+                          <label class="form-label" for="productID">Product ID</label>
+                          <input class="form-control" id="productID" name="productID" list="product"
+                                 placeholder="Please enter Product Name" required/>
+                          <datalist id="product">
+                            <%for (ProductForEdit productForEdit: productForEditList){%>
+                            <option value="<%=productForEdit.getProductId()%>"><%=productForEdit.getProductName()%></option>
+                            <%}%>
+                          </datalist>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                          <label class="form-label" for="colorID">Color</label>
+                          <select class="select2 form-select" id="colorID" name="colorID" required>
+                            <option value="">Please chose Color</option>
+                            <%for (Color color: colorList){%>
+                            <option value=<%=color.getColor_ID()%>><%=color.getColor_Name()%></option>
+                            <%}%>
+                          </select>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                          <label class="form-label" for="sizeID">Size</label>
+                          <select class="select2 form-select" id="sizeID" name="sizeID" required>
+                            <option value="">Please chose Size</option>
+                            <%for (Size size: sizeList){%>
+                            <option value=<%=size.getSize_ID()%>><%=size.getSize_Name()%></option>
+                            <%}%>
+                          </select>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                          <label class="form-label" for="qty_in_stock">Quantity in Stock</label>
+                          <input
+                                  class="form-control"
+                                  id="qty_in_stock"
+                                  name="qty_in_stock"
+                                  placeholder="Please enter Product Price"
+                                  type="number"
+                                  min="0"
+                                  required
+                          />
+                        </div>
+                        <div class="mb-3 col-md-6">
+                          <label class="form-label" for="productimgID">Product Img ID</label>
+                          <input class="form-control" id="productimgID" name="productimgID" list="productimg"
+                                 placeholder="Please enter Product Img Name" required/>
+                          <datalist id="productimg">
+                            <%for (ProductImg productImg: productImgList){%>
+                            <option value=<%=productImg.getProduct_Img_ID()%>><%=productImg.getProduct_img_name()%></option>
+                            <%}%>
+                          </datalist>
+                        </div>
+
+                      </div>
+                      <h6 style="color: green">${alert3}</h6>
+                      <h6 style="color: red">${alert31}</h6>
+                      <div class="mt-2">
+                        <button class="btn btn-dark me-2" type="submit">Create new Variation
+                        </button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
+
           </div>
+
+
         </div>
         <!-- / Content -->
 

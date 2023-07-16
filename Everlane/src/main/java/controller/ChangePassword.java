@@ -17,7 +17,11 @@ public class ChangePassword extends HttpServlet {
         String mod = req.getParameter("mod");
         if (mod == null) {
             req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
-        } else {
+        }else if(mod.equals("2")){
+            req.getRequestDispatcher("changePasswordHighUser.jsp").forward(req, resp);
+
+        }
+        else {
             if(mod.equals("1")){
                 HttpSession session = req.getSession();
                 UserDAO u = new UserDAO();
@@ -30,31 +34,58 @@ public class ChangePassword extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String mod = req.getParameter("mod");
         String oldPassword = req.getParameter("oldPassword").trim();
         String newPassword = req.getParameter("newPassword").trim();
         String confirmPassword = req.getParameter("confirmPassword").trim();
         HttpSession session = req.getSession();
         UserDAO u = new UserDAO();
         User user = (User) session.getAttribute("acc");
-        if (oldPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
-            req.setAttribute("error", "Please fill all the fields");
-            req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
-        } else if (newPassword.length() < 3 || newPassword.length() > 20) {
-            req.setAttribute("error", "Password must be between 3 and 20 characters");
-            req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
-        } else if (confirmPassword.length() < 3 || confirmPassword.length() > 20) {
-            req.setAttribute("error", "Password must be between 3 and 20 characters");
-            req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
-        } else if (!newPassword.equals(confirmPassword)) {
-            req.setAttribute("error", "New password and confirm password are not the same");
-            req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
-        } else if (!oldPassword.equals(user.getPassword())) {
-            req.setAttribute("error", "Old password is not correct");
-            req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
-        } else {
-            u.ChangePass(newPassword, (user.getUserID()));
-            req.setAttribute("success", "Changing password successfully");
-            req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
+        if(mod == null){
+            if (oldPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
+                req.setAttribute("error", "Please fill all the fields");
+                req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
+            } else if (newPassword.length() < 3 || newPassword.length() > 20) {
+                req.setAttribute("error", "Password must be between 3 and 20 characters");
+                req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
+            } else if (confirmPassword.length() < 3 || confirmPassword.length() > 20) {
+                req.setAttribute("error", "Password must be between 3 and 20 characters");
+                req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
+            } else if (!newPassword.equals(confirmPassword)) {
+                req.setAttribute("error", "New password and confirm password are not the same");
+                req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
+            } else if (!oldPassword.equals(user.getPassword())) {
+                req.setAttribute("error", "Old password is not correct");
+                req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
+            } else {
+                u.ChangePass(newPassword, (user.getUserID()));
+                req.setAttribute("success", "Changing password successfully");
+                req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
+            }
+        }else{
+            if (mod.equals("2")){
+                if (oldPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
+                    req.setAttribute("error", "Please fill all the fields");
+                    req.getRequestDispatcher("changePasswordHighUser.jsp").forward(req, resp);
+                } else if (newPassword.length() < 3 || newPassword.length() > 20) {
+                    req.setAttribute("error", "Password must be between 3 and 20 characters");
+                    req.getRequestDispatcher("changePasswordHighUser.jsp").forward(req, resp);
+                } else if (confirmPassword.length() < 3 || confirmPassword.length() > 20) {
+                    req.setAttribute("error", "Password must be between 3 and 20 characters");
+                    req.getRequestDispatcher("changePasswordHighUser.jsp").forward(req, resp);
+                } else if (!newPassword.equals(confirmPassword)) {
+                    req.setAttribute("error", "New password and confirm password are not the same");
+                    req.getRequestDispatcher("changePasswordHighUser.jsp").forward(req, resp);
+                } else if (!oldPassword.equals(user.getPassword())) {
+                    req.setAttribute("error", "Old password is not correct");
+                    req.getRequestDispatcher("changePasswordHighUser.jsp").forward(req, resp);
+                } else {
+                    u.ChangePass(newPassword, (user.getUserID()));
+                    req.setAttribute("success", "Changing password successfully");
+                    req.getRequestDispatcher("changePasswordHighUser.jsp").forward(req, resp);
+                }
+            }
         }
+
     }
 }

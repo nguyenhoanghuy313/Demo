@@ -1,7 +1,7 @@
 package controller;
 import java.io.*;
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import model.*;
 import java.util.*;
@@ -12,11 +12,10 @@ public class ProductDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         String xId = request.getParameter("ProductID").trim();
         String xColor_Name = request.getParameter("color_Name").trim();
-
+//        String xSize_Name = request.getParameter("size_name").trim();
         ProductDAO pd = new ProductDAO();
         ColorDAO col = new ColorDAO();
         SizeDAO si = new SizeDAO();
-
         Product x = pd.getProductByProIDColName(xId, xColor_Name);
         List<Color> colors = col.getColorsByProductID(xId);
         List<Size> sizes = si.getSizesOfThatProduct(xId, xColor_Name);
@@ -26,8 +25,24 @@ public class ProductDetailServlet extends HttpServlet {
         request.setAttribute("pi", x);
         request.setAttribute("colors", colors);
         request.setAttribute("sizes", sizes);
-
         request.getRequestDispatcher("productDetail.jsp").forward(request,response);
     }
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        response.setContentType("text/html;charset=UTF-8");
+        String xId = request.getParameter("ProductID").trim();
+        String xColor_Name = request.getParameter("color_Name").trim();
+        String xSize_Name = request.getParameter("size_name").trim();
+//        String xVariID = request.getHeader("VariationID").trim();
+        ProductDAO pd = new ProductDAO();
+        ColorDAO col = new ColorDAO();
+        SizeDAO si = new SizeDAO();
+        Product x = pd.getProductByProIDColNameSizName(xId,xColor_Name,xSize_Name);
+        List<Color> colors = col.getColorsByProductID(xId);
+        List<Size> sizes = si.getSizesOfThatProduct(xId, xColor_Name);
+        request.setAttribute("pi", x);
+        request.setAttribute("colors", colors);
+        request.setAttribute("sizes", sizes);
+        request.getRequestDispatcher("productDetail.jsp").forward(request,response);
+    }
 }

@@ -13,6 +13,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
+    <%
+        Product pi = (Product) request.getAttribute("pi");
+        List<Color> colors = (List<Color>) request.getAttribute("colors");
+        List<Size> sizes = (List<Size>) request.getAttribute("sizes");
+    %>
     <%--    icon--%>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -22,20 +27,15 @@
     <link rel="stylesheet" href="homepage/best-seller-slider1.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
-    <title>Product Detail</title>
+    <%--    <title>Product Detail</title>--%>
+    <title><%=pi.getProductName()%>
+    </title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<%
-    List<Product> productList = (List<Product>) request.getAttribute("productList");
-    List<Product> productListOnClick = (List<Product>) request.getAttribute("productListOnClick");
-
-    Product pi = (Product) request.getAttribute("pi");
-    List<Color> colors = (List<Color>) request.getAttribute("colors");
-    List<Size> sizes = (List<Size>) request.getAttribute("sizes");
-%>
+<%--<form action="addToCart" method="post">--%>
 <section class="Product_Detail_Container">
     <div class="Product_Image_Container">
         <img src=<%= pi.getThumbnail()%>>
@@ -45,49 +45,74 @@
     </div>
     <div class="Product_Detail">
         <div class="Product_Name">
-            <p class="Category_Tag"><%= pi.getCategoryName()%></p>
+            <p class="Category_Tag"><%= pi.getCategoryName()%>
+            </p>
             <div class="Name_And_Price">
-                <h1><%= pi.getProductName()%></h1>
+                <h1><%= pi.getProductName()%>
+                </h1>
+                <%--                                <h2>variationID: <%=pi.getVariationID()%></h2>--%>
+                <%--                                <h2>prodID: <%=pi.getProductID()%></h2>--%>
                 <div class="Price">
                     <p>₫2896300</p>
-                    <p><%= pi.getPrice()%></p>
+                    <p><%= pi.getPrice()%>
+                    </p>
                 </div>
             </div>
         </div>
-        <div class="Product_Color">
-            <h1>Color</h1>
-            <div class="Color">
-                <%
-                    for(Color color: colors) {
-                %>
-                <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=<%= pi.getProductID()%>&color_Name=<%= color.getColor_Name()%>">
-                    <div style="background-color: <%= color.getColor_Name()%>"></div>
-                    <span><%= color.getColor_Name()%></span>
-                </a>
-                <% } %>
+        <form action="addToCart" method="POST">
+            <div class="Product_Color">
+                <h1>Color</h1>
+                <div class="Color">
+                    <%
+                        for (Color color : colors) {
+                    %>
+                    <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=<%= pi.getProductID()%>&color_Name=<%= color.getColor_Name()%>">
+                        <div style="background-color: <%= color.getColor_Name()%>"></div>
+                        <span><%= color.getColor_Name()%></span>
+                    </a>
+                    <% } %>
+                </div>
+            </div>
 
+            <div class="Product_Size">
+                <h1>Size</h1>
+                <div class="Size">
+                    <input type="hidden" name="ProductID" value="<%= pi.getProductID() %>">
+                    <input type="hidden" name="color_Name" value="<%= pi.getColor_Name() %>">
+                    <input type="hidden" name="VariationID" value="<%= pi.getVariationID() %>">
+                    <%--                    <input type="hidden" name="productName" value="<%= pi.getProductName() %>">--%>
+                    <% for (Size size : sizes) { %>
+                    <input type="radio" id="size_name" name="size_name" value="<%= size.getSize_Name() %>">
+                    <label for="size_name"><%= size.getSize_Name() %>
+                    </label><br>
+                    <%--                    <button type="submit" name="size_name" value="<%= size.getSize_Name() %>"><%= size.getSize_Name() %>--%>
+                    <%--                    </button>--%>
+                    <% } %>
+                </div>
             </div>
-        </div>
-        <div class="Product_Size">
-            <h1>Size</h1>
-            <div class="Size">
-                <%
-                    for(Size size: sizes) {
-                %>
-                <a><%= size.getSize_Name()%></a>
-                <% } %>
-            </div>
-        </div>
-        <button>Add To Bag</button>
+            <button color="white" type="submit"
+<%--                    href="addToCart?ProductID=<%=pi.getProductID()%>&VariationID=<%=pi.getVariationID()%>">--%>
+                Add
+                To Bag
+            </button>
+        </form>
+
+
+        <%--        href="${pageContext.request.contextPath}/addToCart?ProductID=<%=pi.getProductID()%>&VariationID=<%=pi.getVariationID()%>"--%>
         <div class="Product_Description">
             <h1>Description</h1>
             <p>Made of 100% cotton poplin with a subtle sheen, the Smock Dress has a comfortable, breathable feel with
                 an effortlessly polished look.</p>
+            <%--            <p> ${CartMess}</p>--%>
+            <%--            <form action="addToCart" method="GET">--%>
+            <%--                <h2>--%>
+            <%--                    ${CartMess}--%>
+            <%--                </h2>--%>
+            <%--            </form>--%>
         </div>
     </div>
-
-
 </section>
+<%--</form>--%>
 <section class="Best_Seller_Slider">
     <div class="wrapper">
         <i id="left" class='bx bx-chevron-left'></i>
