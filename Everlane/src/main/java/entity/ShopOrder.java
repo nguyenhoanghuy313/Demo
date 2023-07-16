@@ -6,6 +6,25 @@ public class ShopOrder {
     int AddressID;
     int Order_total;
     String Order_status;
+    String recipient;
+    String recipent_phone;
+
+    public ShopOrder(int userID, int order_total, String recipient, String recipent_phone) {
+        UserID = userID;
+        Order_total = order_total;
+        this.recipient = recipient;
+        this.recipent_phone = recipent_phone;
+    }
+
+    public ShopOrder(int shop_orderID, int userID, int addressID, int order_total, String order_status, String recipient, String recipent_phone) {
+        this.shop_orderID = shop_orderID;
+        UserID = userID;
+        AddressID = addressID;
+        Order_total = order_total;
+        Order_status = order_status;
+        this.recipient = recipient;
+        this.recipent_phone = recipent_phone;
+    }
 
     public ShopOrder(int shop_orderID, int userID, int addressID, int order_total, String order_status) {
         this.shop_orderID = shop_orderID;
@@ -58,5 +77,21 @@ public class ShopOrder {
 
     public void setOrder_status(String order_status) {
         Order_status = order_status;
+    }
+
+    public String getRecipent_phone() {
+        return recipent_phone;
+    }
+
+    public void setRecipent_phone(String recipent_phone) {
+        this.recipent_phone = recipent_phone;
+    }
+
+    public String getRecipient() {
+        return recipient;
+    }
+
+    public void setRecipient(String recipient) {
+        this.recipient = recipient;
     }
 }

@@ -90,7 +90,7 @@
                     <% } %>
                 </div>
             </div>
-            <button color="white" type="submit"
+            <button color="white" type="submit">
 <%--                    href="addToCart?ProductID=<%=pi.getProductID()%>&VariationID=<%=pi.getVariationID()%>">--%>
                 Add
                 To Bag

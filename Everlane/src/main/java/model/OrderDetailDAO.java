@@ -8,6 +8,45 @@ import java.util.Date;
 import java.util.List;
 
 public class OrderDetailDAO extends myDAO{
+    public List<Product> getUserOrderDetail(String userID, String OrderID){
+        int xUserID = Integer.parseInt(userID);
+        xSql = "Select DISTINCT od.VariationID, v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, ca.CategoryName, p.CollectionID, p.ProductName, col.color_Name, s.size_Name, p.Price, od.Quantity from variation v, product_img pi, product p , category ca, color col, size s, orderdetails od, shop_order so where p.ProductID = v.ProductID and p.CategoryID = ca.CategoryID and v.product_img_ID = pi.product_img_ID and od.OrderID = so.shop_orderID and v.color_ID = col.color_ID and v.size_ID = s.size_ID and p.ProductID = od.ProductID and v.VariationID = od.VariationID and so.UserID = ?;";
+        int xProductID;
+        String xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName;
+        int xCollectionID;
+        String xProductName, xColor_Name, xSize_Name;
+        double xPrice;
+        int xQty_in_cart, xVariationID;
+        Product x;
+        List<Product> ci = new ArrayList<>();
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, xUserID);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                xProductID = rs.getInt("ProductID");
+                xThumbnail = rs.getString("thumbnail");
+                xProduct_img_1 = rs.getString("product_img_1");
+                xProduct_img_2 = rs.getString("product_img_2");
+                xProduct_img_3 = rs.getString("product_img_3");
+                xCategoryName = rs.getString("CategoryName");
+                xCollectionID = rs.getInt("CollectionID");
+                xProductName = rs.getString("ProductName");
+                xColor_Name = rs.getString("color_Name");
+                xSize_Name = rs.getString("size_Name");
+                xPrice = rs.getDouble("Price");
+                xQty_in_cart = rs.getInt("Quantity");
+                xVariationID = rs.getInt("variationID");
+                x = new Product(xProductID, xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName, xCollectionID, xProductName, xColor_Name, xSize_Name, xPrice, xQty_in_cart,xVariationID);
+                ci.add(x);
+            }
+            rs.close();
+            ps.close();
+        }catch (Exception e){
+            System.out.println("getUserOrder" + e.getMessage());
+        }
+        return ci;
+    }
     public List<Product> getUserOrder(String userID){
         int xUserID = Integer.parseInt(userID);
         xSql = "Select DISTINCT od.VariationID, v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, ca.CategoryName, p.CollectionID, p.ProductName, col.color_Name, s.size_Name, p.Price, od.Quantity from variation v, product_img pi, product p , category ca, color col, size s, orderdetails od, shop_order so where p.ProductID = v.ProductID and p.CategoryID = ca.CategoryID and v.product_img_ID = pi.product_img_ID and od.OrderID = so.shop_orderID and v.color_ID = col.color_ID and v.size_ID = s.size_ID and p.ProductID = od.ProductID and v.VariationID = od.VariationID and so.UserID = ?;";

@@ -1,7 +1,9 @@
 <%@ page import="model.User" %>
 <%@ page import="model.OrderDetailDAO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.Product" %><%--
+<%@ page import="model.Product" %>
+<%@ page import="model.ShopOrderDAO" %>
+<%@ page import="entity.ShopOrder" %><%--
   Created by IntelliJ IDEA.
   User: minileisduk
   Date: 06/07/2023
@@ -66,6 +68,8 @@
   User u = (User) request.getSession().getAttribute("currUser");
   String xUID = String.valueOf(u.getUserID());
   OrderDetailDAO odd = new OrderDetailDAO();
+  ShopOrderDAO sod = new ShopOrderDAO();
+  List<ShopOrder> Bill = sod.getOrdersByUserID(Integer.parseInt(xUID));
   List<Product> odredPro = odd.getUserOrder(xUID);
 %>
 <!-- Layout wrapper -->
@@ -101,7 +105,7 @@
         </li>
         <!-- User List -->
         <li class="menu-item active">
-          <a href="orderListUser.jsp" class="menu-link">
+          <a href="orderDetailUser.jsp" class="menu-link">
             <i class='menu-icon tf-icons bx bxs-package'></i>
             <div data-i18n="Orders & Returns">Orders List</div>
           </a>
@@ -217,30 +221,38 @@
                 <thead>
                 <tr>
                   <th>NO</th>
-                  <th>PRODUCT THUMBNAIL</th>
-                  <th>PRODUCT NAME</th>
-                  <th>COLOR NAME</th>
-                  <th>SIZE NAME</th>
-                  <th>Quantity</th>
-                  <th>Amount</th>
-                  <th>Buy at</th>
+                  <th>Order ID</th>
+                  <th>Total Price</th>
+                  <th>Status</th>
+                  <th>Recipient</th>
+                  <th>Recipient's Phone Number</th>
                 </tr>
                 </thead>
                 <%
-                  for (Product p: odredPro){
+                  for (ShopOrder so: Bill){
 
 
                 %>
                 <tbody class="table-border-bottom-0">
                 <tr class="item">
                   <td>1</td>
-                  <td><img src="<%=p.getThumbnail()%>"></td>
-                  <td><%=p.getProductName()%></td>
-                  <td><%=p.getColor_Name()%></td>
-                  <td><%=p.getSize_Name()%></td>
-                  <td><%=p.getQty_in_cart()%></td>
-                  <td><%=p.getQty_in_stock()%></td>
-                  <td>1/02/2003</td>
+                  <td><%=so.getShop_orderID()%>></td>
+                  <th><%=so.getOrder_total()%>/th>
+                  <th><%=so.getOrder_status()%></th>
+                  <th><%=so.getRecipient()%></th>
+                  <th><%=so.getRecipent_phone()%></th>
+                  <td>
+                    <div class="dropdown">
+                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                              data-bs-toggle="dropdown">
+                        <i class="bx bx-dots-vertical-rounded"></i>
+                      </button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="orderDetailUser.jsp"
+                        >Detail</a>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 </tbody>
                 <%
