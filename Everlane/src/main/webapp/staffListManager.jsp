@@ -1,7 +1,21 @@
-<%@ page import="model.User" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: minileisduk
+  Date: 6/14/2023
+  Time: 10:06 AM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@page import="java.util.*" %>
+<%@page import="model.*" %>
+<%@page import="controller.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+    List<User> userList = (List<User>) request.getAttribute("userList");
+    User userNeedEdit = (User) request.getAttribute("userNeedEdit") ;
+    User user = (User) session.getAttribute("acc");
+%>
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -17,7 +31,7 @@
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Dashboard</title>
+    <title>Product List</title>
 
     <meta name="description" content=""/>
 
@@ -43,9 +57,8 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
-    <link rel="stylesheet" href="a.template/assets/vendor/libs/apex-charts/apex-charts.css"/>
-
     <!-- Page CSS -->
+    <link rel="stylesheet" href="adminpage/product-list/product-list.css">
 
     <!-- Helpers -->
     <script src="a.template/assets/vendor/js/helpers.js"></script>
@@ -54,9 +67,7 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="a.template/assets/js/config.js"></script>
 </head>
-<%
-    User user = (User) session.getAttribute("acc");
-%>
+
 <body>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -249,67 +260,141 @@
                 </div>
             </nav>
             <!-- / Navbar -->
-
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <!-- Content -->
+                <div class="list_option_container">
+                    <div class="list_option_container1">
+                        <div class="input-group ">
+                            <a href="CreateNewUserServlet?UserID=0" class="btn btn-outline-dark" type="button">New User</a>
+                        </div>
+                    </div>
+                    <div class="list_option_container2">
 
-                <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account Settings / Account /</span>
-                        Change Password</h4>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card mb-4">
-                                <!-- Account -->
-                                <hr class="my-0"/>
-                                <div class="card-body">
-                                    <form id="changePasswordHighUser?mod=2" method="POST" >
-                                        <div class="row">
-                                            <div class="mb-3 col-md-12">
-                                                <label for="oldPassword" class="form-label">Old Password</label>
-                                                <input
-                                                        class="form-control"
-                                                        type="text"
-                                                        id="oldPassword"
-                                                        name="oldPassword"
-                                                        placeholder="Please enter your old password"
-                                                        autofocus
-                                                />
-                                            </div>
-                                            <div class="mb-3 col-md-12">
-                                                <label for="newPassword" class="form-label">New Password</label>
-                                                <input class="form-control" type="text" name="newPassword" id="newPassword" placeholder="Please enter your new password" />
-                                            </div>
-                                            <div class="mb-3 col-md-12">
-                                                <label for="reEnterNewPassword" class="form-label">Confirm Your New Password</label>
-                                                <input
-                                                        class="form-control"
-                                                        type="text"
-                                                        id="reEnterNewPassword"
-                                                        name="confirmPassword"
-                                                        placeholder="Please reenter your new password"
-                                                />
-                                            </div>
-                                            <div>
-                                                ${error} ${success}
-                                            </div>
-                                        </div>
-                                        <div class="mt-2">
-                                            <button type="submit" class="btn btn-dark me-2">Save changes</button>
-                                        </div>
-                                    </form>
+                        <div class="input-group input-group-merge">
+                            <form action="${pageContext.request.contextPath}/StaffListManagerServlet?role=all"
+                                  method="post" style="display: flex; flex-direction: row">
+                                <input name="userName" type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon2">
+                                <div  class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button"><i class='bx bx-search'></i></button>
                                 </div>
-                                <!-- /Account -->
-                            </div>
+                            </form>
+                        </div>
+
+                        <div class="input-group">
+                            <button
+                                    class="btn btn-outline-dark dropdown-toggle"
+                                    type="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                            >
+                                Category
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item"
+                                       href="${pageContext.request.contextPath}/StaffListManagerServlet?role=all">All</a>
+                                </li>
+                                <li><a class="dropdown-item"
+                                       href="${pageContext.request.contextPath}/StaffListManagerServlet?role=1">Admin</a>
+                                </li>
+                                <li><a class="dropdown-item"
+                                       href="${pageContext.request.contextPath}/StaffListManagerServlet?role=3">Sale</a>
+                                </li>
+                                <li><a class="dropdown-item"
+                                       href="${pageContext.request.contextPath}/StaffListManagerServlet?role=2">Marketing</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="container-xxl flex-grow-1 container-p-y ">
+                    <div class="card">
+                        <h5 class="card-header">User</h5>
+                        <div class="table-responsive text-nowrap listtable ">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>USER ID</th>
+                                    <th>USER NAME</th>
+                                    <th>EMAIL</th>
+                                    <th>FIRST NAME</th>
+                                    <th>LAST NAME</th>
+                                    <th>DATE OF BIRTH</th>
+                                    <th>GENDER</th>
+                                    <th>PHONE NUMBER</th>
+                                    <th>ROLE</th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-0">
+                                <c:forEach var="u" items="${userList}" varStatus="status">
+                                    <tr class="item">
+                                        <td>${u.getUserID()}</td>
+                                        <td>${u.getUserName()}</td>
+                                        <td>${u.getEmail()}</td>
+                                        <td>${u.getFirstName()}</td>
+                                        <td>${u.getLastName()}</td>
+                                        <td>${u.getDob()}</td>
+                                        <c:choose>
+                                            <c:when test="${u.getSex()  == 1}">
+                                                <td>Male</td>
+                                            </c:when>
+                                            <c:when test="${u.getSex()  == 2}">
+                                                <td>Female</td>
+                                            </c:when>
+                                            <c:when test="${u.getSex()  == 3}">
+                                                <td>Other</td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td>null</td>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <td>${u.getPhone()}</td>
+                                        <c:choose>
+                                            <c:when test="${u.getRole()  == 1}">
+                                                <td>Admin</td>
+                                            </c:when>
+                                            <c:when test="${u.getRole()  == 2}">
+                                                <td>Marketing</td>
+                                            </c:when>
+                                            <c:when test="${u.getRole()  == 3}">
+                                                <td>Sale</td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td>Customer</td>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                                        data-bs-toggle="dropdown">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="UserEditServlet?UserID=${u.getUserID()}"
+                                                    ><i class="bx bx-edit-alt me-1"></i> Edit</a
+                                                    >
+                                                    <a class="dropdown-item" href="DeleteUser?UserID=${u.getUserID()}"
+                                                       onclick="return confirm('Are you sure want to delete this ticket?')"
+                                                    ><i class="bx bx-trash me-1"></i> Delete</a
+                                                    >
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
                 <!-- / Content -->
 
+
                 <div class="content-backdrop fade"></div>
             </div>
-            <!-- Content wrapper -->
             <!-- Content wrapper -->
         </div>
         <!-- / Layout page -->
@@ -319,7 +404,6 @@
     <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
-
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
@@ -332,13 +416,11 @@
 <!-- endbuild -->
 
 <!-- Vendors JS -->
-<script src="a.template/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 <!-- Main JS -->
 <script src="a.template/assets/js/main.js"></script>
 
 <!-- Page JS -->
-<script src="a.template/assets/js/dashboards-analytics.js"></script>
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>

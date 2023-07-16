@@ -110,7 +110,7 @@ public class UserAccountDetailServlet extends HttpServlet {
                 }else{
                     user = u.getUserById(user.getUserID());
                     req.setAttribute("u", user);
-                    req.setAttribute("error3", "Usermust be 18 years old or older");
+                    req.setAttribute("error3", "User must be 18 years old or older");
                     req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
                 }
 

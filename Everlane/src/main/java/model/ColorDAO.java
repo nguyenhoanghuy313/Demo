@@ -77,4 +77,26 @@ public class ColorDAO extends myDAO{
         }
         return (t);
     }
+
+    public Color getColorsByName(String name) {
+        Color t = null;
+        xSql = "select * from color where color_Name like '"+name+"'";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            int xColor_ID;
+            String xColor_Name;
+            Color x;
+            while (rs.next()) {
+                xColor_ID = rs.getInt("color_ID");
+                xColor_Name = rs.getString("color_Name");
+                t = new Color(xColor_ID, xColor_Name);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
 }

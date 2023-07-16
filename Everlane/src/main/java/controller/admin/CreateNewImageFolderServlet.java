@@ -26,11 +26,16 @@ public class CreateNewImageFolderServlet extends HttpServlet {
             String imageandcolorname = imageName + " (" + colorName + ")";
             ProductImg picheckname = pid.getProductFolder(imageandcolorname);
             if(picheckname == null){
+                HttpSession session = request.getSession();
                 String thumbnail = request.getParameter("thumbnail").trim();
                 String productImg1 = request.getParameter("productImg1").trim();
                 String productImg2 = request.getParameter("productImg2").trim();
                 String productImg3 = request.getParameter("productImg3").trim();
                 pid.createNewImageFolder(thumbnail, productImg1,productImg2,productImg3,imageandcolorname);
+                session.setAttribute("colorName", colorName);
+                ProductImg newProductImg = pid.getProductFolder(imageandcolorname);
+                session.setAttribute("newProductImg", newProductImg);
+                System.out.println(newProductImg);
                 request.setAttribute("alert2", "Create done");
                 request.getRequestDispatcher("addNewProduct.jsp").forward(request, response);
             }else{
