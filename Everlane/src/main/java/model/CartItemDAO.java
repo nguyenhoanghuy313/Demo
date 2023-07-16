@@ -75,7 +75,8 @@ public class CartItemDAO extends myDAO{
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, userID);
-            rs = ps.executeQuery();
+            rs = ps.
+                    executeQuery();
             while (rs.next()){
                 xProductID = rs.getInt("ProductID");
                 xThumbnail = rs.getString("thumbnail");

@@ -107,6 +107,7 @@
                                     autofocus
                             />
                         </div>
+                        ${msg}
                         <button type="submit" class="btn btn-primary d-grid w-100">Confirm</button>
                     </form>
                     <div class="text-center">
