@@ -3,8 +3,6 @@ package controller.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import model.Category;
-import model.CategoryDAO;
 import model.User;
 import model.UserDAO;
 
