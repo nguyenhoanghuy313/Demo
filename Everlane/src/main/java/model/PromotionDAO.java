@@ -95,35 +95,7 @@ public class PromotionDAO extends myDAO{
         }
     }
 
-    public Promotion getPromotionByID(String xId){
-        Promotion p = null;
-        int xPromotionID = Integer.parseInt(xId);
-        xSql = "select * from promotion where PromotionID=?;";
-        try{
-            ps = con.prepareStatement(xSql);
-            ps.setInt(1, xPromotionID);
-            rs = ps.executeQuery();
-            String xPromotionName, xPromotionDescription;
-            double xDiscountRate;
-            Date xStartDate, xEndDate;
-            String xBackground_color;
-            while(rs.next()){
-                xPromotionID = rs.getInt("PromotionID");
-                xPromotionName = rs.getString("PromotionName");
-                xPromotionDescription = rs.getString("PromotionDescription");
-                xDiscountRate = rs.getDouble("DiscountRate");
-                xStartDate = rs.getDate("StartDate");
-                xEndDate = rs.getDate("EndDate");
-                xBackground_color = rs.getString("background_color");
-                p = new Promotion(xPromotionID, xPromotionName, xPromotionDescription, xDiscountRate, xStartDate, xEndDate, xBackground_color);
-            }
-            rs.close();
-            ps.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return p;
-    }
+
 
 //    public static void main(String[] args) {
 //        PromotionDAO pDAO = new PromotionDAO();

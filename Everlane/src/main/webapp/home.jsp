@@ -53,37 +53,11 @@
         <button>SHOP NOW</button>
     </div>
 </div>
-    <section class="Season_Collection_Banner" id="Season_Collection_Banner">
-        <img src="${collection.getCollectionImg()}"
-                     alt="">
-        <div class="Season_Collection_Banner_text">
-            <h1>${collection.getCollectionName()}</h1>
-            <p>${collection.getCollection_description()}</p>
-            <button value="collectionID" name="collectionID">
-                <a href="${pageContext.request.contextPath}/productList-servlet?collectionID=${collection.getCollectionID()}&categoryID=3&color_ID=all">
-                    SHOP THE COLLECTION
-                </a>
-            </button>
-        </div>
-    </section>
-<section class="Category_Container">
-    <h1>Shop by Category</h1>
-    <div class="Category_List_Container">
-        <c:forEach var="cate" items="${cateList}" varStatus="status">
-            <c:if test="${status.index < 8}">
-                <div class="Category">
-                    <img src="${cate.getCategoryImg()}" alt="">
-                    <div class="Category_text">
-                        <button value="cateID"><a
-                                href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all"> ${cate.getCategoryName()}</a>
-                        </button>
-                    </div>
-                </div>
-            </c:if>
-        </c:forEach>
-    </div>
-</section>
+//huynhhe170672
+//2
 
+//1
+//huynhhe170672
 <section class="Category_Container">
     <div class="Category_List_Container">
         <div class="Category2">
@@ -127,26 +101,9 @@
     </div>
 </section>
 
-<section class="Sales_Banner" style="background: <%=promotion.getBackground_color()%>">
-    <h1>
-        <%=promotion.getPromotionName()%>: Now up to <%=promotion.getDiscountRate()%>% off
-    </h1>
-    <button>SHOP NOW</button>
-</section>
+//huynhhe170672 3
 
-<section class="Stories_Container">
-<c:forEach var="story" items="${storyList}" varStatus="a">
-    <c:if test="${a.index < 2}">
-    <a style="color: black" href="StoryCusServlet?input=${story.getStory_ID()}" class="Story">
-        <h1>${story.getTitle()}</h1>
-        <button>Learn More</button>
-        <div class="Storyimg">
-            <img src="${story.getThumbnail()}">
-        </div>
-    </a>
-    </c:if>
-</c:forEach>
-</section>
+//huynhhe170672 4
 
 <jsp:include page="footer.jsp"/>
 <script>
