@@ -8,7 +8,7 @@ import java.util.List;
 public class ShopOrderDAO extends myDAO {
     public List<ShopOrder> getOrdersByUserID(int userID){
         List<ShopOrder> so = new ArrayList<>();
-        xSql = "select * from shop_order where UserID = ?";
+        xSql = "select DISTINCT so.* from shop_order so, orderdetails od where UserID = ? and so.shop_orderID = od.OrderID";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, userID);
@@ -18,18 +18,21 @@ public class ShopOrderDAO extends myDAO {
             int xAddressID;
             int xOrder_total;
             String xOrder_status;
+            String xRecipient, xRecipent_phone;
             while (rs.next()){
                 xShop_orderID = rs.getInt("shop_orderID");
                 xUserID = rs.getInt("UserID");
                 xAddressID = rs.getInt("AddressID");
                 xOrder_total = rs.getInt("Order_total");
                 xOrder_status = rs.getString("Order_status");
-                so.add(new ShopOrder(xShop_orderID,xUserID,xAddressID,xOrder_total,xOrder_status));
+                xRecipient = rs.getString("recipient");
+                xRecipent_phone = rs.getString("recipent_phone");
+                so.add(new ShopOrder(xShop_orderID,xUserID,xAddressID,xOrder_total,xOrder_status,xRecipient,xRecipent_phone));
             }
             rs.close();
             ps.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            System.out.println("getOrdersByUserID: " + e.getMessage());
         }
         return so;
     }
@@ -41,6 +44,8 @@ public class ShopOrderDAO extends myDAO {
         int xAddressID;
         int xOrder_total;
         String xOrder_status;
+        String xRecipient, xRecipent_phone;
+
         ShopOrder so = null;
         try {
             ps = con.prepareStatement(xSql);
@@ -51,7 +56,9 @@ public class ShopOrderDAO extends myDAO {
                 xAddressID = rs.getInt("AddressID");
                 xOrder_total = rs.getInt("Order_total");
                 xOrder_status = rs.getString("Order_status");
-                so = new ShopOrder(xShop_orderID,xUserID,xAddressID,xOrder_total,xOrder_status);
+                xRecipient = rs.getString("recipient");
+                xRecipent_phone = rs.getString("recipent_phone");
+                so=new ShopOrder(xShop_orderID,xUserID,xAddressID,xOrder_total,xOrder_status,xRecipient,xRecipent_phone);
             }
             rs.close();
             ps.close();
@@ -62,11 +69,13 @@ public class ShopOrderDAO extends myDAO {
     }
 
     public void insertOrder(ShopOrder so){
-        xSql = "insert into shop_order(UserID,Order_total) values (?,?)";
+        xSql = "insert into shop_order(UserID,Order_status,recipient,recipent_phone) values (?,?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1,so.getUserID());
-            ps.setInt(2,so.getOrder_total());
+            ps.setString(2,so.getOrder_status());
+            ps.setString(3,so.getRecipient());
+            ps.setString(4,so.getRecipent_phone());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {

@@ -3,6 +3,8 @@
 <%@ page import="model.Product" %>
 <%@ page import="java.util.List" %>
 <%@ page import="entity.CartItem" %>
+<%@ page import="entity.Country" %>
+<%@ page import="model.CountryDAO" %>
 <%--
   Created by IntelliJ IDEA.
   User: minileisduk
@@ -38,9 +40,9 @@
     int uID = 0;
     if (u != null) {
         uID = u.getUserID();
-    }else {
+    } else {
         request.setAttribute("Message", "Please Login to perform this action!");
-        request.getRequestDispatcher("login-servlet").forward(request,response);
+        request.getRequestDispatcher("login-servlet").forward(request, response);
         return;
     }
 //    if(u == null){
@@ -51,6 +53,8 @@
 //    int uID = u.getUserID();
     CartItemDAO cid = new CartItemDAO();
     List<Product> cartItemList = cid.getUserItem(uID);
+    CountryDAO ctd = new CountryDAO();
+    List<Country> c = ctd.getAllCountry();
 %>
 <jsp:include page="header.jsp"/>
 
@@ -61,7 +65,8 @@
                 <h1>1</h1>
                 <h1>Your Email</h1>
             </div>
-            <p><%=u.getEmail()%></p>
+            <p><%=u.getEmail()%>
+            </p>
         </div>
         <div class="Shipping">
             <div class="Information_Title">
@@ -69,18 +74,26 @@
                 <h1>Shipping</h1>
             </div>
             <form action="Checkout" method="post">
-                <input list="country" name="Country" placeholder="Country" type="text" required><br>
-                <datalist id="country">
-                    <%for (Category category : cateList) {%>
-                    <option value=<%=category.getCategoryID()%>><%=category.getCategoryName()%>
+                <%--                                <input list="country" name="Country" placeholder="Country" type="text" required><br>--%>
+                <%--                                <datalist id="country">--%>
+                <%--                                    <%for (Country ct : c) {%>--%>
+                <%--                                    <option value=<%=ct.getCountryName()%>><%=ct.getCountryName()%>--%>
+                <%--                                    </option>--%>
+                <%--                                    <%}%>--%>
+                <%--                                </datalist>--%>
+                <label for="CountryID">Choose a country:</label>
+                <select id="CountryID" name="CountryID">
+                    <% for (Country ct : c) { %>
+                    <option value="<%= ct.getCountryID() %>"><%= ct.getCountryName() %>
                     </option>
-                    <%}%>
-                </datalist>
+                    <% } %>
+                </select>
+                <input id="recipient" name="recipient" placeholder="Full Name" type="text" required><br>
                 <input id="Street" name="Street" placeholder="Street Address*" type="text" required><br>
                 <input id="address_line" name="address_line" placeholder="Address" type="text" required><br>
                 <input id="city" name="city" placeholder="City*" type="text" required><br>
                 <input id="postalcode" name="postalcode" placeholder="Postal Code*" type="number" min="0" required><br>
-                <input id="phone" name="phone" placeholder="Phone Number*" type="tel" required><br>
+                <input id="recipent_phone" name="recipent_phone" placeholder="Phone Number*" type="tel" required><br>
                 <input type="submit" value="Save Address">
                 <h2 style="color: red">${ErrMessage}</h2>
             </form>
@@ -129,9 +142,9 @@
                             <div class="Shipping_Title_Container">
                                 <p>Credit Card</p>
                                 <div class="payment-img">
-                                    <svg class="styles_payment-type-logo__icon__Fwkl_" height="24"
-                                         viewBox="0 0 750 471" width="38" xmlns="http://www.w3.org/2000/svg">
-                                        <g fill="none">
+                                    <svg clas s="styles_payment-type-logo__icon__Fwkl_" height="24"
+                                         view Box="0 0 750 471" width="38" xmlns="http://www.w3.org/2000/svg">
+                                        <g fi ll="none">
                                             <rect fill="#0E4595" height="471" rx="40" width="750"></rect>
                                             <path d="m278.197 334.228 33.361-195.763h53.36l-33.385 195.763zm246.111-191.54c-10.572-3.966-27.137-8.222-47.823-8.222-52.725 0-89.865 26.55-90.18 64.603-.298 28.13 26.513 43.822 46.753 53.186 20.77 9.594 27.752 15.714 27.654 24.283-.132 13.121-16.587 19.116-31.923 19.116-21.357 0-32.703-2.966-50.226-10.276l-6.876-3.111-7.49 43.824c12.464 5.464 35.51 10.198 59.438 10.443 56.09 0 92.501-26.246 92.916-66.882.2-22.268-14.016-39.216-44.8-53.188-18.65-9.055-30.072-15.099-29.951-24.268 0-8.137 9.667-16.839 30.556-16.839 17.45-.27 30.089 3.535 39.937 7.5l4.781 2.26 7.234-42.43m137.307-4.222h-41.231c-12.774 0-22.332 3.487-27.942 16.234l-79.245 179.404h56.032s9.161-24.123 11.233-29.418c6.124 0 60.554.084 68.337.084 1.596 6.853 6.491 29.334 6.491 29.334h49.513l-43.188-195.638zm-65.418 126.407c4.413-11.279 21.26-54.723 21.26-54.723-.316.522 4.38-11.334 7.075-18.684l3.606 16.879s10.217 46.728 12.352 56.528h-44.293z"
                                                   fill="#FFF"></path>
@@ -186,40 +199,46 @@
                 <%
                     int cartSize = cartItemList.size();
                     int totalValue = 0;  // Tổng giá trị của các mục
-                    for (Product p: cartItemList) {
-                        CartItem cartItemList2 = cid.getCartItem(String.valueOf(p.getProductID()) ,String.valueOf(p.getVariationID()));
+                    for (Product p : cartItemList) {
+                        CartItem cartItemList2 = cid.getCartItem(String.valueOf(p.getProductID()), String.valueOf(p.getVariationID()));
                         totalValue += (p.getPrice() * cartItemList2.getQuantity());
                     }
                 %>
                 <h1>Cart (<%=cartSize%>)</h1>
             </div>
-            <h1><%=totalValue%></h1>
+            <h1><%=totalValue%>
+            </h1>
         </div>
         <div class="Cart_List">
             <%
                 int itemCount = cartItemList.size();  // Số lượng mục trong giỏ hàng
                 int totalValue2 = 0;  // Tổng giá trị của các mục
-                for (Product ci: cartItemList){
-                    CartItem cartItemList2 = cid.getCartItem(String.valueOf(ci.getProductID()) ,String.valueOf(ci.getVariationID()));
+                for (Product ci : cartItemList) {
+                    CartItem cartItemList2 = cid.getCartItem(String.valueOf(ci.getProductID()), String.valueOf(ci.getVariationID()));
                     totalValue2 += (ci.getPrice() * cartItemList2.getQuantity());
             %>
             <div class="Cart_Item">
                 <img src="<%=ci.getThumbnail()%>" alt="">
                 <div class="Cart_Item_Content">
                     <div class="Cart_Item_Header">
-                        <h1><%=ci.getProductName()%></h1>
-                        <p><%=ci.getSize_Name()%> | <%=ci.getColor_Name()%></p>
-                        <a href="DeleteFromCart?ProductID=<%=ci.getProductID()%>&variationID=<%=ci.getVariationID()%>" class='bx bx-trash'></a>
+                        <h1><%=ci.getProductName()%>
+                        </h1>
+                        <p><%=ci.getSize_Name()%> | <%=ci.getColor_Name()%>
+                        </p>
+                        <a href="DeleteFromCart?ProductID=<%=ci.getProductID()%>&variationID=<%=ci.getVariationID()%>"
+                           class='bx bx-trash'></a>
                     </div>
                     <div class="Cart_Item_Price">
                         <div class="Price">
                             <p style="text-decoration: line-through">₫981800</p>
-                            <p style="font-weight: bold; margin-left: 4px">₫<%=ci.getPrice()*cartItemList2.getQuantity()%>></p>
+                            <p style="font-weight: bold; margin-left: 4px">
+                                ₫<%=ci.getPrice() * cartItemList2.getQuantity()%>></p>
                         </div>
                         <form action="${pageContext.request.contextPath}/adjustQuantity" method="post">
                             <div class="Cart_Item_Amount_Change">
                                 <button class='bx bx-minus' name="choice" value="minus"></button>
-                                <p id="amount"><%= cartItemList2.getQuantity() %></p>
+                                <p id="amount"><%= cartItemList2.getQuantity() %>
+                                </p>
                                 <button class='bx bx-plus' name="choice" value="plus"></button>
                             </div>
                             <input type="hidden" name="ProductID" value="<%= cartItemList2.getProductID() %>">
@@ -238,7 +257,8 @@
             <table>
                 <tr>
                     <td>Subtotal</td>
-                    <td>₫<%=totalValue2%></td>
+                    <td>₫<%=totalValue2%>
+                    </td>
                 </tr>
                 <tr>
                     <td>Duties</td>
@@ -254,7 +274,8 @@
                 </tr>
                 <tr style="font-weight: bold">
                     <td>Total</td>
-                    <td>₫<%=totalValue2%></td>
+                    <td>₫<%=totalValue2%>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -262,6 +283,8 @@
             <a href="${pageContext.request.contextPath}/order?UserID=<%=u.getUserID()%>">Place Order</a>
         </div>
     </div>
+
+
 </section>
 
 <jsp:include page="footer.jsp"/>

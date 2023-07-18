@@ -1,7 +1,9 @@
 <%@ page import="model.User" %>
 <%@ page import="model.OrderDetailDAO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.Product" %><%--
+<%@ page import="model.Product" %>
+<%@ page import="model.ShopOrderDAO" %>
+<%@ page import="entity.ShopOrder" %><%--
   Created by IntelliJ IDEA.
   User: minileisduk
   Date: 06/07/2023
@@ -66,7 +68,9 @@
   User u = (User) request.getSession().getAttribute("currUser");
   String xUID = String.valueOf(u.getUserID());
   OrderDetailDAO odd = new OrderDetailDAO();
-  List<Product> odredPro = odd.getUserOrder(xUID);
+  ShopOrderDAO sod = new ShopOrderDAO();
+  List<ShopOrder> Bill = sod.getOrdersByUserID(Integer.parseInt(xUID));
+//  List<Product> odredPro = odd.getUserOrder(xUID);
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -101,7 +105,7 @@
         </li>
         <!-- User List -->
         <li class="menu-item active">
-          <a href="orderDetailUser.jsp" class="menu-link">
+          <a href="orderListUser.jsp" class="menu-link">
             <i class='menu-icon tf-icons bx bxs-package'></i>
             <div data-i18n="Orders & Returns">Orders List</div>
           </a>
@@ -218,22 +222,25 @@
                 <tr>
                   <th>NO</th>
                   <th>Order ID</th>
-                  <th>Amount</th>
-                  <th>Buy at</th>
-                  <th>Action</th>
+                  <th>Total Price</th>
+                  <th>Status</th>
+                  <th>Recipient</th>
+                  <th>Recipient's Phone Number</th>
                 </tr>
                 </thead>
                 <%
-                  for (Product p: odredPro){
+                  for (ShopOrder so: Bill){
 
 
                 %>
                 <tbody class="table-border-bottom-0">
                 <tr class="item">
-                  <td>NO</td>
-                  <td>Order ID</td>
-                  <td>Amount</td>
-                  <td>Buy at</td>
+                  <td>1</td>
+                  <td><%=so.getShop_orderID()%></td>
+                  <th><%=so.getOrder_total()%></th>
+                  <th><%=so.getOrder_status()%></th>
+                  <th><%=so.getRecipient()%></th>
+                  <th><%=so.getRecipent_phone()%></th>
                   <td>
                     <div class="dropdown">
                       <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -241,7 +248,7 @@
                         <i class="bx bx-dots-vertical-rounded"></i>
                       </button>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="EditProductServlet?input=1&ProductID=<%=x.getProductID()%>"
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/OrderDetail?buyerID=<%=xUID%>&OrderID=<%=so.getShop_orderID()%>"
                         >Detail</a>
                       </div>
                     </div>

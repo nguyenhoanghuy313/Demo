@@ -17,19 +17,28 @@ public class OrderServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         // Lấy thông tin từ yêu cầu
         int userID = Integer.parseInt(request.getParameter("UserID"));
-        String xUserID = String.valueOf(userID);
+//        User currUser = (User) request.getSession().getAttribute("currUser");
+//        String xRecipentName = request.getParameter("recipient").trim();
+//        String xPhone = request.getParameter("recipent_phone").trim();
+//        String xCity = request.getParameter("city").trim();
+//        String xAddressLine = request.getParameter("address_line").trim();
+//        String xStreet = request.getParameter("Street").trim();
+//        String xRegion = request.getParameter("region").trim();
+//        String xPostalCode = request.getParameter("postalcode").trim();
+//        String xUserID = String.valueOf(userID);
+//        String buyerID = String.valueOf(currUser.getUserID());
+
         CartItemDAO cartItemDAO = new CartItemDAO();
         ProductDAO pd = new ProductDAO();
         OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
+        AddressDAO ad = new AddressDAO();
         List<Product> cartItems = cartItemDAO.getUserItem(userID);
 
         // Tạo đơn hàng
         ShopOrderDAO shopOrderDAO = new ShopOrderDAO();
         ShopOrder shopOrder = new ShopOrder(userID, 0);
-        shopOrderDAO.insertOrder(shopOrder);
         shopOrder = shopOrderDAO.getLatestOrder();
         int orderID = shopOrder.getShop_orderID();
 
@@ -42,37 +51,36 @@ public class OrderServlet extends HttpServlet {
             double price = cartItem.getPrice() * quantity;  // Tính toán giá trị dựa trên số lượng
             // Thực hiện đặt hàng cho sản phẩm
             orderDetailDAO.insert(orderID, productID, variationID,quantity,price);
-
             // Xóa sản phẩm đã đặt hàng khỏi giỏ hàng
             cartItemDAO.deleteCartItemByProdID(productID, variationID);
             pd.reduceQuantityOfProduct(productID,variationID,quantity);
-
+            ad.setAddressIDtoShopOrder();
         }
         request.setAttribute("ErrMessage", "Order Placed");
-        response.sendRedirect(request.getHeader("referer"));
+        request.getRequestDispatcher("checkout.jsp").forward(request,response);
+//        response.sendRedirect(request.getHeader("referer"));
     }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
 
+    }
 //    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        int xUserID = Integer.parseInt(request.getParameter("UserID"));
-//        String OrderPid = request.getParameter("ProductID");
-//        String OrderVid = request.getParameter("VariationID");
-//        ShopOrderDAO sod = new ShopOrderDAO();
-//        OrderDetailDAO odd = new OrderDetailDAO();
-//        CartItemDAO cid = new CartItemDAO();
-//        ShopOrder so = new ShopOrder(xUserID,0);
-//        sod.insertOrder(so);
-//        so = sod.getLatestOrder();
-//        int maxOID = sod.getCurrentMaxOrderID();
-//        odd.insert(maxOID, OrderPid);
-//        cid.deleteCartItemByProdID(OrderPid,OrderVid);
-////        List<Product> ci = cid.getUserItem(xUserID);
-////        for (Product p : ci){
-////            int xProductID = p.getProductID();
-////            int xQuantity = p.getQty_in_stock();
-////            double xPrice = p.getPrice();
-////            double xTotalPrice = xPrice * xQuantity;
-////        }
+//            throws ServletException, IOException{
+//        UserDAO ud = new UserDAO();
+//        AddressDAO ad = new AddressDAO();
+//        User currUser = (User) request.getSession().getAttribute("currUser");
+//        assert currUser != null;
+//        String buyerID = String.valueOf(currUser.getUserID());
+//        String xRecipentName = request.getParameter("recipient").trim();
+//        String xPhone = request.getParameter("recipent_phone").trim();
+//        String xCity = request.getParameter("city").trim();
+//        String xAddressLine = request.getParameter("address_line").trim();
+//        String xPostalCode = request.getParameter("postalcode").trim();
+//
+//        ad.insertAddress(xAddressLine,xCity,xPostalCode);
+//        ad.setAddressIDtoShopOrder();
+////            request.setAttribute("ErrMessage", "Address has been added Successfully");
+//        request.getRequestDispatcher("checkout.jsp").forward(request,response);
+//
 //    }
 }

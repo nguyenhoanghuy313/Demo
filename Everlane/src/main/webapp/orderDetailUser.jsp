@@ -66,7 +66,7 @@
   User u = (User) request.getSession().getAttribute("currUser");
   String xUID = String.valueOf(u.getUserID());
   OrderDetailDAO odd = new OrderDetailDAO();
-  List<Product> odredPro = odd.getUserOrder(xUID);
+  List<Product> userOrder = (List<Product>) request.getAttribute("userOrder");
 %>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -101,7 +101,7 @@
         </li>
         <!-- User List -->
         <li class="menu-item active">
-          <a href="orderDetailUser.jsp" class="menu-link">
+          <a href="orderListUser.jsp" class="menu-link">
             <i class='menu-icon tf-icons bx bxs-package'></i>
             <div data-i18n="Orders & Returns">Orders List</div>
           </a>
@@ -227,9 +227,7 @@
                 </tr>
                 </thead>
                 <%
-                  for (Product p: odredPro){
-
-
+                  for (Product p: userOrder){
                 %>
                 <tbody class="table-border-bottom-0">
                 <tr class="item">
