@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ColorDAO extends myDAO{
-
+//huynhhe176072
     public List<Color> getAllColors() {
         List<Color> t = new ArrayList<>();
         xSql = "select * from color;";
@@ -28,7 +28,7 @@ public class ColorDAO extends myDAO{
         return (t);
     }
 
-
+//huynghe176072
 
 
     public Color getColorsByID(String id) {

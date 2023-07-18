@@ -60,7 +60,7 @@ public class ProductDAO extends myDAO {
         }
         return (t);
     }
-
+//huynhhe170672
     public List<Product> searchByName(String sName) {
         List<Product> t = new ArrayList<>();
         xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name\n" + "from variation v, product_img pi, product p , category c, color col, size s\n" + "where p.ProductName like '%" + sName + "%'\n" + "and p.ProductID = v.ProductID \n" + "and v.product_img_ID = pi.product_img_ID\n" + "and v.color_ID = col.color_ID\n" + "and v.size_ID = s.size_ID;";
@@ -98,6 +98,46 @@ public class ProductDAO extends myDAO {
         return (t);
     }
 
+    public Product getProductByProIDColNameSizName(String xId, String xColor_Name, String xSize_Name) {
+        int i = Integer.parseInt(xId);
+        xSql = "select DISTINCT s.size_Name, v.VariationID, v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name\n" + "from variation v, product_img pi, product p , category c, color col, size s\n" + "where size_Name like '%" + xSize_Name + "%' and col.color_Name like '%" + xColor_Name + "%'\n" + "and p.ProductID = ?\n" + "and p.ProductID = v.ProductID \n" + "and v.product_img_ID = pi.product_img_ID\n" + "and v.color_ID = col.color_ID\n" + "and v.size_ID = s.size_ID;";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, i);
+            rs = ps.executeQuery();
+            int xProductID;
+            String xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName;
+            int xCollectionID;
+            String xProductName;
+            double xPrice;
+            int xQty_in_stock;
+            int xVariationID;
+            Product x = null;
+            while (rs.next()) {
+                i = rs.getInt("ProductID");
+                xThumbnail = rs.getString("thumbnail");
+                xProduct_img_1 = rs.getString("product_img_1");
+                xProduct_img_2 = rs.getString("product_img_2");
+                xProduct_img_3 = rs.getString("product_img_3");
+                xCategoryName = null;
+                xCollectionID = 0;
+                xProductName = rs.getString("ProductName");
+                xColor_Name = rs.getString("color_Name");
+                xSize_Name = rs.getString("size_name");
+                xPrice = rs.getDouble("Price");
+                xQty_in_stock = 0;
+                xVariationID = rs.getInt("VariationID");
+                x = new Product(i, xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName, xCollectionID, xProductName, xColor_Name, xSize_Name, xPrice, xQty_in_stock, xVariationID);
+                return x;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+//huynhhe170672
 
     public List<Product> getNewArrivalByCid(String cid) {
         List<Product> t = new ArrayList<>();
