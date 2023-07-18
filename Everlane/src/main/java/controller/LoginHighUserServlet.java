@@ -45,7 +45,7 @@ public class LoginHighUserServlet extends HttpServlet {
         } else {
             if (Role.getRole() == 1 || Role.getRole() == 2 || Role.getRole() == 3) {
                 HttpSession session = req.getSession();
-                session.setAttribute("acc", checkUser);
+                session.setAttribute("accHU", checkUser);
                 //lưu cookie
                 Cookie cookieAcc = new Cookie("email", email);
                 Cookie cookiePass = new Cookie("password", password);
@@ -60,7 +60,7 @@ public class LoginHighUserServlet extends HttpServlet {
                 UserDAO ud = new UserDAO();
                 List<User> userList = ud.getAllUser();
                 req.setAttribute("userList", userList);
-                User user = (User) session.getAttribute("acc");
+                User user = (User) session.getAttribute("accHU");
                 req.setAttribute("u", user);
                 req.getRequestDispatcher("dashboardManager.jsp").forward(req, resp);
             }else{

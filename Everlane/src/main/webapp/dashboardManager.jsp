@@ -55,7 +55,7 @@
     <script src="a.template/assets/js/config.js"></script>
 </head>
 <%
-    User user = (User) session.getAttribute("acc");
+    User user = (User) session.getAttribute("accHU");
 %>
 <body>
 <!-- Layout wrapper -->
@@ -237,7 +237,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="logout-servlet">
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/logout-servlet?mod=1">
                                         <i class="bx bx-power-off me-2"></i>
                                         <span class="align-middle">Log Out</span>
                                     </a>

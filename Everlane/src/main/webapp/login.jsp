@@ -25,10 +25,16 @@
             <h1>Good to see you</h1>
             <h2>Please log in to your account</h2>
             <form action="login-servlet" method="post">
-                <input type="email" id="email" name="email" value="${newemail}" placeholder="Email Address">
+                <input type="email" id="email" name="email" value="${newemail}${email}" placeholder="Email Address">
                 <h2>${EmailErr}</h2>
-                <input type="password" id="password" name="password" value="${newpass}" placeholder="Password">
+                <input type="password" id="password" name="password" value="${newpass}${password}" placeholder="Password">
                 <h2>${PassErr}</h2>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="remember-me" name="remember" />
+                        <label class="form-check-label" for="remember-me"> Remember Me </label>
+                    </div>
+                </div>
                 <input type="submit" value="Login">
                 <h2 style="color: red">
                     ${Message} ${MessageGG}

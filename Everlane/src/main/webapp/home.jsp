@@ -40,17 +40,21 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-  <%
-      Collection collection = (Collection) request.getAttribute("collection");
-      Promotion promotion = (Promotion) request.getAttribute("promotion");
-  %>
+<%--  <%--%>
+<%--      Collection collection = (Collection) request.getAttribute("collection");--%>
+<%--      Promotion promotion = (Promotion) request.getAttribute("promotion");--%>
+<%--  %>--%>
 <div class="pop_up_container">
     <div class="pop_up" style="background: ${promotion.getBackground_color()}">
         <i class='bx bx-x' id="pop_up_x"></i>
         <h1>
             ${promotion.getPromotionName()}: Now up to ${promotion.getDiscountRate()}% off
         </h1>
-        <button>SHOP NOW</button>
+        <button value="collectionID" name="collectionID">
+            <a href="${pageContext.request.contextPath}/productList-servlet?collectionID=${collection.getCollectionID()}&categoryID=3&color_ID=all">
+                SHOP NOW
+            </a>
+        </button>
     </div>
 </div>
     <section class="Season_Collection_Banner" id="Season_Collection_Banner">
@@ -127,9 +131,9 @@
     </div>
 </section>
 
-<section class="Sales_Banner" style="background: <%=promotion.getBackground_color()%>">
+<section class="Sales_Banner" style="background: ${promotion.getBackground_color()}">
     <h1>
-        <%=promotion.getPromotionName()%>: Now up to <%=promotion.getDiscountRate()%>% off
+        ${promotion.getPromotionName()}: Now up to ${promotion.getDiscountRate()}% off
     </h1>
     <button>SHOP NOW</button>
 </section>

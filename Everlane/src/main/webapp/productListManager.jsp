@@ -18,7 +18,7 @@
     Product p = (Product) request.getAttribute("del");
     ProductImgDAO productImgDAO = new ProductImgDAO();
     List<ProductImg> productImgList = productImgDAO.getAllProductFolder();
-    User user = (User) session.getAttribute("acc");
+    User user = (User) session.getAttribute("accHU");
 %>
 <html
         lang="en"

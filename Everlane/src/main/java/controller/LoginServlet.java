@@ -4,10 +4,7 @@ package controller;
 //import controller.LoginGoogle.UserGoogleDto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 import model.*;
 
 import java.io.IOException;
@@ -20,6 +17,17 @@ LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Cookie arr[] = req.getCookies();
+        if (arr != null) {
+            for (Cookie o : arr) {
+                if (o.getName().equals("email")) {
+                    req.setAttribute("email", o.getValue());
+                }
+                if (o.getName().equals("password")) {
+                    req.setAttribute("password", o.getValue());
+                }
+            }
+        }
             req.getRequestDispatcher("login.jsp").forward(req, resp);
     }
 
@@ -33,7 +41,9 @@ LoginServlet extends HttpServlet {
             CategoryDAO c = new CategoryDAO();
             CollectionDAO col = new CollectionDAO();
             PromotionDAO promotionDAO = new PromotionDAO();
+            StoryDAO storyDAO = new StoryDAO();
 
+            List<Story> storyList = storyDAO.getAllStory("all");
 //            List<Product> data = p.getAllProducts();
             List<Category> cateList = c.getAllCategory();
             Collection collection = col.getCollectionsByDate();
@@ -60,7 +70,19 @@ LoginServlet extends HttpServlet {
                 if (Role.getRole() == 4) {
                     HttpSession session = req.getSession();
                     session.setAttribute("acc", checkUser);
+
+                    Cookie cookieAcc = new Cookie("email", email);
+                    Cookie cookiePass = new Cookie("password", password);
+                    cookieAcc.setMaxAge(60 * 60 * 24 * 365);
+                    if(req.getParameter("remember") != null){
+                        cookiePass.setMaxAge(60 * 60 * 24 * 365);
+                    } else {
+                        cookiePass.setMaxAge(0);
+                    }
+                    resp.addCookie(cookieAcc); // lưu cookie lên client
+                    resp.addCookie(cookiePass); // lưu cookie lên client
 //                    req.setAttribute("data", data);
+                    req.setAttribute("storyList", storyList);
                     req.setAttribute("promotion", promotion);
                     req.setAttribute("cateList", cateList);
                     req.setAttribute("collection", collection);
