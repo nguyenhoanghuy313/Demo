@@ -80,6 +80,27 @@ public class SizeDAO extends  myDAO{
         return (t);
     }
 
-
+    public List<Size> getAllSizes() {
+        List<Size> t = new ArrayList<>();
+        xSql = "select * from size;";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            int xSize_ID;
+            String xSize_Name;
+            Size x;
+            while (rs.next()) {
+                xSize_ID = rs.getInt("size_ID");
+                xSize_Name = rs.getString("size_Name");
+                x = new Size(xSize_ID, xSize_Name);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
 //huynhhe170672
 }

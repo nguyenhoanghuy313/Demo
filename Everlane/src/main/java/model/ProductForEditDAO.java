@@ -103,6 +103,39 @@ public class ProductForEditDAO extends myDAO{
         return null;
     }
 
+    //huynhhe170672
+    public  List<ProductForEdit> getAllProductForEdit(){
+        List<ProductForEdit> t = new ArrayList<>();
+        xSql = "select * from product";
+        try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            int xProductId, xCategoryId;
+            String xProductName;
+            double xPrice;
+            int xCollectionId;
+            String xDescription;
+            ProductForEdit p;
+            while(rs.next()){
+                xProductId = rs.getInt("ProductID");
+                xCategoryId = rs.getInt("CategoryID");
+                xProductName = rs.getString("ProductName");
+                xPrice = rs.getDouble("Price");
+                xCollectionId = rs.getInt("CollectionID");
+                xDescription = rs.getString("description");
+                p = new ProductForEdit(xProductId, xCategoryId, xProductName, xPrice, xCollectionId, xDescription);
+                t.add(p);
+            }
+            rs.close();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return (t);
+    }
+
+    //huynhhe170672
+
     public void createNewProduct(int xCategoryID, String xProductName, double xPrice, int xCollectionID, String xDescription){
         try{
             xSql = "INSERT INTO product (CategoryID, ProductName, Price, CollectionID, description) value (?,?,?,?,?)";
