@@ -16,7 +16,7 @@ public class CheckoutServlet extends HttpServlet{
             throws ServletException, IOException{
         ShopOrderDAO sod = new ShopOrderDAO();
         AddressDAO ad = new AddressDAO();
-        User currUser = (User) request.getSession().getAttribute("currUser");
+        User currUser = (User) request.getSession().getAttribute("acc");
         assert currUser != null;
         String buyerID = String.valueOf(currUser.getUserID());
         String xCountryID = request.getParameter("CountryID").trim();

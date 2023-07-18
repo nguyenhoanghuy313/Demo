@@ -17,7 +17,7 @@ public class OrderDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         response.setContentType("text/html;charset=UTF-8");
-        User currUser = (User) request.getSession().getAttribute("currUser");
+        User currUser = (User) request.getSession().getAttribute("acc");
         String buyerID = String.valueOf(currUser.getUserID());
         String xOrderID = request.getParameter("OrderID");
         OrderDetailDAO odd = new OrderDetailDAO();

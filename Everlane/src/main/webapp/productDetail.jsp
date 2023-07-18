@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
     <link rel="stylesheet" href="header/header1.css">
-    <link rel="stylesheet" href="productpage/productdetail/product-detail.css">
+    <link rel="stylesheet" href="productpage/productdetail/product-detail1.css">
     <link rel="stylesheet" href="homepage/best-seller-slider1.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
@@ -79,21 +79,22 @@
                 <div class="Size">
                     <input type="hidden" name="ProductID" value="<%= pi.getProductID() %>">
                     <input type="hidden" name="color_Name" value="<%= pi.getColor_Name() %>">
-                    <input type="hidden" name="VariationID" value="<%= pi.getVariationID() %>">
+                    <%= pi.getVariationID() %>
                     <%--                    <input type="hidden" name="productName" value="<%= pi.getProductName() %>">--%>
-                    <% for (Size size : sizes) { %>
-                    <input type="radio" id="size_name" name="size_name" value="<%= size.getSize_Name() %>">
-                    <label for="size_name"><%= size.getSize_Name() %>
-                    </label><br>
-                    <%--                    <button type="submit" name="size_name" value="<%= size.getSize_Name() %>"><%= size.getSize_Name() %>--%>
-                    <%--                    </button>--%>
-                    <% } %>
+                    <div class="radiocheck_container">
+                        <% for (Size size : sizes) { %>
+                        <div class="radiocheck" for="size_name">
+                            <input type="radio" id="size_name" name="size_name" value="<%= size.getSize_Name() %>" required>
+                            <p id="radio_name"><%= size.getSize_Name() %>
+                            </p>
+                        </div>
+                        <% } %>
+                    </div>
                 </div>
             </div>
-            <button color="white" type="submit">
-<%--                    href="addToCart?ProductID=<%=pi.getProductID()%>&VariationID=<%=pi.getVariationID()%>">--%>
-                Add
-                To Bag
+            <h1 style="color:red; font-family: 'Nunito Sans', sans-serif; font-size: 14px">${CartMessError}</h1>
+            <h1 style="color:green;font-family: 'Nunito Sans', sans-serif;  font-size: 14px">${CartMess}</h1>
+            <button color="white" type="submit">Add To Bag
             </button>
         </form>
 
@@ -103,12 +104,6 @@
             <h1>Description</h1>
             <p>Made of 100% cotton poplin with a subtle sheen, the Smock Dress has a comfortable, breathable feel with
                 an effortlessly polished look.</p>
-            <%--            <p> ${CartMess}</p>--%>
-            <%--            <form action="addToCart" method="GET">--%>
-            <%--                <h2>--%>
-            <%--                    ${CartMess}--%>
-            <%--                </h2>--%>
-            <%--            </form>--%>
         </div>
     </div>
 </section>

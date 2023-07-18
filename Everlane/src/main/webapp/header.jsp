@@ -27,7 +27,7 @@
 
     <%--    css--%>
     <link rel="stylesheet" href="header/header1.css"/>
-    <link rel="stylesheet" href="header/cart/cart1.css">
+    <link rel="stylesheet" href="header/cart/cart2.css">
     <link rel="stylesheet" href="header/search/search1.css">
 
     <!-- Favicon -->
@@ -36,7 +36,7 @@
 </head>
 <body>
 <%
-    User u = (User) request.getSession().getAttribute("currUser");
+    User u = (User) request.getSession().getAttribute("acc");
     int uID = 0;
     String xUID = String.valueOf(uID);
     if (u != null) {
@@ -67,7 +67,8 @@
     <div class="main">
         <a href="#" class="search" id="search-icon"><i class="ri-search-line"></i></a>
         <c:if test="${sessionScope.acc != null}">
-            <a href="${pageContext.request.contextPath}/user-account-detail-servlet" class="user"><i class="ri-user-3-line"></i></a>
+            <a href="${pageContext.request.contextPath}/user-account-detail-servlet" class="user"><i
+                    class="ri-user-3-line"></i></a>
         </c:if>
         <c:if test="${sessionScope.acc == null}">
             <a href="${pageContext.request.contextPath}/login-servlet" class="user"><i class="ri-user-3-line"></i></a>
@@ -90,9 +91,9 @@
                 int totalValue = 0;  // Tổng giá trị của các mục
 
 
-                for (Product ci: cartItemList){
+                for (Product ci : cartItemList) {
 
-                    CartItem cartItemList2 = cid.getCartItem(String.valueOf(ci.getProductID()) ,String.valueOf(ci.getVariationID()));
+                    CartItem cartItemList2 = cid.getCartItem(String.valueOf(ci.getProductID()), String.valueOf(ci.getVariationID()));
                     totalValue += (ci.getPrice() * cartItemList2.getQuantity());
             %>
             <div class="cart_item">
@@ -102,16 +103,21 @@
                 </a>
                 <div class="cart_item_text">
                     <div class="cart_item_name">
-                        <p><%=ci.getProductName()%></p>
-                        <a href="DeleteFromCart?ProductID=<%=ci.getProductID()%>&variationID=<%=ci.getVariationID()%>"><i class='bx bx-trash'></i></a>
+                        <p><%=ci.getProductName()%>
+                        </p>
+                        <a href="DeleteFromCart?ProductID=<%=ci.getProductID()%>&variationID=<%=ci.getVariationID()%>"><i
+                                class='bx bx-trash' style="color:black;"></i></a>
                     </div>
-                    <p><%=ci.getSize_Name()%> | <%=ci.getColor_Name()%>></p>
+                    <p><%=ci.getSize_Name()%> | <%=ci.getColor_Name()%>
+                    </p>
                     <div class="cart_item_price">
-                        <p>₫<%=ci.getPrice()*cartItemList2.getQuantity()%></p>
+                        <p>₫<%=ci.getPrice() * cartItemList2.getQuantity()%>
+                        </p>
                         <form action="${pageContext.request.contextPath}/adjustQuantity" method="post">
-                            <div class="cart_item_quantity">
+                            <div class="Cart_Item_Amount_Change">
                                 <button class='bx bx-minus' name="choice" value="minus"></button>
-                                <p id="amount"><%= cartItemList2.getQuantity() %></p>
+                                <p id="amount"><%= cartItemList2.getQuantity() %>
+                                </p>
                                 <button class='bx bx-plus' name="choice" value="plus"></button>
                             </div>
                             <input type="hidden" name="ProductID" value="<%= cartItemList2.getProductID() %>">
@@ -131,12 +137,21 @@
                 }
             %>
         </div>
+
         <div class="checkout_container">
             <div class="subtotal_container">
-                <p>Subtotal (<%=itemCount%> items)</p>  <!-- Hiển thị số lượng mục trong giỏ hàng -->
-                <p>₫<%=totalValue%></p>
+                <%
+                    int totalCartItem = 0;
+                    for (Product ci : cartItemList) {
+                        CartItem cartItemList2 = cid.getCartItem(String.valueOf(ci.getProductID()), String.valueOf(ci.getVariationID()));
+                        totalCartItem += (cartItemList2.getQuantity());
+                    }
+                %>
+                <p>Subtotal (<%=totalCartItem%> items)</p>  <!-- Hiển thị số lượng mục trong giỏ hàng -->
+                <p>₫<%=totalValue%>
+                </p>
             </div>
-            <a href="${pageContext.request.contextPath}/checkout.jsp">Continue To Checkout</a>
+            <a class="buttonCheckout" href="${pageContext.request.contextPath}/checkout.jsp">Continue To Checkout</a>
         </div>
     </div>
 
@@ -176,9 +191,9 @@
     <form action="${pageContext.request.contextPath}/SearchServlet" method="post" class="search_inner">
         <input type="text" id="site-search" name="productName" placeholder="Search..." list="productL">
         <datalist id="productL">
-            <%for (ProductForEdit productForEdit: productForEditList){%>
+            <%for (ProductForEdit productForEdit : productForEditList) {%>
             <option value="<%=productForEdit.getProductName()%>">
-            <%}%>
+                    <%}%>
         </datalist>
         <button class='bx bx-search-alt'></button>
     </form>

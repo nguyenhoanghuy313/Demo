@@ -63,7 +63,7 @@
 
 <body>
 <%
-  User u = (User) request.getSession().getAttribute("currUser");
+  User u = (User) request.getSession().getAttribute("acc");
   String xUID = String.valueOf(u.getUserID());
   OrderDetailDAO odd = new OrderDetailDAO();
   List<Product> userOrder = (List<Product>) request.getAttribute("userOrder");

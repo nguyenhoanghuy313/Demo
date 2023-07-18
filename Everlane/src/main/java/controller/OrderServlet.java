@@ -19,16 +19,6 @@ public class OrderServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         // Lấy thông tin từ yêu cầu
         int userID = Integer.parseInt(request.getParameter("UserID"));
-//        User currUser = (User) request.getSession().getAttribute("currUser");
-//        String xRecipentName = request.getParameter("recipient").trim();
-//        String xPhone = request.getParameter("recipent_phone").trim();
-//        String xCity = request.getParameter("city").trim();
-//        String xAddressLine = request.getParameter("address_line").trim();
-//        String xStreet = request.getParameter("Street").trim();
-//        String xRegion = request.getParameter("region").trim();
-//        String xPostalCode = request.getParameter("postalcode").trim();
-//        String xUserID = String.valueOf(userID);
-//        String buyerID = String.valueOf(currUser.getUserID());
 
         CartItemDAO cartItemDAO = new CartItemDAO();
         ProductDAO pd = new ProductDAO();
@@ -64,23 +54,4 @@ public class OrderServlet extends HttpServlet {
             throws ServletException, IOException{
 
     }
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException{
-//        UserDAO ud = new UserDAO();
-//        AddressDAO ad = new AddressDAO();
-//        User currUser = (User) request.getSession().getAttribute("currUser");
-//        assert currUser != null;
-//        String buyerID = String.valueOf(currUser.getUserID());
-//        String xRecipentName = request.getParameter("recipient").trim();
-//        String xPhone = request.getParameter("recipent_phone").trim();
-//        String xCity = request.getParameter("city").trim();
-//        String xAddressLine = request.getParameter("address_line").trim();
-//        String xPostalCode = request.getParameter("postalcode").trim();
-//
-//        ad.insertAddress(xAddressLine,xCity,xPostalCode);
-//        ad.setAddressIDtoShopOrder();
-////            request.setAttribute("ErrMessage", "Address has been added Successfully");
-//        request.getRequestDispatcher("checkout.jsp").forward(request,response);
-//
-//    }
 }

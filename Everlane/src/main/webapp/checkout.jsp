@@ -27,16 +27,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap" rel="stylesheet">
 
     <link href="header/header1.css" rel="stylesheet"/>
-    <link href="header/cart/cart1.css" rel="stylesheet">
+    <link href="header/cart/cart2.css" rel="stylesheet">
     <link href="header/search/search1.css" rel="stylesheet">
-    <link href="checkout/checkout1.css" rel="stylesheet">
+    <link href="checkout/checkout2.css" rel="stylesheet">
 
     <!-- Favicon -->
     <link href="a.template/assets/img/favicon/favicon.png" rel="icon" type="image/x-icon"/>
 </head>
 <body>
 <%
-    User u = (User) request.getSession().getAttribute("currUser");
+    User u = (User) request.getSession().getAttribute("acc");
     int uID = 0;
     if (u != null) {
         uID = u.getUserID();
@@ -74,15 +74,9 @@
                 <h1>Shipping</h1>
             </div>
             <form action="Checkout" method="post">
-                <%--                                <input list="country" name="Country" placeholder="Country" type="text" required><br>--%>
-                <%--                                <datalist id="country">--%>
-                <%--                                    <%for (Country ct : c) {%>--%>
-                <%--                                    <option value=<%=ct.getCountryName()%>><%=ct.getCountryName()%>--%>
-                <%--                                    </option>--%>
-                <%--                                    <%}%>--%>
-                <%--                                </datalist>--%>
-                <label for="CountryID">Choose a country:</label>
                 <select id="CountryID" name="CountryID">
+                    <option value="">Choose a country
+                    </option>
                     <% for (Country ct : c) { %>
                     <option value="<%= ct.getCountryID() %>"><%= ct.getCountryName() %>
                     </option>
@@ -97,18 +91,6 @@
                 <input type="submit" value="Save Address">
                 <h2 style="color: red">${ErrMessage}</h2>
             </form>
-            <%--            <form>--%>
-            <%--                <input id="FirstName" name="FullName" placeholder="Full Name*" type="text"><br>--%>
-            <%--                <input id="country" name="Country" placeholder="Country*" type="text"><br>--%>
-            <%--                <input id="address_line1" name="Address" placeholder="Street Address*" type="text"><br>--%>
-            <%--                <input id="apm" name="apartment" placeholder="Apartment, Suite, Building (Optional)" type="text"><br>--%>
-            <%--                <input id="city" name="City" placeholder="City*" type="text"><br>--%>
-            <%--                <input id="region" name="Region" placeholder="State/Province/Region" type="text"><br>--%>
-            <%--                <input id="postalCode" name="PCode" placeholder="Postal Code*" type="text"><br>--%>
-            <%--                <input id="phone" name="PhoneNumber" placeholder="Phone Number*" type="text"><br>--%>
-            <%--                <a href="Checkout?FullName=FirstName&Country=country&Address=address_line1&apartment=apm&City=city&Region=region&PCode=postalCode&PhoneNumber=phone">Save Address</a>--%>
-            <%--&lt;%&ndash;                <input type="submit" value="Save Address" href="Checkout?FullName=FirstName&Country=country&Address=address_line1&apartment=apm&City=city&Region=region&PCode=postalCode&PhoneNumber=phone">&ndash;%&gt;--%>
-            <%--            </form>--%>
             <div class="Shipping_Option">
                 <h2>Select Shipping Option</h2>
                 <form>
@@ -125,7 +107,6 @@
 
                     <input type="submit" value="Continue to Payment">
                 </form>
-
             </div>
         </div>
         <div class="Your_Email">
@@ -203,10 +184,16 @@
                         CartItem cartItemList2 = cid.getCartItem(String.valueOf(p.getProductID()), String.valueOf(p.getVariationID()));
                         totalValue += (p.getPrice() * cartItemList2.getQuantity());
                     }
+                    int totalCartItem = 0;
+                    for (Product ci : cartItemList) {
+                        CartItem cartItemList2 = cid.getCartItem(String.valueOf(ci.getProductID()), String.valueOf(ci.getVariationID()));
+                        totalCartItem += (cartItemList2.getQuantity());
+                    }
                 %>
-                <h1>Cart (<%=cartSize%>)</h1>
+
+                <h1>Cart (<%=totalCartItem%>)</h1>
             </div>
-            <h1><%=totalValue%>
+            <h1>₫<%=totalValue%>
             </h1>
         </div>
         <div class="Cart_List">
@@ -226,13 +213,13 @@
                         <p><%=ci.getSize_Name()%> | <%=ci.getColor_Name()%>
                         </p>
                         <a href="DeleteFromCart?ProductID=<%=ci.getProductID()%>&variationID=<%=ci.getVariationID()%>"
-                           class='bx bx-trash'></a>
+                           class='bx bx-trash' style="color:black;"></a>
                     </div>
                     <div class="Cart_Item_Price">
                         <div class="Price">
                             <p style="text-decoration: line-through">₫981800</p>
                             <p style="font-weight: bold; margin-left: 4px">
-                                ₫<%=ci.getPrice() * cartItemList2.getQuantity()%>></p>
+                                ₫<%=ci.getPrice() * cartItemList2.getQuantity()%></p>
                         </div>
                         <form action="${pageContext.request.contextPath}/adjustQuantity" method="post">
                             <div class="Cart_Item_Amount_Change">
