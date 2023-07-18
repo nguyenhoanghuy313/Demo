@@ -19,16 +19,6 @@ public class OrderServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         // Lấy thông tin từ yêu cầu
         int userID = Integer.parseInt(request.getParameter("UserID"));
-//        User currUser = (User) request.getSession().getAttribute("currUser");
-//        String xRecipentName = request.getParameter("recipient").trim();
-//        String xPhone = request.getParameter("recipent_phone").trim();
-//        String xCity = request.getParameter("city").trim();
-//        String xAddressLine = request.getParameter("address_line").trim();
-//        String xStreet = request.getParameter("Street").trim();
-//        String xRegion = request.getParameter("region").trim();
-//        String xPostalCode = request.getParameter("postalcode").trim();
-//        String xUserID = String.valueOf(userID);
-//        String buyerID = String.valueOf(currUser.getUserID());
 
         CartItemDAO cartItemDAO = new CartItemDAO();
         ProductDAO pd = new ProductDAO();
@@ -55,6 +45,7 @@ public class OrderServlet extends HttpServlet {
             cartItemDAO.deleteCartItemByProdID(productID, variationID);
             pd.reduceQuantityOfProduct(productID,variationID,quantity);
             ad.setAddressIDtoShopOrder();
+            shopOrderDAO.setOrderTotal();
         }
         request.setAttribute("ErrMessage", "Order Placed");
         request.getRequestDispatcher("checkout.jsp").forward(request,response);

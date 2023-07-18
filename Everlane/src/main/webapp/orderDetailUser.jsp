@@ -1,7 +1,10 @@
 <%@ page import="model.User" %>
 <%@ page import="model.OrderDetailDAO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.Product" %><%--
+<%@ page import="model.Product" %>
+<%@ page import="entity.OrderDetail" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %><%--
   Created by IntelliJ IDEA.
   User: minileisduk
   Date: 06/07/2023
@@ -209,7 +212,7 @@
       <div class="content-wrapper">
         <!-- Content -->
         <div class="container-xxl flex-grow-1 container-p-y ">
-          <h4 class="fw-bold py-3 mb-4">Orders List</h4>
+          <h4 class="fw-bold py-3 mb-4">Orders List </h4>
           <div class="card">
             <h5 class="card-header">Products</h5>
             <div class="table-responsive text-nowrap listtable">
@@ -228,6 +231,14 @@
                 </thead>
                 <%
                   for (Product p: userOrder){
+                    // Tạo đối tượng SimpleDateFormat với định dạng mong muốn
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                    // Trích xuất timestamp từ đối tượng p.getOrder_date()
+                    long timestamp = p.getOrder_date().getTime();
+
+                    // Định dạng lại thành chuỗi ngày tháng (YYYY-MM-DD)
+                    String formattedDate = dateFormat.format(new Date(timestamp));
                 %>
                 <tbody class="table-border-bottom-0">
                 <tr class="item">
@@ -237,8 +248,8 @@
                   <td><%=p.getColor_Name()%></td>
                   <td><%=p.getSize_Name()%></td>
                   <td><%=p.getQty_in_cart()%></td>
-                  <td><%=p.getQty_in_stock()%></td>
-                  <td>1/02/2003</td>
+                  <td><%=p.getQty_in_cart() * p.getPrice()%></td>
+                  <td><%=formattedDate%></td>
                 </tr>
                 </tbody>
                 <%

@@ -1,5 +1,6 @@
 package model;
-import java.sql.Date;
+import java.sql.Timestamp;
+
 public class Product {
     int productID;
     String thumbnail, product_img_1, product_img_2, product_img_3, categoryName;
@@ -8,8 +9,27 @@ public class Product {
     double price;
     int qty_in_stock, qty_in_cart;
     int variationID;
+    Timestamp order_date;
 
-    public Product() {
+//    public Product(int xProductID, String xThumbnail, String xProduct_img_1, String xProduct_img_2, String xProduct_img_3, String xCategoryName, int xCollectionID, String xProductName, String xColor_Name, String xSize_Name, double xPrice, int xQty_in_cart, int xVariationID, Timestamp xOrderDate) {
+//    }
+
+    public Product(int productID, String thumbnail, String product_img_1, String product_img_2, String product_img_3, String categoryName, int collectionID, String productName, String color_Name, String size_Name, double price, int qty_in_cart, int variationID, Timestamp order_date) {
+        this.productID = productID;
+        this.thumbnail = thumbnail;
+        this.product_img_1 = product_img_1;
+        this.product_img_2 = product_img_2;
+        this.product_img_3 = product_img_3;
+        this.categoryName = categoryName;
+        this.collectionID = collectionID;
+        this.productName = productName;
+        this.color_Name = color_Name;
+        this.size_Name = size_Name;
+        this.price = price;
+//        this.qty_in_stock = qty_in_stock;
+        this.qty_in_cart = qty_in_cart;
+        this.variationID = variationID;
+        this.order_date = order_date;
     }
 
     public Product(int productID, String thumbnail, String product_img_1, String product_img_2, String product_img_3, String categoryName, int collectionID, String productName, String color_Name, String size_Name, double price, int qty_in_cart, int variationID) {
@@ -41,6 +61,14 @@ public class Product {
         this.size_Name = size_Name;
         this.price = price;
         this.qty_in_stock = qty_in_stock;
+    }
+
+    public Timestamp getOrder_date() {
+        return order_date;
+    }
+
+    public void setOrder_date(Timestamp order_date) {
+        this.order_date = order_date;
     }
 
     public int getQty_in_cart() {
