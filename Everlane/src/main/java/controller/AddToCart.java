@@ -20,7 +20,7 @@ public class AddToCart extends HttpServlet{
         User currUser = (User) request.getSession().getAttribute("currUser");
         if(currUser == null){
             request.setAttribute("Message", "Please Login to perform this action!");
-            request.getRequestDispatcher("login-servlet").forward(request,response);
+            response.sendRedirect(request.getContextPath() + "/login-servlet");
             return;
         }
         CartItemDAO cid = new CartItemDAO();
@@ -52,13 +52,15 @@ public class AddToCart extends HttpServlet{
         String xSize_Name = request.getParameter("size_name").trim();
         String xVariationID = request.getParameter("VariationID").trim();
         User currUser = (User) request.getSession().getAttribute("currUser");
-        if(currUser == null){
+        if (currUser == null) {
             request.setAttribute("Message", "Please Login to perform this action!");
-            request.getRequestDispatcher("login-servlet").forward(request,response);
+//            request.getRequestDispatcher(request.getContextPath() + "/login-servlet").forward(request,response);
+            response.sendRedirect(request.getContextPath() + "/login-servlet");
             return;
         }
-        CartItemDAO cid = new CartItemDAO();
+
         CartDAO cd = new CartDAO();
+        CartItemDAO cid = new CartItemDAO();
         String buyerID = String.valueOf(currUser.getUserID());
         boolean isCartItemExist = cid.checkCartItemExist(xProductID, xVariationID, buyerID);
         if(isCartItemExist){

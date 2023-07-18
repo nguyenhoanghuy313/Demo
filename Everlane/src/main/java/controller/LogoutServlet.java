@@ -1,7 +1,10 @@
 package controller;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.*;
 
 import java.io.IOException;
@@ -35,19 +38,18 @@ public class LogoutServlet extends HttpServlet {
             PromotionDAO promotionDAO = new PromotionDAO();
             StoryDAO storyDAO = new StoryDAO();
 
-            List<Story> storyList = storyDAO.getAllStory("all");
-            List<Category> cateList = c.getAllCategory();
-            Collection collection = col.getCollectionsByDate();
-            request.getSession().setAttribute("collection", collection);
+        List<Story> storyList = storyDAO.getAllStory("all");
+        List<Category> cateList = c.getAllCategory();
+        Collection collection = col.getCollectionsByDate();
+        request.getSession().setAttribute("collection", collection);
 
-            Promotion promotion = promotionDAO.getPromotionByID(String.valueOf(collection.getPromotionID()));
+        Promotion promotion = promotionDAO.getPromotionByID(String.valueOf(collection.getPromotionID()));
 
-            request.setAttribute("storyList", storyList);
-            request.setAttribute("promotion", promotion);
-            request.setAttribute("cateList", cateList);
-            request.setAttribute("collection", collection);
-            request.getRequestDispatcher("home.jsp").forward(request, response);
-        }
+        request.setAttribute("storyList", storyList);
+        request.setAttribute("promotion", promotion);
+        request.setAttribute("cateList", cateList);
+        request.setAttribute("collection", collection);
+        request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 
     @Override
