@@ -93,7 +93,7 @@
                 </div>
             </div>
             <h1 style="color:red; font-family: 'Nunito Sans', sans-serif; font-size: 14px">${CartMessError}</h1>
-            <h1 style="color:green;font-family: 'Nunito Sans', sans-serif;  font-size: 14px">${CartMess}</h1>
+            <h1 style="color:green;font-family: 'Nunito Sans', sans-serif;  font-size: 14px">${ShippMess}</h1>
             <button color="white" type="submit">Add To Bag
             </button>
         </form>
