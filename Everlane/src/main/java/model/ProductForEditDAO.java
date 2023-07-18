@@ -134,6 +134,7 @@ public class ProductForEditDAO extends myDAO{
         return (t);
     }
 
+
     //huynhhe170672
 
     public void createNewProduct(int xCategoryID, String xProductName, double xPrice, int xCollectionID, String xDescription){

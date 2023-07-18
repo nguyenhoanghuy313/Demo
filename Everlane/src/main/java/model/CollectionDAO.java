@@ -67,7 +67,35 @@ public class CollectionDAO extends myDAO{
         }
         return x;
     }
-
+    //huynhhe170672
+    public Collection getCollectionsByDate(){
+        Collection x = null;
+        xSql = "select * from collection order by create_date desc Limit 1;";
+        try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            int xCollectionID;
+            String xCollectionName;
+            int xPromotionID;
+            String xGetCollectionImg;
+            String xCollection_description;
+            Timestamp xcreate_date;
+            while(rs.next()){
+                xCollectionID = rs.getInt("CollectionID");
+                xCollectionName = rs.getString("CollectionName");
+                xPromotionID = rs.getInt("PromotionID");
+                xGetCollectionImg = rs.getString("collectionImg");
+                xCollection_description = rs.getString("collection_description");
+                xcreate_date = rs.getTimestamp("create_date");
+                x = new Collection(xCollectionID, xCollectionName, xPromotionID , xGetCollectionImg, xCollection_description, xcreate_date);
+            }
+            rs.close();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return x;
+    }
 
     public void updateCollection(String xcolname, String xcolImg, String xcoldescrip, Timestamp xcreate_date, int xcolId) {
         try {
@@ -101,9 +129,5 @@ public class CollectionDAO extends myDAO{
     }
 
 
-//    public static void main(String[] args) {
-//
-//        Date currentDate = new Date();
-//        System.out.println("Thời gian tạo: " + currentTime);
-//    }
+
 }
