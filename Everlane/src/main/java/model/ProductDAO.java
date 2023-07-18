@@ -138,13 +138,12 @@ public class ProductDAO extends myDAO {
         return null;
     }
 
-    public List<Product> getProductsByColIDProID(String cateID, String colID) {
+    public List<Product> getProductsByCID(String cid) {
         List<Product> t = new ArrayList<>();
-        xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name\n" + "from variation v, product_img pi, product p , category c, color col, size s\n" + "where col.color_ID = ?\n" + "and c.CategoryID = ?\n" + "and c.CategoryID = p.CategoryID \n" + "and p.ProductID = v.ProductID \n" + "and v.product_img_ID = pi.product_img_ID\n" + "and v.color_ID = col.color_ID\n" + "and v.size_ID = s.size_ID;";
+        xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name\n" + "from variation v, product_img pi, product p , category c, color col, size s\n" + "where c.CategoryID = ? \n" + "and c.CategoryID = p.CategoryID \n" + "and p.ProductID = v.ProductID \n" + "and v.product_img_ID = pi.product_img_ID\n" + "and v.color_ID = col.color_ID\n" + "and v.size_ID = s.size_ID;";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setString(1, colID);
-            ps.setString(2, cateID);
+            ps.setString(1, cid);
             rs = ps.executeQuery();
             int xProductID;
             String xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName;
@@ -177,12 +176,13 @@ public class ProductDAO extends myDAO {
         return (t);
     }
 
-    public List<Product> getProductsByCID(String cid) {
+    public List<Product> getProductsByColIDProID(String cateID, String colID) {
         List<Product> t = new ArrayList<>();
-        xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name\n" + "from variation v, product_img pi, product p , category c, color col, size s\n" + "where c.CategoryID = ? \n" + "and c.CategoryID = p.CategoryID \n" + "and p.ProductID = v.ProductID \n" + "and v.product_img_ID = pi.product_img_ID\n" + "and v.color_ID = col.color_ID\n" + "and v.size_ID = s.size_ID;";
+        xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name\n" + "from variation v, product_img pi, product p , category c, color col, size s\n" + "where col.color_ID = ?\n" + "and c.CategoryID = ?\n" + "and c.CategoryID = p.CategoryID \n" + "and p.ProductID = v.ProductID \n" + "and v.product_img_ID = pi.product_img_ID\n" + "and v.color_ID = col.color_ID\n" + "and v.size_ID = s.size_ID;";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setString(1, cid);
+            ps.setString(1, colID);
+            ps.setString(2, cateID);
             rs = ps.executeQuery();
             int xProductID;
             String xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName;
