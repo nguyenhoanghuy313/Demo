@@ -53,9 +53,18 @@
                 <%--                                <h2>variationID: <%=pi.getVariationID()%></h2>--%>
                 <%--                                <h2>prodID: <%=pi.getProductID()%></h2>--%>
                 <div class="Price">
-                    <p>₫2896300</p>
+                    <%
+                        if(pi.getDiscount() != 0){
+                    %>
+                    <p><%= pi.getPrice()%></p>
+                    <p><%= pi.getDiscount()%>
+                    </p>
+                    <%
+                        }else {
+                    %>
                     <p><%= pi.getPrice()%>
                     </p>
+                    <%}%>
                 </div>
             </div>
         </div>

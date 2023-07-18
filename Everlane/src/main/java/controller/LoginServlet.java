@@ -20,10 +20,10 @@ LoginServlet extends HttpServlet {
         Cookie arr[] = req.getCookies();
         if (arr != null) {
             for (Cookie o : arr) {
-                if (o.getName().equals("email")) {
+                if (o.getName().equals("emailUser")) {
                     req.setAttribute("email", o.getValue());
                 }
-                if (o.getName().equals("password")) {
+                if (o.getName().equals("passwordUser")) {
                     req.setAttribute("password", o.getValue());
                 }
             }
@@ -71,8 +71,8 @@ LoginServlet extends HttpServlet {
                     HttpSession session = req.getSession();
                     session.setAttribute("acc", checkUser);
 
-                    Cookie cookieAcc = new Cookie("email", email);
-                    Cookie cookiePass = new Cookie("password", password);
+                    Cookie cookieAcc = new Cookie("emailUser", email);
+                    Cookie cookiePass = new Cookie("passworUser", password);
                     cookieAcc.setMaxAge(60 * 60 * 24 * 365);
                     if(req.getParameter("remember") != null){
                         cookiePass.setMaxAge(60 * 60 * 24 * 365);

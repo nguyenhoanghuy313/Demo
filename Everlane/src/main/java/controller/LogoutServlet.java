@@ -1,10 +1,7 @@
 package controller;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 import model.*;
 
 import java.io.IOException;
@@ -33,6 +30,7 @@ public class LogoutServlet extends HttpServlet {
         } else {
             HttpSession session = request.getSession();
             session.removeAttribute("acc");
+            session.removeAttribute("currUser");
             CategoryDAO c = new CategoryDAO();
             CollectionDAO col = new CollectionDAO();
             PromotionDAO promotionDAO = new PromotionDAO();
@@ -50,6 +48,7 @@ public class LogoutServlet extends HttpServlet {
         request.setAttribute("cateList", cateList);
         request.setAttribute("collection", collection);
         request.getRequestDispatcher("home.jsp").forward(request, response);
+        }
     }
 
     @Override
