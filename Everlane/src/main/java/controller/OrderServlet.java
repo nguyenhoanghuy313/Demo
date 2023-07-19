@@ -56,6 +56,7 @@ public class OrderServlet extends HttpServlet {
                     cartItemDAO.deleteCartItemByProdID(productID, variationID);
                     pd.reduceQuantityOfProduct(productID,variationID,quantity);
                     ad.setAddressIDtoShopOrder();
+                    shopOrderDAO.setOrderTotal();
                 }
                 session.removeAttribute("temporaryAddress");
                 session.removeAttribute("PayType");
