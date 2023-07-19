@@ -203,7 +203,7 @@
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
-                                    <img src="a.template/assets/img/avatars/1.png" alt
+                                    <img src="a.template/assets/img/avatars/ava.png" alt
                                          class="w-px-40 h-auto rounded-circle"/>
                                 </div>
                             </a>
@@ -213,7 +213,7 @@
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="a.template/assets/img/avatars/1.png" alt
+                                                    <img src="a.template/assets/img/avatars/ava.png" alt
                                                          class="w-px-40 h-auto rounded-circle"/>
                                                 </div>
                                             </div>
@@ -301,6 +301,7 @@
                                             <label class="form-label" for="basic-default-storytitle">Story Title</label>
                                             <input style="width: 100%;" type="text" class="storytitle" name="storytitle"
                                                    id="basic-default-storytitle"
+                                                   required
                                                     <% if (story == null) {%>
                                                    value=""
                                                     <%} else {%>
@@ -311,7 +312,7 @@
                                         <div class="mb-3">
                                             <label class="form-label"
                                                    for="basic-default-storythumbnail">Thumbnail</label>
-                                            <input type="text" class="storythumbnail" name="storythumbnail"
+                                            <input type="url" class="storythumbnail" name="storythumbnail"
                                                    id="basic-default-storythumbnail"
                                                     <% if (story == null) {%>
                                                    value=""
@@ -320,6 +321,7 @@
                                                     <%}%>
                                                    placeholder="Please enter story thumbmail"
                                                    style="width: 100%;"
+                                                   required
                                             />
                                         </div>
                                         <div class="mb-3">
@@ -375,7 +377,7 @@
                                             <textarea id="basic-default-content"
                                                       class="storycontent"
                                                       name="storycontent"
-                                                      style="width: 100%; height: 500px; overflow-y: scroll; text-align: left">
+                                                      style="width: 100%; height: 500px; overflow-y: scroll; text-align: left" required>
                                                     <% if (story == null) {%>
 
                                                     <%} else {%>

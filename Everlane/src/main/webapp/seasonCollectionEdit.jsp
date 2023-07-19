@@ -201,7 +201,7 @@
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
-                                    <img src="a.template/assets/img/avatars/1.png" alt
+                                    <img src="a.template/assets/img/avatars/ava.png" alt
                                          class="w-px-40 h-auto rounded-circle"/>
                                 </div>
                             </a>
@@ -211,7 +211,7 @@
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="a.template/assets/img/avatars/1.png" alt
+                                                    <img src="a.template/assets/img/avatars/ava.png" alt
                                                          class="w-px-40 h-auto rounded-circle"/>
                                                 </div>
                                             </div>
@@ -335,7 +335,6 @@
                                         </div>
                                         <div class="mt-2">
                                             <button type="submit" class="btn btn-dark me-2">Save changes</button>
-                                            <a href="" type="reset" class="btn btn-outline-secondary">Cancel</a>
                                         </div>
                                     </form>
                                 </div>

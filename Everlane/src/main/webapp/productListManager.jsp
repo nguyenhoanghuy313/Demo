@@ -207,7 +207,7 @@
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
-                                    <img src="a.template/assets/img/avatars/1.png" alt
+                                    <img src="a.template/assets/img/avatars/ava.png" alt
                                          class="w-px-40 h-auto rounded-circle"/>
                                 </div>
                             </a>
@@ -217,7 +217,7 @@
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="a.template/assets/img/avatars/1.png" alt
+                                                    <img src="a.template/assets/img/avatars/ava.png" alt
                                                          class="w-px-40 h-auto rounded-circle"/>
                                                 </div>
                                             </div>
@@ -278,19 +278,14 @@
 
                         <div class="input-group input-group-merge">
                             <form action="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
-                                  method="post">
-                                <span class="input-group-text" id="basic-addon-search31"><i
-                                        class="bx bx-search"></i></span>
-                                <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Search..."
-                                        aria-label="Search..."
-                                        aria-describedby="basic-addon-search31"
-                                        name="productName"
-                                />
+                                  method="post" style="display: flex; flex-direction: row">
+                                <input name="productName" type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon2">
+                                <div  class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button"><i class='bx bx-search'></i></button>
+                                </div>
                             </form>
                         </div>
+
                         <div class="input-group">
                             <button
                                     class="btn btn-outline-dark dropdown-toggle"

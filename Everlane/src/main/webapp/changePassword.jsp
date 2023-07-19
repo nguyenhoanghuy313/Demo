@@ -60,7 +60,7 @@
     <!-- Menu -->
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
       <div class="app-brand demo">
-        <a href="dashboardManager.jsp" class="app-brand-link">
+        <a href="${pageContext.request.contextPath}/home-servlet" class="app-brand-link">
               <span class="app-brand-logo demo">
                     <svg width="128" height="14px" class="styles_everlane-logo__4o010" viewBox="0 0 128 14" fill="none"
                          xmlns="http://www.w3.org/2000/svg"><path
@@ -78,57 +78,37 @@
       <div class="menu-inner-shadow"></div>
 
       <ul class="menu-inner py-1">
-        <!-- Dashboard -->
+        <!-- Account Settings -->
         <li class="menu-item active">
-          <a href="dashboardManager.jsp" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Dashboard</div>
-          </a>
-        </li>
-
-        <!-- Layouts -->
-        <!-- Pages -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Pages</span></li>
-        <!-- Product List -->
-        <li class="menu-item">
-          <a href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
-             class="menu-link">
-            <i class='menu-icon tf-icons bx bxs-package'></i>
-            <div data-i18n="Product List">Product List</div>
+          <a href="user-account-detail-servlet" class="menu-link ">
+            <i class='menu-icon tf-icons bx bx-user'></i>
+            <div data-i18n="Account Setting">Account Setting</div>
           </a>
         </li>
         <!-- User List -->
         <li class="menu-item">
-          <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=all" class="menu-link">
-            <i class='menu-icon tf-icons bx bx-user'></i>
-            <div data-i18n="User List">User List</div>
+          <a href="orderListUser.jsp" class="menu-link">
+            <i class='menu-icon tf-icons bx bxs-package'></i>
+            <div data-i18n="Orders & Returns">Orders List</div>
+          </a>
+        </li>
+
+        <li class="menu-item">
+          <a href="${pageContext.request.contextPath}/changePassword" class="menu-link">
+            <i class='menu-icon tf-icons bx bxs-package'></i>
+            <div data-i18n="Change password">Change password</div>
           </a>
         </li>
         <!-- Forms -->
+        <%--logout--%>
         <li class="menu-item">
-          <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons bx bx-detail"></i>
-            <div data-i18n="Marketing">Marketing</div>
+          <a href="logout-servlet" class="menu-link ">
+            <i class='menu-icon tf-icons bx bx-user'></i>
+            <div data-i18n="Account Setting" style="color:red;">Log out</div>
           </a>
-          <ul class="menu-sub">
-            <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/seasonCollectionEditServlet" class="menu-link">
-                <div data-i18n="Season Collection">Season Collection (Home Page)</div>
-              </a>
-            </li>
-          </ul>
-          <ul class="menu-sub">
-            <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/categoryEditServlet" class="menu-link">
-                <div data-i18n="Season Collection">Category (Home Page)</div>
-              </a>
-            </li>
-          </ul>
         </li>
       </ul>
     </aside>
-
-
     <!-- / Menu -->
 
     <!-- Layout container -->
@@ -146,7 +126,6 @@
 
 
       </nav>
-
       <!-- / Navbar -->
 
       <!-- Content wrapper -->
@@ -195,7 +174,6 @@
                     </div>
                     <div class="mt-2">
                       <button type="submit" class="btn btn-dark me-2">Save changes</button>
-                      <a href="changePassword?mod=1" class="btn btn-outline-secondary">Cancel</a>
                     </div>
                   </form>
                 </div>
