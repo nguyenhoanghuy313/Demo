@@ -10,7 +10,7 @@
 <head>
     <title>Login</title>
     <link rel="stylesheet" href="header/header1.css">
-    <link rel="stylesheet" href="account/authentication/authentication.css">
+    <link rel="stylesheet" href="account/authentication/authentication1.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
 
@@ -27,7 +27,10 @@
             <form action="login-servlet" method="post">
                 <input type="email" id="email" name="email" value="${newemail}" placeholder="Email Address">
                 <h2>${EmailErr}</h2>
-                <input type="password" id="password" name="password" value="${newpass}" placeholder="Password">
+                <div class="showpass">
+                    <input type="password" id="password" name="password" value="${newpass}" placeholder="Password"></input>
+                    <span onclick="ShowPassword()" class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                </div>
                 <h2>${PassErr}</h2>
                 <input type="submit" value="Login">
                 <h2 style="color: red">
@@ -46,5 +49,15 @@
     </div>
 </section>
 <jsp:include page="footer.jsp"/>
+<script>
+    function ShowPassword() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 </body>
 </html>

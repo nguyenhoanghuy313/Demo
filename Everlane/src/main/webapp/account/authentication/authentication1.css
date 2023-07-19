@@ -47,6 +47,10 @@
     width: 100%;
     text-align: center;
     margin-top: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 .Authentication_Inner_Container form input{
     width: 460px;
@@ -73,6 +77,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.showpass{
+    position: relative;
+    width: 460px;
+    height: 43px;
+    margin-bottom: 1vh;
+}
+.showpass span{
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    z-index: 10000;
 }
 
 @media (max-width: 1090px){

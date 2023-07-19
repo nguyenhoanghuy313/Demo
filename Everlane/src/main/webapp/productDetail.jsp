@@ -79,7 +79,6 @@
                 <div class="Size">
                     <input type="hidden" name="ProductID" value="<%= pi.getProductID() %>">
                     <input type="hidden" name="color_Name" value="<%= pi.getColor_Name() %>">
-                    <%= pi.getVariationID() %>
                     <%--                    <input type="hidden" name="productName" value="<%= pi.getProductName() %>">--%>
                     <div class="radiocheck_container">
                         <% for (Size size : sizes) { %>
