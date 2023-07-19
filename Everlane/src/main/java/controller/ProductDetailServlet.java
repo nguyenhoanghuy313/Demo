@@ -27,6 +27,7 @@ public class ProductDetailServlet extends HttpServlet {
         request.setAttribute("sizes", sizes);
         request.getRequestDispatcher("productDetail.jsp").forward(request,response);
     }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         response.setContentType("text/html;charset=UTF-8");

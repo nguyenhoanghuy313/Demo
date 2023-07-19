@@ -61,7 +61,6 @@ public class HighUserAccountDetailServlet extends HttpServlet {
 
         int xUserID = Integer.parseInt(req.getParameter("UserID").trim());
 
-
         HttpSession session = req.getSession();
         UserDAO u = new UserDAO();
         User user = (User) session.getAttribute("acc");
@@ -77,7 +76,9 @@ public class HighUserAccountDetailServlet extends HttpServlet {
                     req.setAttribute("u", user);
                     req.setAttribute("error1", "Username must be 5-20 letters, no _ or . ,");
                 } else {
+
                     u.UpdateAccount(username, password, email, firstname, lastname, date, sex, role, phone, xUserID);
+
                     user = u.getUserById(user.getUserID());
                     req.setAttribute("u", user);
                     req.setAttribute("success1", "Saved");
@@ -90,7 +91,9 @@ public class HighUserAccountDetailServlet extends HttpServlet {
                     req.setAttribute("u", user);
                     req.setAttribute("error2", "Email is existed");
                 } else {
+
                     u.UpdateAccount(username, password, email, firstname, lastname, date, sex, role, phone, xUserID);
+
                     user = u.getUserById(user.getUserID());
                     req.setAttribute("u", user);
                     req.setAttribute("success2", "Saved");
@@ -102,7 +105,9 @@ public class HighUserAccountDetailServlet extends HttpServlet {
                 calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - 18);
                 System.out.printf("Date %s is older than 18? %s", date, calendar.getTime().after(date));
                 if (calendar.getTime().after(date)) {
+
                     u.UpdateAccount(username, password, email, firstname, lastname, date, sex, role, phone, xUserID);
+
                     user = u.getUserById(user.getUserID());
                     req.setAttribute("u", user);
                     req.setAttribute("success3", "Saved");

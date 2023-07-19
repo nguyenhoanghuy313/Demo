@@ -9,6 +9,7 @@ import model.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @WebServlet(name = "login-servlet", urlPatterns = {"/login-servlet"})
@@ -49,8 +50,8 @@ LoginServlet extends HttpServlet {
             Collection collection = col.getCollectionsByDate();
             Promotion promotion = promotionDAO.getPromotionByID(String.valueOf(collection.getPromotionID()));
 
-            User checkUser = u.checkUser(email, password);
-            req.getSession().setAttribute("currUser", checkUser);
+            Encryptor encryptor = new Encryptor();
+            User checkUser = u.checkUser(email, encryptor.encryptString(password));
             User Role = u.getRoleByEmail(email);
             if (checkUser == null) {
                 if (email.isEmpty()) {
@@ -103,6 +104,8 @@ LoginServlet extends HttpServlet {
                 }
             }
 //            req.getRequestDispatcher("login.jsp").forward(req, resp);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
     }
 }

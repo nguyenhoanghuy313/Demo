@@ -49,7 +49,7 @@ public class CartItemDAO extends myDAO{
         int xVarID = Integer.parseInt(varID);
         int xUserID = Integer.parseInt(userID);
         xSql = "UPDATE cart_item\n" +
-                "SET CartID = (SELECT MIN(CartID) FROM cart c WHERE c.UserID = ?)\n" +
+                "SET CartID = (SELECT MAX(CartID) FROM cart c WHERE c.UserID = ?)\n" +
                 "WHERE ProductID = ? AND variationID = ?;";
         try {
             ps = con.prepareStatement(xSql);

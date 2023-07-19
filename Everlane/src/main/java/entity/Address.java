@@ -4,13 +4,18 @@ public class Address {
     int addressID;
     String addressLine;
     String city;
-    String region;
+    int postcode;
+    int countryid;
 
-    public Address(int addressID, String addressLine, String city, String region) {
+    public Address() {
+    }
+
+    public Address(int addressID, String addressLine, String city, int postcode, int countryid) {
         this.addressID = addressID;
         this.addressLine = addressLine;
         this.city = city;
-        this.region = region;
+        this.postcode = postcode;
+        this.countryid = countryid;
     }
 
     public int getAddressID() {
@@ -37,11 +42,19 @@ public class Address {
         this.city = city;
     }
 
-    public String getRegion() {
-        return region;
+    public int getPostcode() {
+        return postcode;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public void setPostcode(int postcode) {
+        this.postcode = postcode;
+    }
+
+    public int getCountryid() {
+        return countryid;
+    }
+
+    public void setCountryid(int countryid) {
+        this.countryid = countryid;
     }
 }

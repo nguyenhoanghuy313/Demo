@@ -66,6 +66,17 @@
     border-radius: 5px;
 }
 
+.Shipping form select{
+    width: 100%;
+    padding: 26px 15px 10px;
+    background-color: #F5F4F4;
+    border: none;
+    margin-bottom: 10px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
 .Shipping form input[type="submit"]{
     background-color: black;
     color: white;

@@ -6,10 +6,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Encryptor;
 import model.User;
 import model.UserDAO;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+
 @WebServlet(name = "changePassword", urlPatterns = {"/changePassword"})
 public class ChangePassword extends HttpServlet {
     @Override
@@ -40,6 +43,7 @@ public class ChangePassword extends HttpServlet {
         HttpSession session = req.getSession();
         UserDAO u = new UserDAO();
         User user = (User) session.getAttribute("acc");
+        Encryptor encryptor = new Encryptor();
         if(mod == null){
             if (oldPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
                 req.setAttribute("error", "Please fill all the fields");
@@ -53,13 +57,23 @@ public class ChangePassword extends HttpServlet {
             } else if (!newPassword.equals(confirmPassword)) {
                 req.setAttribute("error", "New password and confirm password are not the same");
                 req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
-            } else if (!oldPassword.equals(user.getPassword())) {
-                req.setAttribute("error", "Old password is not correct");
-                req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
             } else {
-                u.ChangePass(newPassword, (user.getUserID()));
-                req.setAttribute("success", "Changing password successfully");
-                req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
+                try {
+                    if (!encryptor.encryptString(oldPassword).equals(user.getPassword())) {
+                        req.setAttribute("error", "Old password is not correct");
+                        req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
+                    } else {
+                        try {
+                            u.ChangePass(encryptor.encryptString(newPassword), (user.getUserID()));
+                        } catch (NoSuchAlgorithmException e) {
+                            throw new RuntimeException(e);
+                        }
+                        req.setAttribute("success", "Changing password successfully");
+                        req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
+                    }
+                } catch (NoSuchAlgorithmException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }else{
             if (mod.equals("2")){
@@ -75,13 +89,23 @@ public class ChangePassword extends HttpServlet {
                 } else if (!newPassword.equals(confirmPassword)) {
                     req.setAttribute("error", "New password and confirm password are not the same");
                     req.getRequestDispatcher("changePasswordHighUser.jsp").forward(req, resp);
-                } else if (!oldPassword.equals(user.getPassword())) {
-                    req.setAttribute("error", "Old password is not correct");
-                    req.getRequestDispatcher("changePasswordHighUser.jsp").forward(req, resp);
                 } else {
-                    u.ChangePass(newPassword, (user.getUserID()));
-                    req.setAttribute("success", "Changing password successfully");
-                    req.getRequestDispatcher("changePasswordHighUser.jsp").forward(req, resp);
+                    try {
+                        if (!encryptor.encryptString(oldPassword).equals(user.getPassword())) {
+                            req.setAttribute("error", "Old password is not correct");
+                            req.getRequestDispatcher("changePasswordHighUser.jsp").forward(req, resp);
+                        } else {
+                            try {
+                                u.ChangePass(encryptor.encryptString(newPassword), (user.getUserID()));
+                            } catch (NoSuchAlgorithmException e) {
+                                throw new RuntimeException(e);
+                            }
+                            req.setAttribute("success", "Changing password successfully");
+                            req.getRequestDispatcher("changePasswordHighUser.jsp").forward(req, resp);
+                        }
+                    } catch (NoSuchAlgorithmException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         }

@@ -3,10 +3,12 @@ package controller;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import model.Encryptor;
 import model.User;
 import model.UserDAO;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 @WebServlet(name = "loginHighUserServlet", urlPatterns = {"/loginHighUserServlet"})
 public class LoginHighUserServlet extends HttpServlet {
@@ -32,7 +34,13 @@ public class LoginHighUserServlet extends HttpServlet {
         String password = req.getParameter("password").trim();
         String remember = req.getParameter("remember");
         UserDAO u = new UserDAO();
-        User checkUser = u.checkUser(email, password);
+        Encryptor encryptor = new Encryptor();
+        User checkUser = null;
+        try {
+            checkUser = u.checkUser(email, encryptor.encryptString(password));
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
         User Role = u.getRoleByEmail(email);
         if (checkUser == null) {
             if(!email.isEmpty() || !password.isEmpty()) {
