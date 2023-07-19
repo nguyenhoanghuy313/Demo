@@ -97,4 +97,15 @@ public class ShopOrderDAO extends myDAO {
         }
         return currMaxOID;
     }
+
+    public void setOrderTotal(){
+        xSql = "UPDATE shop_order AS so SET Order_total = (SELECT SUM(od.Quantity * od.Price) FROM orderdetails AS od WHERE od.OrderID = so.shop_orderID) WHERE so.Order_status = 'Ordered';\n";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.executeUpdate();
+            ps.close();
+        }catch (Exception e){
+            System.out.println("setOrderTotal: " + e.getMessage());
+        }
+    }
 }
