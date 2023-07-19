@@ -5,10 +5,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Encryptor;
 import model.User;
 import model.UserDAO;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,12 +25,6 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String firstname = req.getParameter("firstname").trim();
-//        String lastname = req.getParameter("lastname").trim();
-//        String phoneString = req.getParameter("phone").trim();
-//        int phone =0;
-//        String dob = req.getParameter("dob");
-//        int gender = Integer.parseInt(req.getParameter("gender"));
         String username = req.getParameter("username").trim();
         String email = req.getParameter("email").trim();
         String password = req.getParameter("password").trim();
@@ -62,8 +59,13 @@ public class SignUpServlet extends HttpServlet {
                 req.setAttribute("error", "Account already exists");
                 req.getRequestDispatcher("register.jsp").forward(req, resp);
             } else {
-//                phone = Integer.parseInt(phoneString);
-                u.addUser(username ,password,email, role, date);
+                //mã hóa mật khẩu
+                Encryptor encryptor = new Encryptor();
+                try {
+                    u.addUser(username , encryptor.encryptString(password) ,email, role, date);
+                } catch (NoSuchAlgorithmException e) {
+                    throw new RuntimeException(e);
+                }
                 req.setAttribute("newemail", email);
                 req.setAttribute("newpass", password);
                 req.setAttribute("success", "Register successfully please sign in");

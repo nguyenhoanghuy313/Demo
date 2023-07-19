@@ -292,7 +292,7 @@
                                                         <%} else {%>
                                                         value=<%= userNeedEdit.getUserName()%>
                                                             <%}%>
-                                                                autofocus
+
                                                 />
                                             </div>
 
@@ -329,17 +329,22 @@
                                                         id="firstName"
                                                         name="firstName"
                                                         placeholder="Please enter First Name"
+                                                        pattern="([A-Z][a-zA-Z]*)" title="First letter must be uppercase, no number and white space"
+                                                        required
                                                         <% if (userNeedEdit == null) {%>
                                                         value=""
                                                         <%} else {%>
                                                         value=<%= userNeedEdit.getFirstName()%>
                                                             <%}%>
+
                                                 />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Last Name</label>
                                                 <input class="form-control" type="text" name="lastName" id="lastName"
                                                        placeholder="Please enter Last Name"
+                                                       pattern="([A-Z][a-zA-Z]*)" title="First letter must be uppercase, no number and white space"
+                                                       required
                                                         <% if (userNeedEdit == null) {%>
                                                        value=""
                                                         <%} else {%>
@@ -351,6 +356,7 @@
                                                 <label for="dob" class="form-label">Date Of Birth</label>
                                                 <input type="date" class="form-control" id="dob" name="dob"
                                                        placeholder=""
+                                                       required
                                                         <% if (userNeedEdit == null) {%>
                                                        value=""
                                                         <%} else {%>
@@ -361,14 +367,14 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="gender" class="form-label">Gender</label>
                                                 <% if (userNeedEdit == null) {%>
-                                                <select id="gender" name="gender" class="select2 form-select">
+                                                <select id="gender" name="gender" class="select2 form-select" required>
                                                     <option value="0">Select</option>
                                                     <option value="1">Male</option>
                                                     <option value="2">Female</option>
                                                     <option value="3">Other</option>
                                                 </select>
                                                 <%} else {%>
-                                                <select id="gender" name="gender" class="select2 form-select">
+                                                <select id="gender" name="gender" class="select2 form-select" required>
                                                     <option value="<%= userNeedEdit.getSex()%>">Select
                                                     </option>
                                                     <option value="1">Male</option>
@@ -381,7 +387,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="role" class="form-label">Role</label>
                                                 <% if (userNeedEdit == null) {%>
-                                                <select id="role" name="role" class="select2 form-select">
+                                                <select id="role" name="role" class="select2 form-select" required>
                                                     <option value="0">Select</option>
                                                     <option value="1">Admin</option>
                                                     <option value="2">Sale</option>
@@ -389,7 +395,7 @@
                                                     <option value="4">Customer</option>
                                                 </select>
                                                 <%} else {%>
-                                                <select id="role" name="role" class="select2 form-select">
+                                                <select id="role" name="role" class="select2 form-select" required>
                                                     <option value="<%= userNeedEdit.getRole()%>">Select
                                                     </option>
                                                     <option value="1">Admin</option>
@@ -409,6 +415,7 @@
                                                             name="phoneNumber"
                                                             class="form-control"
                                                             placeholder="Please enter Phone Number"
+                                                            required
                                                             <% if (userNeedEdit == null) {%>
                                                             value=""
                                                             <%} else {%>

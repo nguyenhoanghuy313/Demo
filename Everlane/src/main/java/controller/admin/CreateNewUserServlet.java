@@ -3,9 +3,11 @@ package controller.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import model.Encryptor;
 import model.User;
 import model.UserDAO;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 
 import java.io.IOException;
@@ -44,6 +46,7 @@ public class CreateNewUserServlet extends HttpServlet {
 
         UserDAO u = new UserDAO();
         User user;
+        Encryptor encryptor = new Encryptor();
 
         if (u.checkUsername(username)) {
             req.setAttribute("error", "Username is existed");
@@ -69,10 +72,14 @@ public class CreateNewUserServlet extends HttpServlet {
                 int xUserID = Integer.parseInt(req.getParameter("UserID").trim());
                 if (xUserID == 0){
                     req.setAttribute("done", "Create done");
-                    u.createNewUser(username, password, email, firstname, lastname, date, sex, role, phone);
+                    try {
+                        u.createNewUser(username, encryptor.encryptString(password), email, firstname, lastname, date, sex, role, phone);
+                    } catch (NoSuchAlgorithmException e) {
+                        throw new RuntimeException(e);
+                    }
                     req.getRequestDispatcher("createNewUser.jsp").forward(req, resp);
                 }else{
-                    u.UpdateAccount(username, password, email, firstname, lastname, date, sex, role, phone, xUserID);
+                        u.UpdateAccount(username, password, email, firstname, lastname, date, sex, role, phone, xUserID);
                     req.getRequestDispatcher("createNewUser.jsp").forward(req, resp);
                 }
             }

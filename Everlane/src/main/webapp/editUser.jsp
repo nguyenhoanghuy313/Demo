@@ -331,6 +331,8 @@
                                                     <%} else {%>
                                                     value=<%= userNeedEdit.getFirstName()%>
                                                         <%}%>
+                                                            pattern="([A-Z][a-zA-Z]*)" title="First letter must be uppercase, no number and white space"
+                                                    required
                                             />
                                             <input class="form-control" type="hidden" name="lastName" id="lastName"
                                                    placeholder="Please enter Last Name"
@@ -339,14 +341,17 @@
                                                     <%} else {%>
                                                    value=<%= userNeedEdit.getLastName()%>
                                                        <%}%>
+                                                           pattern="([A-Z][a-zA-Z]*)" title="First letter must be uppercase, no number and white space"
+                                                   required
                                             />
                                             <input type="hidden" class="form-control" id="dob" name="dob"
-                                                   placeholder=""
+                                                   placeholder="" required
                                                     <% if (userNeedEdit == null) {%>
                                                    value=""
                                                     <%} else {%>
                                                    value=<%= userNeedEdit.getDob()%>
                                                        <%}%>
+
                                             />
                                             <input type="hidden" class="form-control" name="gender"
                                                    placeholder=""

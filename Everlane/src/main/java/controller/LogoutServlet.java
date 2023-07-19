@@ -15,7 +15,6 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-//        session.removeAttribute("currUser");
         session.removeAttribute("acc");
         CategoryDAO c = new CategoryDAO();
         CollectionDAO col = new CollectionDAO();

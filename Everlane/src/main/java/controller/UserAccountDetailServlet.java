@@ -6,10 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Category;
-import model.CategoryDAO;
-import model.User;
-import model.UserDAO;
+import model.*;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -61,7 +58,6 @@ public class UserAccountDetailServlet extends HttpServlet {
 
         int xUserID = Integer.parseInt(req.getParameter("UserID").trim());
 
-
         HttpSession session = req.getSession();
         UserDAO u = new UserDAO();
         User user = (User) session.getAttribute("acc");
@@ -72,12 +68,14 @@ public class UserAccountDetailServlet extends HttpServlet {
                     user = u.getUserById(user.getUserID());
                     req.setAttribute("u", user);
                     req.setAttribute("error1", "Username is existed");
-                } else if(!username.matches("^(?=[a-zA-Z0-9._]{5,20}$)(?!.*[_.]{2})[^_.].*[^_.]$")){
+                } else if (!username.matches("^(?=[a-zA-Z0-9._]{5,20}$)(?!.*[_.]{2})[^_.].*[^_.]$")) {
                     user = u.getUserById(user.getUserID());
                     req.setAttribute("u", user);
                     req.setAttribute("error1", "Username must be 5-20 letters, no _ or . ,");
                 } else {
+
                     u.UpdateAccount(username, password, email, firstname, lastname, date, sex, role, phone, xUserID);
+
                     user = u.getUserById(user.getUserID());
                     req.setAttribute("u", user);
                     req.setAttribute("success1", "Saved");
@@ -90,7 +88,9 @@ public class UserAccountDetailServlet extends HttpServlet {
                     req.setAttribute("u", user);
                     req.setAttribute("error2", "Email is existed");
                 } else {
+
                     u.UpdateAccount(username, password, email, firstname, lastname, date, sex, role, phone, xUserID);
+
                     user = u.getUserById(user.getUserID());
                     req.setAttribute("u", user);
                     req.setAttribute("success2", "Saved");
@@ -101,13 +101,14 @@ public class UserAccountDetailServlet extends HttpServlet {
                 Calendar calendar = GregorianCalendar.getInstance();
                 calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - 18);
                 System.out.printf("Date %s is older than 18? %s", date, calendar.getTime().after(date));
-                if (calendar.getTime().after(date)){
+                if (calendar.getTime().after(date)) {
                     u.UpdateAccount(username, password, email, firstname, lastname, date, sex, role, phone, xUserID);
+
                     user = u.getUserById(user.getUserID());
                     req.setAttribute("u", user);
                     req.setAttribute("success3", "Saved");
                     req.getRequestDispatcher("userAccount.jsp").forward(req, resp);
-                }else{
+                } else {
                     user = u.getUserById(user.getUserID());
                     req.setAttribute("u", user);
                     req.setAttribute("error3", "User must be 18 years old or older");
