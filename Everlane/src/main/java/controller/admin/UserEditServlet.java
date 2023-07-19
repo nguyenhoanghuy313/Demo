@@ -54,7 +54,9 @@ public class UserEditServlet extends HttpServlet {
                 } else if (!username.matches("^(?=[a-zA-Z0-9._]{5,20}$)(?!.*[_.]{2})[^_.].*[^_.]$")) {
                     req.setAttribute("error1", "Username must be 5-20 letters, no _ or . ,");
                 } else {
+
                     u.UpdateAccount(username, password, email, firstname, lastname, date, sex, role, phone, xUserID);
+
                     req.setAttribute("success1", "Saved");
                 }
                 User userNeedEdit = u.getUserById(xUserID);
@@ -65,7 +67,9 @@ public class UserEditServlet extends HttpServlet {
                 if (u.checkEmail(email)) {
                     req.setAttribute("error2", "Email is existed");
                 } else {
+
                     u.UpdateAccount(username, password, email, firstname, lastname, date, sex, role, phone, xUserID);
+
                     req.setAttribute("success2", "Saved");
                 }
                 userNeedEdit = u.getUserById(xUserID);
@@ -77,7 +81,9 @@ public class UserEditServlet extends HttpServlet {
                 calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - 18);
                 System.out.printf("Date %s is older than 18? %s", date, calendar.getTime().after(date));
                 if (calendar.getTime().after(date)) {
+
                     u.UpdateAccount(username, password, email, firstname, lastname, date, sex, role, phone, xUserID);
+
                     userNeedEdit = u.getUserById(xUserID);
                     req.setAttribute("userNeedEdit", userNeedEdit);
                     req.setAttribute("success3", "Saved");
