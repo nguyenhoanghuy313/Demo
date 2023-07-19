@@ -91,7 +91,6 @@ public class ProductServlet extends HttpServlet{
         }
         request.getRequestDispatcher("productList.jsp").forward(request, response);
 
-
     }
 }
 
