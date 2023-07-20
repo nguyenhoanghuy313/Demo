@@ -400,35 +400,20 @@
                                             </div>
 
                                             <div class="mb-3 col-md-6">
-                                                <input type="file" name="thumbnail" id="imageUpload" accept="image/*" >
-<%--                                                <span class="btn btn-primary">Upload Image</span>--%>
-<%--                                                <label class="form-label" for="thumbnail">Select thumbnail image</label>--%>
-<%--                                                <input class="form-control" id="thumbnail" name="thumbnail" type="url"--%>
-<%--                                                       required/>--%>
+                                                <label for="thumbnail" class="form-label">Thumbnail</label>
+                                                <input class="form-control" type="file"  name="thumbnail" id="thumbnail" accept="image/png, image/gif, image/jpeg" required>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <input type="file" name="productImg1" id="imageUpload" accept="image/*" >
-<%--                                                <span class="btn btn-primary">Upload Image</span>--%>
-<%--                                                <label class="form-label" for="productImg1">Select product Image--%>
-<%--                                                    1</label>--%>
-<%--                                                <input class="form-control" id="productImg1" name="productImg1"--%>
-<%--                                                       type="url" required/>--%>
+                                                <label for="productImg1" class="form-label">1st Image</label>
+                                                <input class="form-control" type="file"  name="productImg1" id="productImg1" accept="image/png, image/gif, image/jpeg" required>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <input type="file" name="productImg2" id="imageUpload" accept="image/*" >
-<%--                                                <span class="btn btn-primary">Upload Image</span>--%>
-<%--                                                <label class="form-label" for="productImg2">Select product Image--%>
-<%--                                                    2</label>--%>
-<%--                                                <input class="form-control" id="productImg2" name="productImg2"--%>
-<%--                                                       type="url" required/>--%>
+                                                <label for="productImg2" class="form-label">2nd Image</label>
+                                                <input class="form-control" type="file"  name="productImg2" id="productImg2" accept="image/png, image/gif, image/jpeg" required>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <input type="file" name="productImg3" id="imageUpload" accept="image/*" >
-<%--                                                <span class="btn btn-primary">Upload Image</span>--%>
-<%--                                                <label class="form-label" for="productImg3">Select product Image--%>
-<%--                                                    3</label>--%>
-<%--                                                <input class="form-control" id="productImg3" name="productImg3"--%>
-<%--                                                       type="url" required/>--%>
+                                                <label for="productImg3" class="form-label">3nd Image</label>
+                                                <input class="form-control" type="file"  name="productImg3" id="productImg3" accept="image/png, image/gif, image/jpeg" required>
                                             </div>
                                             <%if (picheckname != null) {%>
                                             <h6 style="color: red">Product Img Folder is already in the database with id

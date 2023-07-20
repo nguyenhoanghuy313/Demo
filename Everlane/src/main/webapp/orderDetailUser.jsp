@@ -166,6 +166,7 @@
                 </tr>
                 </thead>
                 <%
+                  int no = 0;
                   for (Product p: userOrder){
                     // Tạo đối tượng SimpleDateFormat với định dạng mong muốn
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -175,11 +176,12 @@
 
                     // Định dạng lại thành chuỗi ngày tháng (YYYY-MM-DD)
                     String formattedDate = dateFormat.format(new Date(timestamp));
+                    no++;
                 %>
                 <tbody class="table-border-bottom-0">
                 <tr class="item">
-                  <td>1</td>
-                  <td><img src="<%=p.getThumbnail()%>"></td>
+                  <td><%=no%></td>
+                  <td><img src="webImage/productImg/<%=p.getThumbnail()%>"></td>
                   <td><%=p.getProductName()%></td>
                   <td><%=p.getColor_Name()%></td>
                   <td><%=p.getSize_Name()%></td>

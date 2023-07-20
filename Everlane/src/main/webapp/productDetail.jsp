@@ -38,10 +38,10 @@
 <%--<form action="addToCart" method="post">--%>
 <section class="Product_Detail_Container">
     <div class="Product_Image_Container">
-        <img src=<%= pi.getThumbnail()%>>
-        <img src=<%= pi.getProduct_img_1()%>>
-        <img src=<%= pi.getProduct_img_2()%>>
-        <img src=<%= pi.getProduct_img_3()%>>
+        <img src="webImage/productImg/<%= pi.getThumbnail()%>">
+        <img src="webImage/productImg/<%= pi.getProduct_img_1()%>">
+        <img src="webImage/productImg/<%= pi.getProduct_img_2()%>">
+        <img src="webImage/productImg/<%= pi.getProduct_img_3()%>">
     </div>
     <div class="Product_Detail">
         <div class="Product_Name">
@@ -114,7 +114,7 @@
 
             <c:forEach var="p" items="${data}">
                 <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=${p.getProductID()}">
-                    <img src=${p.getProductImg()}>
+                    <img src="webImage/productImg/${p.getProductImg()}">
                     <div class="Product_Name">
                         <div class="Best_Seller_Text">
                             <h1>${p.getProductName()}</h1>

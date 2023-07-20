@@ -98,7 +98,7 @@
             %>
             <div class="cart_item">
                 <a class="cart_item_img">
-                    <img src="<%=ci.getThumbnail()%>"
+                    <img src="webImage/productImg/<%=ci.getThumbnail()%>"
                          alt="">
                 </a>
                 <div class="cart_item_text">

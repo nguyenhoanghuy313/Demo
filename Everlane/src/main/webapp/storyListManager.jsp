@@ -273,16 +273,10 @@
                         <div class="input-group input-group-merge">
                             <form action="${pageContext.request.contextPath}/StoryServlet?input=2"
                                   method="post">
-                                <span class="input-group-text" id="basic-addon-search31"><i
-                                        class="bx bx-search"></i></span>
-                                <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Search..."
-                                        aria-label="Search..."
-                                        aria-describedby="basic-addon-search31"
-                                        name="xName"
-                                />
+                                <input name="xName" type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon2">
+                                <div  class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button"><i class='bx bx-search'></i></button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -308,7 +302,7 @@
                                     for (Story s: storyList){
                                 %>
                                     <th><%=s.getStory_ID()%></th>
-                                    <th><img src="<%=s.getThumbnail()%>" style=" width: 72px; height: 96px; object-fit: cover"></th>
+                                    <th><img src="webImage/story/<%=s.getThumbnail()%>" style=" width: 72px; height: 96px; object-fit: cover"></th>
                                     <th><%=s.getTitle()%></th>
                                     <td>
                                         <div class="dropdown">

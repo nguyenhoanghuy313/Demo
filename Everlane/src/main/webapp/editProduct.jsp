@@ -378,7 +378,7 @@
                                     <!-- Account -->
                                     <hr class="my-0"/>
                                     <div class="card-body">
-                                        <form action="EditProductServlet?input=editImg" method="POST">
+                                        <form action="EditProductServlet?input=editImg" method="POST" enctype="multipart/form-data">
                                             <input class="form-control" name="product_img_ID"
                                                    value="<%=pi.getProduct_Img_ID()%>" type="hidden"/>
                                             <div class="mb-3 col-md-6">
@@ -397,35 +397,28 @@
                                             it's already in the database with id = <%=picheckname.getProduct_Img_ID()%>
                                             <%}%>
                                             <div class="mb-3 col-md-6">
-                                                <img src="<%=pi.getThumbnail()%>" alt="..."
+                                                <img src="webImage/productImg/<%=pi.getThumbnail()%>" alt="..."
                                                      style="width: 72px; height: 96px">
-                                                <label class="form-label" for="thumbnail">Select thumbnail image</label>
-                                                <input class="form-control" id="thumbnail" name="thumbnail" type="url"
-                                                       value="<%=pi.getThumbnail()%>" required/>
+                                                <label for="thumbnail" class="form-label">Thumbnail</label>
+                                                <input class="form-control" type="file"  name="thumbnail" id="thumbnail" accept="image/png, image/gif, image/jpeg">
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <img src="<%=pi.getProduct_Img_1()%>" alt="..."
+                                                <img src="webImage/productImg/<%=pi.getProduct_Img_1()%>" alt="..."
                                                      style="width: 72px; height: 96px">
-                                                <label class="form-label" for="productImg1">Select product Image
-                                                    1</label>
-                                                <input class="form-control" id="productImg1" name="productImg1"
-                                                       type="url" value="<%=pi.getProduct_Img_1()%>" required/>
+                                                <label for="productImg1" class="form-label">  1st Image</label>
+                                                <input class="form-control" type="file"  name="productImg1" id="productImg1" accept="image/png, image/gif, image/jpeg">
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <img src="<%=pi.getProduct_Img_2()%>" alt="..."
+                                                <img src="webImage/productImg/<%=pi.getProduct_Img_2()%>" alt="..."
                                                      style="width: 72px; height: 96px">
-                                                <label class="form-label" for="productImg2">Select product Image
-                                                    2</label>
-                                                <input class="form-control" id="productImg2" name="productImg2"
-                                                       type="url" value="<%=pi.getProduct_Img_2()%>" required/>
+                                                    <label for="productImg2" class="form-label">2nd Image</label>
+                                                    <input class="form-control" type="file"  name="productImg2" id="productImg2" accept="image/png, image/gif, image/jpeg">
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <img src="<%=pi.getProduct_Img_3()%>" alt="..."
+                                                <img src="webImage/productImg/<%=pi.getProduct_Img_3()%>" alt="..."
                                                      style="width: 72px; height: 96px">
-                                                <label class="form-label" for="productImg3">Select product Image
-                                                    3</label>
-                                                <input class="form-control" id="productImg3" name="productImg3"
-                                                       type="url" value="<%=pi.getProduct_Img_3()%>" required/>
+                                                <label for="productImg3" class="form-label">3nd Image</label>
+                                                <input class="form-control" type="file"  name="productImg3" id="productImg3" accept="image/png, image/gif, image/jpeg">
                                             </div>
                                             <div class="mt-2">
                                                 <button class="btn btn-dark me-2" type="submit">Save</button>

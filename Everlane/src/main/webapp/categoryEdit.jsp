@@ -260,31 +260,28 @@
                             <div class="card mb-4">
                                 <div class="card-header d-flex align-items-center justify-content-between">
                                     <h5 class="mb-0">Edit Cateogry</h5>
+                                    <div style="color: green">
+                                        ${message}
+                                    </div>
                                 </div>
                                 <div class="card-body">
-                                    <form action="categoryEditServlet" method="post">
-                                        <c:forEach var="cate" items="${cateList}" varStatus="a">
-                                            <c:if test="${a.index < 8}">
-                                            <div class="row mb-3">
-                                                <input type="hidden" name="cateID" value="${cate.getCategoryID()}">
-                                                <label class="col-sm-2 col-form-label" for="basic-default-tees">${cate.getCategoryName()}</label>
-                                                <div class="col-sm-10">
-                                                    <input class="form-control" name="cateImg" id="basic-default-tees"
-                                                           value="${cate.getCategoryImg()}"
-                                                           type="url"
-                                                           required
-                                                    />
+                                    <c:forEach var="cate" items="${cateList}" varStatus="a">
+                                        <c:if test="${a.index < 8}">
+                                            <form action="categoryEditServlet" method="post" enctype="multipart/form-data">
+
+                                                <div class="row mb-3">
+                                                    <input type="hidden" name="cateID" value="${cate.getCategoryID()}">
+                                                    <label for="thumbnail" class="col-sm-2 col-form-label">${cate.getCategoryName()}</label>
+                                                    <input class="form-control" type="file"  name="cateImg" id="thumbnail" accept="image/png, image/gif, image/jpeg" required>
                                                 </div>
-                                            </div>
-                                            </c:if>
-                                        </c:forEach>
-                                        <div style="color: green">
-                                            ${message}
-                                        </div>
-                                        <div class="mt-2">
-                                            <button type="submit" class="btn btn-dark me-2">Save changes</button>
-                                        </div>
-                                    </form>
+                                                <div class="mt-2">
+                                                    <button type="submit" class="btn btn-dark me-2">Save changes
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </c:if>
+                                    </c:forEach>
+
                                 </div>
                             </div>
                         </div>

@@ -7,7 +7,7 @@ import model.*;
 import java.util.*;
 
 import java.io.IOException;
-
+@MultipartConfig
 @WebServlet(name = "StoryServlet", value = "/StoryServlet")
 public class StoryServlet extends HttpServlet {
     @Override
@@ -36,9 +36,14 @@ public class StoryServlet extends HttpServlet {
 
         if(input.equals("1")) {
             String xStoryTitle = request.getParameter("storytitle").trim();
-            String xStoryThumbnail = request.getParameter("storythumbnail").trim();
+            String xStoryThumbnail = null;
+            UploadImageToFile uploadImageToFile = new UploadImageToFile();
+
+            Part file = request.getPart("storythumbnail");
+            String uThumbnail = uploadImageToFile.uploadPath(file, xStoryThumbnail, "storyImg");
+
             String xStoryContent = request.getParameter("storycontent").trim();
-            sd.createNewStory(xStoryThumbnail, xStoryTitle, xStoryContent);
+            sd.createNewStory(uThumbnail, xStoryTitle, xStoryContent);
             List<Story> storyList = sd.getAllStory("all");
             request.setAttribute("storyList", storyList);
         }
@@ -47,7 +52,11 @@ public class StoryServlet extends HttpServlet {
             List<Story> storyList= sd.getAllStory(xName);
             request.setAttribute("storyList", storyList);
         }
-
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         request.getRequestDispatcher("storyListManager.jsp").forward(request, response);
 
     }

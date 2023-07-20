@@ -362,10 +362,10 @@
                                 <tr class="item">
                                     <td><%=x.getProductID()%>
                                     </td>
-                                    <td><img src=<%=x.getThumbnail()%>></td>
-                                    <td><img src=<%=x.getProduct_img_1()%>></td>
-                                    <td><img src=<%=x.getProduct_img_2()%>></td>
-                                    <td><img src=<%=x.getProduct_img_3()%>></td>
+                                    <td><img src="webImage/productImg/<%=x.getThumbnail()%>"></td>
+                                    <td><img src="webImage/productImg/<%=x.getProduct_img_1()%>"></td>
+                                    <td><img src="webImage/productImg/<%=x.getProduct_img_2()%>"></td>
+                                    <td><img src="webImage/productImg/<%=x.getProduct_img_3()%>"></td>
                                     <td><%=x.getCategoryName()%>
                                     </td>
                                     <td><%=x.getCollectionID()%>
@@ -432,10 +432,10 @@
                                 <tr class="item">
                                     <th><%=pi.getProduct_Img_ID()%></th>
                                     <th><%=pi.getProduct_img_name()%></th>
-                                    <th><img src="webImage/<%=pi.getThumbnail()%>"></th>
-                                    <th><img src="<%=pi.getProduct_Img_1()%>"></th>
-                                    <th><img src="<%=pi.getProduct_Img_2()%>"></th>
-                                    <th><img src="<%=pi.getProduct_Img_3()%>"></th>
+                                    <th><img src="webImage/productImg/<%=pi.getThumbnail()%>"></th>
+                                    <th><img src="webImage/productImg/<%=pi.getProduct_Img_1()%>"></th>
+                                    <th><img src="webImage/productImg/<%=pi.getProduct_Img_2()%>"></th>
+                                    <th><img src="webImage/productImg/<%=pi.getProduct_Img_3()%>"></th>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow"

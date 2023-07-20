@@ -5,9 +5,11 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import model.Story;
 import model.StoryDAO;
+import model.UploadImageToFile;
 
 import java.io.IOException;
 
+@MultipartConfig
 @WebServlet(name = "StoryEdit", value = "/StoryEdit")
 public class StoryEdit extends HttpServlet {
     @Override
@@ -23,10 +25,15 @@ public class StoryEdit extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String xStoryID = request.getParameter("StoryID").trim();
         String xStoryTitle = request.getParameter("storytitle").trim();
-        String xStoryThumbnail = request.getParameter("storythumbnail").trim();
+        String xStoryThumbnail = null;
+        UploadImageToFile uploadImageToFile = new UploadImageToFile();
+
+        Part file = request.getPart("storythumbnail");
+        String uThumbnail = uploadImageToFile.uploadPath(file, xStoryThumbnail, "storyImg");
+
         String xStoryContent = request.getParameter("storycontent").trim();
         StoryDAO sd = new StoryDAO();
-        sd.updateStory(xStoryID, xStoryThumbnail, xStoryTitle, xStoryContent);
+        sd.updateStory(xStoryID, uThumbnail, xStoryTitle, xStoryContent);
         response.sendRedirect("StoryServlet?input=all");
     }
 }

@@ -285,6 +285,7 @@
                                             <%}%>
                                             method="post"
                                             style="width: 100%;"
+                                            enctype="multipart/form-data"
                                     >
                                         <div class="mb-3">
                                             <label class="form-label" for="basic-default-storyid">Story ID</label>
@@ -295,7 +296,9 @@
                                                     <%} else {%>
                                                    value="<%= story.getStory_ID()%>"
                                                     <%}%>
-                                                   placeholder="Please enter story title"/>
+                                                   placeholder="Please enter story title"
+                                                    required
+                                            />
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label" for="basic-default-storytitle">Story Title</label>
@@ -310,19 +313,8 @@
                                                    placeholder="Please enter story title"/>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label"
-                                                   for="basic-default-storythumbnail">Thumbnail</label>
-                                            <input type="url" class="storythumbnail" name="storythumbnail"
-                                                   id="basic-default-storythumbnail"
-                                                    <% if (story == null) {%>
-                                                   value=""
-                                                    <%} else {%>
-                                                   value="<%= story.getThumbnail()%>"
-                                                    <%}%>
-                                                   placeholder="Please enter story thumbmail"
-                                                   style="width: 100%;"
-                                                   required
-                                            />
+                                            <label for="thumbnail" class="form-label">Thumbnail</label>
+                                            <input class="form-control" type="file"  name="storythumbnail" id="thumbnail" accept="image/png, image/gif, image/jpeg" required>
                                         </div>
                                         <div class="mb-3">
                                             <ul style="height: 20vh; overflow-y: scroll">
@@ -385,7 +377,11 @@
                                                     <%}%>
                                             </textarea>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Save</button>
+                                        <div class="mt-2">
+                                            <button type="submit" class="btn btn-dark me-2">Save</button>
+                                            <a href="${pageContext.request.contextPath}/StoryServlet?input=all"
+                                               class="btn btn-outline-secondary">Cancel</a>
+                                        </div>
                                     </form>
                                 </div>
 

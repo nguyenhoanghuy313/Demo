@@ -40,10 +40,14 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-  <%
-      Collection collection = (Collection) request.getAttribute("collection");
-      Promotion promotion = (Promotion) request.getAttribute("promotion");
-  %>
+<%
+    Collection collection = (Collection) request.getAttribute("collection");
+    Promotion promotion = (Promotion) request.getAttribute("promotion");
+
+    CategoryDAO c = new CategoryDAO();
+    List<Category> cateList = c.getAllCategory();
+
+%>
 <div class="pop_up_container">
     <div class="pop_up" style="background: ${promotion.getBackground_color()}">
         <i class='bx bx-x' id="pop_up_x"></i>
@@ -53,19 +57,19 @@
         <button>SHOP NOW</button>
     </div>
 </div>
-    <section class="Season_Collection_Banner" id="Season_Collection_Banner">
-        <img src="${collection.getCollectionImg()}"
-                     alt="">
-        <div class="Season_Collection_Banner_text">
-            <h1>${collection.getCollectionName()}</h1>
-            <p>${collection.getCollection_description()}</p>
-            <button value="collectionID" name="collectionID">
-                <a href="${pageContext.request.contextPath}/productList-servlet?collectionID=${collection.getCollectionID()}&categoryID=3&color_ID=all">
-                    SHOP THE COLLECTION
-                </a>
-            </button>
-        </div>
-    </section>
+<section class="Season_Collection_Banner" id="Season_Collection_Banner">
+    <img src="webImage/collection/${collection.getCollectionImg()}"
+         alt="">
+    <div class="Season_Collection_Banner_text">
+        <h1>${collection.getCollectionName()}</h1>
+        <p>${collection.getCollection_description()}</p>
+        <button value="collectionID" name="collectionID">
+            <a href="${pageContext.request.contextPath}/productList-servlet?collectionID=${collection.getCollectionID()}&categoryID=3&color_ID=all">
+                SHOP THE COLLECTION
+            </a>
+        </button>
+    </div>
+</section>
 <section class="Category_Container">
     <h1>Shop by Category</h1>
     <div class="Category_List_Container">
@@ -75,7 +79,8 @@
                     <img src="webImage/category/${cate.getCategoryImg()}" alt="">
                     <div class="Category_text">
                         <button value="cateID"><a
-                                href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all"> ${cate.getCategoryName()}</a>
+                                href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all">${cate.getCategoryName()}
+                        </a>
                         </button>
                     </div>
                 </div>
@@ -91,7 +96,8 @@
             <div class="Category_text">
                 <h2>New Arrivals</h2>
                 <button>
-                    <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=1&color_ID=all&mod=bottom">Shop Now</a>
+                    <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=1&color_ID=all&mod=bottom">Shop
+                        Now</a>
                 </button>
             </div>
         </div>
@@ -113,7 +119,7 @@
 
             <c:forEach var="p" items="${data}">
                 <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=${p.getProductID()}">
-                    <img src="${p.getProductImg()}">
+                    <img src="webImage/productImg/${p.getProductImg()}">
                     <div class="Product_Name">
                         <div class="Best_Seller_Text">
                             <h1>${p.getProductName()}</h1>
@@ -135,17 +141,17 @@
 </section>
 
 <section class="Stories_Container">
-<c:forEach var="story" items="${storyList}" varStatus="a">
-    <c:if test="${a.index < 2}">
-    <a style="color: black" href="StoryCusServlet?input=${story.getStory_ID()}" class="Story">
-        <h1>${story.getTitle()}</h1>
-        <button>Learn More</button>
-        <div class="Storyimg">
-            <img src="${story.getThumbnail()}">
-        </div>
-    </a>
-    </c:if>
-</c:forEach>
+    <c:forEach var="story" items="${storyList}" varStatus="a">
+        <c:if test="${a.index < 2}">
+            <a style="color: black" href="StoryCusServlet?input=${story.getStory_ID()}" class="Story">
+                <h1>${story.getTitle()}</h1>
+                <button>Learn More</button>
+                <div class="Storyimg">
+                    <img src="webImage/story/${story.getThumbnail()}">
+                </div>
+            </a>
+        </c:if>
+    </c:forEach>
 </section>
 
 <jsp:include page="footer.jsp"/>

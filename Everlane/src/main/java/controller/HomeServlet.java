@@ -1,6 +1,7 @@
 package controller;
 import java.io.*;
 import jakarta.servlet.*;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import model.*;
@@ -8,6 +9,8 @@ import model.Collection;
 
 
 import java.util.*;
+
+@MultipartConfig
 @WebServlet(name = "category-servlet", value = "/home-servlet")
 public class HomeServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

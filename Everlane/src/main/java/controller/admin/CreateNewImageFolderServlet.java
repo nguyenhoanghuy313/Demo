@@ -42,9 +42,13 @@ public class CreateNewImageFolderServlet extends HttpServlet {
                 Part file3 = request.getPart("productImg2");
                 Part file4 = request.getPart("productImg3");
 
-                String uThumbnail = uploadImageToFile.uploadPath(file1, thumbnail);
+                String uThumbnail = uploadImageToFile.uploadPath(file1, thumbnail, "productImg");
+                String uProductImg1 = uploadImageToFile.uploadPath(file2, productImg1, "productImg");
+                String uProductImg2 = uploadImageToFile.uploadPath(file3, productImg2, "productImg");
+                String uProductImg3 = uploadImageToFile.uploadPath(file4, productImg3, "productImg");
 
-                pid.createNewImageFolder(uThumbnail, productImg1,productImg2,productImg3,imageandcolorname);
+                pid.createNewImageFolder(uThumbnail, uProductImg1,uProductImg2,uProductImg3,imageandcolorname);
+
                 session.setAttribute("colorName", colorName);
                 ProductImg newProductImg = pid.getProductFolder(imageandcolorname);
                 session.setAttribute("newProductImg", newProductImg);
