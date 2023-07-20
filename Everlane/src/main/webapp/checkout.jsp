@@ -142,7 +142,11 @@
                     int totalValue = 0;  // Tổng giá trị của các mục
                     for (Product p : cartItemList) {
                         CartItem cartItemList2 = cid.getCartItem(String.valueOf(p.getProductID()), String.valueOf(p.getVariationID()));
-                        totalValue += (p.getPrice() * cartItemList2.getQuantity());
+                        if(p.getDiscount() != 0) {
+                            totalValue += (p.getDiscount() * cartItemList2.getQuantity());
+                        } else {
+                            totalValue += (p.getPrice() * cartItemList2.getQuantity());
+                        }
                     }
                     int totalCartItem = 0;
                     for (Product ci : cartItemList) {
@@ -177,10 +181,20 @@
                     </div>
                     <div class="Cart_Item_Price">
                         <div class="Price">
-                            <p style="text-decoration: line-through">₫981800</p>
+                            <%
+                            if(ci.getDiscount() != 0) {
+                            %>
+                            <p style="text-decoration: line-through"><%=ci.getPrice()%></p>
+                            <p style="font-weight: bold; margin-left: 4px">
+                                ₫<%=ci.getDiscount() * cartItemList2.getQuantity()%>
+                            </p>
+                            <%} else {%>
+<%--                            <p style="text-decoration: line-through">ci.getPrice()</p>--%>
                             <p style="font-weight: bold; margin-left: 4px">
                                 ₫<%=ci.getPrice() * cartItemList2.getQuantity()%>
                             </p>
+                            <%}%>
+
                         </div>
                         <form action="${pageContext.request.contextPath}/adjustQuantity" method="post">
                             <div class="Cart_Item_Amount_Change">

@@ -94,7 +94,11 @@
                 for (Product ci : cartItemList) {
 
                     CartItem cartItemList2 = cid.getCartItem(String.valueOf(ci.getProductID()), String.valueOf(ci.getVariationID()));
-                    totalValue += (ci.getPrice() * cartItemList2.getQuantity());
+                    if(ci.getDiscount() != 0) {
+                        totalValue += (ci.getDiscount() * cartItemList2.getQuantity());
+                    } else {
+                        totalValue += (ci.getPrice() * cartItemList2.getQuantity());
+                    }
             %>
             <div class="cart_item">
                 <a class="cart_item_img">
@@ -111,7 +115,11 @@
                     <p><%=ci.getSize_Name()%> | <%=ci.getColor_Name()%>
                     </p>
                     <div class="cart_item_price">
+                        <% if (ci.getDiscount() != 0) {%>
+                        <p>₫<%=ci.getDiscount() * cartItemList2.getQuantity()%>
+                        <%} else {%>
                         <p>₫<%=ci.getPrice() * cartItemList2.getQuantity()%>
+                        <%}%>
                         </p>
                         <form action="${pageContext.request.contextPath}/adjustQuantity" method="post">
                             <div class="Cart_Item_Amount_Change">
