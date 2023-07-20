@@ -371,7 +371,7 @@
                                     <!-- Account -->
                                     <hr class="my-0"/>
                                     <div class="card-body">
-                                        <form action="CreateNewImageFolderServlet" method="POST">
+                                        <form action="CreateNewImageFolderServlet" method="POST" enctype="multipart/form-data">
                                             <div class="mb-3 col-md-6">
                                                 <label class="form-label" for="imageName">Product Name</label>
                                                 <input class="form-control" id="imageName" name="imageName"
@@ -400,27 +400,35 @@
                                             </div>
 
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label" for="thumbnail">Select thumbnail image</label>
-                                                <input class="form-control" id="thumbnail" name="thumbnail" type="url"
-                                                       required/>
+                                                <input type="file" name="thumbnail" id="imageUpload" accept="image/*" >
+<%--                                                <span class="btn btn-primary">Upload Image</span>--%>
+<%--                                                <label class="form-label" for="thumbnail">Select thumbnail image</label>--%>
+<%--                                                <input class="form-control" id="thumbnail" name="thumbnail" type="url"--%>
+<%--                                                       required/>--%>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label" for="productImg1">Select product Image
-                                                    1</label>
-                                                <input class="form-control" id="productImg1" name="productImg1"
-                                                       type="url" required/>
+                                                <input type="file" name="productImg1" id="imageUpload" accept="image/*" >
+<%--                                                <span class="btn btn-primary">Upload Image</span>--%>
+<%--                                                <label class="form-label" for="productImg1">Select product Image--%>
+<%--                                                    1</label>--%>
+<%--                                                <input class="form-control" id="productImg1" name="productImg1"--%>
+<%--                                                       type="url" required/>--%>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label" for="productImg2">Select product Image
-                                                    2</label>
-                                                <input class="form-control" id="productImg2" name="productImg2"
-                                                       type="url" required/>
+                                                <input type="file" name="productImg2" id="imageUpload" accept="image/*" >
+<%--                                                <span class="btn btn-primary">Upload Image</span>--%>
+<%--                                                <label class="form-label" for="productImg2">Select product Image--%>
+<%--                                                    2</label>--%>
+<%--                                                <input class="form-control" id="productImg2" name="productImg2"--%>
+<%--                                                       type="url" required/>--%>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label" for="productImg3">Select product Image
-                                                    3</label>
-                                                <input class="form-control" id="productImg3" name="productImg3"
-                                                       type="url" required/>
+                                                <input type="file" name="productImg3" id="imageUpload" accept="image/*" >
+<%--                                                <span class="btn btn-primary">Upload Image</span>--%>
+<%--                                                <label class="form-label" for="productImg3">Select product Image--%>
+<%--                                                    3</label>--%>
+<%--                                                <input class="form-control" id="productImg3" name="productImg3"--%>
+<%--                                                       type="url" required/>--%>
                                             </div>
                                             <%if (picheckname != null) {%>
                                             <h6 style="color: red">Product Img Folder is already in the database with id

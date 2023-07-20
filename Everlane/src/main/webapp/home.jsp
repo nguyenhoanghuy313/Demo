@@ -72,7 +72,7 @@
         <c:forEach var="cate" items="${cateList}" varStatus="status">
             <c:if test="${status.index < 8}">
                 <div class="Category">
-                    <img src="${cate.getCategoryImg()}" alt="">
+                    <img src="webImage/category/${cate.getCategoryImg()}" alt="">
                     <div class="Category_text">
                         <button value="cateID"><a
                                 href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all"> ${cate.getCategoryName()}</a>
@@ -113,7 +113,7 @@
 
             <c:forEach var="p" items="${data}">
                 <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=${p.getProductID()}">
-                    <img src=${p.getProductImg()}>
+                    <img src="${p.getProductImg()}">
                     <div class="Product_Name">
                         <div class="Best_Seller_Text">
                             <h1>${p.getProductName()}</h1>

@@ -432,7 +432,7 @@
                                 <tr class="item">
                                     <th><%=pi.getProduct_Img_ID()%></th>
                                     <th><%=pi.getProduct_img_name()%></th>
-                                    <th><img src="<%=pi.getThumbnail()%>"></th>
+                                    <th><img src="webImage/<%=pi.getThumbnail()%>"></th>
                                     <th><img src="<%=pi.getProduct_Img_1()%>"></th>
                                     <th><img src="<%=pi.getProduct_Img_2()%>"></th>
                                     <th><img src="<%=pi.getProduct_Img_3()%>"></th>
