@@ -17,7 +17,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
 </head>
-<body>
+<body >
 <jsp:include page="header.jsp"/>
 <section class="Authentication_Container">
     <div class="Authentication_Inner_Container">

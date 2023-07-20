@@ -156,7 +156,6 @@
               <table class="table">
                 <thead>
                 <tr>
-                  <th>NO</th>
                   <th>Order ID</th>
                   <th>Total Price</th>
                   <th>Status</th>
@@ -171,7 +170,6 @@
                 %>
                 <tbody class="table-border-bottom-0">
                 <tr class="item">
-                  <td>1</td>
                   <td><%=so.getShop_orderID()%></td>
                   <th><%=so.getOrder_total()%></th>
                   <th><%=so.getOrder_status()%></th>

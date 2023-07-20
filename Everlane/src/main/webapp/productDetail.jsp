@@ -33,7 +33,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
 </head>
-<body>
+<body onpageshow="showCart()">
 <jsp:include page="header.jsp"/>
 <%--<form action="addToCart" method="post">--%>
 <section class="Product_Detail_Container">
@@ -93,7 +93,7 @@
             </div>
             <h1 style="color:red; font-family: 'Nunito Sans', sans-serif; font-size: 14px">${CartMessError}</h1>
             <h1 style="color:green;font-family: 'Nunito Sans', sans-serif;  font-size: 14px">${ShippMess}</h1>
-            <button color="white" type="submit">Add To Bag
+            <button color="white" type="submit" onclick="showCart()">Add To Cart
             </button>
         </form>
 

@@ -34,7 +34,9 @@ LoginServlet extends HttpServlet {
             CategoryDAO c = new CategoryDAO();
             CollectionDAO col = new CollectionDAO();
             PromotionDAO promotionDAO = new PromotionDAO();
+            StoryDAO storyDAO = new StoryDAO();
 
+            List<Story> storyList = storyDAO.getAllStory("all");
 //            List<Product> data = p.getAllProducts();
             List<Category> cateList = c.getAllCategory();
             Collection collection = col.getCollectionsByDate();
@@ -62,26 +64,17 @@ LoginServlet extends HttpServlet {
                     HttpSession session = req.getSession();
                     session.setAttribute("acc", checkUser);
 //                    req.setAttribute("data", data);
+                    req.setAttribute("storyList", storyList);
                     req.setAttribute("promotion", promotion);
                     req.setAttribute("cateList", cateList);
                     req.setAttribute("collection", collection);
                     req.getRequestDispatcher("home.jsp").forward(req, resp);
-//                    return;
-//                } else if (Role.getRole() == 1) {
-//                    HttpSession session = req.getSession();
-//                    session.setAttribute("acc", checkUser);
-//                    UserDAO ud = new UserDAO();
-//                    List<User> userList = ud.getAllUser();
-//                    req.setAttribute("userList", userList);
-//                    req.getRequestDispatcher("userListManager.jsp").forward(req, resp);
-////                    return;
                 } else {
                     req.setAttribute("Message", "Email or Password is incorrect or not exist!!!");
                     req.getRequestDispatcher("login.jsp").forward(req, resp);
 //                    return;
                 }
             }
-//            req.getRequestDispatcher("login.jsp").forward(req, resp);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }

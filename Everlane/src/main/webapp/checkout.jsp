@@ -164,7 +164,7 @@
                     CartItem cartItemList2 = cid.getCartItem(String.valueOf(ci.getProductID()), String.valueOf(ci.getVariationID()));
                     totalValue2 += (ci.getPrice() * cartItemList2.getQuantity());
             %>
-            <div class="Cart_Item">
+            <div class="Cart_Item" style="margin-bottom: 20px;">
                 <img src="webImage/productImg/<%=ci.getThumbnail()%>" alt="">
                 <div class="Cart_Item_Content">
                     <div class="Cart_Item_Header">
