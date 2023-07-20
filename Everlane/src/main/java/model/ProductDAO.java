@@ -18,6 +18,16 @@ public class ProductDAO extends myDAO {
                 case "down":
                     xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, c.CategoryName, p.CollectionID, p.ProductName, col.color_Name, s.size_Name, p.Price, v.qty_in_stock\n" + "from variation v, product_img pi, product p , category c, color col, size s\n" + "where p.ProductID = v.ProductID \n" + "and p.CategoryID = c.CategoryID\n" + "and v.product_img_ID = pi.product_img_ID\n" + "and v.color_ID = col.color_ID\n" + "and v.size_ID = s.size_ID\n" + "order by p.Price desc ";
                     break;
+                case "inventory":
+                    xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, c.CategoryName, p.CollectionID, p.ProductName, col.color_Name, s.size_Name, p.Price, v.qty_in_stock\n" +
+                            "from variation v, product_img pi, product p , category c, color col, size s\n" +
+                            "where p.ProductID = v.ProductID \n" +
+                            "and p.CategoryID = c.CategoryID\n" +
+                            "and v.product_img_ID = pi.product_img_ID\n" +
+                            "and v.color_ID = col.color_ID\n" +
+                            "and v.size_ID = s.size_ID\n" +
+                            "order by v.qty_in_stock desc";
+                    break;
                 default:
                     int cId = Integer.parseInt(input);
                     xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, c.CategoryName, p.CollectionID, p.ProductName, col.color_Name, s.size_Name, p.Price, v.qty_in_stock\n" + "from variation v, product_img pi, product p , category c, color col, size s\n" + "where c.CategoryID = " + cId + " \n" + "and p.ProductID = v.ProductID \n" + "and p.CategoryID = c.CategoryID\n" + "and v.product_img_ID = pi.product_img_ID\n" + "and v.color_ID = col.color_ID\n" + "and v.size_ID = s.size_ID";

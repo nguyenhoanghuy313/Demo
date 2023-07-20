@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductForEditDAO extends myDAO{
-    public  List<ProductForEdit> getAllProductForEdit(){
+    public List<ProductForEdit> getAllProductForEdit(){
         List<ProductForEdit> t = new ArrayList<>();
         xSql = "select * from product";
         try{
@@ -172,5 +172,22 @@ public class ProductForEditDAO extends myDAO{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public int PTotal(){
+        xSql = "select count(*) from product;";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                int c = rs.getInt(1);
+                return c;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

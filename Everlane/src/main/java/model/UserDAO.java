@@ -43,33 +43,6 @@ public class UserDAO extends myDAO {
         return t;
     }
 
-//    public User checkUser(String xemail, String xpassword) {
-//        try {
-//            xSql = "select *\n" +
-//                    "from user\n" +
-//                    "where Email=? and Password=?";
-//            ps = con.prepareStatement(xSql);
-//            ps.setString(1, xemail);//dau hoi so 1
-//            ps.setString(2, xpassword);//dau hoi so 2
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                return new User(rs.getInt(1),
-//                        rs.getString(2),
-//                        rs.getString(3),
-//                        rs.getString(4),
-//                        rs.getString(5),
-//                        rs.getString(6),
-//                        rs.getDate(7),
-//                        rs.getInt(8),
-//                        rs.getInt(9),
-//                        rs.getString(10));
-//            }
-//        } catch (Exception e) {
-//            System.out.println("CheckUser: " + e.getMessage());
-//        }
-//        return null;
-//    }
-
     public User checkUser(String xEmail, String xPassword) {
         try {
             xSql = "select *\n" +
@@ -121,7 +94,6 @@ public class UserDAO extends myDAO {
         }
         return u;
     }
-
 
     public boolean checkAccountExist(String xusername, String xemail) {
         try {
@@ -227,7 +199,6 @@ public class UserDAO extends myDAO {
             System.out.println("Create new User: " + e.getMessage());
         }
     }
-
 
     public List<User> searchByName(String sName, String role) {
         if(role.equalsIgnoreCase("all")) {
@@ -391,14 +362,12 @@ public class UserDAO extends myDAO {
         }
     }
 
-    //Nguyễn Đắc Hoàng Đạt - HE170720
     public static boolean isValidDate(String date) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date currentDate = new java.util.Date();
             java.util.Date inputDate = dateFormat.parse(date);
             return !inputDate.after(currentDate) && !inputDate.equals(currentDate); // Ngày sinh không hợp lệ
-// Ngày sinh hợp lệ
         } catch (Exception e) {
             return false; // Lỗi xảy ra khi chuyển đổi ngày
         }
@@ -452,6 +421,30 @@ public class UserDAO extends myDAO {
         }
     }
 
+    public int CustomerTotal(String input){
+        if (input.equals("all")){
+            xSql = "select count(*) from user where Role = 4;";
+        }else if(input.equals("male")){
+            xSql = "select count(*) from user where Role = 4 and Sex = 1;";
+        }else if(input.equals("female")){
+            xSql = "select count(*) from user where Role = 4 and Sex = 2;";
+        }else{
+            xSql = "select count(*) from user where Role = 4 and (Sex != 1 and Sex != 2) ;";
+        }
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                int c = rs.getInt(1);
+                return c;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }
 
 
