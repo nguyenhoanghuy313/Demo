@@ -286,6 +286,7 @@
                                                 <option value="2" ${c.getCollectionID() != "2" ? "" : "selected"}>Winter Collection</option>
                                                 <option value="3" ${c.getCollectionID() != "3" ? "" : "selected"}>Spring Collection</option>
                                                 <option value="4" ${c.getCollectionID() != "4" ? "" : "selected"}>Autumn Collection</option>
+                                                <option value="5" ${c.getCollectionID() != "5" ? "" : "selected"}>NO Sale Collection</option>
                                             </select>
                                         </div>
                                     </form>

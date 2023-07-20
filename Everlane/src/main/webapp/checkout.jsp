@@ -166,7 +166,11 @@
                 int totalValue2 = 0;  // Tổng giá trị của các mục
                 for (Product ci : cartItemList) {
                     CartItem cartItemList2 = cid.getCartItem(String.valueOf(ci.getProductID()), String.valueOf(ci.getVariationID()));
-                    totalValue2 += (ci.getPrice() * cartItemList2.getQuantity());
+                    if(ci.getDiscount() != 0) {
+                        totalValue2 += (ci.getDiscount() * cartItemList2.getQuantity());
+                    } else {
+                        totalValue2 += (ci.getPrice() * cartItemList2.getQuantity());
+                    }
             %>
             <div class="Cart_Item">
                 <img src="<%=ci.getThumbnail()%>" alt="">
@@ -224,15 +228,15 @@
                 </tr>
                 <tr>
                     <td>Duties</td>
-                    <td>???</td>
+                    <td>0</td>
                 </tr>
                 <tr>
                     <td>Tax</td>
-                    <td>???</td>
+                    <td>0</td>
                 </tr>
                 <tr>
                     <td>Shipping</td>
-                    <td>₫360,000</td>
+                    <td>Free Ship</td>
                 </tr>
                 <tr style="font-weight: bold">
                     <td>Total</td>

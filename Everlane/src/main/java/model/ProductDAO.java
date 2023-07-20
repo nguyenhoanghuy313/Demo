@@ -103,7 +103,16 @@ public class ProductDAO extends myDAO {
 
     public List<Product> getProductsByCID(String cid) {
         List<Product> t = new ArrayList<>();
-        xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name\n" + "from variation v, product_img pi, product p , category c, color col, size s\n" + "where c.CategoryID = ? \n" + "and c.CategoryID = p.CategoryID \n" + "and p.ProductID = v.ProductID \n" + "and v.product_img_ID = pi.product_img_ID\n" + "and v.color_ID = col.color_ID\n" + "and v.size_ID = s.size_ID;";
+        xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name, (p.Price-(p.Price*pro.DiscountRate/100)) 'DiscountPrice'\n" +
+                "from variation v, product_img pi, product p , category c, color col, size s, collection collec, promotion pro\n" +
+                "where c.CategoryID = ? \n" +
+                "and c.CategoryID = p.CategoryID \n" +
+                "and p.ProductID = v.ProductID \n" +
+                "and v.product_img_ID = pi.product_img_ID\n" +
+                "and collec.PromotionID = pro.PromotionID\n" +
+                "and p.CollectionID = collec.CollectionID\n" +
+                "and v.color_ID = col.color_ID\n" +
+                "and v.size_ID = s.size_ID;";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, cid);
@@ -112,7 +121,7 @@ public class ProductDAO extends myDAO {
             String xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName;
             int xCollectionID;
             String xProductName, xColor_Name, xSize_Name;
-            double xPrice;
+            double xPrice, xDiscountPrice;
             int xQty_in_stock;
             Product x;
             while (rs.next()) {
@@ -128,7 +137,8 @@ public class ProductDAO extends myDAO {
                 xSize_Name = null;
                 xPrice = rs.getDouble("Price");
                 xQty_in_stock = 0;
-                x = new Product(xProductID, xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName, xCollectionID, xProductName, xColor_Name, xSize_Name, xPrice, xQty_in_stock);
+                xDiscountPrice = rs.getDouble("DiscountPrice");
+                x = new Product(xProductID, xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName, xCollectionID, xProductName, xColor_Name, xSize_Name, xPrice, xQty_in_stock, xDiscountPrice);
                 t.add(x);
             }
             rs.close();
@@ -140,13 +150,15 @@ public class ProductDAO extends myDAO {
     }
     public List<Product> getNewArrivalByCid(String cid) {
         List<Product> t = new ArrayList<>();
-        xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name\n" +
-                "from variation v, product_img pi, product p , category c, color col, size s\n" +
+        xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name, (p.Price-(p.Price*pro.DiscountRate/100)) 'DiscountPrice'\n" +
+                "from variation v, product_img pi, product p , category c, color col, size s, collection collec, promotion pro\n" +
                 "where c.CategoryID = ? \n" +
                 "and c.CategoryID = p.CategoryID \n" +
                 "and p.ProductID = v.ProductID \n" +
                 "and v.product_img_ID = pi.product_img_ID\n" +
                 "and v.color_ID = col.color_ID\n" +
+                "and collec.PromotionID = pro.PromotionID\n" +
+                "and p.CollectionID = collec.CollectionID\n" +
                 "and v.size_ID = s.size_ID\n" +
                 "order by v.ProductID limit 10;";
         try {
@@ -157,7 +169,7 @@ public class ProductDAO extends myDAO {
             String xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName;
             int xCollectionID;
             String xProductName, xColor_Name, xSize_Name;
-            double xPrice;
+            double xPrice, xDiscountPrice;
             int xQty_in_stock;
             Product x;
             while (rs.next()) {
@@ -173,7 +185,8 @@ public class ProductDAO extends myDAO {
                 xSize_Name = null;
                 xPrice = rs.getDouble("Price");
                 xQty_in_stock = 0;
-                x = new Product(xProductID, xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName, xCollectionID, xProductName, xColor_Name, xSize_Name, xPrice, xQty_in_stock);
+                xDiscountPrice = rs.getDouble("DiscountPrice");
+                x = new Product(xProductID, xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName, xCollectionID, xProductName, xColor_Name, xSize_Name, xPrice, xQty_in_stock, xDiscountPrice);
                 t.add(x);
             }
             rs.close();
@@ -235,7 +248,17 @@ public class ProductDAO extends myDAO {
 
     public List<Product> getProductsByColIDProID(String cateID, String colID) {
         List<Product> t = new ArrayList<>();
-        xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name\n" + "from variation v, product_img pi, product p , category c, color col, size s\n" + "where col.color_ID = ?\n" + "and c.CategoryID = ?\n" + "and c.CategoryID = p.CategoryID \n" + "and p.ProductID = v.ProductID \n" + "and v.product_img_ID = pi.product_img_ID\n" + "and v.color_ID = col.color_ID\n" + "and v.size_ID = s.size_ID;";
+        xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name, (p.Price-(p.Price*pro.DiscountRate/100)) 'DiscountPrice'\n" +
+                "from variation v, product_img pi, product p , category c, color col, size s, collection collec, promotion pro\n" +
+                "where col.color_ID = ?\n" +
+                "and c.CategoryID = ?\n" +
+                "and c.CategoryID = p.CategoryID \n" +
+                "and p.ProductID = v.ProductID \n" +
+                "and v.product_img_ID = pi.product_img_ID\n" +
+                "and collec.PromotionID = pro.PromotionID\n" +
+                "and p.CollectionID = collec.CollectionID\n" +
+                "and v.color_ID = col.color_ID\n" +
+                "and v.size_ID = s.size_ID;";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, colID);
@@ -245,7 +268,7 @@ public class ProductDAO extends myDAO {
             String xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName;
             int xCollectionID;
             String xProductName, xColor_Name, xSize_Name;
-            double xPrice;
+            double xPrice, xDiscountPrice;
             int xQty_in_stock;
             Product x;
             while (rs.next()) {
@@ -261,7 +284,8 @@ public class ProductDAO extends myDAO {
                 xSize_Name = null;
                 xPrice = rs.getDouble("Price");
                 xQty_in_stock = 0;
-                x = new Product(xProductID, xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName, xCollectionID, xProductName, xColor_Name, xSize_Name, xPrice, xQty_in_stock);
+                xDiscountPrice = rs.getDouble("DiscountPrice");
+                x = new Product(xProductID, xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName, xCollectionID, xProductName, xColor_Name, xSize_Name, xPrice, xQty_in_stock, xDiscountPrice);
                 t.add(x);
             }
             rs.close();
@@ -274,14 +298,16 @@ public class ProductDAO extends myDAO {
 
     public List<Product> getNewArrivalByColIDProID(String cateID, String colID) {
         List<Product> t = new ArrayList<>();
-        xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name\n" +
-                "from variation v, product_img pi, product p , category c, color col, size s\n" +
+        xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name, (p.Price-(p.Price*pro.DiscountRate/100)) 'DiscountPrice'\n" +
+                "from variation v, product_img pi, product p , category c, color col, size s, collection collec, promotion pro\n" +
                 "where col.color_ID = ?\n" +
                 "and c.CategoryID = ?\n" +
                 "and c.CategoryID = p.CategoryID \n" +
                 "and p.ProductID = v.ProductID \n" +
                 "and v.product_img_ID = pi.product_img_ID\n" +
                 "and v.color_ID = col.color_ID\n" +
+                "and collec.PromotionID = pro.PromotionID\n" +
+                "and p.CollectionID = collec.CollectionID\n" +
                 "and v.size_ID = s.size_ID\n" +
                 "order by v.ProductID limit 1;";
         try {
@@ -293,7 +319,7 @@ public class ProductDAO extends myDAO {
             String xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName;
             int xCollectionID;
             String xProductName, xColor_Name, xSize_Name;
-            double xPrice;
+            double xPrice, xDiscountPrice;
             int xQty_in_stock;
             Product x;
             while (rs.next()) {
@@ -309,7 +335,8 @@ public class ProductDAO extends myDAO {
                 xSize_Name = null;
                 xPrice = rs.getDouble("Price");
                 xQty_in_stock = 0;
-                x = new Product(xProductID, xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName, xCollectionID, xProductName, xColor_Name, xSize_Name, xPrice, xQty_in_stock);
+                xDiscountPrice = rs.getDouble("DiscountPrice");
+                x = new Product(xProductID, xThumbnail, xProduct_img_1, xProduct_img_2, xProduct_img_3, xCategoryName, xCollectionID, xProductName, xColor_Name, xSize_Name, xPrice, xQty_in_stock, xDiscountPrice);
                 t.add(x);
             }
             rs.close();
@@ -511,12 +538,12 @@ public class ProductDAO extends myDAO {
 
 //    public static void main(String[] args) {
 //        ProductDAO p = new ProductDAO();
-//        Product product = p.getProductByProIDColName("1","black");
-//        System.out.println(product.getDiscount());
-////        List<Product> t = p.getProductsByCollectID("1", "1");
+////        Product product = p.getProductByProIDColName("1","black");
+////        System.out.println(product.getDiscount());
+//        List<Product> t = p.getNewArrivalByColIDProID("1", "3");
 ////        List<Product> t = p.getProductsByColIDCollectID("2", "3", "2");
-////        for (Product x : t) {
-////            System.out.println(x.getDiscount());
-////        }
+//        for (Product x : t) {
+//            System.out.println(x.getDiscount());
+//        }
 //    }
 }
