@@ -34,7 +34,7 @@ public class LoginGoogleHandler extends HttpServlet {
         PromotionDAO promotionDAO = new PromotionDAO();
         UserGoogleDto user = getUserInfo(accessToken);
         Collection collection = col.getCollectionsByDate();
-        Promotion promotion = promotionDAO.getPromotionByID(String.valueOf(collection.getPromotionID()));
+        Promotion promotion = promotionDAO.getPromotionByID("1");
         User ugoogle = u.getUserByEmail(user.getEmail());
         request.getSession().setAttribute("acc", ugoogle);
 //        response.sendRedirect(request.getContextPath()+"/home.jsp");

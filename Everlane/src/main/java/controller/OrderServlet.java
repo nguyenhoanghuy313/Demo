@@ -40,8 +40,7 @@ public class OrderServlet extends HttpServlet {
 
                 // Tạo đơn hàng
                 ShopOrderDAO shopOrderDAO = new ShopOrderDAO();
-                ShopOrder shopOrder = new ShopOrder(userID, 0);
-                shopOrder = shopOrderDAO.getLatestOrder();
+                ShopOrder shopOrder= shopOrderDAO.getLatestOrder();
                 int orderID = shopOrder.getShop_orderID();
 
                 // Đặt hàng cho từng sản phẩm trong giỏ hàng
@@ -52,6 +51,12 @@ public class OrderServlet extends HttpServlet {
                     double price = cartItem.getPrice() * quantity;  // Tính toán giá trị dựa trên số lượng
                     // Thực hiện đặt hàng cho sản phẩm
                     orderDetailDAO.insert(orderID, productID, variationID,quantity,price);
+                    VariationDAO variationDAO = new VariationDAO();
+
+                    //Giảm quanty in stock
+                    Variation var = variationDAO.getVariation(productID, cartItem.getColor_Name(), cartItem.getSize_Name());
+                    variationDAO.updateVariation(cartItem.getProductID(), var.getColor_ID(), var.getSize_ID(), var.getQtu_in_stock() - cartItem.getQty_in_cart(), var.getProduct_img_ID(), var.getVariationID());
+
                     // Xóa sản phẩm đã đặt hàng khỏi giỏ hàng
                     cartItemDAO.deleteCartItemByProdID(productID, variationID);
                     pd.reduceQuantityOfProduct(productID,variationID,quantity);

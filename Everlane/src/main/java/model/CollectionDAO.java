@@ -17,18 +17,16 @@ public class CollectionDAO extends myDAO{
             rs = ps.executeQuery();
             int xCollectionID;
             String xCollectionName;
-            int xPromotionID;
             String xGetCollectionImg;
             String xCollection_description;
             Timestamp xDate;
             while(rs.next()){
                 xCollectionID = rs.getInt("CollectionID");
                 xCollectionName = rs.getString("CollectionName");
-                xPromotionID = rs.getInt("PromotionID");
                 xGetCollectionImg = rs.getString("collectionImg");
                 xCollection_description = rs.getString("collection_description");
                 xDate = rs.getTimestamp("create_date");
-                x = new Collection(xCollectionID, xCollectionName, xPromotionID , xGetCollectionImg, xCollection_description, xDate);
+                x = new Collection(xCollectionID, xCollectionName, xGetCollectionImg, xCollection_description, xDate);
             }
             rs.close();
             ps.close();
@@ -47,18 +45,16 @@ public class CollectionDAO extends myDAO{
             ps.setInt(1, i);
             rs = ps.executeQuery();
             String xCollectionName;
-            int xPromotionID;
             String xGetCollectionImg;
             String xCollection_description;
             Timestamp xcreate_date;
             while(rs.next()){
                 i = rs.getInt("CollectionID");
                 xCollectionName = rs.getString("CollectionName");
-                xPromotionID = rs.getInt("PromotionID");
                 xGetCollectionImg = rs.getString("collectionImg");
                 xCollection_description = rs.getString("collection_description");
                 xcreate_date = rs.getTimestamp("create_date");
-                x = new Collection(i, xCollectionName, xPromotionID , xGetCollectionImg, xCollection_description, xcreate_date);
+                x = new Collection(i, xCollectionName,xGetCollectionImg, xCollection_description, xcreate_date);
             }
             rs.close();
             ps.close();
@@ -75,18 +71,16 @@ public class CollectionDAO extends myDAO{
             rs = ps.executeQuery();
             int xCollectionID;
             String xCollectionName;
-            int xPromotionID;
             String xGetCollectionImg;
             String xCollection_description;
             Timestamp xcreate_date;
             while(rs.next()){
                 xCollectionID = rs.getInt("CollectionID");
                 xCollectionName = rs.getString("CollectionName");
-                xPromotionID = rs.getInt("PromotionID");
                 xGetCollectionImg = rs.getString("collectionImg");
                 xCollection_description = rs.getString("collection_description");
                 xcreate_date = rs.getTimestamp("create_date");
-                x = new Collection(xCollectionID, xCollectionName, xPromotionID , xGetCollectionImg, xCollection_description, xcreate_date);
+                x = new Collection(xCollectionID, xCollectionName , xGetCollectionImg, xCollection_description, xcreate_date);
             }
             rs.close();
             ps.close();

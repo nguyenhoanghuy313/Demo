@@ -19,7 +19,7 @@ public class VerifyPaymentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        request.getRequestDispatcher("Checkout").forward(request, response);
+        request.getRequestDispatcher("Checkout?input=3").forward(request, response);
     }
 
 

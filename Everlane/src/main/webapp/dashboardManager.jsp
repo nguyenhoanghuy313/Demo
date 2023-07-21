@@ -2,6 +2,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="model.*" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="entity.BestSeller" %>
 
 <html
         class="light-style layout-menu-fixed"
@@ -75,6 +77,14 @@
 
     ProductDAO productDAO = new ProductDAO();
     List<Product> inventory = productDAO.getAllProducts("inventory", 1);
+
+    BestSellerDAO bestseller = new BestSellerDAO();
+    List<BestSeller> bestSellers = bestseller.getBestSeller();
+    List<Product> productList = new ArrayList<>();
+    for (BestSeller bestSeller: bestSellers){
+        Product product = productDAO.getProductByProIDColName(String.valueOf(bestSeller.getProductID()), bestSeller.getColorName());
+        productList.add(product);
+    }
 
 %>
 <body>
@@ -285,7 +295,7 @@
                                             <h5 class="card-title text-primary">Welcomeback <%=user.getUserName()%>!
                                                 🎉</h5>
                                             <p class="mb-4">
-                                                We have reached <span class="fw-bold"><%=cusTotal%></span> more sales today.
+                                                We have reached <span class="fw-bold"><%=saleTotal%></span> more sales today.
                                             </p>
                                         </div>
                                     </div>
@@ -429,42 +439,28 @@
                         <div class="col-md-6 col-lg-4 order-2 mb-4">
                             <div class="card h-100">
                                 <div class="card-header d-flex align-items-center justify-content-between">
-                                    <h5 class="card-title m-0 me-2">Best seller</h5>
+                                    <h5 class="card-title m-0 me-2">Best Seller</h5>
                                 </div>
                                 <div class="card-body">
-                                    <ul class="p-0 m-0">
+                                    <ul class="p-0 m-0" style="height: 600px; overflow-y: scroll">
+                                        <%for (Product i : productList) {%>
                                         <li class="d-flex mb-4 pb-1">
                                             <div class="avatar flex-shrink-0 me-3">
                                                 <img alt="User" class="rounded"
-                                                     src="a.template/assets/img/icons/unicons/paypal.png"/>
+                                                     src="webImage/productImg/<%=i.getThumbnail()%>"/>
                                             </div>
                                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                                 <div class="me-2">
-                                                    <small class="text-muted d-block mb-1">Paypal</small>
-                                                    <h6 class="mb-0">Send money</h6>
-                                                </div>
-                                                <div class="user-progress d-flex align-items-center gap-1">
-                                                    <h6 class="mb-0">+82.6</h6>
-                                                    <span class="text-muted">USD</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex mb-4 pb-1">
-                                            <div class="avatar flex-shrink-0 me-3">
-                                                <img alt="User" class="rounded"
-                                                     src="a.template/assets/img/icons/unicons/paypal.png"/>
-                                            </div>
-                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                <div class="me-2">
-                                                    <small class="text-muted d-block mb-1">Paypal</small>
-                                                    <h6 class="mb-0">Send money</h6>
-                                                </div>
-                                                <div class="user-progress d-flex align-items-center gap-1">
-                                                    <h6 class="mb-0">+82.6</h6>
-                                                    <span class="text-muted">USD</span>
+                                                    <h6 class="mb-0"><%=i.getProductName()%>
+                                                    </h6>
+                                                    <small class="text-muted d-block mb-1"><%=i.getColor_Name()%>
+                                                        | <%=i.getSize_Name()%> | <%=i.getQty_in_stock()%>
+                                                        | <%=i.getPrice()%>
+                                                    </small>
                                                 </div>
                                             </div>
                                         </li>
+                                        <%}%>
                                     </ul>
                                 </div>
                             </div>

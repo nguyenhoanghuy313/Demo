@@ -6,7 +6,6 @@ import java.util.Date;
 public class Collection {
     int collectionID;
     String collectionName;
-    int promotionID;
     String collectionImg;
     String collection_description;
     Timestamp create_date;
@@ -14,10 +13,9 @@ public class Collection {
     public Collection() {
     }
 
-    public Collection(int collectionID, String collectionName, int promotionID, String collectionImg, String collection_description, Timestamp create_date) {
+    public Collection(int collectionID, String collectionName, String collectionImg, String collection_description, Timestamp create_date) {
         this.collectionID = collectionID;
         this.collectionName = collectionName;
-        this.promotionID = promotionID;
         this.collectionImg = collectionImg;
         this.collection_description = collection_description;
         this.create_date = create_date;
@@ -47,13 +45,6 @@ public class Collection {
         this.collectionName = collectionName;
     }
 
-    public int getPromotionID() {
-        return promotionID;
-    }
-
-    public void setPromotionID(int promotionID) {
-        this.promotionID = promotionID;
-    }
 
     public String getCollectionImg() {
         return collectionImg;

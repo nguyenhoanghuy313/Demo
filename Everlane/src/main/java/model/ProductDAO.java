@@ -148,6 +148,7 @@ public class ProductDAO extends myDAO {
         }
         return (t);
     }
+
     public List<Product> getNewArrivalByCid(String cid) {
         List<Product> t = new ArrayList<>();
         xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name\n" +
@@ -327,6 +328,7 @@ public class ProductDAO extends myDAO {
         }
         return (t);
     }
+
     public List<Product> getProductsByColIDCollectID(String cateID, String colID, String collectID) {
         List<Product> t = new ArrayList<>();
         xSql = "select DISTINCT v.ProductID, pi.thumbnail, pi.product_img_1, pi.product_img_2, pi.product_img_3, p.ProductName, p.Price, col.color_Name\n" +
@@ -498,6 +500,7 @@ public class ProductDAO extends myDAO {
         }
         return 0;
     }
+
     public void reduceQuantityOfProduct(String proID, String variID, int quantity){
         int xProID = Integer.parseInt(proID);
         int xVariID = Integer.parseInt(variID);

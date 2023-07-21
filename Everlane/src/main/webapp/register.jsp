@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="header/header1.css">
     <link href="header/pop-up/pop-up.css" rel="stylesheet">
     <link href="header/pop-up/policy.css" rel="stylesheet">
-    <link rel="stylesheet" href="account/authentication/authentication1.css">
+    <link rel="stylesheet" href="account/authentication/authentication.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
     <!-- Favicon -->

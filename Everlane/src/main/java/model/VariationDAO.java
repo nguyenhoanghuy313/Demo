@@ -47,6 +47,37 @@ public class VariationDAO extends myDAO{
         return v;
     }
 
+    public Variation getVariationByID(int VariationID){
+        Variation v = null;
+        xSql = "select distinct v.*\n" +
+                "from variation v, product_img pi, product p , category c, color col, size s\n" +
+                "where v.VariationID = '"+ VariationID +"'" +
+                "and p.ProductID = v.ProductID \n" +
+                "and p.CategoryID = c.CategoryID\n" +
+                "and v.product_img_ID = pi.product_img_ID\n" +
+                "and v.color_ID = col.color_ID\n" +
+                "and v.size_ID = s.size_ID;";
+        try{
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            int variationID, productID, color_ID, size_ID, qtu_in_stock, product_img_ID;
+            while(rs.next()){
+                variationID = rs.getInt("VariationID");
+                productID = rs.getInt("ProductID");
+                color_ID = rs.getInt("color_ID");
+                size_ID = rs.getInt("size_ID");
+                qtu_in_stock = rs.getInt("qty_in_stock");
+                product_img_ID = rs.getInt("product_img_ID");
+                v = new Variation(variationID, productID, color_ID, size_ID, qtu_in_stock, product_img_ID);
+            }
+            rs.close();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
     public Variation getVariationByImgID(String ImgID){
         Variation v = null;
         xSql = "select distinct v.*\n" +
