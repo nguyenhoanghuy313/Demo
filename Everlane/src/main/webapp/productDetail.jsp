@@ -33,15 +33,15 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
 </head>
-<body>
+<body onpageshow="showCart()">
 <jsp:include page="header.jsp"/>
 <%--<form action="addToCart" method="post">--%>
 <section class="Product_Detail_Container">
     <div class="Product_Image_Container">
-        <img src=<%= pi.getThumbnail()%>>
-        <img src=<%= pi.getProduct_img_1()%>>
-        <img src=<%= pi.getProduct_img_2()%>>
-        <img src=<%= pi.getProduct_img_3()%>>
+        <img src="webImage/productImg/<%= pi.getThumbnail()%>">
+        <img src="webImage/productImg/<%= pi.getProduct_img_1()%>">
+        <img src="webImage/productImg/<%= pi.getProduct_img_2()%>">
+        <img src="webImage/productImg/<%= pi.getProduct_img_3()%>">
     </div>
     <div class="Product_Detail">
         <div class="Product_Name">
@@ -88,7 +88,6 @@
                 <div class="Size">
                     <input type="hidden" name="ProductID" value="<%= pi.getProductID() %>">
                     <input type="hidden" name="color_Name" value="<%= pi.getColor_Name() %>">
-                    <%= pi.getVariationID() %>
                     <%--                    <input type="hidden" name="productName" value="<%= pi.getProductName() %>">--%>
                     <div class="radiocheck_container">
                         <% for (Size size : sizes) { %>
@@ -103,7 +102,7 @@
             </div>
             <h1 style="color:red; font-family: 'Nunito Sans', sans-serif; font-size: 14px">${CartMessError}</h1>
             <h1 style="color:green;font-family: 'Nunito Sans', sans-serif;  font-size: 14px">${ShippMess}</h1>
-            <button color="white" type="submit">Add To Bag
+            <button color="white" type="submit" onclick="showCart()">Add To Cart
             </button>
         </form>
 
@@ -124,7 +123,7 @@
 
             <c:forEach var="p" items="${data}">
                 <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=${p.getProductID()}">
-                    <img src=${p.getProductImg()}>
+                    <img src="webImage/productImg/${p.getProductImg()}">
                     <div class="Product_Name">
                         <div class="Best_Seller_Text">
                             <h1>${p.getProductName()}</h1>

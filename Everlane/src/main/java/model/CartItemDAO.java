@@ -8,15 +8,16 @@ import java.util.List;
 //Đoàn Phan Hưng - HE170721
 public class CartItemDAO extends myDAO{
 
-    public void insert(String proID, String varID){
+    public void insert(String cartID, String proID, String varID){
+        int xCartID = Integer.parseInt(cartID);
         int xProID = Integer.parseInt(proID);
-//        int xQuan = Integer.parseInt(quan);
         int xVarID = Integer.parseInt(varID);
-        xSql = "insert into cart_item (ProductID,  VariationID) values (?, ?)";
+        xSql = "insert into cart_item (CartID, ProductID, Quantity, VariationID) values (?, ?, 1, ?)";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, xProID);
-            ps.setInt(2, xVarID);
+            ps.setInt(1, xCartID);
+            ps.setInt(2, xProID);
+            ps.setInt(3, xVarID);
             ps.executeUpdate();
             ps.close();
 //            System.out.println(xSql);
@@ -134,14 +135,49 @@ public class CartItemDAO extends myDAO{
         return c;
     }
 
-    public void plusQuantity (String proID, String variID){
+    public CartItem getCartQuantity(String proID, String variID, String cartID){
         int xProID = Integer.parseInt(proID);
         int xVariID = Integer.parseInt(variID);
-        xSql = "update cart_item set Quantity = Quantity + 1 where ProductID = ? and variationID = ?";
+        int xCart_itemID = Integer.parseInt(cartID);
+        xSql = "select ci.*, c.UserID from cart_item ci, product p, cart c, variation v where ci.ProductID = p.ProductID and ci.variationID = v.VariationID and c.CartID = ci.CartID and ci.ProductID = ? and ci.variationID = ? and ci.CartID = ?;";
+        int xCartID;
+        int xProductID;
+        int xQuantity;
+        int xVariationID;
+        CartItem c = null;
+        try{
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, xProID);
+            ps.setInt(2, xVariID);
+            ps.setInt(3, xCart_itemID);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                xCart_itemID = rs.getInt("cart_itemID");
+                xCartID = rs.getInt("CartID");
+                xProductID = rs.getInt("ProductID");
+                xQuantity = rs.getInt("Quantity");
+                xVariationID = rs.getInt("variationID");
+                c=new CartItem(xCart_itemID,xCartID,xProductID,xQuantity,xVariationID) ;
+            }
+            rs.close();
+            ps.close();
+//            System.out.println(xSql);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return c;
+    }
+
+    public void plusQuantity (String proID, String variID, String cardID){
+        int xProID = Integer.parseInt(proID);
+        int xVariID = Integer.parseInt(variID);
+        int xCartID = Integer.parseInt(cardID);
+        xSql = "update cart_item set Quantity = Quantity + 1 where ProductID = ? and variationID = ? and CartID = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, xProID);
             ps.setInt(2, xVariID);
+            ps.setInt(3, xCartID);
             ps.executeUpdate();
             ps.close();
         }catch (Exception e){
@@ -149,14 +185,16 @@ public class CartItemDAO extends myDAO{
         }
     }
 
-    public void minusQuantity(String proID, String variID){
+    public void minusQuantity(String proID, String variID , String cardID){
         int xProID = Integer.parseInt(proID);
         int xVariID = Integer.parseInt(variID);
-        xSql = "update cart_item set Quantity = Quantity - 1 where ProductID = ? and variationID = ?";
+        int xCartID = Integer.parseInt(cardID);
+        xSql = "update cart_item set Quantity = Quantity - 1 where ProductID = ? and variationID = ? and CartID = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, xProID);
             ps.setInt(2, xVariID);
+            ps.setInt(3, xCartID);
             ps.executeUpdate();
             ps.close();
         }catch (Exception e){
@@ -176,15 +214,16 @@ public class CartItemDAO extends myDAO{
         }
     }
 
-    public void deleteCartItem(String ProductID, String VariationID) {
-//        int xCartItemID = Integer.parseInt(CartItemID);
+    public void deleteCartItem(String ProductID, String VariationID, String CartItemID) {
+        int xCartItemID = Integer.parseInt(CartItemID);
         int xProductID = Integer.parseInt(ProductID);
         int xVariationID = Integer.parseInt(VariationID);
-        xSql = "delete from cart_item where ProductID=? and variationID=?";
+        xSql = "delete from cart_item where ProductID=? and variationID=? and CartID=?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, xProductID);
             ps.setInt(2, xVariationID);
+            ps.setInt(3, xCartItemID);
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {

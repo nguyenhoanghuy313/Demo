@@ -57,7 +57,6 @@
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
         <!-- Menu -->
-
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
                 <a href="${pageContext.request.contextPath}/home-servlet" class="app-brand-link">
@@ -92,25 +91,14 @@
                         <div data-i18n="Orders & Returns">Orders List</div>
                     </a>
                 </li>
-                <!-- Forms -->
+
                 <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons bx bx-detail"></i>
-                        <div data-i18n="Form Layouts">Form Layouts</div>
+                    <a href="${pageContext.request.contextPath}/changePassword" class="menu-link">
+                        <i class='menu-icon tf-icons bx bxs-package'></i>
+                        <div data-i18n="Change password">Change password</div>
                     </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="form-layouts-vertical.html" class="menu-link">
-                                <div data-i18n="Vertical Form">Vertical Form</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="form-layouts-horizontal.html" class="menu-link">
-                                <div data-i18n="Horizontal Form">Horizontal Form</div>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
+                <!-- Forms -->
                 <%--logout--%>
                 <li class="menu-item">
                     <a href="logout-servlet" class="menu-link ">
@@ -120,13 +108,11 @@
                 </li>
             </ul>
         </aside>
-
         <!-- / Menu -->
 
         <!-- Layout container -->
         <div class="layout-page">
             <!-- Navbar -->
-
             <nav
                     class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
                     id="layout-navbar"
@@ -137,61 +123,8 @@
                     </a>
                 </div>
 
-                <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                    <ul class="navbar-nav flex-row align-items-center ms-auto">
-                        <!-- User -->
-                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                               data-bs-toggle="dropdown">
-                                <div class="avatar avatar-online">
-                                    <img src="a.template/assets/img/avatars/1.png" alt
-                                         class="w-px-40 h-auto rounded-circle"/>
-                                </div>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0 me-3">
-                                                <div class="avatar avatar-online">
-                                                    <img src="a.template/assets/img/avatars/1.png" alt
-                                                         class="w-px-40 h-auto rounded-circle"/>
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <c:if test=" ${sessionScope.acc!= null}">
-                                                    <span class="fw-semibold d-block">${sessionScope.acc.userName}</span>
-                                                </c:if>
-                                                <small class="text-muted">Admin</small>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="dropdown-divider"></div>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="highUserAccount.jsp">
-                                        <i class="bx bx-user me-2"></i>
-                                        <span class="align-middle">My Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="dropdown-divider"></div>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="logout-servlet">
-                                        <i class="bx bx-power-off me-2"></i>
-                                        <span class="align-middle">Log Out</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <!--/ User -->
-                    </ul>
-                </div>
-            </nav>
 
+            </nav>
             <!-- / Navbar -->
 
             <!-- Content wrapper -->
@@ -257,51 +190,19 @@
                                 <hr class="my-0"/>
 
                                 <div class="card-body">
-                                    <form action="user-account-detail-servlet?input=email" method="POST">
-                                        <div class="row">
-                                            <input type="hidden" class="form-control" name="username"
-                                                   value="${u.getUserName()}"/>
-                                            <input type="hidden" class="form-control" name="password"
-                                                   value="${u.getPassword()}"/>
-                                            <div class="mb-3 col-md-6">
-                                                <label for="email" class="form-label">E-mail</label>
-                                                <input
-                                                        class="form-control"
-                                                        type="email"
-                                                        id="email"
-                                                        name="email"
-                                                        value="${u.getEmail()}"
-                                                        required
-                                                        placeholder="Please enter your Email"
-                                                />
-                                            </div>
-                                            <input class="form-control" type="hidden" name="firstName"
-                                                   value="${u.getFirstName()}"/>
-                                            <input class="form-control" type="hidden" name="lastName"
-                                                   value="${u.getLastName()}"/>
-                                            <input class="form-control" type="hidden" name="dob" value="${u.getDob()}"/>
-                                            <input class="form-control" type="hidden" name="gender"
-                                                   value="${u.getSex()}"/>
-                                            <input type="hidden" class="form-control" name="role"
-                                                   value="${u.getRole()}"/>
-                                            <input type="hidden" name="phoneNumber" class="form-control"
-                                                   value="${u.getPhone()}"/>
-                                            <input type="hidden" name="UserID" class="form-control"
-                                                   value="${u.getUserID()}"/>
-
-                                            <div style="color: red">
-                                                ${error2}
-                                            </div>
-                                            <div style="color: green">
-                                                ${success2}
-                                            </div>
-                                        </div>
-                                        <div class="mt-2">
-                                            <button type="submit" class="btn btn-dark me-2" value="Update"
-                                                    name="Update">Change email
-                                            </button>
-                                        </div>
-                                    </form>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="email" class="form-label">E-mail</label>
+                                        <input
+                                                class="form-control"
+                                                type="email"
+                                                id="email"
+                                                name="email"
+                                                value="${u.getEmail()}"
+                                                required
+                                                placeholder="Please enter your Email"
+                                                readonly
+                                        />
+                                    </div>
                                 </div>
                                 <hr class="my-0"/>
 
@@ -319,7 +220,8 @@
                                                 <input class="form-control" type="text" id="firstName" name="firstName"
                                                        value="${u.getFirstName()}" placeholder="Enter your First Name"
                                                        required
-                                                       pattern="([A-Z][a-zA-Z]*)" title="First letter must be uppercase, no number and white space"
+                                                       pattern="([A-Z][a-zA-Z]*)"
+                                                       title="First letter must be uppercase, no number and white space"
                                                 />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -327,7 +229,8 @@
                                                 <input class="form-control" type="text" name="lastName" id="lastName"
                                                        value="${u.getLastName()}" placeholder="Enter your last name"
                                                        required
-                                                       pattern="([A-Z][a-zA-Z]*)" title="First letter must be uppercase, no number and white space"
+                                                       pattern="([A-Z][a-zA-Z]*)"
+                                                       title="First letter must be uppercase, no number and white space"
                                                 />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -393,13 +296,7 @@
                                 </div>
                                 <hr class="my-0"/>
 
-                                <div class="card-body">
-                                    <div class="mt-2">
-                                        <a class="btn btn-outline-secondary"
-                                           href="${pageContext.request.contextPath}/changePassword">Change
-                                            password</a>
-                                    </div>
-                                </div>
+
 
                                 <!-- /Account -->
                             </div>

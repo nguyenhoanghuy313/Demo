@@ -40,7 +40,7 @@
         %>
         <a href="StoryCusServlet?input=<%=s.getStory_ID()%>" class="Story">
             <div class="Story_img">
-                <img src=<%=s.getThumbnail()%>>
+                <img src="webImage/story/<%=s.getThumbnail()%>">
             </div>
             <p><%=s.getTitle()%>
             </p>

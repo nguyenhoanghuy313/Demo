@@ -219,7 +219,7 @@
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
-                                    <img src="a.template/assets/img/avatars/1.png" alt
+                                    <img src="a.template/assets/img/avatars/ava.png" alt
                                          class="w-px-40 h-auto rounded-circle"/>
                                 </div>
                             </a>
@@ -229,7 +229,7 @@
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="a.template/assets/img/avatars/1.png" alt
+                                                    <img src="a.template/assets/img/avatars/ava.png" alt
                                                          class="w-px-40 h-auto rounded-circle"/>
                                                 </div>
                                             </div>
@@ -371,7 +371,7 @@
                                     <!-- Account -->
                                     <hr class="my-0"/>
                                     <div class="card-body">
-                                        <form action="CreateNewImageFolderServlet" method="POST">
+                                        <form action="CreateNewImageFolderServlet" method="POST" enctype="multipart/form-data">
                                             <div class="mb-3 col-md-6">
                                                 <label class="form-label" for="imageName">Product Name</label>
                                                 <input class="form-control" id="imageName" name="imageName"
@@ -400,27 +400,20 @@
                                             </div>
 
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label" for="thumbnail">Select thumbnail image</label>
-                                                <input class="form-control" id="thumbnail" name="thumbnail" type="url"
-                                                       required/>
+                                                <label for="thumbnail" class="form-label">Thumbnail</label>
+                                                <input class="form-control" type="file"  name="thumbnail" id="thumbnail" accept="image/png, image/gif, image/jpeg" required>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label" for="productImg1">Select product Image
-                                                    1</label>
-                                                <input class="form-control" id="productImg1" name="productImg1"
-                                                       type="url" required/>
+                                                <label for="productImg1" class="form-label">1st Image</label>
+                                                <input class="form-control" type="file"  name="productImg1" id="productImg1" accept="image/png, image/gif, image/jpeg" required>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label" for="productImg2">Select product Image
-                                                    2</label>
-                                                <input class="form-control" id="productImg2" name="productImg2"
-                                                       type="url" required/>
+                                                <label for="productImg2" class="form-label">2nd Image</label>
+                                                <input class="form-control" type="file"  name="productImg2" id="productImg2" accept="image/png, image/gif, image/jpeg" required>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label" for="productImg3">Select product Image
-                                                    3</label>
-                                                <input class="form-control" id="productImg3" name="productImg3"
-                                                       type="url" required/>
+                                                <label for="productImg3" class="form-label">3nd Image</label>
+                                                <input class="form-control" type="file"  name="productImg3" id="productImg3" accept="image/png, image/gif, image/jpeg" required>
                                             </div>
                                             <%if (picheckname != null) {%>
                                             <h6 style="color: red">Product Img Folder is already in the database with id

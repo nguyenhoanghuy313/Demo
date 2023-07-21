@@ -3,9 +3,10 @@ import entity.*;
 import java.util.ArrayList;
 import java.util.List;
 public class CartDAO extends myDAO {
+
     public void insertProductIntoCart(String  userID){
         int xUserID = Integer.parseInt(userID);
-        xSql = "insert into Cart(UserID) values (?)";
+        xSql = "insert into cart(UserID) values (?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, xUserID);
@@ -13,6 +14,28 @@ public class CartDAO extends myDAO {
         } catch (Exception e){
             System.out.println("insertProductIntoCart: " + e.getMessage());
         }
+    }
+    public Cart getCart(String UserID){
+        int i = Integer.parseInt(UserID);
+        xSql = "select * from cart where UserID = ? ORDER BY CartID DESC LIMIT 1;";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, i);
+            rs = ps.executeQuery();
+            int xID;
+            Cart x;
+            while (rs.next()) {
+                xID = rs.getInt("CartID");
+                i = rs.getInt("UserID");
+                x = new Cart(xID, i);
+                return x;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     public List<Product> getProductInCart(int userID){
         xSql = "select p.* from product p, cart c, cart_item ci where p.ProductID = ci.ProductID and c.UserID = ?";

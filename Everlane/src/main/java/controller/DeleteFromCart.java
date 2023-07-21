@@ -11,11 +11,23 @@ public class DeleteFromCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         CartItemDAO cid = new CartItemDAO();
-        String xCartItemID = request.getParameter("CartItemID");
+        HttpSession session = request.getSession();
         String xProductID = request.getParameter("ProductID");
         String xVariationID = request.getParameter("variationID");
-//        cid.deleteCartItemByProdID(xProductID);
-        cid.deleteCartItem(xProductID,xVariationID);
+        CartItemDAO cartItemDAO= new CartItemDAO();
+        CartDAO cd = new CartDAO();
+        Cart curCart;
+        Cart currentCart = (Cart) request.getSession().getAttribute("currentCart");
+        User currUser = (User) request.getSession().getAttribute("acc");
+        String buyerID = String.valueOf(currUser.getUserID());
+        if(currentCart==null){
+            curCart = cd.getCart(buyerID);
+            session.setAttribute("currentCart", curCart);
+            cid.deleteCartItem(xProductID,xVariationID, String.valueOf(curCart.getCartID()));
+        }else{
+            cid.deleteCartItem(xProductID,xVariationID, String.valueOf(currentCart.getCartID()));
+        }
+
         response.sendRedirect(request.getHeader("referer"));
     }
 }

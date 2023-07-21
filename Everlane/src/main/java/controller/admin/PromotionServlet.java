@@ -8,6 +8,7 @@ import model.PromotionDAO;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @WebServlet(name = "PromotionServlet", value = "/PromotionServlet")
@@ -37,8 +38,19 @@ public class PromotionServlet extends HttpServlet {
         int discountrate = Integer.parseInt(request.getParameter("discountrate").trim());
         Date startdate = Date.valueOf(request.getParameter("startdate").trim());
         Date enddate = Date.valueOf(request.getParameter("enddate").trim());
-        String backgroundcolor = request.getParameter("backgroundcolor").trim();
-        pd.createNewPromotion(promotionname, promotiondescription, discountrate, startdate, enddate, backgroundcolor);
-        response.sendRedirect("PromotionServlet?input=all");
+        if (startdate.after(Date.valueOf(LocalDate.now())) || startdate.equals(Date.valueOf(LocalDate.now()))){
+            if(enddate.after(startdate)){
+                String backgroundcolor = request.getParameter("backgroundcolor").trim();
+                pd.createNewPromotion(promotionname, promotiondescription, discountrate, startdate, enddate, backgroundcolor);
+                response.sendRedirect("PromotionServlet?input=all");
+            }else{
+                request.setAttribute("Message", "End Date must after Start Date ");
+                request.getRequestDispatcher("editPromotion.jsp").forward(request, response);
+            }
+        }else{
+            request.setAttribute("Message", "Start Date can't be before current Date ");
+            request.getRequestDispatcher("editPromotion.jsp").forward(request, response);
+        }
+
     }
 }

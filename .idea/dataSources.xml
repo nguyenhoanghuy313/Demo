@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://localhost:3306/swp_project</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="@everlanedb.cdsnwdufdxg9.ap-northeast-2.rds.amazonaws.com" uuid="45e3fdd9-1137-4ee3-bd89-2d828b3ebb7e">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://everlanedb.cdsnwdufdxg9.ap-northeast-2.rds.amazonaws.com:3306</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

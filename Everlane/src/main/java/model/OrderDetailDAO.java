@@ -49,6 +49,7 @@ public class OrderDetailDAO extends myDAO{
         }
         return ci;
     }
+
     public List<Product> getUserOrder(String userID, String orderID){
         int xUserID = Integer.parseInt(userID);
         int xOrderID = Integer.parseInt(orderID);
@@ -142,5 +143,62 @@ public class OrderDetailDAO extends myDAO{
         } catch (Exception e) {
             System.out.println("insertOrderDetail: " + e.getMessage());
         }
+    }
+
+    public int SaleTotal(){
+        xSql = "select sum(Order_total) FROM shop_order";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                int c = rs.getInt(1);
+                return c;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public  String[] getDashboarDate(){
+        String[] date = new String[10];
+        int count = 0;
+        xSql = "select distinct CAST(o.order_date as CHAR) from shop_order s, orderdetails o where s.shop_orderID = o.OrderID;";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                date[count]=rs.getString(1);
+                count++;
+            }
+            rs.close();
+            ps.close();
+            return date;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public  String[] getDashboarOrTotal(){
+        String[] sum = new String[10];
+        int count = 0;
+        xSql = "select sum(s.Order_total) from shop_order s, orderdetails o where s.shop_orderID = o.OrderID group by o.order_date;";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                sum[count]=rs.getString(1);
+                count++;
+            }
+            rs.close();
+            ps.close();
+            return sum;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

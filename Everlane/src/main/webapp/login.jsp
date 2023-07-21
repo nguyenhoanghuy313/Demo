@@ -17,7 +17,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
 </head>
-<body>
+<body >
 <jsp:include page="header.jsp"/>
 <section class="Authentication_Container">
     <div class="Authentication_Inner_Container">
@@ -27,7 +27,10 @@
             <form action="login-servlet" method="post">
                 <input type="email" id="email" name="email" value="${newemail}${emailUser}" placeholder="Email Address">
                 <h2>${EmailErr}</h2>
-                <input type="password" id="password" name="password" value="${newpass}${passwordUser}" placeholder="Password">
+                <div class="showpass">
+                    <input type="password" id="password" name="password" value="${newpass}${passwordUser}" placeholder="Password">
+                    <span onclick="ShowPassword()" class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                </div>
                 <h2>${PassErr}</h2>
                 <div class="mb-3">
                     <div class="form-check">
@@ -52,5 +55,15 @@
     </div>
 </section>
 <jsp:include page="footer.jsp"/>
+<script>
+    function ShowPassword() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 </body>
 </html>

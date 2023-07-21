@@ -1,51 +1,53 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="model.*" %>
+<%@ page import="java.util.List" %>
 
 <html
-        lang="en"
         class="light-style layout-menu-fixed"
-        dir="ltr"
-        data-theme="theme-default"
         data-assets-path="../a.template/assets/"
         data-template="vertical-menu-template-free"
+        data-theme="theme-default"
+        dir="ltr"
+        lang="en"
 >
 <head>
     <meta charset="utf-8"/>
     <meta
-            name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+            name="viewport"
     />
 
     <title>Dashboard</title>
 
-    <meta name="description" content=""/>
+    <meta content="" name="description"/>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
+    <link href="a.template/assets/img/favicon/favicon.png" rel="icon" type="image/x-icon"/>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
     <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet"
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="a.template/assets/vendor/fonts/boxicons.css"/>
+    <link href="a.template/assets/vendor/fonts/boxicons.css" rel="stylesheet"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="a.template/assets/vendor/css/core.css" class="template-customizer-core-css"/>
-    <link rel="stylesheet" href="a.template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css"/>
-    <link rel="stylesheet" href="a.template/assets/css/demo.css"/>
+    <link class="template-customizer-core-css" href="a.template/assets/vendor/css/core.css" rel="stylesheet"/>
+    <link class="template-customizer-theme-css" href="a.template/assets/vendor/css/theme-default.css" rel="stylesheet"/>
+    <link href="a.template/assets/css/demo.css" rel="stylesheet"/>
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+    <link href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet"/>
 
-    <link rel="stylesheet" href="a.template/assets/vendor/libs/apex-charts/apex-charts.css"/>
+    <link href="a.template/assets/vendor/libs/apex-charts/apex-charts.css" rel="stylesheet"/>
 
     <!-- Page CSS -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
 
     <!-- Helpers -->
     <script src="a.template/assets/vendor/js/helpers.js"></script>
@@ -55,26 +57,44 @@
     <script src="a.template/assets/js/config.js"></script>
 </head>
 <%
-    User user = (User) session.getAttribute("accHU");
+    User user = (User) session.getAttribute("acc");
+
+    OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
+    long saleTotal = orderDetailDAO.SaleTotal();
+    String[] dashboardDate = orderDetailDAO.getDashboarDate();
+    String[] dashboardOrTotal = orderDetailDAO.getDashboarOrTotal();
+
+    UserDAO userDAO = new UserDAO();
+    long cusTotal = userDAO.CustomerTotal("all");
+    long male = userDAO.CustomerTotal("male");
+    long female = userDAO.CustomerTotal("female");
+    long other = userDAO.CustomerTotal("other");
+
+    ProductForEditDAO productForEditDAO = new ProductForEditDAO();
+    long proTotal = productForEditDAO.PTotal();
+
+    ProductDAO productDAO = new ProductDAO();
+    List<Product> inventory = productDAO.getAllProducts("inventory", 1);
+
 %>
 <body>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
         <!-- Menu -->
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+        <aside class="layout-menu menu-vertical menu bg-menu-theme" id="layout-menu">
             <div class="app-brand demo">
-                <a href="dashboardManager.jsp" class="app-brand-link">
+                <a class="app-brand-link" href="dashboardManager.jsp">
               <span class="app-brand-logo demo">
-                    <svg width="128" height="14px" class="styles_everlane-logo__4o010" viewBox="0 0 128 14" fill="none"
+                    <svg class="styles_everlane-logo__4o010" fill="none" height="14px" viewBox="0 0 128 14" width="128"
                          xmlns="http://www.w3.org/2000/svg"><path
                             d="M116.776 0V14H127.933V11.2198H119.6V8.38015H127.032V5.61985H119.6V2.78015H127.933V0H116.776ZM108.221 0V9.45982L101.311 0H98.5062V14H101.311V4.54018L108.222 14H111.066V0H108.222H108.221ZM86.0055 0L80.3766 14H83.3211L84.4828 11.1397H90.2922L91.4341 14H94.4191L88.7902 0H86.0055ZM87.3875 3.7201L89.2307 8.48018H85.5046L87.3875 3.7201ZM67.1754 0V14H77.3717V11.2198H69.9998V0H67.1754ZM52.4714 2.71982V5.70003H57.6201C58.4017 5.70003 59.0625 5.09986 59.0625 4.22024C59.0625 3.34063 58.4216 2.71982 57.6201 2.71982H52.4714ZM58.7619 14L55.396 8.38015H52.4714V14H49.647V0H57.6201C60.0238 0 61.867 1.74018 61.867 4.17976C61.867 6.35974 60.4651 7.9197 58.5019 8.28012L61.9672 14H58.7619ZM32.9201 0V14H44.0785V11.2198H35.7453V8.38015H43.1776V5.61985H35.7453V2.78015H44.0785V0H32.9201ZM26.1494 0L22.1227 10.1997L18.0753 0H15.0307L20.6596 14H23.484L29.1336 0H26.1486H26.1494ZM0.0865293 0L0.0666504 14H11.245V11.2198H2.91092V8.38015H10.3432V5.61985H2.91092V2.78015H11.2442V0H0.0865293Z"
                             fill="black"></path></svg>
               </span>
                 </a>
 
-                <a href="dashboardManager.jsp"
-                   class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                <a class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none"
+                   href="dashboardManager.jsp">
                     <i class="bx bx-chevron-left bx-sm align-middle"></i>
                 </a>
             </div>
@@ -84,7 +104,7 @@
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
                 <li class="menu-item active">
-                    <a href="dashboardManager.jsp" class="menu-link">
+                    <a class="menu-link" href="dashboardManager.jsp">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
                     </a>
@@ -96,7 +116,7 @@
                 <!-- Product List -->
                 <%if (user.getRole() == 1) {%>
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/StaffListManagerServlet?role=all" class="menu-link">
+                    <a class="menu-link" href="${pageContext.request.contextPath}/StaffListManagerServlet?role=all">
                         <i class='menu-icon tf-icons bx bx-user'></i>
                         <div data-i18n="User List">Staff List</div>
                     </a>
@@ -104,34 +124,34 @@
                 <%}%>
                 <%if (user.getRole() == 1 || user.getRole() == 2) {%>
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all"
-                       class="menu-link">
+                    <a class="menu-link"
+                       href="${pageContext.request.contextPath}/ProductListManagerServlet?input=all">
                         <i class='menu-icon tf-icons bx bxs-package'></i>
                         <div data-i18n="Product List">Product List</div>
                     </a>
                 </li>
                 <!-- User List -->
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=4" class="menu-link">
+                    <a class="menu-link" href="${pageContext.request.contextPath}/UserListManagerServlet?role=4">
                         <i class='menu-icon tf-icons bx bx-user'></i>
                         <div data-i18n="User List">Customer List</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <a class="menu-link menu-toggle" href="javascript:void(0);">
                         <i class="menu-icon tf-icons bx bx-detail"></i>
                         <div data-i18n="Sale">Sale</div>
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="PromotionServlet?input=all" class="menu-link">
+                            <a class="menu-link" href="PromotionServlet?input=all">
                                 <div data-i18n="Promotion List">Promotion List</div>
                             </a>
                         </li>
                     </ul>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="${pageContext.request.contextPath}/CollectionUpdatePromotion" class="menu-link">
+                            <a class="menu-link" href="${pageContext.request.contextPath}/CollectionUpdatePromotion">
                                 <div data-i18n="Promotion List">Season Collection (Update Promotion)</div>
                             </a>
                         </li>
@@ -140,27 +160,27 @@
                 <%}%>
                 <%if (user.getRole() == 1 || user.getRole() == 3) {%>
                 <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <a class="menu-link menu-toggle" href="javascript:void(0);">
                         <i class="menu-icon tf-icons bx bx-detail"></i>
                         <div data-i18n="Marketing">Marketing</div>
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="${pageContext.request.contextPath}/seasonCollectionEditServlet" class="menu-link">
+                            <a class="menu-link" href="${pageContext.request.contextPath}/seasonCollectionEditServlet">
                                 <div data-i18n="Season Collection">Season Collection (Home Page)</div>
                             </a>
                         </li>
                     </ul>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="${pageContext.request.contextPath}/categoryEditServlet" class="menu-link">
+                            <a class="menu-link" href="${pageContext.request.contextPath}/categoryEditServlet">
                                 <div data-i18n="Season Collection">Category (Home Page)</div>
                             </a>
                         </li>
                     </ul>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="${pageContext.request.contextPath}/StoryServlet?input=all" class="menu-link">
+                            <a class="menu-link" href="${pageContext.request.contextPath}/StoryServlet?input=all">
                                 <div data-i18n="Story List">Story List (Story Page)</div>
                             </a>
                         </li>
@@ -188,11 +208,11 @@
                     <ul class="navbar-nav flex-row align-items-center ms-auto">
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                               data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle hide-arrow" data-bs-toggle="dropdown"
+                               href="javascript:void(0);">
                                 <div class="avatar avatar-online">
-                                    <img src="a.template/assets/img/avatars/1.png" alt
-                                         class="w-px-40 h-auto rounded-circle"/>
+                                    <img alt class="w-px-40 h-auto rounded-circle"
+                                         src="a.template/assets/img/avatars/ava.png"/>
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -201,8 +221,8 @@
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="a.template/assets/img/avatars/1.png" alt
-                                                         class="w-px-40 h-auto rounded-circle"/>
+                                                    <img alt class="w-px-40 h-auto rounded-circle"
+                                                         src="a.template/assets/img/avatars/ava.png"/>
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
@@ -237,7 +257,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/logout-servlet?mod=1">
+                                    <a class="dropdown-item" href="logout-servlet">
                                         <i class="bx bx-power-off me-2"></i>
                                         <span class="align-middle">Log Out</span>
                                     </a>
@@ -256,466 +276,167 @@
 
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <div class="row">
+                        <%--Welcome banner--%>
                         <div class="col-lg-8 mb-4 order-0">
                             <div class="card">
                                 <div class="d-flex align-items-end row">
                                     <div class="col-sm-7">
                                         <div class="card-body">
-                                            <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
+                                            <h5 class="card-title text-primary">Welcomeback <%=user.getUserName()%>!
+                                                🎉</h5>
                                             <p class="mb-4">
-                                                You have done <span class="fw-bold">72%</span> more sales today. Check
-                                                your new badge in
-                                                your profile.
+                                                We have reached <span class="fw-bold"><%=cusTotal%></span> more sales today.
                                             </p>
-
-                                            <a href="javascript:" class="btn btn-sm btn-outline-primary">View
-                                                Badges</a>
                                         </div>
                                     </div>
                                     <div class="col-sm-5 text-center text-sm-left">
                                         <div class="card-body pb-0 px-0 px-md-4">
                                             <img
-                                                    src="a.template/assets/img/illustrations/man-with-laptop-light.png"
-                                                    height="140"
                                                     alt="View Badge User"
                                                     data-app-dark-img="illustrations/man-with-laptop-dark.png"
                                                     data-app-light-img="illustrations/man-with-laptop-light.png"
+                                                    height="140"
+                                                    src="a.template/assets/img/illustrations/man-with-laptop-light.png"
                                             />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <%--/Welcome banner--%>
+
                         <div class="col-lg-4 col-md-4 order-1">
                             <div class="row">
+                                <%--Sale amount--%>
                                 <div class="col-lg-6 col-md-12 col-6 mb-4">
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="card-title d-flex align-items-start justify-content-between">
                                                 <div class="avatar flex-shrink-0">
                                                     <img
-                                                            src="a.template/assets/img/icons/unicons/chart-success.png"
-                                                            alt="chart success"
-                                                            class="rounded"
-                                                    />
-                                                </div>
-                                                <div class="dropdown">
-                                                    <button
-                                                            class="btn p-0"
-                                                            type="button"
-                                                            id="cardOpt3"
-                                                            data-bs-toggle="dropdown"
-                                                            aria-haspopup="true"
-                                                            aria-expanded="false"
-                                                    >
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-end"
-                                                         aria-labelledby="cardOpt3">
-                                                        <a class="dropdown-item" href="javascript:void(0);">View
-                                                            More</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <span class="fw-semibold d-block mb-1">Profit</span>
-                                            <h3 class="card-title mb-2">$12,628</h3>
-                                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>
-                                                +72.80%</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-12 col-6 mb-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="card-title d-flex align-items-start justify-content-between">
-                                                <div class="avatar flex-shrink-0">
-                                                    <img
-                                                            src="a.template/assets/img/icons/unicons/wallet-info.png"
                                                             alt="Credit Card"
                                                             class="rounded"
+                                                            src="a.template/assets/img/icons/unicons/dollar.png"
                                                     />
-                                                </div>
-                                                <div class="dropdown">
-                                                    <button
-                                                            class="btn p-0"
-                                                            type="button"
-                                                            id="cardOpt6"
-                                                            data-bs-toggle="dropdown"
-                                                            aria-haspopup="true"
-                                                            aria-expanded="false"
-                                                    >
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-end"
-                                                         aria-labelledby="cardOpt6">
-                                                        <a class="dropdown-item" href="javascript:void(0);">View
-                                                            More</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <span>Sales</span>
-                                            <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>
-                                                +28.42%</small>
+                                            <h6 class="card-title text-nowrap mb-1"><%=saleTotal%>
+                                            </h6>
                                         </div>
                                     </div>
                                 </div>
+                                <%--/Sale amount--%>
+
+                                <%--Customer Amount--%>
+                                <div class="col-lg-6 col-md-12 col-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="card-title d-flex align-items-start justify-content-between">
+                                                <div class="avatar flex-shrink-0">
+                                                    <img
+                                                            alt="User Amount"
+                                                            class="rounded"
+                                                            src="a.template/assets/img/avatars/ava.png"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <span>Customer Amount</span>
+                                            <h6 class="card-title text-nowrap mb-1"><%=cusTotal%>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%--/Customer Amount--%>
                             </div>
                         </div>
                         <!-- Total Revenue -->
                         <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
                             <div class="card">
                                 <div class="row row-bordered g-0">
-                                    <div class="col-md-8">
+                                    <div class="col-md-12">
                                         <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
-                                        <div id="totalRevenueChart" class="px-2"></div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card-body">
-                                            <div class="text-center">
-                                                <div class="dropdown">
-                                                    <button
-                                                            class="btn btn-sm btn-outline-primary dropdown-toggle"
-                                                            type="button"
-                                                            id="growthReportId"
-                                                            data-bs-toggle="dropdown"
-                                                            aria-haspopup="true"
-                                                            aria-expanded="false"
-                                                    >
-                                                        2022
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-end"
-                                                         aria-labelledby="growthReportId">
-                                                        <a class="dropdown-item" href="javascript:void(0);">2021</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">2020</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">2019</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="growthChart"></div>
-                                        <div class="text-center fw-semibold pt-3 mb-2">62% Company Growth</div>
+                                        <div class="col-md-12" id="TotalRevenue"
+                                             style="max-width:700px; height:400px"></div>
+                                        <script type="text/javascript">
+                                            google.charts.load('current', {'packages': ['corechart']});
+                                            google.charts.setOnLoadCallback(drawChart);
 
-                                        <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-                                            <div class="d-flex">
-                                                <div class="me-2">
-                                                    <span class="badge bg-label-primary p-2"><i
-                                                            class="bx bx-dollar text-primary"></i></span>
-                                                </div>
-                                                <div class="d-flex flex-column">
-                                                    <small>2022</small>
-                                                    <h6 class="mb-0">$32.5k</h6>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex">
-                                                <div class="me-2">
-                                                    <span class="badge bg-label-info p-2"><i
-                                                            class="bx bx-wallet text-info"></i></span>
-                                                </div>
-                                                <div class="d-flex flex-column">
-                                                    <small>2021</small>
-                                                    <h6 class="mb-0">$41.2k</h6>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            function drawChart() {
+                                                var data = google.visualization.arrayToDataTable([
+                                                    ['Date', 'Sale'],
+                                                    ['<%=dashboardDate[9]%>', <%=dashboardOrTotal[9]%>],
+                                                    ['<%=dashboardDate[8]%>', <%=dashboardOrTotal[8]%>],
+                                                    ['<%=dashboardDate[7]%>', <%=dashboardOrTotal[7]%>],
+                                                    ['<%=dashboardDate[6]%>', <%=dashboardOrTotal[6]%>],
+                                                    ['<%=dashboardDate[5]%>', <%=dashboardOrTotal[5]%>],
+                                                    ['<%=dashboardDate[4]%>', <%=dashboardOrTotal[4]%>],
+                                                    ['<%=dashboardDate[3]%>', <%=dashboardOrTotal[3]%>],
+                                                    ['<%=dashboardDate[2]%>', <%=dashboardOrTotal[2]%>],
+                                                    ['<%=dashboardDate[1]%>', <%=dashboardOrTotal[1]%>],
+                                                    ['<%=dashboardDate[0]%>', <%=dashboardOrTotal[0]%>]
+                                                ]);
+
+                                                var options = {
+                                                    title: 'Company Performance',
+                                                    curveType: 'function',
+                                                    legend: {position: 'bottom'}
+                                                };
+
+                                                var chart = new google.visualization.LineChart(document.getElementById('TotalRevenue'));
+
+                                                chart.draw(data, options);
+                                            }
+                                        </script>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!--/ Total Revenue -->
-                        <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
+                        <div class="col-12 col-lg-4 order-2 order-md-3 order-lg-2 mb-4">
                             <div class="row">
-                                <div class="col-6 mb-4">
+                                <div class="col-12 mb-5">
                                     <div class="card">
-                                        <div class="card-body">
-                                            <div class="card-title d-flex align-items-start justify-content-between">
-                                                <div class="avatar flex-shrink-0">
-                                                    <img src="a.template/assets/img/icons/unicons/paypal.png"
-                                                         alt="Credit Card" class="rounded"/>
-                                                </div>
-                                                <div class="dropdown">
-                                                    <button
-                                                            class="btn p-0"
-                                                            type="button"
-                                                            id="cardOpt4"
-                                                            data-bs-toggle="dropdown"
-                                                            aria-haspopup="true"
-                                                            aria-expanded="false"
-                                                    >
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-end"
-                                                         aria-labelledby="cardOpt4">
-                                                        <a class="dropdown-item" href="javascript:void(0);">View
-                                                            More</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <span class="d-block mb-1">Payments</span>
-                                            <h3 class="card-title text-nowrap mb-2">$2,456</h3>
-                                            <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i>
-                                                -14.82%</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 mb-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="card-title d-flex align-items-start justify-content-between">
-                                                <div class="avatar flex-shrink-0">
-                                                    <img src="a.template/assets/img/icons/unicons/cc-primary.png"
-                                                         alt="Credit Card" class="rounded"/>
-                                                </div>
-                                                <div class="dropdown">
-                                                    <button
-                                                            class="btn p-0"
-                                                            type="button"
-                                                            id="cardOpt1"
-                                                            data-bs-toggle="dropdown"
-                                                            aria-haspopup="true"
-                                                            aria-expanded="false"
-                                                    >
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                                                        <a class="dropdown-item" href="javascript:void(0);">View
-                                                            More</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <span class="fw-semibold d-block mb-1">Transactions</span>
-                                            <h3 class="card-title mb-2">$14,857</h3>
-                                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>
-                                                +28.14%</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- </div>
-                <div class="row"> -->
-                                <div class="col-12 mb-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                                                <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                                                    <div class="card-title">
-                                                        <h5 class="text-nowrap mb-2">Profile Report</h5>
-                                                        <span class="badge bg-label-warning rounded-pill">Year 2021</span>
-                                                    </div>
-                                                    <div class="mt-sm-auto">
-                                                        <small class="text-success text-nowrap fw-semibold"
-                                                        ><i class="bx bx-chevron-up"></i> 68.2%</small
-                                                        >
-                                                        <h3 class="mb-0">$84,686k</h3>
-                                                    </div>
-                                                </div>
-                                                <div id="profileReportChart"></div>
-                                            </div>
-                                        </div>
+                                        <h5 class="card-header m-0 me-2 pb-3">Gender</h5>
+                                        <div class="col-12" id="Gender"
+                                             style="max-width:700px; height:400px"></div>
+                                        <script>
+                                            google.charts.load('current', {'packages': ['corechart']});
+                                            google.charts.setOnLoadCallback(drawChart);
+
+                                            function drawChart() {
+
+                                                const data = google.visualization.arrayToDataTable([
+                                                    ['Gender', 'Mhl'],
+                                                    ['Male', <%=male*100/cusTotal%>],
+                                                    ['Female', <%=female*100/cusTotal%>],
+                                                    ['Other', <%=other*100/cusTotal%>]
+                                                ]);
+
+                                                const options = {};
+
+                                                const chart = new google.visualization.PieChart(document.getElementById('Gender'));
+                                                chart.draw(data, options);
+                                            }
+                                        </script>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <!-- Order Statistics -->
-                        <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-                            <div class="card h-100">
-                                <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                                    <div class="card-title mb-0">
-                                        <h5 class="m-0 me-2">Order Statistics</h5>
-                                        <small class="text-muted">42.82k Total Sales</small>
-                                    </div>
-                                    <div class="dropdown">
-                                        <button
-                                                class="btn p-0"
-                                                type="button"
-                                                id="orederStatistics"
-                                                data-bs-toggle="dropdown"
-                                                aria-haspopup="true"
-                                                aria-expanded="false"
-                                        >
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
-                                            <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-                                            <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                                            <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <div class="d-flex flex-column align-items-center gap-1">
-                                            <h2 class="mb-2">8,258</h2>
-                                            <span>Total Orders</span>
-                                        </div>
-                                        <div id="orderStatisticsChart"></div>
-                                    </div>
-                                    <ul class="p-0 m-0">
-                                        <li class="d-flex mb-4 pb-1">
-                                            <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-primary"
-                            ><i class="bx bx-mobile-alt"></i
-                            ></span>
-                                            </div>
-                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">Electronic</h6>
-                                                    <small class="text-muted">Mobile, Earbuds, TV</small>
-                                                </div>
-                                                <div class="user-progress">
-                                                    <small class="fw-semibold">82.5k</small>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex mb-4 pb-1">
-                                            <div class="avatar flex-shrink-0 me-3">
-                                                <span class="avatar-initial rounded bg-label-success"><i
-                                                        class="bx bx-closet"></i></span>
-                                            </div>
-                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">Fashion</h6>
-                                                    <small class="text-muted">T-shirt, Jeans, Shoes</small>
-                                                </div>
-                                                <div class="user-progress">
-                                                    <small class="fw-semibold">23.8k</small>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex mb-4 pb-1">
-                                            <div class="avatar flex-shrink-0 me-3">
-                                                <span class="avatar-initial rounded bg-label-info"><i
-                                                        class="bx bx-home-alt"></i></span>
-                                            </div>
-                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">Decor</h6>
-                                                    <small class="text-muted">Fine Art, Dining</small>
-                                                </div>
-                                                <div class="user-progress">
-                                                    <small class="fw-semibold">849k</small>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex">
-                                            <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-secondary"
-                            ><i class="bx bx-football"></i
-                            ></span>
-                                            </div>
-                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">Sports</h6>
-                                                    <small class="text-muted">Football, Cricket Kit</small>
-                                                </div>
-                                                <div class="user-progress">
-                                                    <small class="fw-semibold">99</small>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!--/ Order Statistics -->
-
-                        <!-- Expense Overview -->
-                        <div class="col-md-6 col-lg-4 order-1 mb-4">
-                            <div class="card h-100">
-                                <div class="card-header">
-                                    <ul class="nav nav-pills" role="tablist">
-                                        <li class="nav-item">
-                                            <button
-                                                    type="button"
-                                                    class="nav-link active"
-                                                    role="tab"
-                                                    data-bs-toggle="tab"
-                                                    data-bs-target="#navs-tabs-line-card-income"
-                                                    aria-controls="navs-tabs-line-card-income"
-                                                    aria-selected="true"
-                                            >
-                                                Income
-                                            </button>
-                                        </li>
-                                        <li class="nav-item">
-                                            <button type="button" class="nav-link" role="tab">Expenses</button>
-                                        </li>
-                                        <li class="nav-item">
-                                            <button type="button" class="nav-link" role="tab">Profit</button>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="card-body px-0">
-                                    <div class="tab-content p-0">
-                                        <div class="tab-pane fade show active" id="navs-tabs-line-card-income"
-                                             role="tabpanel">
-                                            <div class="d-flex p-4 pt-3">
-                                                <div class="avatar flex-shrink-0 me-3">
-                                                    <img src="a.template/assets/img/icons/unicons/wallet.png"
-                                                         alt="User"/>
-                                                </div>
-                                                <div>
-                                                    <small class="text-muted d-block">Total Balance</small>
-                                                    <div class="d-flex align-items-center">
-                                                        <h6 class="mb-0 me-1">$459.10</h6>
-                                                        <small class="text-success fw-semibold">
-                                                            <i class="bx bx-chevron-up"></i>
-                                                            42.9%
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="incomeChart"></div>
-                                            <div class="d-flex justify-content-center pt-4 gap-2">
-                                                <div class="flex-shrink-0">
-                                                    <div id="expensesOfWeek"></div>
-                                                </div>
-                                                <div>
-                                                    <p class="mb-n1 mt-1">Expenses This Week</p>
-                                                    <small class="text-muted">$39 less than last week</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--/ Expense Overview -->
-
                         <!-- Transactions -->
                         <div class="col-md-6 col-lg-4 order-2 mb-4">
                             <div class="card h-100">
                                 <div class="card-header d-flex align-items-center justify-content-between">
-                                    <h5 class="card-title m-0 me-2">Transactions</h5>
-                                    <div class="dropdown">
-                                        <button
-                                                class="btn p-0"
-                                                type="button"
-                                                id="transactionID"
-                                                data-bs-toggle="dropdown"
-                                                aria-haspopup="true"
-                                                aria-expanded="false"
-                                        >
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-                                            <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
-                                            <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-                                            <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
-                                        </div>
-                                    </div>
+                                    <h5 class="card-title m-0 me-2">Best seller</h5>
                                 </div>
                                 <div class="card-body">
                                     <ul class="p-0 m-0">
                                         <li class="d-flex mb-4 pb-1">
                                             <div class="avatar flex-shrink-0 me-3">
-                                                <img src="a.template/assets/img/icons/unicons/paypal.png" alt="User"
-                                                     class="rounded"/>
+                                                <img alt="User" class="rounded"
+                                                     src="a.template/assets/img/icons/unicons/paypal.png"/>
                                             </div>
                                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                                 <div class="me-2">
@@ -730,80 +451,16 @@
                                         </li>
                                         <li class="d-flex mb-4 pb-1">
                                             <div class="avatar flex-shrink-0 me-3">
-                                                <img src="a.template/assets/img/icons/unicons/wallet.png" alt="User"
-                                                     class="rounded"/>
+                                                <img alt="User" class="rounded"
+                                                     src="a.template/assets/img/icons/unicons/paypal.png"/>
                                             </div>
                                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                                 <div class="me-2">
-                                                    <small class="text-muted d-block mb-1">Wallet</small>
-                                                    <h6 class="mb-0">Mac'D</h6>
+                                                    <small class="text-muted d-block mb-1">Paypal</small>
+                                                    <h6 class="mb-0">Send money</h6>
                                                 </div>
                                                 <div class="user-progress d-flex align-items-center gap-1">
-                                                    <h6 class="mb-0">+270.69</h6>
-                                                    <span class="text-muted">USD</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex mb-4 pb-1">
-                                            <div class="avatar flex-shrink-0 me-3">
-                                                <img src="a.template/assets/img/icons/unicons/chart.png" alt="User"
-                                                     class="rounded"/>
-                                            </div>
-                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                <div class="me-2">
-                                                    <small class="text-muted d-block mb-1">Transfer</small>
-                                                    <h6 class="mb-0">Refund</h6>
-                                                </div>
-                                                <div class="user-progress d-flex align-items-center gap-1">
-                                                    <h6 class="mb-0">+637.91</h6>
-                                                    <span class="text-muted">USD</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex mb-4 pb-1">
-                                            <div class="avatar flex-shrink-0 me-3">
-                                                <img src="a.template/assets/img/icons/unicons/cc-success.png" alt="User"
-                                                     class="rounded"/>
-                                            </div>
-                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                <div class="me-2">
-                                                    <small class="text-muted d-block mb-1">Credit Card</small>
-                                                    <h6 class="mb-0">Ordered Food</h6>
-                                                </div>
-                                                <div class="user-progress d-flex align-items-center gap-1">
-                                                    <h6 class="mb-0">-838.71</h6>
-                                                    <span class="text-muted">USD</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex mb-4 pb-1">
-                                            <div class="avatar flex-shrink-0 me-3">
-                                                <img src="a.template/assets/img/icons/unicons/wallet.png" alt="User"
-                                                     class="rounded"/>
-                                            </div>
-                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                <div class="me-2">
-                                                    <small class="text-muted d-block mb-1">Wallet</small>
-                                                    <h6 class="mb-0">Starbucks</h6>
-                                                </div>
-                                                <div class="user-progress d-flex align-items-center gap-1">
-                                                    <h6 class="mb-0">+203.33</h6>
-                                                    <span class="text-muted">USD</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex">
-                                            <div class="avatar flex-shrink-0 me-3">
-                                                <img src="a.template/assets/img/icons/unicons/cc-warning.png" alt="User"
-                                                     class="rounded"/>
-                                            </div>
-                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                <div class="me-2">
-                                                    <small class="text-muted d-block mb-1">Mastercard</small>
-                                                    <h6 class="mb-0">Ordered Food</h6>
-                                                </div>
-                                                <div class="user-progress d-flex align-items-center gap-1">
-                                                    <h6 class="mb-0">-92.45</h6>
+                                                    <h6 class="mb-0">+82.6</h6>
                                                     <span class="text-muted">USD</span>
                                                 </div>
                                             </div>
@@ -813,6 +470,58 @@
                             </div>
                         </div>
                         <!--/ Transactions -->
+                        <!-- Transactions -->
+                        <div class="col-md-6 col-lg-4 order-2 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header d-flex align-items-center justify-content-between">
+                                    <h5 class="card-title m-0 me-2">Inventory</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="p-0 m-0" style="height: 600px; overflow-y: scroll">
+                                        <%for (Product i : inventory) {%>
+                                        <li class="d-flex mb-4 pb-1">
+                                            <div class="avatar flex-shrink-0 me-3">
+                                                <img alt="User" class="rounded"
+                                                     src="webImage/productImg/<%=i.getThumbnail()%>"/>
+                                            </div>
+                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                <div class="me-2">
+                                                    <h6 class="mb-0"><%=i.getProductName()%>
+                                                    </h6>
+                                                    <small class="text-muted d-block mb-1"><%=i.getColor_Name()%>
+                                                        | <%=i.getSize_Name()%> | <%=i.getQty_in_stock()%>
+                                                        | <%=i.getPrice()%>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <%}%>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ Transactions -->
+
+                        <%--Number of product--%>
+                        <div class="col-md-6 col-lg-4 order-2 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
+                                        <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                                            <div class="card-title">
+                                                <h5 class="text-nowrap mb-2"></h5>
+                                                <span class="badge bg-label-warning rounded-pill">Number of items</span>
+                                            </div>
+                                            <div class="mt-sm-auto">
+                                                <h6 class="mb-0"><%=proTotal%>
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <%--/Number of product--%>
                     </div>
                 </div>
                 <!-- / Content -->

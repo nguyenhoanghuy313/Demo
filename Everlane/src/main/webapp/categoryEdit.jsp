@@ -190,7 +190,7 @@
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
-                                    <img src="a.template/assets/img/avatars/1.png" alt
+                                    <img src="a.template/assets/img/avatars/ava.png" alt
                                          class="w-px-40 h-auto rounded-circle"/>
                                 </div>
                             </a>
@@ -200,7 +200,7 @@
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="a.template/assets/img/avatars/1.png" alt
+                                                    <img src="a.template/assets/img/avatars/ava.png" alt
                                                          class="w-px-40 h-auto rounded-circle"/>
                                                 </div>
                                             </div>
@@ -260,118 +260,28 @@
                             <div class="card mb-4">
                                 <div class="card-header d-flex align-items-center justify-content-between">
                                     <h5 class="mb-0">Edit Cateogry</h5>
+                                    <div style="color: green">
+                                        ${message}
+                                    </div>
                                 </div>
                                 <div class="card-body">
-                                    <form action="categoryEditServlet" method="post">
-                                        <c:forEach var="cate" items="${cateList}">
-                                            <div class="row mb-3">
-                                                <input type="hidden" name="cateID" value="${cate.getCategoryID()}">
-                                                <label class="col-sm-2 col-form-label" for="basic-default-tees">${cate.getCategoryName()}</label>
-                                                <div class="col-sm-10">
-                                                    <input class="form-control" name="cateImg" id="basic-default-tees"
-                                                           value="${cate.getCategoryImg()}"
-                                                           type="text"/>
+                                    <c:forEach var="cate" items="${cateList}" varStatus="a">
+                                        <c:if test="${a.index < 8}">
+                                            <form action="categoryEditServlet" method="post" enctype="multipart/form-data">
+
+                                                <div class="row mb-3">
+                                                    <input type="hidden" name="cateID" value="${cate.getCategoryID()}">
+                                                    <label for="thumbnail" class="col-sm-2 col-form-label">${cate.getCategoryName()}</label>
+                                                    <input class="form-control" type="file"  name="cateImg" id="thumbnail" accept="image/png, image/gif, image/jpeg" required>
                                                 </div>
-                                            </div>
-                                        </c:forEach>
-<%--                                        <div class="row mb-3">--%>
-<%--                                            <label class="col-sm-2 col-form-label" for="basic-default-dresses">Dreses--%>
-<%--                                                Image</label>--%>
-<%--                                            <div class="col-sm-10">--%>
-<%--                                                <input class="form-control" --%>
-<%--                                                       value="Lấy giá trị ảnh hiện tại"--%>
-<%--                                                       type="text"/>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="row mb-3">--%>
-<%--                                            <label class="col-sm-2 col-form-label" for="basic-default-tees">Tees--%>
-<%--                                                Image</label>--%>
-<%--                                            <div class="col-sm-10">--%>
-<%--                                                <input class="form-control"--%>
-<%--                                                       value="Lấy giá trị ảnh hiện tại"--%>
-<%--                                                       type="text"/>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="row mb-3">--%>
-<%--                                            <label class="col-sm-2 col-form-label" for="basic-default-bottoms">Bottoms--%>
-<%--                                                Image</label>--%>
-<%--                                            <div class="col-sm-10">--%>
-<%--                                                <input class="form-control" id="basic-default-bottoms"--%>
-<%--                                                       value="Lấy giá trị ảnh hiện tại"--%>
-<%--                                                       type="text"/>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="row mb-3">--%>
-<%--                                            <label class="col-sm-2 col-form-label" for="basic-default-tops">Tops--%>
-<%--                                                Image</label>--%>
-<%--                                            <div class="col-sm-10">--%>
-<%--                                                <input class="form-control" id="basic-default-tops"--%>
-<%--                                                       value="Lấy giá trị ảnh hiện tại"--%>
-<%--                                                       type="text"/>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="row mb-3">--%>
-<%--                                            <label class="col-sm-2 col-form-label" for="basic-default-denim">Denim--%>
-<%--                                                Image</label>--%>
-<%--                                            <div class="col-sm-10">--%>
-<%--                                                <input class="form-control" id="basic-default-denim"--%>
-<%--                                                       value="Lấy giá trị ảnh hiện tại"--%>
-<%--                                                       type="text"/>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="row mb-3">--%>
-<%--                                            <label class="col-sm-2 col-form-label"--%>
-<%--                                                   for="basic-default-shoes&accessories">Shoes & Accessories</label>--%>
-<%--                                            <div class="col-sm-10">--%>
-<%--                                                <input class="form-control" id="basic-default-shoes&accessories"--%>
-<%--                                                       value="Lấy giá trị ảnh hiện tại"--%>
-<%--                                                       type="text"/>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="row mb-3">--%>
-<%--                                            <label class="col-sm-2 col-form-label" for="basic-default-swim">Swim--%>
-<%--                                                Image</label>--%>
-<%--                                            <div class="col-sm-10">--%>
-<%--                                                <input class="form-control" id="basic-default-swim"--%>
-<%--                                                       value="Lấy giá trị ảnh hiện tại"--%>
-<%--                                                       type="text"/>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="row mb-3">--%>
-<%--                                            <label class="col-sm-2 col-form-label" for="basic-default-sports&skirts">Sports--%>
-<%--                                                & Skirts Image</label>--%>
-<%--                                            <div class="col-sm-10">--%>
-<%--                                                <input class="form-control" id="basic-default-sports&skirts"--%>
-<%--                                                       value="Lấy giá trị ảnh hiện tại"--%>
-<%--                                                       type="text"/>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="row mb-3">--%>
-<%--                                            <label class="col-sm-2 col-form-label" for="basic-default-newarrivals">New--%>
-<%--                                                Arrivals Image</label>--%>
-<%--                                            <div class="col-sm-10">--%>
-<%--                                                <input class="form-control" id="basic-default-newarrivals"--%>
-<%--                                                       value="Lấy giá trị ảnh hiện tại"--%>
-<%--                                                       type="text"/>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="row mb-3">--%>
-<%--                                            <label class="col-sm-2 col-form-label" for="basic-default-bestsellers">Best--%>
-<%--                                                Sellers Image</label>--%>
-<%--                                            <div class="col-sm-10">--%>
-<%--                                                <input class="form-control" id="basic-default-bestsellers"--%>
-<%--                                                       value="Lấy giá trị ảnh hiện tại"--%>
-<%--                                                       type="text"/>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-                                        <div style="color: green">
-                                            ${message}
-                                        </div>
-                                        <div class="mt-2">
-                                            <button type="submit" class="btn btn-dark me-2">Save changes</button>
-                                            <a href="" type="reset" class="btn btn-outline-secondary">Cancel</a>
-                                        </div>
-                                    </form>
+                                                <div class="mt-2">
+                                                    <button type="submit" class="btn btn-dark me-2">Save changes
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </c:if>
+                                    </c:forEach>
+
                                 </div>
                             </div>
                         </div>

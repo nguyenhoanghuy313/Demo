@@ -42,12 +42,6 @@
     if (u != null) {
         uID = u.getUserID();
     }
-//    if(u == null){
-//        response.setStatus(response.SC_MOVED_TEMPORARILY);
-//        response.setHeader("Location", "login-servlet");
-//        return;
-//    }
-//    int uID = u.getUserID();
     CartItemDAO cid = new CartItemDAO();
     List<Product> cartItemList = cid.getUserItem(uID);
     ProductForEditDAO proEditDAO = new ProductForEditDAO();
@@ -77,7 +71,7 @@
         <a class="cart" id="cart-icon"><i class="ri-shopping-cart-2-line"></i></a>
     </div>
 
-    <div class="cart_container">
+    <div  class="cart_container">
         <a class='bx bx-x' id="x-icon"></a>
         <div class="cart_list">
             <h1>Your cart</h1>
@@ -102,7 +96,7 @@
             %>
             <div class="cart_item">
                 <a class="cart_item_img">
-                    <img src="<%=ci.getThumbnail()%>"
+                    <img src="webImage/productImg/<%=ci.getThumbnail()%>"
                          alt="">
                 </a>
                 <div class="cart_item_text">
@@ -226,12 +220,19 @@
         y1.classList.toggle("openCart");
     }
 
+
+    function showCart() {
+        y1.classList.toggle("openCart");
+    }
+
     //search
     xSearch = document.querySelector("#search-icon");
     ySearch = document.querySelector(".search_container");
     xSearch.onclick = function () {
         ySearch.classList.toggle("openSearch");
     }
+
+
 </script>
 
 </body>

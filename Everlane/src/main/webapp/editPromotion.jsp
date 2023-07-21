@@ -200,7 +200,7 @@
               <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                  data-bs-toggle="dropdown">
                 <div class="avatar avatar-online">
-                  <img src="a.template/assets/img/avatars/1.png" alt
+                  <img src="a.template/assets/img/avatars/ava.png" alt
                        class="w-px-40 h-auto rounded-circle"/>
                 </div>
               </a>
@@ -210,7 +210,7 @@
                     <div class="d-flex">
                       <div class="flex-shrink-0 me-3">
                         <div class="avatar avatar-online">
-                          <img src="a.template/assets/img/avatars/1.png" alt
+                          <img src="a.template/assets/img/avatars/ava.png" alt
                                class="w-px-40 h-auto rounded-circle"/>
                         </div>
                       </div>
@@ -270,7 +270,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card mb-4">
-                <h5 class="card-header">User Detail</h5>
+                <h5 class="card-header">Promotion Detail</h5>
                 <!-- Account -->
                 <hr class="my-0"/>
                 <div class="card-body">
@@ -284,6 +284,7 @@
                                 id="promotionname"
                                 name="promotionname"
                                 placeholder="Please enter Promotion Name"
+                                required
                         />
                       </div>
                       <div class="mb-3 col-md-6">
@@ -294,6 +295,7 @@
                                 id="promotiondescription"
                                 name="promotiondescription"
                                 placeholder="Please enter Promotion Description"
+                                required
                         />
                       </div>
                       <div class="mb-3 col-md-6">
@@ -304,6 +306,9 @@
                                 id="discountrate"
                                 name="discountrate"
                                 placeholder="Please enter Discount Rate"
+                                min="10"
+                                max="100"
+                                required
                         />
                       </div>
                       <div class="mb-3 col-md-6">
@@ -314,6 +319,7 @@
                                 id="startdate"
                                 name="startdate"
                                 placeholder="Please enter Start Date"
+                                required
                         />
                       </div>
                       <div class="mb-3 col-md-6">
@@ -324,6 +330,7 @@
                                 id="enddate"
                                 name="enddate"
                                 placeholder="Please enter End Date"
+                                required
                         />
                       </div>
                       <div class="mb-3 col-md-6">
@@ -334,13 +341,18 @@
                                 id="backgroundcolor"
                                 name="backgroundcolor"
                                 placeholder="Please enter background color"
+                                required
                         />
                       </div>
                       <div class="mt-2">
+                        <p class="mb-4" style="color: red">
+                          ${Message}
+                        </p>
                         <button type="submit" class="btn btn-dark me-2">Save</button>
-                        <a href="${pageContext.request.contextPath}/UserListManagerServlet?role=all"
+                        <a href="${pageContext.request.contextPath}/PromotionServlet?input=all"
                            class="btn btn-outline-secondary">Cancel</a>
                       </div>
+                    </div>
                   </form>
                 </div>
                 <!-- /Account -->

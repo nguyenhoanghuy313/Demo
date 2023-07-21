@@ -95,7 +95,7 @@
                     <!-- /Logo -->
                     <h4 class="mb-2">Forgot Password? 🔒</h4>
                     <p class="mb-4">Enter your email and we'll check to reset your password</p>
-                    <form id="formAuthentication" class="mb-3" action="loginHighUserServlet" method="POST">
+                    <form id="formAuthentication" class="mb-3" action="SendMail?mod=2" method="POST">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input
@@ -106,8 +106,15 @@
                                     placeholder="Enter your email"
                                     autofocus
                             />
+                            <input type="hidden" name="subject"  value="Your new Everlane password">
+                            <input type="hidden" name="content" value="This is your new password">
                         </div>
-                        ${msg}
+                        <p class="mb-4" style="color: red">
+                            ${Message}
+                        </p>
+                        <p class="mb-4" style="color: green;">
+                            ${success}
+                        </p>
                         <button type="submit" class="btn btn-primary d-grid w-100">Confirm</button>
                     </form>
                     <div class="text-center">

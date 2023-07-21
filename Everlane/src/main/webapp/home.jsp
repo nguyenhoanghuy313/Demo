@@ -40,10 +40,14 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<%--  <%--%>
-<%--      Collection collection = (Collection) request.getAttribute("collection");--%>
-<%--      Promotion promotion = (Promotion) request.getAttribute("promotion");--%>
-<%--  %>--%>
+<%
+    Collection collection = (Collection) request.getAttribute("collection");
+    Promotion promotion = (Promotion) request.getAttribute("promotion");
+
+    CategoryDAO c = new CategoryDAO();
+    List<Category> cateList = c.getAllCategory();
+
+%>
 <div class="pop_up_container">
     <div class="pop_up" style="background: ${promotion.getBackground_color()}">
         <i class='bx bx-x' id="pop_up_x"></i>

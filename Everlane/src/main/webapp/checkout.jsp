@@ -172,8 +172,8 @@
                         totalValue2 += (ci.getPrice() * cartItemList2.getQuantity());
                     }
             %>
-            <div class="Cart_Item">
-                <img src="<%=ci.getThumbnail()%>" alt="">
+            <div class="Cart_Item" style="margin-bottom: 20px;">
+                <img src="webImage/productImg/<%=ci.getThumbnail()%>" alt="">
                 <div class="Cart_Item_Content">
                     <div class="Cart_Item_Header">
                         <h1><%=ci.getProductName()%>

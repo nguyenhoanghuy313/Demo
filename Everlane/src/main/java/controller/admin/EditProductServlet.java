@@ -2,6 +2,7 @@ package controller.admin;
 
 import java.io.*;
 import jakarta.servlet.*;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import model.*;
@@ -9,6 +10,7 @@ import java.util.*;
 
 import java.io.IOException;
 
+@MultipartConfig
 @WebServlet(name = "EditProductServlet", value = "/EditProductServlet")
 public class EditProductServlet extends HttpServlet {
     @Override
@@ -59,11 +61,30 @@ public class EditProductServlet extends HttpServlet {
         }else if(input.equals("editImg")){
             int product_img_ID = Integer.parseInt(request.getParameter("product_img_ID").trim());
             String imageName = request.getParameter("imageName").trim();
-            String thumbnail = request.getParameter("thumbnail").trim();
-            String productImg1 = request.getParameter("productImg1").trim();
-            String productImg2 = request.getParameter("productImg2").trim();
-            String productImg3 = request.getParameter("productImg3").trim();
-            pid.updateImgFolder(thumbnail, productImg1, productImg2, productImg3, imageName, product_img_ID);
+
+            UploadImageToFile uploadImageToFile = new UploadImageToFile();
+            String thumbnail = null;
+            String productImg1 = null;
+            String productImg2 = null;
+            String productImg3 = null;
+
+            Part file1 = request.getPart("thumbnail");
+            Part file2 = request.getPart("productImg1");
+            Part file3 = request.getPart("productImg2");
+            Part file4 = request.getPart("productImg3");
+
+            String uThumbnail = uploadImageToFile.uploadPath(file1, thumbnail, "productImg");
+            String uProductImg1 = uploadImageToFile.uploadPath(file2, productImg1, "productImg");
+            String uProductImg2 = uploadImageToFile.uploadPath(file3, productImg2, "productImg");
+            String uProductImg3 = uploadImageToFile.uploadPath(file4, productImg3, "productImg");
+
+
+            pid.updateImgFolder(uThumbnail, uProductImg1, uProductImg2, uProductImg3, imageName, product_img_ID);
+            try {
+                Thread.sleep(2000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             response.sendRedirect("ProductListManagerServlet?input=all");
         }else if(input.equals("editVariation1")){
             int variationID = Integer.parseInt(request.getParameter("variationID").trim());

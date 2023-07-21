@@ -6,7 +6,7 @@ import java.util.List;
 public class CategoryDAO extends myDAO {
     public List<Category> getAllCategory() {
         List<Category> t = new ArrayList<>();
-        xSql = "select * from Category";
+        xSql = "select * from category;";
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();

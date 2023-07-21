@@ -27,7 +27,7 @@
 <body>
 
 <jsp:include page="header.jsp"/>
-<section style="background-image: url(<%=story.getThumbnail()%>)" class="Story_Thumbnail_Tile">
+<section style="background-image: url('webImage/story/<%=story.getThumbnail()%>')" class="Story_Thumbnail_Tile">
     <h1>
         <%=story.getTitle()%>
     </h1>

@@ -10,7 +10,7 @@
 <head>
     <title>Forgot Password</title>
     <link rel="stylesheet" href="header/header1.css">
-    <link rel="stylesheet" href="account/authentication/authentication.css">
+    <link rel="stylesheet" href="account/authentication/authentication1.css">
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
 
@@ -24,12 +24,13 @@
         <div class="Login_Container">
             <h1>Forgot your password ???</h1>
             <h2>Please enter your email</h2>
-            <form action="" method="post">
-                <input type="email" id="email" name="email" value="${newemail}" placeholder="Email Address">
-                <h2>${EmailErr}</h2>
+            <form action="SendMail?mod=1" method="post">
+                <input type="email" id="email" name="email" placeholder="Email Address">
+                <input type="hidden" name="subject"  value="Your new Everlane password">
+                <input type="hidden" name="content" value="This is your new password">
                 <input type="submit" value="Send">
                 <h2 style="color: red">
-                    ${Message} ${MessageGG}
+                    ${Message}
                 </h2>
                 <h2 style="color: green;">
                     ${success}

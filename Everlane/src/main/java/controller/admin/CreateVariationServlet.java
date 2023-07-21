@@ -36,7 +36,7 @@ public class CreateVariationServlet extends HttpServlet {
             String qty_in_stock = request.getParameter("qty_in_stock").trim();
             String productimgName = request.getParameter("productimgName").trim();
             ProductImg productImg = productImgDAO.getProductFolder(productimgName);
-            if(productName.contains(productImg.getProduct_img_name())){
+            if(productImg.getProduct_img_name().contains(productName)){
                 if(productImg.getProduct_img_name().contains(color.getColor_Name())){
                     variationDAO.createNewVariation(Integer.parseInt(productID),color.getColor_ID() ,size.getSize_ID() ,Integer.parseInt(qty_in_stock) ,productImg.getProduct_Img_ID());
                     request.setAttribute("alert3", "Create done");
