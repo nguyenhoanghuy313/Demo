@@ -110,6 +110,7 @@
                     </p>
                     <div class="cart_item_price">
                         <% if (ci.getDiscount() != 0) {%>
+                        <p>₫<%=ci.getPrice() * cartItemList2.getQuantity()%>
                         <p>₫<%=ci.getDiscount() * cartItemList2.getQuantity()%>
                         <%} else {%>
                         <p>₫<%=ci.getPrice() * cartItemList2.getQuantity()%>

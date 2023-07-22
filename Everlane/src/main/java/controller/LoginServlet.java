@@ -48,7 +48,7 @@ LoginServlet extends HttpServlet {
 //            List<Product> data = p.getAllProducts();
             List<Category> cateList = c.getAllCategory();
             Collection collection = col.getCollectionsByDate();
-            Promotion promotion = promotionDAO.getPromotionByID("1");
+            Promotion promotion = promotionDAO.getLastestPromotion();
 
             Encryptor encryptor = new Encryptor();
             User checkUser = u.checkUser(email, encryptor.encryptString(password));

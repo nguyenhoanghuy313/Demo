@@ -25,7 +25,7 @@
             <h1>Good to see you</h1>
             <h2>Please log in to your account</h2>
             <form action="login-servlet" method="post">
-                <input type="email" id="email" name="email" value="${newemail}" placeholder="Email Address">
+                <input type="email" id="email" name="email" value="${newemail}${emailUser}" placeholder="Email Address">
                 <h2>${EmailErr}</h2>
                 <div class="showpass">
                     <input type="password" id="password" name="password" value="${newpass}${passwordUser}" placeholder="Password">

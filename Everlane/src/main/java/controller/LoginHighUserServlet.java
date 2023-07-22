@@ -71,6 +71,7 @@ public class LoginHighUserServlet extends HttpServlet {
                 User user = (User) session.getAttribute("accHU");
                 req.setAttribute("u", user);
                 req.getRequestDispatcher("dashboardManager.jsp").forward(req, resp);
+                
             }else{
                 req.setAttribute("error", "Email or Password is incorrect or not exist!!!");
                 req.getRequestDispatcher("loginHighUser.jsp").forward(req, resp);

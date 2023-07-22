@@ -59,7 +59,7 @@
     <script src="a.template/assets/js/config.js"></script>
 </head>
 <%
-    User user = (User) session.getAttribute("acc");
+    User user = (User) session.getAttribute("accHU");
 
     OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
     long saleTotal = orderDetailDAO.SaleTotal();

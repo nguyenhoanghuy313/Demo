@@ -62,7 +62,7 @@
     </div>
 </div>
     <section class="Season_Collection_Banner" id="Season_Collection_Banner">
-        <img src="${collection.getCollectionImg()}"
+        <img src="webImage/collection/${collection.getCollectionImg()}"
                      alt="">
         <div class="Season_Collection_Banner_text">
             <h1>${collection.getCollectionName()}</h1>
@@ -80,7 +80,7 @@
         <c:forEach var="cate" items="${cateList}" varStatus="status">
             <c:if test="${status.index < 8}">
                 <div class="Category">
-                    <img src="${cate.getCategoryImg()}" alt="">
+                    <img src="webImage/category/${cate.getCategoryImg()}" alt="">
                     <div class="Category_text">
                         <button value="cateID"><a
                                 href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all"> ${cate.getCategoryName()}</a>
@@ -155,7 +155,7 @@
         <h1>${story.getTitle()}</h1>
         <button>Learn More</button>
         <div class="Storyimg">
-            <img src="${story.getThumbnail()}">
+            <img src="webImage/story/${story.getThumbnail()}">
         </div>
     </a>
     </c:if>
