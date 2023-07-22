@@ -13,7 +13,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html
         class="light-style layout-menu-fixed"
-        data-assets-path="../a.template/assets/"
+        data-assets-path="../bootstrap/assets/"
         data-template="vertical-menu-template-free"
         data-theme="theme-default"
         dir="ltr"
@@ -42,26 +42,26 @@
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link href="a.template/assets/vendor/fonts/boxicons.css" rel="stylesheet"/>
+    <link href="bootstrap/assets/vendor/fonts/boxicons.css" rel="stylesheet"/>
 
     <!-- Core CSS -->
-    <link class="template-customizer-core-css" href="a.template/assets/vendor/css/core.css" rel="stylesheet"/>
-    <link class="template-customizer-theme-css" href="a.template/assets/vendor/css/theme-default.css" rel="stylesheet"/>
-    <link href="a.template/assets/css/demo.css" rel="stylesheet"/>
+    <link class="template-customizer-core-css" href="bootstrap/assets/vendor/css/core.css" rel="stylesheet"/>
+    <link class="template-customizer-theme-css" href="bootstrap/assets/vendor/css/theme-default.css" rel="stylesheet"/>
+    <link href="bootstrap/assets/css/demo.css" rel="stylesheet"/>
 
     <!-- Vendors CSS -->
-    <link href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet"/>
+    <link href="bootstrap/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet"/>
 
-    <link href="a.template/assets/vendor/libs/apex-charts/apex-charts.css" rel="stylesheet"/>
+    <link href="bootstrap/assets/vendor/libs/apex-charts/apex-charts.css" rel="stylesheet"/>
 
     <!-- Page CSS -->
 
     <!-- Helpers -->
-    <script src="a.template/assets/vendor/js/helpers.js"></script>
+    <script src="bootstrap/assets/vendor/js/helpers.js"></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="a.template/assets/js/config.js"></script>
+    <script src="bootstrap/assets/js/config.js"></script>
 </head>
 <%
     List<Collection> collectionList = (List<Collection>) request.getAttribute("collectionList");
@@ -392,22 +392,22 @@
         document.getElementById("frm").submit();
     }
 </script>
-<script src="a.template/assets/vendor/libs/jquery/jquery.js"></script>
-<script src="a.template/assets/vendor/libs/popper/popper.js"></script>
-<script src="a.template/assets/vendor/js/bootstrap.js"></script>
-<script src="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="bootstrap/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="bootstrap/assets/vendor/libs/popper/popper.js"></script>
+<script src="bootstrap/assets/vendor/js/bootstrap.js"></script>
+<script src="bootstrap/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-<script src="a.template/assets/vendor/js/menu.js"></script>
+<script src="bootstrap/assets/vendor/js/menu.js"></script>
 <!-- endbuild -->
 
 <!-- Vendors JS -->
-<script src="a.template/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+<script src="bootstrap/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 <!-- Main JS -->
-<script src="a.template/assets/js/main.js"></script>
+<script src="bootstrap/assets/js/main.js"></script>
 
 <!-- Page JS -->
-<script src="a.template/assets/js/dashboards-analytics.js"></script>
+<script src="bootstrap/assets/js/dashboards-analytics.js"></script>
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>

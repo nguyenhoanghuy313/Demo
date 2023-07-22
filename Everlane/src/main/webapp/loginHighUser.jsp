@@ -4,7 +4,7 @@
         class="light-style customizer-hide"
         dir="ltr"
         data-theme="theme-default"
-        data-assets-path="../a.template/assets/"
+        data-assets-path="../bootstrap/assets/"
         data-template="vertical-menu-template-free"
 >
 <head>
@@ -30,25 +30,25 @@
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="a.template/assets/vendor/fonts/boxicons.css"/>
+    <link rel="stylesheet" href="bootstrap/assets/vendor/fonts/boxicons.css"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="a.template/assets/vendor/css/core.css" class="template-customizer-core-css"/>
-    <link rel="stylesheet" href="a.template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css"/>
-    <link rel="stylesheet" href="a.template/assets/css/demo.css"/>
+    <link rel="stylesheet" href="bootstrap/assets/vendor/css/core.css" class="template-customizer-core-css"/>
+    <link rel="stylesheet" href="bootstrap/assets/vendor/css/theme-default.css" class="template-customizer-theme-css"/>
+    <link rel="stylesheet" href="bootstrap/assets/css/demo.css"/>
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="a.template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+    <link rel="stylesheet" href="bootstrap/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
     <!-- Page CSS -->
     <!-- Page -->
-    <link rel="stylesheet" href="a.template/assets/vendor/css/pages/page-auth.css"/>
+    <link rel="stylesheet" href="bootstrap/assets/vendor/css/pages/page-auth.css"/>
     <!-- Helpers -->
-    <script src="a.template/assets/vendor/js/helpers.js"></script>
+    <script src="bootstrap/assets/vendor/js/helpers.js"></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="a.template/assets/js/config.js"></script>
+    <script src="bootstrap/assets/js/config.js"></script>
 </head>
 
 <body>

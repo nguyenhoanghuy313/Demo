@@ -3,13 +3,6 @@
 <%@ page import="entity.CartItem" %>
 <%@ page import="entity.ProductForEdit" %>
 <%@ page import="entity.User" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: minileisduk
-  Date: 5/17/2023
-  Time: 3:18 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -77,11 +70,6 @@
         <a class='bx bx-x' id="x-icon"></a>
         <div class="cart_list">
             <h1>Your cart</h1>
-            <%--            <c:if test="${not empty addedProduct}">--%>
-            <%--                <div class="popup">--%>
-            <%--                    <p>Sản phẩm ${addedProduct} đã được thêm vào giỏ hàng.</p>--%>
-            <%--                </div>--%>
-            <%--            </c:if>--%>
             <%
                 int itemCount = cartItemList.size();  // Số lượng mục trong giỏ hàng
                 int totalValue = 0;  // Tổng giá trị của các mục
@@ -152,7 +140,7 @@
                         totalCartItem += (cartItemList2.getQuantity());
                     }
                 %>
-                <p>Subtotal (<%=totalCartItem%> items)</p>  <!-- Hiển thị số lượng mục trong giỏ hàng -->
+                <p>Subtotal (<%=totalCartItem%> items)</p>
                 <p>₫<%=totalValue%>
                 </p>
             </div>
@@ -160,7 +148,6 @@
         </div>
     </div>
 
-    <%--        mobile--%>
     <div class="menu_container">
         <div class="menu_container1">
             <a href="#">Best-Sellers</a>
