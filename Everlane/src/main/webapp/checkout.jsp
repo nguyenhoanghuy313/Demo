@@ -31,7 +31,7 @@
     <link href="header/header1.css" rel="stylesheet"/>
     <link href="header/cart/cart2.css" rel="stylesheet">
     <link href="header/search/search1.css" rel="stylesheet">
-    <link href="checkout/checkout.css" rel="stylesheet">
+    <link href="checkout/checkout2.css" rel="stylesheet">
 
     <!-- Favicon -->
     <link href="webImage/other/icon/favicon.png" rel="icon" type="image/x-icon"/>
@@ -142,6 +142,7 @@
                             </div>
                         </label>
                     </div>
+                    <h1 style="color:green;font-family: 'Nunito Sans', sans-serif;  font-size: 14px">${PayMess}</h1>
                     <h1 style="color:red; font-family: 'Nunito Sans', sans-serif; font-size: 14px">${PayMessError}</h1>
 
                     <input type="submit" value="Continue to Payment">
@@ -176,7 +177,11 @@
                     int totalValue = 0;  // Tổng giá trị của các mục
                     for (Product p : cartItemList) {
                         CartItem cartItemList2 = cid.getCartItem(String.valueOf(p.getProductID()), String.valueOf(p.getVariationID()));
-                        totalValue += (p.getPrice() * cartItemList2.getQuantity());
+                        if(p.getDiscount() != 0) {
+                            totalValue += (p.getDiscount() * cartItemList2.getQuantity());
+                        } else {
+                            totalValue += (p.getPrice() * cartItemList2.getQuantity());
+                        }
                     }
                     int totalCartItem = 0;
                     for (Product ci : cartItemList) {
@@ -196,7 +201,11 @@
                 int totalValue2 = 0;  // Tổng giá trị của các mục
                 for (Product ci : cartItemList) {
                     CartItem cartItemList2 = cid.getCartItem(String.valueOf(ci.getProductID()), String.valueOf(ci.getVariationID()));
-                    totalValue2 += (ci.getPrice() * cartItemList2.getQuantity());
+                    if(ci.getDiscount() != 0) {
+                        totalValue2 += (ci.getDiscount() * cartItemList2.getQuantity());
+                    } else {
+                        totalValue2 += (ci.getPrice() * cartItemList2.getQuantity());
+                    }
             %>
             <div class="Cart_Item" style="margin-bottom: 20px;">
                 <img src="webImage/productImg/<%=ci.getThumbnail()%>" alt="">
@@ -214,10 +223,20 @@
                     </div>
                     <div class="Cart_Item_Price">
                         <div class="Price">
-                            <p style="text-decoration: line-through">₫981800</p>
+                            <%
+                            if(ci.getDiscount() != 0) {
+                            %>
+                            <p style="text-decoration: line-through"><%=ci.getPrice()%></p>
+                            <p style="font-weight: bold; margin-left: 4px">
+                                ₫<%=ci.getDiscount() * cartItemList2.getQuantity()%>
+                            </p>
+                            <%} else {%>
+<%--                            <p style="text-decoration: line-through">ci.getPrice()</p>--%>
                             <p style="font-weight: bold; margin-left: 4px">
                                 ₫<%=ci.getPrice() * cartItemList2.getQuantity()%>
                             </p>
+                            <%}%>
+
                         </div>
                         <form action="${pageContext.request.contextPath}/adjustQuantity" method="post">
                             <div class="Cart_Item_Amount_Change">
@@ -236,6 +255,7 @@
                             <input type="hidden" name="VariationID" value="<%= cartItemList2.getVariationID() %>">
                             <input type="submit" style="display: none;">
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -260,11 +280,11 @@
 <%--                </tr>--%>
                 <tr>
                     <td>Shipping</td>
-                    <td>₫360000</td>
+                    <td>Free Ship</td>
                 </tr>
                 <tr style="font-weight: bold">
                     <td>Total</td>
-                    <td>₫<%=totalValue2 + 360000%>
+                    <td>₫<%=totalValue2%>
                     </td>
                 </tr>
             </table>
@@ -276,6 +296,8 @@
             <a class="button" href="${pageContext.request.contextPath}/order?UserID=<%=u.getUserID()%>">Place Order</a>
         </div>
     </div>
+
+
 </section>
 
 <jsp:include page="footer.jsp"/>

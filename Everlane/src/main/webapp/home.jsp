@@ -55,22 +55,26 @@
         <h1>
             ${promotion.getPromotionName()}: Now up to ${promotion.getDiscountRate()}% off
         </h1>
-        <button>SHOP NOW</button>
-    </div>
-</div>
-<section class="Season_Collection_Banner" id="Season_Collection_Banner">
-    <img src="webImage/collection/${collection.getCollectionImg()}"
-         alt="">
-    <div class="Season_Collection_Banner_text">
-        <h1>${collection.getCollectionName()}</h1>
-        <p>${collection.getCollection_description()}</p>
         <button value="collectionID" name="collectionID">
             <a href="${pageContext.request.contextPath}/productList-servlet?collectionID=${collection.getCollectionID()}&categoryID=3&color_ID=all">
-                SHOP THE COLLECTION
+                SHOP NOW
             </a>
         </button>
     </div>
-</section>
+</div>
+    <section class="Season_Collection_Banner" id="Season_Collection_Banner">
+        <img src="webImage/collection/${collection.getCollectionImg()}"
+                     alt="">
+        <div class="Season_Collection_Banner_text">
+            <h1>${collection.getCollectionName()}</h1>
+            <p>${collection.getCollection_description()}</p>
+            <button value="collectionID" name="collectionID">
+                <a href="${pageContext.request.contextPath}/productList-servlet?collectionID=${collection.getCollectionID()}&categoryID=3&color_ID=all">
+                    SHOP THE COLLECTION
+                </a>
+            </button>
+        </div>
+    </section>
 <section class="Category_Container">
     <h1>Shop by Category</h1>
     <div class="Category_List_Container">
@@ -80,8 +84,7 @@
                     <img src="webImage/category/${cate.getCategoryImg()}" alt="">
                     <div class="Category_text">
                         <button value="cateID"><a
-                                href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all">${cate.getCategoryName()}
-                        </a>
+                                href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all"> ${cate.getCategoryName()}</a>
                         </button>
                     </div>
                 </div>
@@ -148,25 +151,25 @@
     </div>
 </section>
 
-<section class="Sales_Banner" style="background: <%=promotion.getBackground_color()%>">
+<section class="Sales_Banner" style="background: ${promotion.getBackground_color()}">
     <h1>
-        <%=promotion.getPromotionName()%>: Now up to <%=promotion.getDiscountRate()%>% off
+        ${promotion.getPromotionName()}: Now up to ${promotion.getDiscountRate()}% off
     </h1>
     <button>SHOP NOW</button>
 </section>
 
 <section class="Stories_Container">
-    <c:forEach var="story" items="${storyList}" varStatus="a">
-        <c:if test="${a.index < 2}">
-            <a style="color: black" href="StoryCusServlet?input=${story.getStory_ID()}" class="Story">
-                <h1>${story.getTitle()}</h1>
-                <button>Learn More</button>
-                <div class="Storyimg">
-                    <img src="webImage/story/${story.getThumbnail()}">
-                </div>
-            </a>
-        </c:if>
-    </c:forEach>
+<c:forEach var="story" items="${storyList}" varStatus="a">
+    <c:if test="${a.index < 2}">
+    <a style="color: black" href="StoryCusServlet?input=${story.getStory_ID()}" class="Story">
+        <h1>${story.getTitle()}</h1>
+        <button>Learn More</button>
+        <div class="Storyimg">
+            <img src="webImage/story/${story.getThumbnail()}">
+        </div>
+    </a>
+    </c:if>
+</c:forEach>
 </section>
 
 <jsp:include page="footer.jsp"/>

@@ -20,13 +20,15 @@ public class CollectionDAO extends myDAO{
             String xGetCollectionImg;
             String xCollection_description;
             Timestamp xDate;
+            int xPromotionID;
             while(rs.next()){
                 xCollectionID = rs.getInt("CollectionID");
                 xCollectionName = rs.getString("CollectionName");
                 xGetCollectionImg = rs.getString("collectionImg");
                 xCollection_description = rs.getString("collection_description");
                 xDate = rs.getTimestamp("create_date");
-                x = new Collection(xCollectionID, xCollectionName, xGetCollectionImg, xCollection_description, xDate);
+                xPromotionID = rs.getInt("PromotionID");
+                x = new Collection(xCollectionID, xCollectionName, xGetCollectionImg, xCollection_description, xDate, xPromotionID);
             }
             rs.close();
             ps.close();
@@ -48,13 +50,15 @@ public class CollectionDAO extends myDAO{
             String xGetCollectionImg;
             String xCollection_description;
             Timestamp xcreate_date;
+            int xPromotionID;
             while(rs.next()){
                 i = rs.getInt("CollectionID");
                 xCollectionName = rs.getString("CollectionName");
                 xGetCollectionImg = rs.getString("collectionImg");
                 xCollection_description = rs.getString("collection_description");
                 xcreate_date = rs.getTimestamp("create_date");
-                x = new Collection(i, xCollectionName,xGetCollectionImg, xCollection_description, xcreate_date);
+                xPromotionID = rs.getInt("PromotionID");
+                x = new Collection(i, xCollectionName,xGetCollectionImg, xCollection_description, xcreate_date, xPromotionID);
             }
             rs.close();
             ps.close();
@@ -74,13 +78,15 @@ public class CollectionDAO extends myDAO{
             String xGetCollectionImg;
             String xCollection_description;
             Timestamp xcreate_date;
+            int xPromotionID;
             while(rs.next()){
                 xCollectionID = rs.getInt("CollectionID");
                 xCollectionName = rs.getString("CollectionName");
                 xGetCollectionImg = rs.getString("collectionImg");
                 xCollection_description = rs.getString("collection_description");
                 xcreate_date = rs.getTimestamp("create_date");
-                x = new Collection(xCollectionID, xCollectionName , xGetCollectionImg, xCollection_description, xcreate_date);
+                xPromotionID = rs.getInt("PromotionID");
+                x = new Collection(xCollectionID, xCollectionName , xGetCollectionImg, xCollection_description, xcreate_date, xPromotionID);
             }
             rs.close();
             ps.close();

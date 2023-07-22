@@ -9,16 +9,18 @@ public class Collection {
     String collectionImg;
     String collection_description;
     Timestamp create_date;
+    int PromotionID;
 
     public Collection() {
     }
 
-    public Collection(int collectionID, String collectionName, String collectionImg, String collection_description, Timestamp create_date) {
+    public Collection(int collectionID, String collectionName, String collectionImg, String collection_description, Timestamp create_date, int promotionID) {
         this.collectionID = collectionID;
         this.collectionName = collectionName;
         this.collectionImg = collectionImg;
         this.collection_description = collection_description;
         this.create_date = create_date;
+        PromotionID = promotionID;
     }
 
     public Timestamp getCreate_date() {
@@ -60,5 +62,13 @@ public class Collection {
 
     public void setCollection_description(String collection_description) {
         this.collection_description = collection_description;
+    }
+
+    public int getPromotionID() {
+        return PromotionID;
+    }
+
+    public void setPromotionID(int promotionID) {
+        PromotionID = promotionID;
     }
 }

@@ -1,11 +1,10 @@
+//Nguyễn Đắc Hoàng Đạt - HE170720
 package controller;
 
+//import controller.LoginGoogle.UserGoogleDto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 import model.*;
 
 import java.io.IOException;
@@ -19,7 +18,18 @@ LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("login.jsp").forward(req, resp);
+        Cookie arr[] = req.getCookies();
+        if (arr != null) {
+            for (Cookie o : arr) {
+                if (o.getName().equals("emailUser")) {
+                    req.setAttribute("emailUser", o.getValue());
+                }
+                if (o.getName().equals("passwordUser")) {
+                    req.setAttribute("passwordUser", o.getValue());
+                }
+            }
+        }
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
     }
 
     @Override
@@ -36,7 +46,7 @@ LoginServlet extends HttpServlet {
             List<Story> storyList = storyDAO.getAllStory("all");
             List<Category> cateList = c.getAllCategory();
             Collection collection = col.getCollectionsByDate();
-            Promotion promotion = promotionDAO.getPromotionByID("1");
+            Promotion promotion = promotionDAO.getLastestPromotion();
 
             Encryptor encryptor = new Encryptor();
             User checkUser = u.checkUser(email, encryptor.encryptString(password));
@@ -59,6 +69,18 @@ LoginServlet extends HttpServlet {
                 if (Role.getRole() == 4) {
                     HttpSession session = req.getSession();
                     session.setAttribute("acc", checkUser);
+
+                    Cookie cookieAcc = new Cookie("emailUser", email);
+                    Cookie cookiePass = new Cookie("passwordUser", password);
+                    cookieAcc.setMaxAge(60 * 60 * 24 * 365);
+                    if(req.getParameter("remember me") != null){
+                        cookiePass.setMaxAge(60 * 60 * 24 * 365);
+                    } else {
+                        cookiePass.setMaxAge(0);
+                    }
+                    resp.addCookie(cookieAcc); // lưu cookie lên client
+                    resp.addCookie(cookiePass); // lưu cookie lên client
+//                    req.setAttribute("data", data);
                     req.setAttribute("storyList", storyList);
                     req.setAttribute("promotion", promotion);
                     req.setAttribute("cateList", cateList);

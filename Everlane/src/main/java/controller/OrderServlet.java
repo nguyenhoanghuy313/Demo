@@ -49,6 +49,7 @@ public class OrderServlet extends HttpServlet {
                     String variationID = String.valueOf(cartItem.getVariationID());
                     int quantity = cartItem.getQty_in_cart();  // Lấy số lượng từ giỏ hàng
                     double price = cartItem.getPrice() * quantity;  // Tính toán giá trị dựa trên số lượng
+
                     // Thực hiện đặt hàng cho sản phẩm
                     orderDetailDAO.insert(orderID, productID, variationID,quantity,price);
                     VariationDAO variationDAO = new VariationDAO();
