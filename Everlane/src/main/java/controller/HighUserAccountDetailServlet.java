@@ -24,9 +24,7 @@ public class HighUserAccountDetailServlet extends HttpServlet {
         String mod = req.getParameter("mod");
         String accountActivation = req.getParameter("accountActivation");
         UserDAO u = new UserDAO();
-//        ProductsDAO p = new ProductsDAO();
         CategoryDAO c = new CategoryDAO();
-//        List<Product> data = p.getAllProducts();
         List<Category> cateList = c.getAllCategory();
         if (mod == null) {
             HttpSession session = req.getSession();
@@ -38,7 +36,6 @@ public class HighUserAccountDetailServlet extends HttpServlet {
             if (mod.equals("1")) {
                 HttpSession session = req.getSession();
                 session.getAttribute("acc");
-//                req.setAttribute("data", data);
                 req.setAttribute("cateList", cateList);
                 req.getRequestDispatcher("home.jsp").forward(req, resp);
             }

@@ -32,7 +32,7 @@
   <meta name="description" content=""/>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
+  <link rel="icon" type="image/x-icon" href="webImage/other/icon/favicon.png"/>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -205,7 +205,7 @@
                  href="javascript:void(0);">
                 <div class="avatar avatar-online">
                   <img alt class="w-px-40 h-auto rounded-circle"
-                       src="a.template/assets/img/avatars/ava.png"/>
+                       src="webImage/other/icon/ava.png"/>
                 </div>
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
@@ -215,7 +215,7 @@
                       <div class="flex-shrink-0 me-3">
                         <div class="avatar avatar-online">
                           <img alt class="w-px-40 h-auto rounded-circle"
-                               src="a.template/assets/img/avatars/ava.png"/>
+                               src="webImage/other/icon/ava.png"/>
                         </div>
                       </div>
                       <div class="flex-grow-1">

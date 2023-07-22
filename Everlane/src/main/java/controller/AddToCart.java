@@ -19,9 +19,6 @@ public class AddToCart extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        PrintWriter pr = response.getWriter();
-//        String xUserID = request.getParameter("UserID");
-//        int xCart_itemID;
         ProductDAO pd = new ProductDAO();
         VariationDAO vd = new VariationDAO();
         String xProductID = request.getParameter("ProductID");

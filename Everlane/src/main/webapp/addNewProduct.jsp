@@ -52,7 +52,7 @@
     <meta content="" name="description"/>
 
     <!-- Favicon -->
-    <link href="a.template/assets/img/favicon/favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="webImage/other/icon/favicon.png" rel="icon" type="image/x-icon"/>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -84,7 +84,6 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="a.template/assets/js/config.js"></script>
 </head>
-
 <body>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -94,10 +93,7 @@
             <div class="app-brand demo">
                 <a href="dashboardManager.jsp" class="app-brand-link">
               <span class="app-brand-logo demo">
-                    <svg width="128" height="14px" class="styles_everlane-logo__4o010" viewBox="0 0 128 14" fill="none"
-                         xmlns="http://www.w3.org/2000/svg"><path
-                            d="M116.776 0V14H127.933V11.2198H119.6V8.38015H127.032V5.61985H119.6V2.78015H127.933V0H116.776ZM108.221 0V9.45982L101.311 0H98.5062V14H101.311V4.54018L108.222 14H111.066V0H108.222H108.221ZM86.0055 0L80.3766 14H83.3211L84.4828 11.1397H90.2922L91.4341 14H94.4191L88.7902 0H86.0055ZM87.3875 3.7201L89.2307 8.48018H85.5046L87.3875 3.7201ZM67.1754 0V14H77.3717V11.2198H69.9998V0H67.1754ZM52.4714 2.71982V5.70003H57.6201C58.4017 5.70003 59.0625 5.09986 59.0625 4.22024C59.0625 3.34063 58.4216 2.71982 57.6201 2.71982H52.4714ZM58.7619 14L55.396 8.38015H52.4714V14H49.647V0H57.6201C60.0238 0 61.867 1.74018 61.867 4.17976C61.867 6.35974 60.4651 7.9197 58.5019 8.28012L61.9672 14H58.7619ZM32.9201 0V14H44.0785V11.2198H35.7453V8.38015H43.1776V5.61985H35.7453V2.78015H44.0785V0H32.9201ZM26.1494 0L22.1227 10.1997L18.0753 0H15.0307L20.6596 14H23.484L29.1336 0H26.1486H26.1494ZM0.0865293 0L0.0666504 14H11.245V11.2198H2.91092V8.38015H10.3432V5.61985H2.91092V2.78015H11.2442V0H0.0865293Z"
-                            fill="black"></path></svg>
+                  <img src="webImage/other/logo/logo.png" style="width:128px; height:14px">
               </span>
                 </a>
 
@@ -198,7 +194,6 @@
             </ul>
         </aside>
         <!-- / Menu -->
-
         <!-- Layout container -->
         <div class="layout-page">
             <!-- Navbar -->
@@ -219,7 +214,7 @@
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
-                                    <img src="a.template/assets/img/avatars/ava.png" alt
+                                    <img src="webImage/other/icon/ava.png" alt
                                          class="w-px-40 h-auto rounded-circle"/>
                                 </div>
                             </a>
@@ -229,7 +224,7 @@
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="a.template/assets/img/avatars/ava.png" alt
+                                                    <img src="webImage/other/icon/ava.png" alt
                                                          class="w-px-40 h-auto rounded-circle"/>
                                                 </div>
                                             </div>
@@ -371,7 +366,8 @@
                                     <!-- Account -->
                                     <hr class="my-0"/>
                                     <div class="card-body">
-                                        <form action="CreateNewImageFolderServlet" method="POST" enctype="multipart/form-data">
+                                        <form action="CreateNewImageFolderServlet" method="POST"
+                                              enctype="multipart/form-data">
                                             <div class="mb-3 col-md-6">
                                                 <label class="form-label" for="imageName">Product Name</label>
                                                 <input class="form-control" id="imageName" name="imageName"
@@ -401,19 +397,26 @@
 
                                             <div class="mb-3 col-md-6">
                                                 <label for="thumbnail" class="form-label">Thumbnail</label>
-                                                <input class="form-control" type="file"  name="thumbnail" id="thumbnail" accept="image/png, image/gif, image/jpeg" required>
+                                                <input class="form-control" type="file" name="thumbnail" id="thumbnail"
+                                                       accept="image/png, image/gif, image/jpeg" required>
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="productImg1" class="form-label">1st Image</label>
-                                                <input class="form-control" type="file"  name="productImg1" id="productImg1" accept="image/png, image/gif, image/jpeg" required>
+                                                <input class="form-control" type="file" name="productImg1"
+                                                       id="productImg1" accept="image/png, image/gif, image/jpeg"
+                                                       required>
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="productImg2" class="form-label">2nd Image</label>
-                                                <input class="form-control" type="file"  name="productImg2" id="productImg2" accept="image/png, image/gif, image/jpeg" required>
+                                                <input class="form-control" type="file" name="productImg2"
+                                                       id="productImg2" accept="image/png, image/gif, image/jpeg"
+                                                       required>
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="productImg3" class="form-label">3nd Image</label>
-                                                <input class="form-control" type="file"  name="productImg3" id="productImg3" accept="image/png, image/gif, image/jpeg" required>
+                                                <input class="form-control" type="file" name="productImg3"
+                                                       id="productImg3" accept="image/png, image/gif, image/jpeg"
+                                                       required>
                                             </div>
                                             <%if (picheckname != null) {%>
                                             <h6 style="color: red">Product Img Folder is already in the database with id
@@ -450,7 +453,7 @@
                                                     <datalist id="product">
                                                         <%for (ProductForEdit productForEdit : productForEditList) {%>
                                                         <option value="<%=productForEdit.getProductName()%>">
-                                                        <%}%>
+                                                                <%}%>
                                                     </datalist>
                                                 </div>
                                                 <div class="mb-3 col-md-6">
@@ -458,12 +461,14 @@
                                                     <select class="select2 form-select" id="colorName" name="colorName"
                                                             required>
                                                         <%if (colorName != null) {%>
-                                                        <option value="<%=colorName%>"><%=colorName%></option>
-                                                        <%}else{%>
+                                                        <option value="<%=colorName%>"><%=colorName%>
+                                                        </option>
+                                                        <%} else {%>
                                                         <option value="">Please pick a color</option>
                                                         <%}%>
                                                         <%for (Color color : colorList) {%>
-                                                        <option value="<%=color.getColor_Name()%>"><%=color.getColor_Name()%></option>
+                                                        <option value="<%=color.getColor_Name()%>"><%=color.getColor_Name()%>
+                                                        </option>
                                                         <%}%>
                                                     </select>
                                                 </div>
@@ -535,12 +540,10 @@
         </div>
         <!-- / Layout page -->
     </div>
-
     <!-- Overlay -->
     <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
-
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
@@ -561,7 +564,6 @@
 <!-- Page JS -->
 <script src="a.template/assets/js/dashboards-analytics.js"></script>
 
-<!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>

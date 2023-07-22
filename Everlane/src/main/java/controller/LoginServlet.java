@@ -1,7 +1,5 @@
-//Nguyễn Đắc Hoàng Đạt - HE170720
 package controller;
 
-//import controller.LoginGoogle.UserGoogleDto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,14 +28,12 @@ LoginServlet extends HttpServlet {
             String email = req.getParameter("email").trim();
             String password = req.getParameter("password").trim();
             UserDAO u = new UserDAO();
-//            ProductsDAO p = new ProductsDAO();
             CategoryDAO c = new CategoryDAO();
             CollectionDAO col = new CollectionDAO();
             PromotionDAO promotionDAO = new PromotionDAO();
             StoryDAO storyDAO = new StoryDAO();
 
             List<Story> storyList = storyDAO.getAllStory("all");
-//            List<Product> data = p.getAllProducts();
             List<Category> cateList = c.getAllCategory();
             Collection collection = col.getCollectionsByDate();
             Promotion promotion = promotionDAO.getPromotionByID("1");
@@ -63,7 +59,6 @@ LoginServlet extends HttpServlet {
                 if (Role.getRole() == 4) {
                     HttpSession session = req.getSession();
                     session.setAttribute("acc", checkUser);
-//                    req.setAttribute("data", data);
                     req.setAttribute("storyList", storyList);
                     req.setAttribute("promotion", promotion);
                     req.setAttribute("cateList", cateList);
@@ -72,7 +67,6 @@ LoginServlet extends HttpServlet {
                 } else {
                     req.setAttribute("Message", "Email or Password is incorrect or not exist!!!");
                     req.getRequestDispatcher("login.jsp").forward(req, resp);
-//                    return;
                 }
             }
         } catch (NoSuchAlgorithmException e) {
@@ -80,4 +74,3 @@ LoginServlet extends HttpServlet {
         }
     }
 }
-//Nguyễn Đắc Hoàng Đạt - HE170720

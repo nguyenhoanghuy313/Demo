@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="footer/ad-container.css">
     <link rel="stylesheet" href="footer/footer.css">
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
+    <link rel="icon" type="image/x-icon" href="webImage/other/icon/favicon.png"/>
 </head>
 <body>
 <%--Header--%>

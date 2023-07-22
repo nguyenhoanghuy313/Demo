@@ -1,4 +1,3 @@
-////Nguyễn Đắc Hoàng Đạt - HE170720
 package controller;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -59,7 +58,6 @@ public class SignUpServlet extends HttpServlet {
                 req.setAttribute("error", "Account already exists");
                 req.getRequestDispatcher("register.jsp").forward(req, resp);
             } else {
-                //mã hóa mật khẩu
                 Encryptor encryptor = new Encryptor();
                 try {
                     u.addUser(username , encryptor.encryptString(password) ,email, role, date);
@@ -74,4 +72,3 @@ public class SignUpServlet extends HttpServlet {
         }
     }
 }
-////Nguyễn Đắc Hoàng Đạt - HE170720

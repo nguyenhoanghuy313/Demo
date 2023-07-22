@@ -28,7 +28,6 @@ public class UserListManagerServlet extends HttpServlet {
         String xName = request.getParameter("userName").trim();
         UserDAO ud = new UserDAO();
         CategoryDAO cd = new CategoryDAO();
-//        String cateID = request.getParameter("categoryID");
         List<Category> cateList = cd.getAllCategory();
         request.setAttribute("cateList", cateList);
         List<User> userList = ud.searchByName(xName, xRole);

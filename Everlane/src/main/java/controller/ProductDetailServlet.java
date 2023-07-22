@@ -12,7 +12,6 @@ public class ProductDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         String xId = request.getParameter("ProductID").trim();
         String xColor_Name = request.getParameter("color_Name").trim();
-//        String xSize_Name = request.getParameter("size_name").trim();
         ProductDAO pd = new ProductDAO();
         ColorDAO col = new ColorDAO();
         SizeDAO si = new SizeDAO();
@@ -20,8 +19,6 @@ public class ProductDetailServlet extends HttpServlet {
         List<Color> colors = col.getColorsByProductID(xId);
         List<Size> sizes = si.getSizesOfThatProduct(xId, xColor_Name);
 
-//        List<Product> data = pd.getAllProducts();
-//        request.setAttribute("data", data);
         request.setAttribute("pi", x);
         request.setAttribute("colors", colors);
         request.setAttribute("sizes", sizes);
@@ -34,7 +31,6 @@ public class ProductDetailServlet extends HttpServlet {
         String xId = request.getParameter("ProductID").trim();
         String xColor_Name = request.getParameter("color_Name").trim();
         String xSize_Name = request.getParameter("size_name").trim();
-//        String xVariID = request.getHeader("VariationID").trim();
         ProductDAO pd = new ProductDAO();
         ColorDAO col = new ColorDAO();
         SizeDAO si = new SizeDAO();

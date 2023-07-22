@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="header/search/search1.css">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
+    <link rel="icon" type="image/x-icon" href="webImage/other/icon/favicon.png"/>
 
 </head>
 <body>
@@ -56,7 +56,7 @@
         <li><a href="${pageContext.request.contextPath}/StoryCusServlet?input=all">Stories</a></li>
     </ul>
     <a href="${pageContext.request.contextPath}/home-servlet" class="logo"><img
-            src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Everlane_logo.png"></a>
+            src="webImage/other/logo/logo.png"></a>
 
     <div class="main">
         <a href="#" class="search" id="search-icon"><i class="ri-search-line"></i></a>

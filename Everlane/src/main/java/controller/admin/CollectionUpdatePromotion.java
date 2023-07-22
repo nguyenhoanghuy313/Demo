@@ -20,7 +20,6 @@ public class CollectionUpdatePromotion extends HttpServlet {
             CollectionDAO col = new CollectionDAO();
             Collection collection = col.getCollections(req.getParameter("collectionIDGet"));
             req.setAttribute("c", collection);
-//            req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
             req.getRequestDispatcher("seasonCollectionUpdatePromotion.jsp").forward(req, resp);
         }
         else
@@ -28,7 +27,6 @@ public class CollectionUpdatePromotion extends HttpServlet {
             CollectionDAO col = new CollectionDAO();
             Collection collection = col.getCollectionsByDate();
             req.setAttribute("c", collection);
-//            req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
             req.getRequestDispatcher("seasonCollectionUpdatePromotion.jsp").forward(req, resp);
         }    }
 
@@ -45,7 +43,6 @@ public class CollectionUpdatePromotion extends HttpServlet {
         Collection collection = col.getCollections(collectionID);
         req.setAttribute("c", collection);
         req.setAttribute("message", "Update successfully");
-//        req.getRequestDispatcher("seasonCollectionEdit.jsp").forward(req, resp);
         req.getRequestDispatcher("seasonCollectionUpdatePromotion.jsp").forward(req, resp);
 
     }

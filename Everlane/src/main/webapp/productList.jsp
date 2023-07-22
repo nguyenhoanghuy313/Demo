@@ -16,7 +16,7 @@
 <head>
     <title>Product List</title>
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="a.template/assets/img/favicon/favicon.png"/>
+    <link rel="icon" type="image/x-icon" href="webImage/other/icon/favicon.png"/>
     <%--    icon--%>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">

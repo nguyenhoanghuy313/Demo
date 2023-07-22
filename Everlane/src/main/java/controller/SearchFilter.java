@@ -23,16 +23,12 @@ public class SearchFilter extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
 
-        // Hello
         PrintWriter out = response.getWriter();
         String[] type = request.getParameterValues("type");
         int priceRange = Integer.parseInt(request.getParameter("priceRange"));
         String color = request.getParameter("color");
         String size = request.getParameter("size");
-//        ProductsDAO cd = new ProductsDAO();
-//        List<Product> list = cd.searchByFilter(type,priceRange,color);
         request.setAttribute("offSet", 0);
-//        request.setAttribute("list", list);
         request.getRequestDispatcher("productList.jsp").forward(request,response);
     }
 

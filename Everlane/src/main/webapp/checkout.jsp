@@ -34,7 +34,7 @@
     <link href="checkout/checkout.css" rel="stylesheet">
 
     <!-- Favicon -->
-    <link href="a.template/assets/img/favicon/favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="webImage/other/icon/favicon.png" rel="icon" type="image/x-icon"/>
 </head>
 <body>
 <%
