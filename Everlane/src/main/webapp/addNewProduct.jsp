@@ -513,7 +513,7 @@
                                             <h6 style="color: green">${alert3}</h6>
                                             <h6 style="color: red">${alert31}</h6>
                                             <div class="mt-2">
-                                                <button class="btn btn-dark me-2" type="submit">Create new Variation
+                                                <button class="btn btn-dark me-2" type="submit">Create
                                                 </button>
                                             </div>
                                         </form>

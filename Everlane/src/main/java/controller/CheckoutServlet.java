@@ -18,6 +18,16 @@ public class CheckoutServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User u = (User) request.getSession().getAttribute("acc");
+        HttpSession session = request.getSession();
+        String input = request.getParameter("input").trim();
+        if(input.equals("1")){
+            session.removeAttribute("temporaryAddress");
+        } else if (input.equals("2")) {
+            session.removeAttribute("PayType");
+        }else{
+            session.removeAttribute("temporaryAddress");
+            session.removeAttribute("PayType");
+        }
         CartItemDAO cid = new CartItemDAO();
         if (u == null) {
             request.setAttribute("Message", "Please Login to perform this action!");

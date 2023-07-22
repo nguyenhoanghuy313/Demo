@@ -153,7 +153,7 @@
                 <p>₫<%=totalValue%>
                 </p>
             </div>
-            <a class="buttonCheckout" href="${pageContext.request.contextPath}/Checkout">Continue To Checkout</a>
+            <a class="buttonCheckout" href="${pageContext.request.contextPath}/Checkout?input=3">Continue To Checkout</a>
         </div>
     </div>
 

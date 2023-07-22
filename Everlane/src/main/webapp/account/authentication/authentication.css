@@ -87,10 +87,13 @@
 }
 .showpass span{
     position: absolute;
+    width: 16px;
+    height: 16px;
     right: 10px;
     top: 0;
     bottom: 0;
-    z-index: 10000;
+    margin: auto 0;
+    z-index: 1000;
 }
 
 @media (max-width: 1090px){

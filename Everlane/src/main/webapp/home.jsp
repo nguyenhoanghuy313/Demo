@@ -94,22 +94,28 @@
 
 <section class="Category_Container">
     <div class="Category_List_Container">
+<c:forEach var="cate" items="${cateList}" varStatus="status">
+    <c:if test="${status.index > 8}">
         <div class="Category2">
-            <img src="https://media.everlane.com/image/upload/c_scale,dpr_1.0,f_auto,q_auto,w_auto/c_limit,w_900/v1/i/73436bb3_0cdc.png">
+            <img src="webImage/category/${cate.getCategoryImg()}">
             <div class="Category_text">
-                <h2>New Arrivals</h2>
+                <h2>${cate.getCategoryName()}</h2>
                 <button>
-                    <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=1&color_ID=all&mod=bottom">Shop Now</a>
+                    <c:choose>
+                        <c:when test="${status.index == 10}">
+                            <a href="${pageContext.request.contextPath}/BestSellerServlet">Shop
+                                Now</a>
+                        </c:when>
+                        <c:otherwise>
+                        <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=1&color_ID=all&mod=bottom">Shop
+                            Now</a>
+                        </c:otherwise>
+                    </c:choose>
                 </button>
             </div>
         </div>
-        <div class="Category2">
-            <img src="https://media.everlane.com/image/upload/c_scale,dpr_1.0,f_auto,q_auto,w_auto/c_limit,w_900/v1/i/73436bb3_0cdc.png">
-            <div class="Category_text">
-                <h2>Best Sellers</h2>
-                <button>Buy</button>
-            </div>
-        </div>
+    </c:if>
+</c:forEach>
     </div>
     <h1>Best-Sellers: Wear Now, Love Forever</h1>
 </section>
@@ -121,7 +127,7 @@
 
             <c:forEach var="p" items="${data}">
                 <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=${p.getProductID()}">
-                    <img src=${p.getProductImg()}>
+                    <img src="webImage/productImg/${p.getProductImg()}">
                     <div class="Product_Name">
                         <div class="Best_Seller_Text">
                             <h1>${p.getProductName()}</h1>

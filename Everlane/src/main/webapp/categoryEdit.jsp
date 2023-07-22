@@ -266,7 +266,7 @@
                                 </div>
                                 <div class="card-body">
                                     <c:forEach var="cate" items="${cateList}" varStatus="a">
-                                        <c:if test="${a.index < 8}">
+                                        <c:if test="${a.index != 8}">
                                             <form action="categoryEditServlet" method="post" enctype="multipart/form-data">
 
                                                 <div class="row mb-3">
