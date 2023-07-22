@@ -31,7 +31,7 @@
     <link href="header/header1.css" rel="stylesheet"/>
     <link href="header/cart/cart2.css" rel="stylesheet">
     <link href="header/search/search1.css" rel="stylesheet">
-    <link href="checkout/checkout2.css" rel="stylesheet">
+    <link href="checkout/checkout.css" rel="stylesheet">
 
     <!-- Favicon -->
     <link href="webImage/other/icon/favicon.png" rel="icon" type="image/x-icon"/>
