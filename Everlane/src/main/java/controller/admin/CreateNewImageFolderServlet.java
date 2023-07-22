@@ -1,12 +1,12 @@
 package controller.admin;
 
+import entity.ProductForEdit;
+import entity.ProductImg;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import model.*;
 import jakarta.servlet.http.Part;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 
 import java.io.IOException;
 

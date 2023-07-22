@@ -1,7 +1,5 @@
 package controller.vnpay;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -15,9 +13,7 @@ import java.util.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import model.Config;
-
-import java.io.IOException;
+import entity.Config;
 
 @WebServlet(name = "ajaxServlet", value = "/ajaxServlet")
 public class ajaxServlet extends HttpServlet {

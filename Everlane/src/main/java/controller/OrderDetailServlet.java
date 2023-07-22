@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.OrderDetailDAO;
 import model.Product;
-import model.User;
+import entity.User;
 
 import java.io.IOException;
 import java.util.List;

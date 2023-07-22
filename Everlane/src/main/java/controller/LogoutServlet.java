@@ -1,4 +1,8 @@
 package controller;
+import entity.Category;
+import entity.Collection;
+import entity.Promotion;
+import entity.Story;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;

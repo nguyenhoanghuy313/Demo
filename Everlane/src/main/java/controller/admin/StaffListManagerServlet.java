@@ -3,9 +3,9 @@ package controller.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import model.Category;
+import entity.Category;
 import model.CategoryDAO;
-import model.User;
+import entity.User;
 import model.UserDAO;
 
 import java.io.IOException;

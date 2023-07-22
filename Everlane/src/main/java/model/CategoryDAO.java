@@ -1,5 +1,7 @@
 package model;
 
+import entity.Category;
+
 import java.util.ArrayList;
 import java.util.List;
 

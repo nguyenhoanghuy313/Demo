@@ -1,16 +1,12 @@
 package model;
 //import java.util.Date;
+import entity.Collection;
+
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.*;
 
 public class CollectionDAO extends myDAO{
-    public Collection getAllCollections(){
-        Collection x = null;
+    public entity.Collection getAllCollections(){
+        entity.Collection x = null;
         xSql = "select * from collection";
         try{
             ps = con.prepareStatement(xSql);
@@ -28,7 +24,7 @@ public class CollectionDAO extends myDAO{
                 xCollection_description = rs.getString("collection_description");
                 xDate = rs.getTimestamp("create_date");
                 xPromotionID = rs.getInt("PromotionID");
-                x = new Collection(xCollectionID, xCollectionName, xGetCollectionImg, xCollection_description, xDate, xPromotionID);
+                x = new entity.Collection(xCollectionID, xCollectionName, xGetCollectionImg, xCollection_description, xDate, xPromotionID);
             }
             rs.close();
             ps.close();
@@ -38,8 +34,8 @@ public class CollectionDAO extends myDAO{
         return x;
     }
 
-    public Collection getCollections(String xId){
-        Collection x = null;
+    public entity.Collection getCollections(String xId){
+        entity.Collection x = null;
         int i = Integer.parseInt(xId);
         xSql = "select * from collection where CollectionID = ?";
         try{
@@ -58,7 +54,7 @@ public class CollectionDAO extends myDAO{
                 xCollection_description = rs.getString("collection_description");
                 xcreate_date = rs.getTimestamp("create_date");
                 xPromotionID = rs.getInt("PromotionID");
-                x = new Collection(i, xCollectionName,xGetCollectionImg, xCollection_description, xcreate_date, xPromotionID);
+                x = new entity.Collection(i, xCollectionName,xGetCollectionImg, xCollection_description, xcreate_date, xPromotionID);
             }
             rs.close();
             ps.close();
@@ -67,8 +63,8 @@ public class CollectionDAO extends myDAO{
         }
         return x;
     }
-    public Collection getCollectionsByDate(){
-        Collection x = null;
+    public entity.Collection getCollectionsByDate(){
+        entity.Collection x = null;
         xSql = "select * from collection order by create_date desc Limit 1;";
         try{
             ps = con.prepareStatement(xSql);

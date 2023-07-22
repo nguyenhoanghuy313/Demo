@@ -3,8 +3,8 @@ package controller.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import model.Encryptor;
-import model.User;
+import entity.Encryptor;
+import entity.User;
 import model.UserDAO;
 
 import java.security.NoSuchAlgorithmException;
