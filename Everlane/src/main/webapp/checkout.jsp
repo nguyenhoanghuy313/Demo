@@ -206,8 +206,11 @@
                         </h1>
                         <p><%=ci.getSize_Name()%> | <%=ci.getColor_Name()%>
                         </p>
+                        <%            if (tempAddress == null && PayType == null) {
+                        %>
                         <a href="DeleteFromCart?ProductID=<%=ci.getProductID()%>&variationID=<%=ci.getVariationID()%>"
                            class='bx bx-trash' style="color:black;"></a>
+                        <%}%>
                     </div>
                     <div class="Cart_Item_Price">
                         <div class="Price">
@@ -218,10 +221,16 @@
                         </div>
                         <form action="${pageContext.request.contextPath}/adjustQuantity" method="post">
                             <div class="Cart_Item_Amount_Change">
+                                <%            if (tempAddress == null && PayType == null) {
+                                %>
                                 <button class='bx bx-minus' name="choice" value="minus"></button>
                                 <p id="amount"><%= cartItemList2.getQuantity() %>
                                 </p>
                                 <button class='bx bx-plus' name="choice" value="plus"></button>
+                                <%}else{%>
+                                <p id="amount"><%= cartItemList2.getQuantity() %>
+                                </p>
+                                <%}%>
                             </div>
                             <input type="hidden" name="ProductID" value="<%= cartItemList2.getProductID() %>">
                             <input type="hidden" name="VariationID" value="<%= cartItemList2.getVariationID() %>">

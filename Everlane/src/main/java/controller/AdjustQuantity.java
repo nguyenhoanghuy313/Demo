@@ -36,11 +36,10 @@ public class AdjustQuantity extends HttpServlet{
                 cid.plusQuantity(xProductID,xVariationID, String.valueOf(curCart.getCartID()));
                 response.sendRedirect(request.getHeader("referer"));
             }else {
-                cid.minusQuantity(xProductID,xVariationID, String.valueOf(curCart.getCartID()));
                 CartItem cartItem = cid.getCartQuantity(xProductID, xVariationID, String.valueOf(curCart.getCartID()));
                 int quan = cartItem.getQuantity();
-                if(quan<1){
-                    cid.deleteCartItem(xProductID,xVariationID, String.valueOf(curCart.getCartID()));
+                if(quan>1){
+                    cid.minusQuantity(xProductID,xVariationID, String.valueOf(curCart.getCartID()));
                 }
                 response.sendRedirect(request.getHeader("referer"));
             }
@@ -49,11 +48,10 @@ public class AdjustQuantity extends HttpServlet{
                 cid.plusQuantity(xProductID,xVariationID, String.valueOf(currentCart.getCartID()));
                 response.sendRedirect(request.getHeader("referer"));
             }else {
-                cid.minusQuantity(xProductID,xVariationID, String.valueOf(currentCart.getCartID()));
                 CartItem cartItem = cid.getCartQuantity(xProductID, xVariationID, String.valueOf(currentCart.getCartID()));
                 int quan = cartItem.getQuantity();
-                if(quan<1){
-                    cid.deleteCartItem(xProductID,xVariationID, String.valueOf(currentCart.getCartID()));
+                if(quan>1){
+                    cid.minusQuantity(xProductID,xVariationID, String.valueOf(currentCart.getCartID()));
                 }
                 response.sendRedirect(request.getHeader("referer"));
             }

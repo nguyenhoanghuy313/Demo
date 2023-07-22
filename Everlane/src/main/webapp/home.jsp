@@ -10,6 +10,7 @@
 <%@page import="model.*" %>
 <%@page import="controller.*" %>
 <%@ page import="model.Collection" %>
+<%@ page import="entity.BestSeller" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
@@ -117,21 +118,31 @@
     <h1>Best-Sellers: Wear Now, Love Forever</h1>
 </section>
 
+
+<%        BestSellerDAO bestseller = new BestSellerDAO();
+    List<BestSeller> bestSellers = bestseller.getBestSeller();
+    List<Product> plist = new ArrayList<>();
+    ProductDAO pd = new ProductDAO();
+    for (BestSeller bestSeller: bestSellers){
+        Product product = pd.getProductByProIDColName(String.valueOf(bestSeller.getProductID()), bestSeller.getColorName());
+        plist.add(product);
+    }
+%>
 <section class="Best_Seller_Slider">
     <div class="wrapper">
         <i id="left" class='bx bx-chevron-left'></i>
         <div class="carousel">
-            <c:forEach var="p" items="${data}">
-                <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=${p.getProductID()}">
-                    <img src="webImage/productImg/${p.getProductImg()}">
+            <%for (Product p:plist){%>
+                <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=<%=p.getProductID()%>&color_Name=<%=p.getColor_Name()%>">
+                    <img src="webImage/productImg/<%=p.getThumbnail()%>">
                     <div class="Product_Name">
                         <div class="Best_Seller_Text">
-                            <h1>${p.getProductName()}</h1>
-                            <h1>${p.getPrice()}</h1>
+                            <h1><%=p.getProductName()%></h1>
+                            <h1><%=p.getPrice()%></h1>
                         </div>
                     </div>
                 </a>
-            </c:forEach>
+            <%}%>
         </div>
         <i id="right" class='bx bx-chevron-right'></i>
     </div>

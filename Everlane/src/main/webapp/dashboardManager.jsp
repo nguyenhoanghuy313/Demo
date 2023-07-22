@@ -454,8 +454,7 @@
                                                     <h6 class="mb-0"><%=i.getProductName()%>
                                                     </h6>
                                                     <small class="text-muted d-block mb-1"><%=i.getColor_Name()%>
-                                                        | <%=i.getSize_Name()%> | <%=i.getQty_in_stock()%>
-                                                        | <%=i.getPrice()%>
+                                                        | <%=i.getSize_Name()%> | <%=i.getPrice()%>
                                                     </small>
                                                 </div>
                                             </div>

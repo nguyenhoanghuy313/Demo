@@ -107,40 +107,6 @@
     </div>
 </section>
 <%--</form>--%>
-<section class="Best_Seller_Slider">
-    <div class="wrapper">
-        <i id="left" class='bx bx-chevron-left'></i>
-        <div class="carousel">
-
-            <c:forEach var="p" items="${data}">
-                <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=${p.getProductID()}">
-                    <img src="webImage/productImg/${p.getProductImg()}">
-                    <div class="Product_Name">
-                        <div class="Best_Seller_Text">
-                            <h1>${p.getProductName()}</h1>
-                            <h1>${p.getPrice()}</h1>
-                        </div>
-                    </div>
-                </a>
-            </c:forEach>
-        </div>
-        <i id="right" class='bx bx-chevron-right'></i>
-    </div>
-</section>
-
 <jsp:include page="footer.jsp"/>
-<script>
-    const carousel = document.querySelector(".carousel"),
-        firstImg = carousel.querySelectorAll("img")[0],
-        arrowIcons = document.querySelectorAll(".wrapper i");
-
-    arrowIcons.forEach(icon => {
-        icon.addEventListener("click", () => {
-            let firstImgWidth = firstImg.clientWidth + 14; // getting first img width & adding 14 margin value
-            // if clicked icon is left, reduce width value from the carousel scroll left else add to it
-            carousel.scrollLeft += icon.id == "left" ? -firstImgWidth : firstImgWidth;
-        });
-    });
-</script>
 </body>
 </html>

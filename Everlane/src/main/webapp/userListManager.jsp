@@ -325,7 +325,7 @@
                                                     <i class="bx bx-dots-vertical-rounded"></i>
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="UserEditServlet?UserID=${u.getUserID()}"
+                                                    <a class="dropdown-item" href="OrderListManagerServlet?UserID=${u.getUserID()}&UserName=${u.getUserName()}"
                                                     ><i class="bx bx-edit-alt me-1"></i> Order List ???</a
                                                     >
                                                 </div>
