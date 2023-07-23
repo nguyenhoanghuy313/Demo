@@ -40,17 +40,16 @@ public class LogoutServlet extends HttpServlet {
             PromotionDAO promotionDAO = new PromotionDAO();
             StoryDAO storyDAO = new StoryDAO();
 
-        List<Story> storyList = storyDAO.getAllStory("all");
-        List<Category> cateList = c.getAllCategory();
-        Collection collection = col.getCollectionsByDate();
-        request.getSession().setAttribute("collection", collection);
+            List<Story> storyList = storyDAO.getAllStory("all");
+            List<Category> cateList = c.getAllCategory();
+            Collection collection = col.getCollectionsByDate();
+            request.getSession().setAttribute("collection", collection);
+            Promotion promotion = promotionDAO.getLastestPromotion();
 
-        Promotion promotion = promotionDAO.getPromotionByID("1");
-
-        request.setAttribute("storyList", storyList);
-        request.setAttribute("promotion", promotion);
-        request.setAttribute("cateList", cateList);
-        request.setAttribute("collection", collection);
+            request.setAttribute("storyList", storyList);
+            request.setAttribute("promotion", promotion);
+            request.setAttribute("cateList", cateList);
+            request.setAttribute("collection", collection);
         request.getRequestDispatcher("home.jsp").forward(request, response);
         }
     }

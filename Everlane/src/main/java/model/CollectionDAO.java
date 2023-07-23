@@ -1,5 +1,4 @@
 package model;
-//import java.util.Date;
 import entity.Collection;
 
 import java.sql.Timestamp;
@@ -124,9 +123,5 @@ public class CollectionDAO extends myDAO{
     }
 
 
-//    public static void main(String[] args) {
-//
-//        Date currentDate = new Date();
-//        System.out.println("Thời gian tạo: " + currentTime);
-//    }
+
 }

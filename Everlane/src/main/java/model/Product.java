@@ -12,8 +12,7 @@ public class Product {
     double discount;
     Timestamp order_date;
 
-//    public Product(int xProductID, String xThumbnail, String xProduct_img_1, String xProduct_img_2, String xProduct_img_3, String xCategoryName, int xCollectionID, String xProductName, String xColor_Name, String xSize_Name, double xPrice, int xQty_in_cart, int xVariationID, Timestamp xOrderDate) {
-//    }
+
 
     public Product(int productID, String thumbnail, String product_img_1, String product_img_2, String product_img_3, String categoryName, int collectionID, String productName, String color_Name, String size_Name, double price, int qty_in_cart, int variationID, Timestamp order_date) {
         this.productID = productID;
@@ -27,7 +26,6 @@ public class Product {
         this.color_Name = color_Name;
         this.size_Name = size_Name;
         this.price = price;
-//        this.qty_in_stock = qty_in_stock;
         this.qty_in_cart = qty_in_cart;
         this.variationID = variationID;
         this.order_date = order_date;

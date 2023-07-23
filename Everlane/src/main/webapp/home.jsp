@@ -157,7 +157,7 @@
     <h1>
         ${promotion.getPromotionName()}: Now up to ${promotion.getDiscountRate()}% off
     </h1>
-    <button>SHOP NOW</button>
+    <button style="color: black">SHOP NOW</button>
 </section>
 
 <section class="Stories_Container">

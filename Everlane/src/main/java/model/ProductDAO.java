@@ -549,14 +549,5 @@ public class ProductDAO extends myDAO {
         }
     }
 
-//    public static void main(String[] args) {
-//        ProductDAO p = new ProductDAO();
-////        Product product = p.getProductByProIDColName("1","black");
-////        System.out.println(product.getDiscount());
-//        List<Product> t = p.getNewArrivalByColIDProID("1", "3");
-////        List<Product> t = p.getProductsByColIDCollectID("2", "3", "2");
-//        for (Product x : t) {
-//            System.out.println(x.getDiscount());
-//        }
-//    }
+
 }

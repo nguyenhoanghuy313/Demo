@@ -61,16 +61,11 @@ public class CategoryDAO extends myDAO {
             ps = con.prepareStatement(xSql);
             ps.setString(1, xcateImg);
             ps.setInt(2, xcateId);
-//            ps.setString(9, xRole);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("updateCategory: " + e.getMessage());
         }
     }
 
-//    public static void main(String[] args) {
-//        CategoryDAO categoryDAO = new CategoryDAO();
-//        categoryDAO.updateCategory("imge", 1);
-//        }
 
 }

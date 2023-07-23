@@ -325,7 +325,7 @@
                                                 </button>
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="OrderListManagerServlet?UserID=${u.getUserID()}&UserName=${u.getUserName()}"
-                                                    ><i class="bx bx-edit-alt me-1"></i> Order List ???</a
+                                                    ><i class="bx bx-edit-alt me-1"></i> Order List</a
                                                     >
                                                 </div>
                                             </div>
