@@ -60,7 +60,7 @@
                     <%
                         }else {
                     %>
-                    <p><%= pi.getPrice()%>
+                    <p style="text-decoration: none"><%= pi.getPrice()%>
                     </p>
                     <%}%>
                 </div>
