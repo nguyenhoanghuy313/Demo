@@ -47,8 +47,6 @@
     </div>
     <div class="Product_Detail">
         <div class="Product_Name">
-            <p class="Category_Tag"><%= pi.getCategoryName()%>
-            </p>
             <div class="Name_And_Price">
                 <h1><%= pi.getProductName()%>
                 </h1>
@@ -64,7 +62,7 @@
                     <%
                         }else {
                     %>
-                    <p><%= pi.getPrice()%>
+                    <p style="text-decoration: none"><%= pi.getPrice()%>
                     </p>
                     <%}%>
                 </div>

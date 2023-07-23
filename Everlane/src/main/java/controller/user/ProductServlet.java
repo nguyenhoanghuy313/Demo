@@ -91,9 +91,6 @@ public class ProductServlet extends HttpServlet{
             request.setAttribute("collectionID", collectionID);
         }
         request.getRequestDispatcher("productList.jsp").forward(request, response);
-
-
-
     }
 }
 

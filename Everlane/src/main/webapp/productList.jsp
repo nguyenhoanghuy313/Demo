@@ -68,7 +68,7 @@
                         <%
                         } else {
                         %>
-                        <a style="color: black" href="${pageContext.request.contextPath}/productList-servlet?categoryID=${cate.getCategoryID()}&color_ID=all&collectionID=<%=collection.getCollectionID()%>"
+                        <a style="color: black" href="${pageContext.request.contextPath}/productList-servlet?categoryID=<%=collection.getCollectionID()%>&color_ID=all&collectionID=${cate.getCategoryID()}"
                            class="Category_Option">
                             <span>${cate.getCategoryName()}</span>
                         </a>
@@ -141,7 +141,7 @@
                             <%
                             if(x.getDiscount() != 0){
                             %>
-                            <p><del><%= x.getPrice()%></del> </p>
+                            <p style="text-decoration:line-through"><%= x.getPrice()%></p>
                             <p><%= x.getDiscount()%></p>
                             <%
                                 }else{
