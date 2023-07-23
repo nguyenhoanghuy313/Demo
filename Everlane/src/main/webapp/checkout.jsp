@@ -270,21 +270,13 @@
                     <td>₫<%=totalValue2%>
                     </td>
                 </tr>
-<%--                <tr>--%>
-<%--                    <td>Duties</td>--%>
-<%--                    <td>???</td>--%>
-<%--                </tr>--%>
-<%--                <tr>--%>
-<%--                    <td>Tax</td>--%>
-<%--                    <td>???</td>--%>
-<%--                </tr>--%>
                 <tr>
                     <td>Shipping</td>
-                    <td>Free Ship</td>
+                    <td>₫360000</td>
                 </tr>
                 <tr style="font-weight: bold">
                     <td>Total</td>
-                    <td>₫<%=totalValue2%>
+                    <td>₫<%=totalValue2 + 360000%>
                     </td>
                 </tr>
             </table>

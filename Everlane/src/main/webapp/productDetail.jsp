@@ -47,13 +47,9 @@
     </div>
     <div class="Product_Detail">
         <div class="Product_Name">
-            <p class="Category_Tag"><%= pi.getCategoryName()%>
-            </p>
             <div class="Name_And_Price">
                 <h1><%= pi.getProductName()%>
                 </h1>
-                <%--                                <h2>variationID: <%=pi.getVariationID()%></h2>--%>
-                <%--                                <h2>prodID: <%=pi.getProductID()%></h2>--%>
                 <div class="Price">
                     <%
                         if(pi.getDiscount() != 0){
@@ -77,9 +73,9 @@
                     <%
                         for (Color color : colors) {
                     %>
-                    <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=<%= pi.getProductID()%>&color_Name=<%= color.getColor_Name()%>">
+                    <a  style="color: black" href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=<%= pi.getProductID()%>&color_Name=<%= color.getColor_Name()%>">
                         <div style="background-color: <%= color.getColor_Name()%>"></div>
-                        <span><%= color.getColor_Name()%></span>
+                        <span style="color: black"><%= color.getColor_Name()%></span>
                     </a>
                     <% } %>
                 </div>

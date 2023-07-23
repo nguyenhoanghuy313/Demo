@@ -373,16 +373,16 @@
                                             function drawChart() {
                                                 var data = google.visualization.arrayToDataTable([
                                                     ['Date', 'Sale'],
-                                                    ['<%=dashboardDate[9]%>', <%=dashboardOrTotal[9]%>],
-                                                    ['<%=dashboardDate[8]%>', <%=dashboardOrTotal[8]%>],
-                                                    ['<%=dashboardDate[7]%>', <%=dashboardOrTotal[7]%>],
-                                                    ['<%=dashboardDate[6]%>', <%=dashboardOrTotal[6]%>],
-                                                    ['<%=dashboardDate[5]%>', <%=dashboardOrTotal[5]%>],
-                                                    ['<%=dashboardDate[4]%>', <%=dashboardOrTotal[4]%>],
-                                                    ['<%=dashboardDate[3]%>', <%=dashboardOrTotal[3]%>],
-                                                    ['<%=dashboardDate[2]%>', <%=dashboardOrTotal[2]%>],
-                                                    ['<%=dashboardDate[1]%>', <%=dashboardOrTotal[1]%>],
-                                                    ['<%=dashboardDate[0]%>', <%=dashboardOrTotal[0]%>]
+                                                    ['<%=dashboardDate[0]%>', <%=dashboardOrTotal[9]%>],
+                                                    ['<%=dashboardDate[1]%>', <%=dashboardOrTotal[8]%>],
+                                                    ['<%=dashboardDate[2]%>', <%=dashboardOrTotal[7]%>],
+                                                    ['<%=dashboardDate[3]%>', <%=dashboardOrTotal[6]%>],
+                                                    ['<%=dashboardDate[4]%>', <%=dashboardOrTotal[5]%>],
+                                                    ['<%=dashboardDate[5]%>', <%=dashboardOrTotal[4]%>],
+                                                    ['<%=dashboardDate[6]%>', <%=dashboardOrTotal[3]%>],
+                                                    ['<%=dashboardDate[7]%>', <%=dashboardOrTotal[2]%>],
+                                                    ['<%=dashboardDate[8]%>', <%=dashboardOrTotal[1]%>],
+                                                    ['<%=dashboardDate[9]%>', <%=dashboardOrTotal[0]%>]
                                                 ]);
 
                                                 var options = {
