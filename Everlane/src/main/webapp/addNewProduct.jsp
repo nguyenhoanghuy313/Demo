@@ -332,6 +332,7 @@
                                                         <option value="<%=pc.getCollectionID()%>"><%=pc.getCollectionName()%>
                                                         </option>
                                                         <%}%>
+                                                        <option value="5">No Sale</option>
                                                     </select>
                                                 </div>
 

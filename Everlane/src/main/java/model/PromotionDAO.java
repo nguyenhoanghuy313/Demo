@@ -125,9 +125,10 @@ public class PromotionDAO extends myDAO{
         return p;
     }
 
-//    public static void main(String[] args) {
-//        PromotionDAO pDAO = new PromotionDAO();
-//        Promotion p = pDAO.getPromotionByID("1");
-//        System.out.printf("%d %s %s %f %s %s %s", p.getPromotionID(), p.getPromotionName(), p.getPromotionDescription(), p.getDiscountRate(), p.getStartDate(), p.getEndDate(), p.getBackground_color());
-//    }
+
+    public static void main(String[] args) {
+        PromotionDAO pDAO = new PromotionDAO();
+        Promotion p = pDAO.getLastestPromotion();
+        System.out.printf("%d %s %s %f %s %s %s", p.getPromotionID(), p.getPromotionName(), p.getPromotionDescription(), p.getDiscountRate(), p.getStartDate(), p.getEndDate(), p.getBackground_color());
+    }
 }

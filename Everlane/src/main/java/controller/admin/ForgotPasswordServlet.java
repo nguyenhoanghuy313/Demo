@@ -23,12 +23,12 @@ public class ForgotPasswordServlet extends HttpServlet {
         User checkEmail = u.getUserByEmail(email);
         if(checkEmail == null)
         {
-            req.setAttribute("message", "Email not exist");
+            req.setAttribute("msg", "Email not exist");
             req.getRequestDispatcher("forgotPasswordHighUser.jsp").forward(req, resp);
         }
         else
         {
-            req.setAttribute("message", "Please check your email to reset password");
+            req.setAttribute("msg", "Please check your email to reset password");
             req.getRequestDispatcher("forgotPasswordHighUser.jsp").forward(req, resp);
         }
     }

@@ -27,8 +27,11 @@ public class LoginGoogleHandler extends HttpServlet {
         String accessToken = getToken(code);
         UserDAO u = new UserDAO();
         CollectionDAO col = new CollectionDAO();
-//        ProductsDAO p = new ProductsDAO();
         CategoryDAO c = new CategoryDAO();
+        StoryDAO storyDAO = new StoryDAO();
+
+        List<Story> storyList = storyDAO.getAllStory("all");
+//        ProductsDAO p = new ProductsDAO();
 //        List<Product> data = p.getAllProducts();
         List<Category> cateList = c.getAllCategory();
         PromotionDAO promotionDAO = new PromotionDAO();
@@ -47,6 +50,8 @@ public class LoginGoogleHandler extends HttpServlet {
             request.setAttribute("promotion", promotion);
             request.setAttribute("cateList", cateList);
             request.setAttribute("collection", collection);
+            request.setAttribute("storyList", storyList);
+            request.getSession().setAttribute("storyList", storyList);
             request.getSession().setAttribute("promotion", promotion);
             request.getSession().setAttribute("collection", collection);
             request.getSession().setAttribute("cateList", cateList);

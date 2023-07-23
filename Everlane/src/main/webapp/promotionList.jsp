@@ -13,7 +13,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
   List<Promotion> promotionList = (List<Promotion>) request.getAttribute("promotionList");
-  User user = (User) session.getAttribute("acc");
+  User user = (User) session.getAttribute("accHU");
 %>
 <html
         lang="en"

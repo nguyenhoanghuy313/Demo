@@ -135,7 +135,16 @@
                     <div class="Product_Text">
                         <div class="Product_Name">
                             <a href="${pageContext.request.contextPath}/productDetail-servlet?ProductID=<%= x.getProductID()%>&color_Name=<%= x.getColor_Name()%>"><%= x.getProductName()%></a>
+                            <%
+                            if(x.getDiscount() != 0){
+                            %>
+                            <p><del><%= x.getPrice()%></del> </p>
+                            <p><%= x.getDiscount()%></p>
+                            <%
+                                }else{
+                            %>
                             <p><%= x.getPrice()%></p>
+                            <% } %>
                         </div>
                         <p><%= x.getColor_Name()%></p>
                     </div>
