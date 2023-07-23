@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-//Đoàn Phan Hưng - HE170721
 public class CartItemDAO extends myDAO{
 
     public void insert(String cartID, String proID, String varID){
@@ -20,7 +19,6 @@ public class CartItemDAO extends myDAO{
             ps.setInt(3, xVarID);
             ps.executeUpdate();
             ps.close();
-//            System.out.println(xSql);
         }catch (Exception e){
             System.out.println("insert: " + e.getMessage());
         }
@@ -29,17 +27,12 @@ public class CartItemDAO extends myDAO{
     public void setQuantity(String proID, String varID){
         int xProID = Integer.parseInt(proID);
         int xVarID = Integer.parseInt(varID);
-//        int xUserID = Integer.parseInt(userID);
         xSql = "update cart_item \n" +
                 "set Quantity = '1' WHERE productID = " + proID + " AND variationID = " + varID + ";";
         try {
             ps = con.prepareStatement(xSql);
-//            ps.setInt(1, xProID);
-//            ps.setInt(2, xVarID);
             ps.executeUpdate();
             ps.close();
-//            System.out.println("Setted");
-//            System.out.println(xSql);
         }catch (Exception e){
             System.out.println("setQuantity: " + e.getMessage());
         }
@@ -128,7 +121,6 @@ public class CartItemDAO extends myDAO{
             }
             rs.close();
             ps.close();
-//            System.out.println(xSql);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -161,7 +153,6 @@ public class CartItemDAO extends myDAO{
             }
             rs.close();
             ps.close();
-//            System.out.println(xSql);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -268,15 +259,4 @@ public class CartItemDAO extends myDAO{
         }
         return false;
     }
-//    public void insertProductIntoCart(int userID, int productID){
-//        xSql
-//    }
-
-//    public static void main(String[] args) {
-//        CartItemDAO dao = new CartItemDAO();
-//        List<Product> c = dao.getUserItem(2);
-//        for (Product x : c) {
-//            System.out.println(x.getDiscount());
-//        }
-//    }
 }

@@ -1,5 +1,7 @@
 package model;
 
+import entity.Variation;
+
 public class VariationDAO extends myDAO{
     public void createNewVariation( int xProductID, int xColor_ID, int xSize_ID, int xQty_in_stock, int xProduct_img_ID){
         try{

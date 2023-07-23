@@ -1,5 +1,7 @@
 package model;
 
+import entity.Color;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,6 +1,7 @@
 package model;
 
-import java.sql.SQLOutput;
+import entity.Story;
+
 import java.util.ArrayList;
 import java.util.List;
 

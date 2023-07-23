@@ -11,6 +11,10 @@
 <%@page import="controller.*" %>
 <%@ page import="model.Collection" %>
 <%@ page import="entity.BestSeller" %>
+<%@ page import="entity.Collection" %>
+<%@ page import="entity.BestSeller" %>
+<%@ page import="entity.Category" %>
+<%@ page import="entity.Promotion" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>

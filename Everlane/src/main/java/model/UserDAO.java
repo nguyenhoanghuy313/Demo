@@ -1,7 +1,8 @@
 package model;
 
+import entity.User;
+
 import java.sql.Date;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +32,7 @@ public class UserDAO extends myDAO {
                 xSex = rs.getInt("Sex");
                 xRole = rs.getInt("Role");
                 xPhone = rs.getString("Phone");
-                xUserImg = rs.getString("UserImg");
-                x = new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone, xUserImg);
+                x = new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone);
                 t.add(x);
             }
             rs.close();
@@ -49,13 +49,13 @@ public class UserDAO extends myDAO {
                     "from user\n" +
                     "where Email=? and Password=?";
             ps = con.prepareStatement(xSql);
-            ps.setString(1, xEmail);//dau hoi so 1
-            ps.setString(2, xPassword);//dau hoi so 2
+            ps.setString(1, xEmail);
+            ps.setString(2, xPassword);
             int xUserID;
             String xUserName, xFirstName, xLastName;
             Date xDob;
             int xSex, xRole;
-            String xPhone, xUserImg;
+            String xPhone;
             rs = ps.executeQuery();
             while (rs.next()) {
                 xUserID = rs.getInt("UserID");
@@ -68,8 +68,7 @@ public class UserDAO extends myDAO {
                 xSex = rs.getInt("Sex");
                 xRole = rs.getInt("Role");
                 xPhone = rs.getString("Phone");
-                xUserImg = rs.getString("UserImg");
-                return new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone, xUserImg);
+                return new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone);
 
             }
         } catch (Exception e) {
@@ -101,8 +100,8 @@ public class UserDAO extends myDAO {
                     "from user\n" +
                     "where UserName=? and Email=?";
             ps = con.prepareStatement(xSql);
-            ps.setString(1, xusername);//dau hoi so 1
-            ps.setString(2, xemail);//dau hoi so 2
+            ps.setString(1, xusername);
+            ps.setString(2, xemail);
             rs = ps.executeQuery();
             if (rs.next()) {
                 return true;
@@ -119,7 +118,7 @@ public class UserDAO extends myDAO {
                     "from user\n" +
                     "where UserName like ?";
             ps = con.prepareStatement(xSql);
-            ps.setString(1, xusername);//dau hoi so 1
+            ps.setString(1, xusername);
             rs = ps.executeQuery();
             if (rs.next()) {
                 return true;
@@ -136,7 +135,7 @@ public class UserDAO extends myDAO {
                     "from user\n" +
                     "where Email like ?";
             ps = con.prepareStatement(xSql);
-            ps.setString(1, xemail);//dau hoi so 1
+            ps.setString(1, xemail);
             rs = ps.executeQuery();
             if (rs.next()) {
                 return true;
@@ -153,7 +152,7 @@ public class UserDAO extends myDAO {
                     "from user\n" +
                     "where Password=?";
             ps = con.prepareStatement(xSql);
-            ps.setString(1, xpassword);//dau hoi so 1
+            ps.setString(1, xpassword);
             rs = ps.executeQuery();
             if (rs.next()) {
                 return true;
@@ -164,10 +163,10 @@ public class UserDAO extends myDAO {
         return false;
     }
 
-    //add User for register Customer
+
     public void addUser(String xUsername, String xPassword, String xEmail, int xRole, Date dob) {
         try {
-            xSql = "INSERT INTO user (UserName,Password,Email,FirstName,LastName,Dob,Sex,Role, Phone, UserImg) values (?, ?, ?, null, null, ?, null, ?, null, null)";
+            xSql = "INSERT INTO user (UserName,Password,Email,FirstName,LastName,Dob,Sex,Role, Phone) values (?, ?, ?, null, null, ?, null, ?, null)";
             ps = con.prepareStatement(xSql);
             ps.setString(1, xUsername);
             ps.setString(2, xPassword);
@@ -180,10 +179,9 @@ public class UserDAO extends myDAO {
         }
     }
 
-    //create new User for highUser
     public void createNewUser(String xUsername, String xPassword, String xEmail, String xFirstName, String xLastName, Date xDob, int xSex, int xRole, String xPhone) {
         try {
-            xSql = "INSERT INTO user (UserName,Password,Email,FirstName,LastName,Dob,Sex, Role, Phone, UserImg) values (?, ?, ?, ?, ?, ?, ?, ?, ?, null)";
+            xSql = "INSERT INTO user (UserName,Password,Email,FirstName,LastName,Dob,Sex, Role, Phone) values (?, ?, ?, ?, ?, ?, ?, ?, ?";
             ps = con.prepareStatement(xSql);
             ps.setString(1, xUsername);
             ps.setString(2, xPassword);
@@ -212,7 +210,7 @@ public class UserDAO extends myDAO {
             String xUserName, xPassword, xEmail, xFirstName, xLastName;
             Date xDob;
             int xSex, xRole;
-            String xPhone, xUserImg;
+            String xPhone;
             User u;
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
@@ -227,8 +225,7 @@ public class UserDAO extends myDAO {
                 xSex = rs.getInt("Sex");
                 xRole = rs.getInt("Role");
                 xPhone = rs.getString("Phone");
-                xUserImg = rs.getString("UserImg");
-                u = new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone, xUserImg);
+                u = new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone);
                 userList.add(u);
             }
             rs.close();
@@ -256,7 +253,7 @@ public class UserDAO extends myDAO {
             String xUserName, xPassword, xEmail, xFirstName, xLastName;
             Date xDob;
             int xSex, xRole;
-            String xPhone, xUserImg;
+            String xPhone;
             User u;
             while ((rs.next())) {
                 xUserID = rs.getInt("UserID");
@@ -269,8 +266,7 @@ public class UserDAO extends myDAO {
                 xSex = rs.getInt("Sex");
                 xRole = rs.getInt("Role");
                 xPhone = rs.getString("Phone");
-                xUserImg = rs.getString("UserImg");
-                u = new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone, xUserImg);
+                u = new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone);
                 sortedUserList.add(u);
             }
             rs.close();
@@ -291,7 +287,7 @@ public class UserDAO extends myDAO {
             String xUserName, xPassword, xFirstName, xLastName;
             Date xDob;
             int xSex, xRole;
-            String xPhone, xUserImg;
+            String xPhone;
             while (rs.next()) {
                 xUserID = rs.getInt("UserID");
                 xUserName = rs.getString("UserName");
@@ -303,8 +299,7 @@ public class UserDAO extends myDAO {
                 xSex = rs.getInt("Sex");
                 xRole = rs.getInt("Role");
                 xPhone = rs.getString("Phone");
-                xUserImg = rs.getString("UserImg");
-                User u = new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone, xUserImg);
+                User u = new User(xUserID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone);
                 return u;
             }
             rs.close();
@@ -324,7 +319,7 @@ public class UserDAO extends myDAO {
             String xUserName, xPassword, xEmail, xFirstName, xLastName;
             Date xDob;
             int xSex, xRole;
-            String xPhone, xUserImg;
+            String xPhone;
             User u;
             while (rs.next()) {
                 uID = rs.getInt("UserID");
@@ -337,8 +332,7 @@ public class UserDAO extends myDAO {
                 xSex = rs.getInt("Sex");
                 xRole = rs.getInt("Role");
                 xPhone = rs.getString("Phone");
-                xUserImg = rs.getString("UserImg");
-                u = new User(uID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone, xUserImg);
+                u = new User(uID, xUserName, xPassword, xEmail, xFirstName, xLastName, xDob, xSex, xRole, xPhone);
                 return u;
             }
             rs.close();
@@ -367,9 +361,9 @@ public class UserDAO extends myDAO {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date currentDate = new java.util.Date();
             java.util.Date inputDate = dateFormat.parse(date);
-            return !inputDate.after(currentDate) && !inputDate.equals(currentDate); // Ngày sinh không hợp lệ
+            return !inputDate.after(currentDate) && !inputDate.equals(currentDate);
         } catch (Exception e) {
-            return false; // Lỗi xảy ra khi chuyển đổi ngày
+            return false;
         }
     }
 
@@ -399,7 +393,6 @@ public class UserDAO extends myDAO {
             ps = con.prepareStatement(xSql);
             ps.setString(1, xpassword);
             ps.setInt(2, userId);
-//            ps.setString(9, xRole);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("ChangePass: " + e.getMessage());
@@ -411,9 +404,6 @@ public class UserDAO extends myDAO {
         xSql = "update swp_project.user set FirstName = " + "'"+ FirstName + "'" + ", Phone = "+ "'"+ phone + "'" +" where UserID = " +userID;
         try {
             ps = con.prepareStatement(xSql);
-//            ps.setString(1, firstName);
-//            ps.setString(2, phoneNum);
-//            ps.setInt(1, xUserID);
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {

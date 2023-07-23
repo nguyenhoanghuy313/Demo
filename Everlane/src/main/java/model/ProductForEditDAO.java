@@ -1,7 +1,7 @@
 package model;
 
-import java.sql.Date;
-import java.sql.SQLOutput;
+import entity.ProductForEdit;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,5 +1,7 @@
 package model;
 
+import entity.ProductImg;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,5 +1,7 @@
 package model;
 
+import entity.ProCollection;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
