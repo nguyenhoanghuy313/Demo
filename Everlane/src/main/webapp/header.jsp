@@ -46,8 +46,7 @@
     <%-- web--%>
     <a class="bx bx-menu" id="menu-icon"></a>
     <ul class="navbar">
-        <li><a href="#">Women</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="${pageContext.request.contextPath}/home-servlet">About</a></li>
         <li><a href="${pageContext.request.contextPath}/StoryCusServlet?input=all">Stories</a></li>
     </ul>
     <a href="${pageContext.request.contextPath}/home-servlet" class="logo"><img
@@ -118,11 +117,6 @@
                             <input type="submit" style="display: none;">
                         </form>
 
-                        <%--                        <div class="cart_item_quantity">--%>
-                        <%--                            <button class='bx bx-minus' name="choice" value="minus" ></button>--%>
-                        <%--                            <p id="amount" ><%=cartItemList2.getQuantity()%></p>--%>
-                        <%--                            <button class='bx bx-plus' ></button>--%>
-                        <%--                        </div>--%>
                     </div>
                 </div>
             </div>
@@ -150,16 +144,13 @@
 
     <div class="menu_container">
         <div class="menu_container1">
-            <a href="#">Best-Sellers</a>
-            <a href="#">Everworld Stories</a>
+            <a href="${pageContext.request.contextPath}/BestSellerServlet">Best-Sellers</a>
+            <a href="${pageContext.request.contextPath}/StoryCusServlet?input=all">Everworld Stories</a>
         </div>
         <div class="menu_container2">
-            <a href="">What's New</a>
-            <a href="">Apparel</a>
-            <a href="">Denim</a>
-            <a href="">Shoes,Bags & Accessories</a>
-            <a href="">Sales</a>
-            <a href="">About</a>
+            <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=1&color_ID=all&mod=bottom">What's New</a>
+            <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=2&color_ID=all">Denim</a>
+            <a href="${pageContext.request.contextPath}/productList-servlet?categoryID=6&color_ID=all">Shoes,Bags & Accessories</a>
         </div>
         <div class="menu_container3">
             <a href="">Account</a>
@@ -170,12 +161,10 @@
 
 <div class="navbar2_container">
     <ul class="navbar2">
-        <li><a href="">What's New</a></li>
-        <li><a href="">Best Sellers</a></li>
-        <li><a href="">Apparel</a></li>
-        <li><a href="">Denim</a></li>
-        <li><a href="">Shoes, Bags & Accessories</a></li>
-        <li><a href="" style="color: red">Sale</a></li>
+        <li><a href="${pageContext.request.contextPath}/productList-servlet?categoryID=1&color_ID=all&mod=bottom">What's New</a></li>
+        <li><a href="${pageContext.request.contextPath}/BestSellerServlet">Best Sellers</a></li>
+        <li><a href="${pageContext.request.contextPath}/productList-servlet?categoryID=2&color_ID=all">Denim</a></li>
+        <li><a href="${pageContext.request.contextPath}/productList-servlet?categoryID=6&color_ID=all">Shoes, Bags & Accessories</a></li>
     </ul>
 </div>
 

@@ -66,10 +66,10 @@
                 </div>
             </div>
             <div class="footer_search">
-                <form action="">
-                    <input type="text" placeholder="Email Address" name="search">
-                    <button type="submit"><i class='bx bx-right-arrow-alt'></i></button>
-                </form>
+<%--                <div>--%>
+<%--                    <input type="text" placeholder="Email Address" name="search">--%>
+<%--                    <button type="submit"><i class='bx bx-right-arrow-alt'></i></button>--%>
+<%--                </div>--%>
             </div>
         </div>
         <p>© 2023 All Rights Reserved</p>

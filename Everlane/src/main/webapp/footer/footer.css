@@ -46,7 +46,7 @@
     width: 40%;
     font-family: 'Nunito Sans', sans-serif;
 }
-.footer_search form{
+.footer_search div{
     padding: 20px 20px 30px;
     width: 80%;
     display: flex;

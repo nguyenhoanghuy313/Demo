@@ -181,7 +181,7 @@ public class UserDAO extends myDAO {
 
     public void createNewUser(String xUsername, String xPassword, String xEmail, String xFirstName, String xLastName, Date xDob, int xSex, int xRole, String xPhone) {
         try {
-            xSql = "INSERT INTO user (UserName,Password,Email,FirstName,LastName,Dob,Sex, Role, Phone) values (?, ?, ?, ?, ?, ?, ?, ?, ?";
+            xSql = "INSERT INTO user (UserName,Password,Email,FirstName,LastName,Dob,Sex, Role, Phone) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             ps = con.prepareStatement(xSql);
             ps.setString(1, xUsername);
             ps.setString(2, xPassword);
@@ -345,7 +345,7 @@ public class UserDAO extends myDAO {
 
     public void deleteUser(String userID) {
         int uID = Integer.parseInt(userID);
-        xSql = "Delete from user where UserID = ?";
+        xSql = "delete from user where UserID = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, uID);
