@@ -32,22 +32,14 @@ public class LoginGoogleHandler extends HttpServlet {
         StoryDAO storyDAO = new StoryDAO();
 
         List<Story> storyList = storyDAO.getAllStory("all");
-//        ProductsDAO p = new ProductsDAO();
-//        List<Product> data = p.getAllProducts();
         List<Category> cateList = c.getAllCategory();
         PromotionDAO promotionDAO = new PromotionDAO();
         UserGoogleDto user = getUserInfo(accessToken);
         Collection collection = col.getCollectionsByDate();
-        Promotion promotion = promotionDAO.getPromotionByID("1");
+        Promotion promotion = promotionDAO.getLastestPromotion();
         User ugoogle = u.getUserByEmail(user.getEmail());
         request.getSession().setAttribute("acc", ugoogle);
-//        response.sendRedirect(request.getContextPath()+"/home.jsp");
-//        request.getRequestDispatcher("home.jsp").forward(request,response);
-//        System.out.println(user.getEmail());
-//        request.getSession().setAttribute("acc", ugoogle);
         if(ugoogle != null) {
-//            request.setAttribute("data", data);
-//            request.getSession().setAttribute("data", data);
             request.setAttribute("promotion", promotion);
             request.setAttribute("cateList", cateList);
             request.setAttribute("collection", collection);
