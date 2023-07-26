@@ -293,7 +293,7 @@
                                             <h5 class="card-title text-primary">Welcomeback <%=user.getUserName()%>!
                                                 🎉</h5>
                                             <p class="mb-4">
-                                                We have reached <span class="fw-bold"><%=saleTotal%></span> more sales today.
+                                                We have reached <span class="fw-bold"><%=saleTotal%></span>.
                                             </p>
                                         </div>
                                     </div>

@@ -328,32 +328,7 @@
                                                 <li>2. To create paragraphs, use a blank line to separate one or more
                                                     lines of text.
                                                 </li>
-                                                <li>3. To create a line break or new line, end a line with two or more
-                                                    spaces, and then type return.
-                                                </li>
-                                                <li>4. To bold text, italicize, add two asterisks or underscores before
-                                                    and after a word or phrase.
-                                                    <ul>
-                                                        <Li>I just love **bold text**.</Li>
-                                                        <li>Italicized text is the *cat's meow*.</li>
-                                                        <li>This text is ***really important***. (bold and italicize)
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>5. Create a list, just ad number, dashes (-), asterisks (*), or plus
-                                                    signs (+) in front of line items
-                                                    <ul>
-                                                        <li>
-                                                            1. First item <br>
-                                                            2. Second item <br>
-                                                            3. Third item <br>
-                                                            &nbsp&nbsp&nbsp1. Indented item <br>
-                                                            &nbsp&nbsp&nbsp2. Indented item <br>
-                                                            4. Fourth item
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>6. Add link and img
+                                                <li>3. Add link and img
                                                     <ul>
                                                         <li>
                                                             My favorite search engine is [Duck Duck

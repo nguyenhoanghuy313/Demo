@@ -57,11 +57,11 @@
         <h1>
             ${promotion.getPromotionName()}: Now up to ${promotion.getDiscountRate()}% off
         </h1>
-        <button value="collectionID" name="collectionID">
-            <a href="${pageContext.request.contextPath}/productList-servlet?collectionID=${collection.getCollectionID()}&categoryID=3&color_ID=all">
-                SHOP NOW
-            </a>
-        </button>
+<%--        <button value="collectionID" name="collectionID">--%>
+<%--            <a href="${pageContext.request.contextPath}/productList-servlet?collectionID=${collection.getCollectionID()}&categoryID=3&color_ID=all">--%>
+<%--                SHOP NOW--%>
+<%--            </a>--%>
+<%--        </button>--%>
     </div>
 </div>
     <section class="Season_Collection_Banner" id="Season_Collection_Banner">
